@@ -1,0 +1,15 @@
+﻿@namespace BlazorSlider
+@inject BlazorSliderService BlazorSliderService
+
+<div class="p-0 p-sm-1">
+    <input type="range" min="@Min" max="@Max" value="@Value" @onchange="(ChangeEventArgs e) => BlazorSliderService.UpdateValue(this, e, Id)" class="slider w-100" id="@Id">
+</div>
+
+@code {
+
+    [Parameter] public string Id { get; set; }
+    [Parameter] public int Min { get; set; }
+    [Parameter] public int Max { get; set; }
+    [Parameter] public int Value { get; set; }
+
+}

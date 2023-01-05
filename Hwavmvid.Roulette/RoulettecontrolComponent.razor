@@ -1,0 +1,29 @@
+﻿@namespace Hwavmvid.Roulette
+
+@using System
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Hwavmvid.Rouletteshared.Items
+
+@inject RouletteService RouletteService
+
+<div class="p-1 p-sm-2 text-center">
+
+    <div class="my-1">
+
+        <button @onclick="@(() => RouletteService.PlayNewRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.playing ? true : false)">
+            Play new game
+        </button>
+
+        <button @onclick="@(() => RouletteService.StopRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.playing ? false : true)">
+            Stop game
+        </button>
+
+    </diV>
+
+</div>
+
+@code {
+
+}

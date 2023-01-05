@@ -1,0 +1,152 @@
+﻿@namespace BlazorDraggableList
+@inherits BlazorDraggableListBase<TItemGeneric>
+@typeparam TItemGeneric
+
+<style type="text/css">
+
+    .draggable-item {
+        cursor: grab;
+    }
+
+    .dropzone {
+        position: absolute;
+        z-index: 1;
+        display: none;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,216,0,0.3);
+        border: 3px dashed #ff006e;
+    }
+
+    .active-dropzone {
+        background-color: rgba(76, 255, 0, 0.3);
+        border: 3px dashed rgb(0, 255, 144);
+    }
+
+    @@media(min-width: 576px) {
+        .draggable-container-horizontal {
+            column-count: 2;
+            column-gap: 0;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: initial;
+                vertical-align: initial;
+                width: 100%;
+        }
+    }
+
+    @@media(min-width: 768px) {
+        .draggable-container-horizontal {
+            column-count: 2;
+            column-gap: 0;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: initial;
+                vertical-align: initial;
+                width: 100%;
+            }
+    }
+
+    @@media(min-width: 992px) {
+        .draggable-container-horizontal {
+            column-count: initial;
+            column-gap: initial;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: inline-block;
+                vertical-align: middle;
+                width: 30% !important;
+
+            }
+    }
+
+    @@media(min-width: 1200px) {
+        .draggable-container-horizontal {
+            column-count: initial;
+            column-gap: initial;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: inline-block;
+                vertical-align: middle;
+                width: 275px !important;
+                height: 206px !important
+            }
+    }
+
+    @@media(min-width: 1400px) {
+        .draggable-container-horizontal {
+            column-count: initial;
+            column-gap: initial;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: inline-block;
+                vertical-align: middle;
+                width: 275px !important;
+                height: 206px !important
+            }
+    }
+
+    @@media(max-width: 575px) {
+        .draggable-container-horizontal {
+            column-count: 2;
+            column-gap: 0;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: initial;
+                vertical-align: initial;
+                width: 100%;
+            }
+    }
+
+    @@media(max-width: 320px) {
+        .draggable-container-horizontal {
+            column-count: 1;
+            column-gap: 0;
+        }
+
+            .draggable-container-horizontal .draggable-item {
+                display: initial;
+                vertical-align: initial;
+                width: 100%;
+            }
+    }
+
+</style>
+
+@if (Items != null && Items.Any())
+{
+
+    <div id="@Id" class="w-100 overflow-auto @Class @(Orientation == BlazorDraggableListOrientationType.Horizontal ? "draggable-container-horizontal" : "draggable-container-vertical")" style="@(Orientation == BlazorDraggableListOrientationType.Horizontal && Items.Count() == 1 ? "column-count: 1 !important;" : "")">
+        <div class="align-items-center justify-content-center text-center w-100 @(Orientation == BlazorDraggableListOrientationType.Horizontal ? "" : "d-flex flex-column")">
+
+            @for (int i = 0; i < Items.Count(); i++)
+            {
+                var temp = i;
+
+                <div class="position-relative w-100 h-100 p-0 draggable-item">
+
+                    <div id="blazor-draggable-list-item-@temp" draggable="true" style="height: 100%;">
+                        @BlazorDraggableListItem(Items[temp])
+                    </div>
+
+                    <div id="blazor-draggable-list-item-dropzone-@temp" class="dropzone dropzone-@temp" />
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+}
+
+@code {
+
+}

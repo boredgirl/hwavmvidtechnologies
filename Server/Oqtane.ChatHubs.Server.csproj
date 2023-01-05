@@ -1,0 +1,99 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Version>4.2.8517</Version>
+    <Product>Oqtane.ChatHubs</Product>
+    <Authors>hwavmvid technologies</Authors>
+    <Company>hwavmvid technologies</Company>
+    <Description>Just another ChatHub Module for the Oqtane Framework</Description>
+    <Copyright>hwavmvid technologies</Copyright>
+    <AssemblyName>Oqtane.ChatHubs.Server.Oqtane</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />	
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Composition" Version="1.0.31" />
+    <PackageReference Include="FFMpegCore" Version="4.7.0" />
+    <PackageReference Include="Instances" Version="1.6.1" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorSlider\BlazorSlider.csproj" />
+    <ProjectReference Include="..\BlazorAlerts\BlazorAlerts.csproj" />
+    <ProjectReference Include="..\BlazorBrowserResize\BlazorBrowserResize.csproj" />
+    <ProjectReference Include="..\BlazorColorPicker\BlazorColorPicker.csproj" />
+    <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
+    <ProjectReference Include="..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
+    <ProjectReference Include="..\BlazorFileUpload\BlazorFileUpload.csproj" />
+    <ProjectReference Include="..\BlazorModal\BlazorModal.csproj" />
+    <ProjectReference Include="..\BlazorNotifications\BlazorNotifications.csproj" />
+    <ProjectReference Include="..\BlazorPager\BlazorPager.csproj" />
+    <ProjectReference Include="..\BlazorTabs\BlazorTabs.csproj" />
+    <ProjectReference Include="..\BlazorVideo\BlazorVideo.csproj" />
+    <ProjectReference Include="..\BlazorVideoPlayer\BlazorVideoPlayer.csproj" />
+    <ProjectReference Include="..\BlazorWindows\BlazorWindows.csproj" />
+    <ProjectReference Include="..\BlazorDevices\BlazorDevices.csproj" />
+    <ProjectReference Include="..\BlazorDownload\BlazorDownload.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Jsapinotifications\Hwavmvid.Jsapinotifications.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Blackjack\Hwavmvid.Blackjack.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Motorsport.Racewaymaps\Hwavmvid.Motorsport.Racewaymaps.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettebetoptions\Hwavmvid.Roulettebetoptions.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettebets\Hwavmvid.Roulettebets.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettecoins\Hwavmvid.Roulettecoins.csproj" />
+    <ProjectReference Include="..\Hwavmvid.RouletteItellisense\Hwavmvid.Rouletteitellisense.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulette\Hwavmvid.Roulette.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettesurface\Hwavmvid.Roulettesurface.csproj" />
+    <ProjectReference Include="..\Shared\Oqtane.ChatHubs.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oqtane.Server" Version="3.0.0" />
+    <PackageReference Include="Oqtane.Shared" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\CommandResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommandResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\CommandResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Oqtane.ChatHubs.Server.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Modules\Oqtane.ChatHubs\ffmpeg.exe" />
+    <None Include="wwwroot\Modules\Oqtane.ChatHubs\ffplay.exe" />
+    <None Include="wwwroot\Modules\Oqtane.ChatHubs\ffprobe.exe" />
+  </ItemGroup>
+  
+</Project>

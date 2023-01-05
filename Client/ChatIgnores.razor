@@ -1,0 +1,87 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable 
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+@inject BlazorPagerService<ChatHubIgnore> BlazorPagerServiceChatHubIgnore
+
+@using System.Linq
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs.Models
+@using BlazorPager
+@using Oqtane.ChatHubs.Constants
+@using Microsoft.AspNetCore.SignalR.Client
+
+@if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+{
+
+    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetIgnoreItems");
+
+    <h5><span class="oi oi-shield"></span> Ignoliste <span class="badge bg-success">NEW</span></h5>
+
+    <BlazorPagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerIgnoreItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoreItems" TItemGeneric="@ChatHubIgnore" Class="py-sm-3" Scrolling="@false">
+        <BlazorPagerItem>
+
+            <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
+                <div class="flex-fill">
+                    <button type="button" class="btn btn-sm btn-link">@context.User.DisplayName</button>
+                </div>
+                <div class="flex-fill text-start">
+                    <button type="button" @onclick="@(() => BlazorPagerServiceChatHubIgnore.RemoveItem(context, ModuleState.ModuleId))" class="btn btn-sm btn-danger">
+                        <span aria-hidden="true" style="font-size: 1.4rem; line-height: 0;">&times;</span> Remove Ignore
+                    </button>
+                </div>
+            </div>
+
+        </BlazorPagerItem>
+    </BlazorPagerComponent>
+
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorPagerServiceChatHubIgnore.OnRetrievedItems += RetrievedItems;
+        this.BlazorPagerServiceChatHubIgnore.OnRemoveItem += RemoveItem;
+        this.BlazorPagerServiceChatHubIgnore.OnError += Error;
+        await base.OnInitializedAsync();
+    }
+
+    public void RetrievedItems(List<ChatHubIgnore> obj, int apiQueryId)
+    {
+        if (apiQueryId == ModuleState.ModuleId)
+        {
+            this.ChatHubService.IgnoredUsers.AddRange(obj);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+
+    public async void RemoveItem(BlazorPagerEvent<ChatHubIgnore> obj)
+    {
+        if (obj.ApiQueryId == ModuleState.ModuleId)
+        {
+            await this.ChatHubService.UnignoreUser(obj.Item.ChatHubIgnoredUserId);
+            this.ChatHubService.IgnoredUsers.Remove(obj.Item);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+
+    public void Error(Exception exception, int apiQueryId)
+    {
+        if (ModuleState.ModuleId == apiQueryId)
+        {
+            this.ChatHubService.HandleException(exception);
+        }
+    }
+
+    public void Dispose()
+    {
+        this.BlazorPagerServiceChatHubIgnore.OnRetrievedItems -= RetrievedItems;
+        this.BlazorPagerServiceChatHubIgnore.OnRemoveItem -= RemoveItem;
+        this.BlazorPagerServiceChatHubIgnore.OnError -= Error;
+    }
+
+}

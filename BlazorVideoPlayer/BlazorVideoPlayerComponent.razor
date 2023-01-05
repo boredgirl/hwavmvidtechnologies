@@ -1,0 +1,78 @@
+﻿@namespace BlazorVideoPlayer
+@inherits BlazorVideoPlayerComponentBase
+
+@using BlazorSlider
+
+<style type="text/css">
+
+    .video-item-@(MapId) {
+        line-height: 14px;
+    }
+
+    .video-item-@(MapId) .video-item-devices {
+        display: none;
+    }
+
+    .video-item-resize-container-@(MapId) {
+        resize: both;
+        overflow: hidden;
+        background-color: @BackgroundColor;
+        background-color: transparent !important;
+    }
+
+    @@media (max-width: 767px) {
+        .video-item-resize-container-@(MapId) {
+            width: 100%;
+            min-height: 100px;
+        }
+    }
+
+    .video-item-resize-container:hover .video-ellipsis {
+        display: initial;
+    }
+
+    .video-item-ellipsis {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        z-index: 1;
+        display: initial;
+    }
+
+</style>
+
+<div class="video-item-@(MapId) p-0 p-sm-0 w-100 h-100" style="height: 190px !important;">
+
+    <div class="video-item-resize-container-@(MapId) position-relative w-100 h-100">
+
+        <div class="align-items-center justify-content-center px-3 position-absolute w-100 h-100 @(VideoOverlay == true ? "d-flex" : "d-none")" style="z-index: 1;">
+            <button class="btn btn-lg btn-link text-white bg-dark p-sm-2" type="button" @onclick="async () => await BlazorVideoPlayerService.StartVideo(MapId)">
+
+                <span class="oi oi-media-play text-danger"></span> @Name
+
+            </button>
+        </div>
+
+        <div class="align-items-center justify-content-center px-3 position-absolute w-100 h-100 @(VideoOverlay == false && SliderValueChanged == true ? "d-flex" : "d-none")" style="z-index: 1;">
+            <div class="text-center p-1 rounded" style="background-color: rgba(255,255,255,0.8);">
+                <img src="/Modules/Oqtane.ChatHubs/loading.gif" />
+            </div>
+        </div>
+
+        <div class="w-100 h-100 postion-relative">
+
+            <video id="remote-livestream-element-id-@(MapId)" class="remote-livestream video-item-element mb-0 w-100 h-100" controls></video>
+
+            <div class="position-absolute w-100" style="bottom: 0px; z-index: 1;">
+                <BlazorSliderComponent Id="@MapId" Min="1" Max="@TotalVideoSequences" Value="@SliderCurrentValue"></BlazorSliderComponent>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+}

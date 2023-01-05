@@ -1,0 +1,45 @@
+﻿@namespace Hwavmvid.Roulettebetoptions
+@inherits ComponentBase
+
+@using System
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Hwavmvid.Rouletteshared.Enums
+@using Hwavmvid.Rouletteshared.Items
+@using Hwavmvid.Rouletteshared.Constants
+
+<div class="position-relative" style="width: 70px; height: 70px;">
+
+    @if (Item.Key == RouletteBetoptionsType.Red || 
+         Item.Key == RouletteBetoptionsType.Black)
+    {
+        <button type="button" class="btn btn-sm btn-primary w-100 h-100" disabled="@true" style="font-size: 1.2rem !important;">
+            @(Item.Value)
+        </button>
+    }
+
+    @if (Item.Key == RouletteBetoptionsType.FirstHalf || 
+         Item.Key == RouletteBetoptionsType.SecondHalf)
+    {
+        <button type="button" class="btn btn-sm btn-primary w-100 h-100" disabled="@true" style="font-size: 1.2rem !important;">
+            @(Item.Value)
+        </button>
+    }
+
+    @if (Item.Key == RouletteBetoptionsType.FirstTwelve || 
+         Item.Key == RouletteBetoptionsType.SecondTwelve || 
+         Item.Key == RouletteBetoptionsType.ThirdTwelve)
+    {
+        <button type="button" class="btn btn-sm btn-primary w-100 h-100" disabled="@true" style="font-size: 1.2rem !important;">
+            @(Item.Value)
+        </button>
+    }
+
+    <div id="@(string.Concat(RouletteConstants.droppableitemprefix, Item.Key.ToString()))" class="roulettedropzone roulettedropzone-@(Item.Key.ToString())" />
+
+</div>
+
+@code {
+
+    [Parameter] public RouletteBetoptionsItem Item { get; set; }
+}

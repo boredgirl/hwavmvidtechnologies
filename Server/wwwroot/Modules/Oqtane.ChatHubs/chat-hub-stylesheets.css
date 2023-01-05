@@ -1,0 +1,154 @@
+﻿/*
+body * { border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; }
+*/
+
+html {
+    scrollbar-color: #616161 #161616;
+}
+
+body {
+    
+}
+
+    body::-webkit-scrollbar {
+        width: auto;
+        background-color: #161616;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: #616161;
+    }
+
+    body::-webkit-scrollbar-button {
+        background-color: #464646;
+    }
+
+    body .app-menu .nav-item {
+        padding-bottom: 0rem;
+    }
+
+    @media (max-width: 767px) {
+        body main nav.navbar {
+            padding: 0px !important;
+        }
+
+            body main .content .container .container-fluid,
+            body main .content .container .container-fluid .row,
+            body main .content .container-fluid .row,
+            body main .content .container-fluid .row .container-fluid
+            {
+                padding-left: 0px !important;
+                padding-right: 0px !important;
+            }
+
+    }
+
+.bg-green {
+    background-color: #ddffdd !important;
+}
+
+.bg-yellow {
+    background-color: #ffffdd !important;
+}
+
+.bg-transparent-white {
+    background-color: rgba(255,255,255,0.6);
+}
+
+.bg-transparent-gray {
+    background-color: rgba(242,242,242,0.6);
+}
+
+.chathubs-container {
+    min-height: 1000px;
+}
+
+.userlist .nav-link {
+    padding: .5rem .4rem;
+}
+
+.chathub-font-size-075rem {
+    font-size: 0.75rem;
+}
+
+@media (max-width: 1199px) {
+
+    .userlist {
+        position: fixed;
+        z-index: 1100;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        max-width: 100% !important;
+    }
+
+    .bg-transparent-white {
+        background-color: #fff;
+    }
+
+    .bg-transparent-gray {
+        background-color: #f2f2f2;
+    }
+}
+
+
+#chathubs-navigation-tabs > ul.nav-tabs {
+    border: none;
+    margin: 0;
+}
+
+    #chathubs-navigation-tabs > ul.nav-tabs > li a:hover, #chathubs-navigation-tabs > ul.na-tabs > li a:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+    #chathubs-navigation-tabs > ul.nav-tabs > li > a {
+        position: relative;
+        z-index: 2;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        color: slateblue;
+        text-transform: capitalize;
+        border: none;
+        border-radius: 0px;
+        background: transparent;
+        transition: all 0.2s linear;
+    }
+
+        #chathubs-navigation-tabs > ul.nav-tabs > li a:hover,
+        #chathubs-navigation-tabs > ul.nav-tabs > li.active a {
+            border: none;
+        }
+
+        #chathubs-navigation-tabs > ul.nav-tabs > li > a:before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+            border-color: black;
+        }
+
+        #chathubs-navigation-tabs > ul.nav-tabs > li > a:after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 4px;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+            transition: all 0.2s linear;
+            background-color: black;
+            border-color: black;
+        }
+
+    #chathubs-navigation-tabs > ul.nav-tabs > li:hover > a:after,
+    #chathubs-navigation-tabs > ul.nav-tabs > li.active > a:after {
+        width: 100%;
+        opacity: 1;
+    }

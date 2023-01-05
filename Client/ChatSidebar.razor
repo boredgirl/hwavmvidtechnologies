@@ -1,0 +1,151 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+
+@inject NavigationManager NavigationManager
+@inject BlazorPagerService<ChatHubUser> BlazorPagerServiceChatHubUser
+
+@using BlazorFileUpload
+@using BlazorVideo
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Models
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using BlazorTabs
+@using BlazorPager
+@using Oqtane.ChatHubs.Constants
+
+<div class="w-100 my-3" style="height: @(string.Format("{0}px", UserlistWindowHeight)); overflow: auto;">
+
+    <button type="button" class="btn btn-light input-group-button @(room.ShowUserlist ? "d-block" : "d-none")" @onclick="() => ChatHubService.ToggleUserlist(room.Id)" style="position: relative; float: right;"><span class="oi oi-x"></span></button>
+
+    <TabContainer>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-people"></span></div></TabTitle>
+            <TabContent>
+
+                <div class="p-0">
+
+                    <ChatUsers Room="@room" SettingsModalRef="@SettingsModalRef"></ChatUsers>
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-image"></span></div></TabTitle>
+            <TabContent>
+
+                <div class="px-sm-1 py-3">
+
+                    <h5>Share your pics <span class="badge bg-success">FREE</span></h5>
+
+                    @{
+                        var url = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), this.ChatHubService.ChatHubControllerApiUrl, "/PostImageUpload");
+
+                        Dictionary<string, string> headers = new Dictionary<string, string>();
+                        headers.Add("connectionId", ChatHubService.Connection?.ConnectionId);
+                        headers.Add("displayName", ChatHubService.ConnectedUser?.DisplayName);
+                        headers.Add("roomId", room.Id.ToString());
+                        headers.Add("moduleId", ModuleState.ModuleId.ToString());
+                    }
+
+                    <BlazorFileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@(FileUploadInputFileElementId)" DropzoneElementId="@(FileUploadDropzoneContainerElementId)"></BlazorFileUploadComponent>
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-warning"></span>&nbsp;</div></TabTitle>
+            <TabContent>
+
+                <div class="px-sm-1 py-3">
+
+                    <ChatModerators Room="@room"></ChatModerators>
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-question-mark"></span>&nbsp;</div></TabTitle>
+            <TabContent>
+
+                <div class="px-sm-1 py-3">
+
+                    <ChatWhitelistUsers Room="@room"></ChatWhitelistUsers>
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-ban"></span>&nbsp;</div></TabTitle>
+            <TabContent>
+
+                <div class="px-sm-1 py-3">
+
+                    <ChatBlacklistUsers Room="@room"></ChatBlacklistUsers>
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+        <TabItem>
+            <TabTitle><div><span class="oi oi-key"></span> (@room.WaitingRoomItems.Count())</div></TabTitle>
+            <TabContent>
+
+                <div class="px-sm-1 py-3">
+
+                    <h5>Users waiting to become whitelisted <span class="badge bg-success">NEW</span></h5>
+
+                    <table class="table table-sm">
+                        <tbody>
+                            @foreach (var waitingRoomItem in room.WaitingRoomItems)
+                            {
+                                <tr>
+                                    <td>@waitingRoomItem.DisplayName</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.RemoveWaitingRoomItem_Clicked(waitingRoomItem)">
+                                            <span class="oi oi-check"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @if (!room.WaitingRoomItems.Any())
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            No waiting room users found yet.
+                        </div>
+                    }
+
+                </div>
+
+            </TabContent>
+        </TabItem>
+
+    </TabContainer>
+
+</div>
+
+@code {
+
+    [Inject] public BlazorVideoService BlazorVideoService { get; set; }
+    [Inject] public ChatHubService ChatHubService { get; set; }
+
+    [Parameter] public ChatHubRoom room { get; set; }
+    [Parameter] public SettingsModal SettingsModalRef { get; set; }
+    [Parameter] public int UserlistWindowHeight { get; set; }
+
+    protected readonly string FileUploadDropzoneContainerElementId = "FileUploadDropzoneContainer";
+    protected readonly string FileUploadInputFileElementId = "FileUploadInputFileContainer";
+
+    public void OpenProfile_Clicked(int userId, int roomId)
+    {
+        this.SettingsModalRef.OpenDialogAsync();
+    }
+
+}

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AssemblyName>Oqtane.ChatHubs.Shared.Oqtane</AssemblyName>
+    <OutputType>Library</OutputType>
+    <Version>4.2.8517</Version>
+    <Product>Oqtane.ChatHubs</Product>
+    <Authors>hwavmvid technologies</Authors>
+    <Company>hwavmvid technologies</Company>
+    <Description>Just another ChatHub Module for the Oqtane Framework</Description>
+    <Copyright>hwavmvid technologies</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oqtane.Shared" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>

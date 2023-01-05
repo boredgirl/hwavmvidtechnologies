@@ -1,0 +1,50 @@
+﻿@namespace Hwavmvid.Roulettebets
+@inherits RoulettebetsComponentBase
+
+@using System
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Hwavmvid.Rouletteshared.Enums
+
+@inject RouletteBetsService RouletteBetsService
+
+<div class="row g-1 p-2 align-items-center" style="border-top: 1px solid gray;">
+
+    <div class="col-sm-6">
+
+        @{
+            string bet = $"Bet id {Item.Id}: ";
+            bet += Item.Coin.CurrencyAbbr + Item.Coin.Value;
+            bet += " on ";
+            bet += Item.Surfacenumber != null ? Item.Surfacenumber.Value : Item.Betoption.Value;
+        }
+
+        <div class="w-100 h-100 text-center">
+            <strong>@(bet)</strong>
+        </div>
+
+    </div>
+
+    <div class="col-sm-2">
+
+        <button type="button" class="btn btn-sm btn-danger" @onclick="@(() => Remove_Clicked(Item))">
+            <span>Remove</span>
+        </button>
+
+    </div>
+
+    @if (Item.Status != RouletteBetStatus.undefined)
+    {
+        <div class="col-sm-2">
+
+            <div>
+                <span class="bg-primary text-light">
+                    @(Item.Status.ToString())
+                </span>
+            </div>
+
+        </div>
+    }
+
+</div>

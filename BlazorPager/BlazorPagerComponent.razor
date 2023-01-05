@@ -1,0 +1,102 @@
+﻿@namespace BlazorPager
+@inherits BlazorPagerBase<TItemGeneric>
+
+@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Components.Web
+
+@typeparam TItemGeneric
+
+<section id="@ElementId" class="blazor-pager position-relative">
+
+    @if (Loading)
+    {
+        <div class="text-center w-100 p-3 bg-light text-dark">
+            <img src="/Modules/Oqtane.ChatHubs/loading.gif" />
+        </div>
+    }
+
+    @if (ContextPageItems != null && ContextPageItems.Any())
+    {
+        <div class="@Class">
+
+            @foreach (TItemGeneric item in ContextPageItems)
+            {
+                @BlazorPagerItem(item)
+            }
+
+        </div>
+
+        @if (this.Loading)
+        {
+            <div class="text-center w-100 p-3 bg-light text-dark">
+                <img src="/Modules/Oqtane.ChatHubs/loading.gif" />
+            </div>
+        }
+
+        @if (!this.Loading && ContextPage != PagesTotal && PagesTotal != 0)
+        {
+            <div class="w-100 text-center p-2 border border-warning bg-light text-dark" @onclick="@(async () => await LoadMore_Clicked())" style="background-color: rgba(255,255,255,0.7); cursor: pointer;">
+                <div><span class="oi oi-caret-bottom" style="font-size: 1.4rem"></span></div>
+                <div><small>Load more</small></div>
+            </div>
+        }
+
+        @if (PagesTotal > 1)
+        {
+            <nav class="mt-2 clearfix" aria-label="Navigation" style="font-size: 0.86rem;">
+                <ul class="pagination float-end">
+
+                    <li class="page-item @(ContextPage == 1 ? "disabled" : "")">
+                        <a class="page-link" href="javascript:void(0)" aria-label="First" @onclick="async () => await FirstAsync()">
+                            First
+                        </a>
+                    </li>
+
+                    <li class="page-item @(ContextPage == 1 ? "disabled" : "")">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Previous" @onclick="async () => await PreviousAsync()">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Prev</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= PagesTotal; i++)
+                    {
+                        var diff = Math.Abs(ContextPage - i);
+                        if (PagesTotal >= 4 && diff >= 2)
+                        {
+                            continue;
+                        }
+
+                        int temp = i;
+                        <li class="page-item @(ContextPage == i ? "active" : "")">
+                            <a class="page-link" href="javascript:void(0)" @onclick="@(async () => await SetContextPageAsync(temp))">@i</a>
+                        </li>
+                    }
+
+                    <li class="page-item @(ContextPage == PagesTotal ? "disabled" : "")">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next" @onclick="@(async () => await NextAsync())">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item @(ContextPage == PagesTotal ? "disabled" : "")">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Last" @onclick="@(async () => await LastAsync())">
+                            Last
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        }
+    }
+
+    @if (!Loading && ContextPageItems == null || !Loading && !ContextPageItems.Any())
+    {
+        <div class="alert alert-info w-100" role="alert">
+            No items found.
+        </div>
+    }
+
+</section>

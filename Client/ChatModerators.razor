@@ -1,0 +1,87 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable 
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+@inject BlazorPagerService<ChatHubModerator> BlazorPagerServiceChatHubModerator
+
+@using System.Linq
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs.Models
+@using BlazorPager
+@using Oqtane.ChatHubs.Constants
+@using Microsoft.AspNetCore.SignalR.Client
+
+@if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+{
+
+    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetModeratorItems");
+
+    <h5>Moderators <span class="badge bg-success">NEW</span></h5>
+
+    <BlazorPagerComponent ApiQueryId="@Room.Id" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerModeratorItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@Room.Moderators" Context="context" ItemsPerPage="@ChatHubConstants.ModeratorItems" TItemGeneric="@ChatHubModerator" Class="py-sm-3" Scrolling="@false">
+        <BlazorPagerItem>
+
+            <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
+                <div class="flex-fill">
+                    <button type="button" class="btn btn-sm btn-link">@context.ModeratorDisplayName</button>
+                </div>
+                <div class="flex-fill text-start">
+                    <button type="button" @onclick="@(() => BlazorPagerServiceChatHubModerator.RemoveItem(context, Room.Id))" class="btn btn-sm btn-danger">
+                        <span aria-hidden="true" style="font-size: 1.4rem; line-height: 0;">&times;</span> Remove Moderator
+                    </button>
+                </div>
+            </div>
+
+        </BlazorPagerItem>
+    </BlazorPagerComponent>
+
+}
+
+@code {
+
+    [Parameter] public ChatHubRoom Room { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorPagerServiceChatHubModerator.OnRetrievedItems += RetrievedItems;
+        this.BlazorPagerServiceChatHubModerator.OnRemoveItem += RemoveItem;
+        this.BlazorPagerServiceChatHubModerator.OnError += Error;
+        await base.OnInitializedAsync();
+    }
+
+    public void RetrievedItems(List<ChatHubModerator> obj, int apiQueryId)
+    {
+        if (this.Room.Id == apiQueryId)
+        {
+            this.Room.Moderators.AddRange(obj);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public async void RemoveItem(BlazorPagerEvent<ChatHubModerator> obj)
+    {
+        if (this.Room.Id == obj.ApiQueryId)
+        {
+            await this.ChatHubService.RemoveModeratorAsync(obj.Item.ChatHubUserId, obj.ApiQueryId);
+            this.Room.Moderators.Remove(obj.Item);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public void Error(Exception exception, int apiQueryId)
+    {
+        if (this.Room.Id == apiQueryId)
+        {
+            this.ChatHubService.HandleException(exception);
+        }
+    }
+
+    public void Dispose()
+    {
+        this.BlazorPagerServiceChatHubModerator.OnRetrievedItems -= RetrievedItems;
+        this.BlazorPagerServiceChatHubModerator.OnRemoveItem -= RemoveItem;
+        this.BlazorPagerServiceChatHubModerator.OnError -= Error;
+    }
+
+}

@@ -1,0 +1,50 @@
+﻿@namespace BlazorNotifications
+@inherits BlazorNotificationsBase
+
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Components.Web
+
+<style type="text/css">
+
+    @@media(min-width: 1400px) {
+        .blazor-notifications {
+            position: fixed;
+            z-index: 1400;
+            top: 0px;
+            right: 0px;
+            width: 420px;
+        }
+    }
+    @@media(max-width: 1399px) {
+        .blazor-notifications {
+            position: fixed;
+            z-index: 1400;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+        }
+    }
+
+</style>
+
+@if (BlazorNotificationsService.NotificationItems.Any())
+{
+    <div class="blazor-notifications">
+
+        @foreach (var item in BlazorNotificationsService.NotificationItems.ToList())
+        {
+            <div class="position-relative w-100 p-2 alert alert-@item.Type.ToString().ToLower() rounded-0 mb-0">
+                <h6 class="alert-heading">@item.Title</h6>
+                <div><small>@item.Content</small></div>
+            </div>
+        }
+
+    </div>
+}
+
+
+@code {
+
+}

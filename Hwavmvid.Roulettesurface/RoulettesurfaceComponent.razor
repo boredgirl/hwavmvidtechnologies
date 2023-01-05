@@ -1,0 +1,103 @@
+﻿@namespace Hwavmvid.Roulettesurface
+@inherits RoulettesurfaceComponentBase
+
+@using System
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Hwavmvid.Rouletteshared.Items
+@using Hwavmvid.Rouletteshared.Constants
+
+<div class="container p-1 p-sm-2">
+
+    <div class="row g-1 align-items-center numberitemscontainerheight">
+            
+        <div class="col-sm-1 position-relative">
+
+            @{
+                var zero = RoulettesurfaceService.NumberItems.FirstOrDefault(); var zerozero = RoulettesurfaceService.NumberItems.LastOrDefault();
+                List<RoulettesurfaceNumber> zeros = new List<RoulettesurfaceNumber>();
+                zeros.Add(zero); zeros.Add(zerozero);
+            }
+
+            <div class="row g-1">
+
+                @foreach (var item in zeros)
+                {
+                
+                    <div class="col-sm-12 position-relative">
+
+                        @if (WinItem != null && WinItem.Value == item.Value)
+                        {
+                            <button type="button" class="btn btn-sm btn-rounded w-100 h-100 btn-primary numberitemscontainerheight" disabled="@(true)">
+                                <strong style="font-size: 1.2rem">
+                                    @(item.Value == 37 ? "00" : item.Value)
+                                </strong>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-sm btn-rounded w-100 h-100 btn-success numberitemscontainerheight" disabled="@(true)">
+                                <strong style="font-size: 1.2rem">
+                                    @(item.Value == 37 ? "00" : item.Value)
+                                </strong>
+                            </button>
+                        }
+
+                        <div id="@(string.Concat(RouletteConstants.droppableitemprefix, item.Value.ToString()))" class="roulettedropzone roulettedropzone-@(item.Value.ToString())" />
+
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-11">
+
+            <div class="row g-1">
+
+                @foreach (var onethirditems in RoulettesurfaceService.NumberItems.Skip(1).Take(RoulettesurfaceService.NumberItems.Count - 2).GroupBy(item => Convert.ToInt32((item.Value - 1) / 12)))
+                {
+
+                    <div class="col-sm-4 g-sm-3">
+
+                        <div class="row g-1">
+
+                            @foreach (var item in onethirditems.ToList<RoulettesurfaceNumber>())
+                            {
+
+                                <div class="col-sm-4 position-relative">
+
+                                    @if (WinItem != null && WinItem.Value == item.Value)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-rounded btn-primary w-100 h-100 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(true)">
+                                            <strong style="font-size: 1.2rem;">@item.Value</strong>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-sm btn-rounded w-100 h-100 @(item.Color == RoulettesurfaceService.Carpetgreen ? "btn-success" : item.Color == RoulettesurfaceService.Red ? "btn-danger" : item.Color == RoulettesurfaceService.Black ? "btn-dark" : "btn-primary") p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(true)">
+                                            <strong style="font-size: 1.2rem;">@item.Value</strong>
+                                        </button>
+                                    }
+
+                                    <div id="@(string.Concat(RouletteConstants.droppableitemprefix, item.Value.ToString()))" class="roulettedropzone roulettedropzone-@(item.Value.ToString())" />
+
+                                </div>
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+        </div>
+
+    </div>       
+
+</div>

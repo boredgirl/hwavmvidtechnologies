@@ -1,0 +1,43 @@
+﻿@namespace BlazorDropdown
+
+@using Microsoft.AspNetCore.Components
+
+<div class="dropdown">
+    <button type="button" class="btn btn-lg btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+        <span class="oi oi-menu"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end @(ShowDropdown ? DisplayDropdownClass : "")">
+
+        @foreach (var item in DropdownItemModels)
+        {
+            <li><button @onclick="@(() => DropdownItem_Clicked(item))" class="dropdown-item" type="button">@item.Name</button></li>
+        }
+
+    </ul>
+</div>
+
+@code {
+
+    [Parameter] public List<BlazorDropdownItem> DropdownItemModels { get; set; }
+
+    [Parameter] public EventCallback<BlazorDropdownEvent> DropdownItemClicked { get; set; }
+
+    public async void DropdownItem_Clicked(BlazorDropdownItem item)
+    {
+        var dropdownEvent = new BlazorDropdownEvent() { ClickedDropdownItem = item };
+        await this.DropdownItemClicked.InvokeAsync(dropdownEvent);
+    }
+
+    public bool ShowDropdown { get; set; }
+
+    public string DisplayDropdownClass { get; set; } = "show";
+
+    public async Task ToggleDropdown()
+    {
+        await Task.Run(() =>
+        {
+            this.ShowDropdown = !this.ShowDropdown;
+        });
+    }
+
+}

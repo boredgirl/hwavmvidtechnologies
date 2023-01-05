@@ -1,0 +1,46 @@
+﻿@namespace Hwavmvid.Blackjack
+@inherits ComponentBase
+
+@using System
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+@if (Card.Type != BlackjackCardType.Placeholder)
+{
+    <div class="blackjack-card position-relative bg-white border border-light rounded">
+    
+        <img src="/Modules/Oqtane.ChatHubs/@(string.Concat(Card.ImageUrl, Card.ImageUrlExtension))" height="250">
+
+        <div class="position-absolute" style="color: @(Card.ImageFontColor); top: 2px; left: 2px; width: 38px; text-align: center;">
+            <div style="font-size: 32px">@Card.Abbr</div>
+        </div>
+
+    </div>
+}
+
+@if (Card.Type == BlackjackCardType.Placeholder)
+{
+    <div class="blackjack-card position-relative bg-success rounded" style="border: 1px solid dashed; border-color: red;">
+    
+        <img src="/Modules/Oqtane.ChatHubs/@(string.Concat(Card.ImageUrl, Card.ImageUrlExtension))" height="250">
+
+        <div class="position-absolute w-100 h-100" style="top: 0px; left: 0px;">
+            <div class="row align-items-center h-100">
+                <div class="col">
+                    <div class="text-center">
+                        <small class="text-danger" style="font-family: Consolas, monospace;">
+                            <strong>Hwavmvid</strong><br />
+                            <span class="text-dark">♤♧</span><span class="text-danger">♢♡</span>
+                        </small>
+                    </div>
+                </div>
+              </div>
+        </div>
+
+    </div>
+}
+
+@code {
+
+    [Parameter] public BlackjackCard Card { get; set; }
+}

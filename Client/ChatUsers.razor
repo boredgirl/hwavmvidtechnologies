@@ -1,0 +1,152 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable 
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+@inject BlazorPagerService<ChatHubUser> BlazorPagerServiceChatHubUser
+
+@using System.Linq
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs.Models
+@using BlazorPager
+@using Oqtane.ChatHubs.Constants
+@using Microsoft.AspNetCore.SignalR.Client
+
+@if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+{
+
+    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetUsers");
+                        
+    <BlazorPagerComponent ElementId="WasmBlazorPagerUserlist" Class="WasmBlazorPagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
+
+        <BlazorPagerItem>
+
+            @if (user.UserId == ChatHubService.ConnectedUser.UserId)
+            {
+                <div class="accordion-item" @key="user">
+                    <div class="accordion-header">
+                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.UserId" aria-expanded="@user.UserlistItemCollapsed">
+                            <strong class="align-middle" style="height: 16px;">@user.DisplayName</strong>
+                        </button>
+                    </div>
+                    <div id="collapse-@user.UserId" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div class="card-text">
+                                <button type="button" class="btn btn-sm btn-link" @onclick="@(() => OpenProfile_Clicked(user.UserId, room.Id))">Account Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="accordion-item" @key="user">
+                    <div class="accordion-header">
+                        <button type="button" OnClick="(e) => UserlistItem_Clicked(e, room, user)" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse-@user.UserId" aria-expanded="@user.UserlistItemCollapsed">
+                            <span class="align-middle" style="height: 16px;">@user.DisplayName</span>
+                        </button>
+                    </div>
+
+                    <div id="collapse-@user.UserId" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+
+                            @if (!ChatHubService.IgnoredUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.IgnoreUser_Clicked(user.UserId)">Ignore User</button>
+                                </div>
+                            }
+
+                            @if (!room.Moderators.Any(item => item.ChatHubUserId == user.UserId))
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddModerator_Clicked(user.UserId, room.Id)">Add Modi</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="async () => await ChatHubService.RemoveModeratorAsync(user.UserId, room.Id)">Delete Modi</button>
+                                </div>
+                            }
+
+                            @if (!room.WhitelistUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddWhitelistUser_Clicked(user.UserId, room.Id)">Add Whitelist User</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveWhitelistUser_Clicked(user.UserId, room.Id))">Delete Whitelist User</button>
+                                </div>
+                            }
+
+                            @if (!room.BlacklistUsers.Any(item => item.ChatHubUserId == user.UserId))
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="() => ChatHubService.AddBlacklistUser_Clicked(user.UserId, room.Id)">Add Blacklist User</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <button type="button" class="btn btn-sm btn-link" @onclick="@(async () => await ChatHubService.RemoveBlacklistUser_Clicked(user.UserId, room.Id))">Delete Blacklist User</button>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </BlazorPagerItem>
+
+    </BlazorPagerComponent>
+
+}
+
+@code {
+
+    [Parameter] public ChatHubRoom room { get; set; }
+    [Parameter] public SettingsModal SettingsModalRef { get; set; }
+
+    public void OpenProfile_Clicked(int userId, int roomId)
+    {
+        this.SettingsModalRef.OpenDialogAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorPagerServiceChatHubUser.OnRetrievedItems += RetrievedItems;
+        this.BlazorPagerServiceChatHubUser.OnError += Error;
+        await base.OnInitializedAsync();
+    }
+
+    public void RetrievedItems(List<ChatHubUser> obj, int apiQueryId)
+    {
+        if (this.room.Id == apiQueryId)
+        {
+            this.room.Users.AddRange(obj);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public void Error(Exception exception, int apiQueryId)
+    {
+        if (this.room.Id == apiQueryId)
+        {
+            this.ChatHubService.HandleException(exception);
+        }
+    }
+
+    public void Dispose()
+    {
+        this.BlazorPagerServiceChatHubUser.OnRetrievedItems -= RetrievedItems;
+        this.BlazorPagerServiceChatHubUser.OnError -= Error;
+    }
+
+}

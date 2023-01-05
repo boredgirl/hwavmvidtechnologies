@@ -1,0 +1,138 @@
+﻿@namespace BlazorDownload
+@inherits ComponentBase
+@implements IDisposable
+
+@inject BlazorDownloadService BlazorDownloadService
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.SignalR.Client
+
+@if (!string.IsNullOrEmpty(Id))
+{
+
+    <span class="blazor-download">
+
+        @if (!DownloadInProgress)
+        {
+            <button type="button" @onclick="@(() => StartDownloadFile())" class="btn btn-sm btn-dark">
+                ⇩ @DownloadButtonName
+            </button>
+        }
+        else if (DownloadInProgress)
+        {
+            <button type="button" class="btn btn-sm btn-dark">
+                <span class="progress">
+                    <span class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @(ProgressWidth)%;" aria-valuenow="@ProgressCurrent" aria-valuemin="@ProgressMin" aria-valuemax="@ProgressTotal">@(ProgressWidth)% @Message</span>
+                </span>
+            </button>
+        }
+
+    </span>
+
+}
+
+@code {
+
+    [Parameter] public string Id { get; set; }
+    [Parameter] public string ApiQueryId { get; set; }
+    [Parameter] public string FileType { get; set; }
+    [Parameter] public string DownloadButtonName { get; set; }
+    [Parameter] public string ApiUrl { get; set; }
+    [Parameter] public HubConnection HubConnection { get; set; }
+    [Parameter] public string HubContextMethodName { get; set; }
+
+    public double ProgressMin { get; set; } = 0;
+    public double ProgressTotal { get; set; } = 100;
+    public double ProgressCurrent { get; set; } = 0;
+    public int ProgressWidth { get; set; }
+    public bool DownloadInProgress { get; set; } = false;
+    public string Message { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorDownloadService.OnApiItemReceived += async (BlazorDownloadEvent e) => await OnApiItemReceived(e);
+
+        var map = this.BlazorDownloadService.GetMap(this.Id);
+        if (map != null && map.LastApiItem != null)
+        {
+            this.ProgressTotal = map.LastApiItem.ProgressTotal;
+            this.ProgressCurrent = map.LastApiItem.ProgressCurrent;
+            this.DownloadInProgress = map.DownloadInProgress;
+            this.Message = map.LastApiItem.Message;
+
+            var width = Convert.ToInt32(this.ProgressCurrent / this.ProgressTotal * 100);
+            this.ProgressWidth = width == 0 ? 100 : width;
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.BlazorDownloadService.InitBlazorDownload(this.Id, this.ApiQueryId, this.FileType, this.HubConnection, this.HubContextMethodName);
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public void StartDownloadFile()
+    {
+        this.BlazorDownloadService.StartDownloadFile(this.Id, this.ApiUrl);
+    }
+
+    public async Task OnApiItemReceived(BlazorDownloadEvent obj)
+    {
+        if (this.ApiQueryId == obj.ApiItem.Id)
+        {
+            var map = this.BlazorDownloadService.GetMap(this.Id);
+            if (map != null)
+            {
+
+                if(!obj.ApiItem.DownloadCompleted)
+                {
+                    map.LastApiItem = obj.ApiItem;
+                    this.DownloadInProgress = map.DownloadInProgress;
+                    this.ProgressTotal = obj.ApiItem.ProgressTotal;
+                    this.ProgressCurrent = obj.ApiItem.ProgressCurrent;
+                    this.Message = obj.ApiItem.Message;
+
+                    var width = Convert.ToInt32(this.ProgressCurrent / this.ProgressTotal * 100);
+                    this.ProgressWidth = width == 0 ? 100 : width;
+
+                    this.UpdateUI();
+                }
+
+                if (obj.ApiItem.DownloadCompleted)
+                {
+                    this.ProgressTotal = obj.ApiItem.ProgressTotal;
+                    this.ProgressCurrent = obj.ApiItem.ProgressCurrent;
+                    this.Message = obj.ApiItem.Message;
+
+                    var width = Convert.ToInt32(this.ProgressCurrent / this.ProgressTotal * 100);
+                    this.ProgressWidth = width == 0 ? 100 : width;
+
+                    map.LastApiItem = null;
+
+                    this.UpdateUI();
+                }
+            }
+        }
+    }
+
+    public void UpdateUI()
+    {
+        InvokeAsync(() =>
+        {
+            this.StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        this.BlazorDownloadService.OnApiItemReceived -= async (BlazorDownloadEvent e) => await OnApiItemReceived(e);
+    }
+
+}

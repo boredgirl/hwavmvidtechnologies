@@ -1,0 +1,51 @@
+﻿@namespace BlazorWindows
+@inherits WindowContainerBase
+@using BlazorDraggableList
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<style type="text/css">
+
+    .blazor-window-nav::-webkit-scrollbar {
+        height: 8px;
+        background-color: grey;
+    }
+
+    .blazor-window-nav {
+        scrollbar-width: thin;
+    }
+
+    @@media(min-width: 768px) {
+        .livestream-container-item {
+            border: 1px solid #ffbb66;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+    }
+</style>
+
+@if (WindowItems.Count() >= 1 && RenderLivestreams)
+{
+    <BlazorDraggableListComponent Items="WindowItems" Id="@DraggableLivestreamContainerElementId" Class="p-0 p-md-2 my-2 livestream-container-item blazor-window-nav" Orientation="@BlazorDraggableListOrientationType.Horizontal">
+
+        <BlazorDraggableListItem>
+            @context.WindowLivestream
+        </BlazorDraggableListItem>
+
+    </BlazorDraggableListComponent>
+}
+
+<CascadingValue Value=this>
+
+    <ul class="blazor-window-nav nav nav-tabs d-flex flex-nowrap overflow-auto" style="overflow-y: hidden !important;">
+        @ChildContent
+    </ul>
+
+</CascadingValue>
+
+<div class="nav-tabs-body">
+    @ActiveWindow?.WindowContent
+</div>
+
+@code {
+
+}

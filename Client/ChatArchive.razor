@@ -1,0 +1,123 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable
+
+@inject ChatHubService ChatHubService
+@inject BlazorPagerService<ChatHubCam> BlazorPagerServiceChatHubCam
+@inject NavigationManager NavigationManager
+
+@using Oqtane.ChatHubs.Constants
+@using BlazorPager
+@using Oqtane.ChatHubs.Services
+@using BlazorVideoPlayer
+@using Oqtane.ChatHubs.Models
+@using Oqtane.ChatHubs.Enums
+@using System.Linq
+@using Microsoft.AspNetCore.SignalR.Client
+@using BlazorDownload
+
+@if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+{
+
+    <ChatJumbotronVideoCaptures></ChatJumbotronVideoCaptures>
+
+    <div class="p-md-2 mt-2 text-center bg-secondary border border-primary">
+
+        @{
+            var archiveItemApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetArchiveItems");
+        }
+
+        <BlazorPagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
+            <BlazorPagerItem>
+
+                <div class="mb-2 mb-sm-3 p-0 p-sm-1" style="width: 340px; display: inline-block; text-align: center;">
+
+                    <div class="p-0 py-sm-1 input-group input-group-sm">
+
+                        <label for="@(string.Concat("video-uri-" + context.Id))">
+                            <small style="font-family: Consolas, monospace;">@context.CreatedOn.ToLongDateString()</small>
+                        </label>
+
+                        @{
+                            string videoSourceInputValue = string.Empty;
+                            if (!string.IsNullOrEmpty(context.VideoUrl) && !string.IsNullOrEmpty(context.VideoUrlExtension))
+                                videoSourceInputValue = string.Concat(NavigationManager.BaseUri, Oqtane.ChatHubs.Constants.ChatHubConstants.ApplicationTempPath, "/", context.VideoUrl, context.VideoUrlExtension);
+                            else
+                                videoSourceInputValue = "No video converted yet";
+                        }
+                        
+                        <small class="ellipsis bg-light w-100" id="@(string.Concat("video-uri-" + context.Id))">
+                            @videoSourceInputValue
+                        </small>
+
+                    </div>
+
+                    <BlazorVideoPlayerComponent TotalVideoSequences="@context.TotalVideoSequences" MapId="@Guid.NewGuid().ToString()" ParameterId1="@context.ChatHubRoomId.ToString()" ParameterId2="@context.Id.ToString()" Name="@(string.Concat("Cam Id: ", context.Id.ToString()))" BackgroundColor="#7FFFD4"></BlazorVideoPlayerComponent>
+
+                    <div class="text-center my-1">
+
+                        <button type="button" @onclick="() => BlazorPagerServiceChatHubCam.RemoveItem(context, ModuleState.ModuleId)" class="btn btn-sm btn-primary">Delete</button>
+                    
+                        @{
+                            var mp4downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + ModuleState.ModuleId.ToString() + "/" + ".mp4");
+                            var mp3downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + ModuleState.ModuleId.ToString() + "/" + ".mp3");
+                        }
+
+                        <BlazorDownloadComponent Id="@string.Concat(".mp4", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp4" DownloadButtonName=".mp4" ApiUrl="@mp4downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></BlazorDownloadComponent>
+                        <BlazorDownloadComponent Id="@string.Concat(".mp3", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp3" DownloadButtonName=".mp3" ApiUrl="@mp3downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></BlazorDownloadComponent>
+
+                    </div>
+
+                </div>
+
+            </BlazorPagerItem>
+        </BlazorPagerComponent>
+
+    </div>
+
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorPagerServiceChatHubCam.OnRetrievedItems += RetrievedItems;
+        this.BlazorPagerServiceChatHubCam.OnRemoveItem += RemoveItem;
+        this.BlazorPagerServiceChatHubCam.OnError += Error;
+        await base.OnInitializedAsync();
+    }
+
+    public void RetrievedItems(List<ChatHubCam> items, int apiQueryId)
+    {
+        if (apiQueryId == ModuleState.ModuleId)
+        {
+            this.ChatHubService.VideoCaptures.AddRange(items);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public async void RemoveItem(BlazorPagerEvent<ChatHubCam> obj)
+    {
+        if (obj.ApiQueryId == ModuleState.ModuleId)
+        {
+            await this.ChatHubService.DeleteCam(obj.Item.Id);
+            this.ChatHubService.VideoCaptures.Remove(obj.Item);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+
+    public void Error(Exception exception, int apiQueryId)
+    {
+        if (this.ModuleState.ModuleId == apiQueryId)
+        {
+            this.ChatHubService.HandleException(exception);
+        }
+    }
+
+    public void Dispose()
+    {
+        this.BlazorPagerServiceChatHubCam.OnRetrievedItems -= RetrievedItems;
+        this.BlazorPagerServiceChatHubCam.OnRemoveItem -= RemoveItem;
+        this.BlazorPagerServiceChatHubCam.OnError -= Error;
+    }
+
+}

@@ -1,0 +1,70 @@
+﻿@namespace BlazorDevices
+@inherits BlazorDevicesComponentBase
+
+@using System
+@using System.Linq
+
+<style type="text/css">
+
+    .ellipsis {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+</style>
+
+@if (BlazorDevicesService.item != null &&
+     BlazorDevicesService.item.audios != null &&
+     BlazorDevicesService.item.microphones != null &&
+     BlazorDevicesService.item.webcams != null &&
+     AudioDefaultDevice != null &&
+     MicrophoneDefaultDevice != null &&
+     WebcamDefaultDevice != null)
+{
+    
+    <div class="blazordevices">
+
+        <div class="small mt-2 mb-1"><u><mark>Browser Default Audiooutput</mark></u></div>
+        <div class="p-1 px-sm-1 py-sm-3 mb-1 mb-sm-2 border border-secondary overflow-hidden">
+
+            @foreach(var audioitem in BlazorDevicesService.item.audios)
+            {
+                <button type="button" class="btn btn-sm btn-link d-block ellipsis @(audioitem.id == AudioDefaultDevice.id ? "btn-success text-white" : "bg-transparent")" @onclick="@(() => SetAudioDefaultDevice(audioitem))">
+                    @audioitem.name
+                </button>
+            }
+
+        </div>
+
+        <div class="small mt-2 mb-1"><u><mark>Browser Default Microphone</mark></u></div>
+        <div class="p-1 px-sm-1 py-sm-3 mb-1 mb-sm-2 border border-secondary overflow-hidden">
+
+            @foreach(var microphoneitem in BlazorDevicesService.item.microphones)
+            {
+                <button type="button" class="btn btn-sm btn-link d-block ellipsis @(microphoneitem.id == MicrophoneDefaultDevice.id ? "btn-success text-white" : "bg-transparent")" @onclick="@(() => SetMicrophoneDefaultDevice(microphoneitem))">
+                    @microphoneitem.name
+                </button>
+            }
+
+        </div>
+
+        <div class="small mt-2 mb-1"><u><mark>Browser Default Webcam</mark></u></div>
+        <div class="p-1 px-sm-1 py-sm-3 mb-sm-2 border border-secondary overflow-hidden">
+
+            @foreach(var webcamitem in BlazorDevicesService.item.webcams)
+            {
+                <button type="button" class="btn btn-sm btn-link d-block ellipsis @(webcamitem.id == WebcamDefaultDevice.id ? "btn-success text-white" : "bg-transparent")" @onclick="@(() => SetWebcamDefaultDevice(webcamitem))">
+                    @webcamitem.name
+                </button>
+            }
+
+        </div>
+
+    </div>
+
+}
+
+@code {
+
+}

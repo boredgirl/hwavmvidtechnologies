@@ -1,0 +1,86 @@
+﻿@namespace BlazorDynamicLayout
+@inherits BlazorDynamicLayoutBase<TItemLivestream, TItemTab, TItemContent>
+
+@using BlazorDraggableList
+@using System.Reflection
+
+@typeparam TItemLivestream
+@typeparam TItemTab
+@typeparam TItemContent
+
+<style type="text/css">
+
+    .blazor-window-nav::-webkit-scrollbar {
+        height: 8px;
+        background-color: grey;
+    }
+
+    .blazor-window-nav {
+        scrollbar-width: thin;
+    }
+
+    .ellipsis {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+</style>
+
+
+@if (Livestreams != null && Livestreams.Any())
+{
+    <BlazorDraggableListComponent Items="@Livestreams" Id="@DraggableLivestreamContainerElementId" Class="p-0 p-md-2 my-2 bg-secondary border border-primary livestream-container-item blazor-window-nav" Orientation="@BlazorDraggableListOrientationType.Horizontal">
+
+        <BlazorDraggableListItem>
+
+            @LivestreamItemContainer(context)
+
+        </BlazorDraggableListItem>
+
+    </BlazorDraggableListComponent>
+}
+
+<div class="border border-primary">
+
+    <nav class="bg-primary">
+        <div id="@TabNavigationId" class="blazor-window-nav nav nav-tabs d-flex flex-nowrap overflow-auto" style="overflow-y: hidden !important;">
+
+            @foreach (dynamic tab in Tabs.Select((item, index) => new TabItem<TItemTab>() { Item = item, Index = index }))
+            {
+                PropertyInfo propertyInfo = tab.Item.GetType().GetProperty(TabIdPropertyInfoName);
+                var propertyValue = propertyInfo.GetValue(tab.Item);
+                string id = propertyValue.ToString();
+                bool activeTab = ActiveTabId == id;
+
+                <button class="nav-link position-relative ellipsis @(activeTab ? "active" : "")" @onclick="() => BlazorDynamicLayoutService.TabClicked(id)" style="height: 48px; max-width: 120px;" role="tab" aria-selected="@activeTab">
+                    @TabItemContainer(tab)
+                </button>
+            }
+
+        </div>
+    </nav>
+
+    <div id="@TabContentId" class="tab-content">
+
+        @foreach (dynamic content in Contents.Select((item, index) => new ContentItem<TItemContent>() { Item = item, Index = index }))
+        {
+            PropertyInfo propertyInfo = content.Item.GetType().GetProperty(TabIdPropertyInfoName);
+            var propertyValue = propertyInfo.GetValue(content.Item);
+            string id = propertyValue.ToString();
+            bool activeTab = ActiveTabId == id;
+
+            <div class="tab-pane fade @(activeTab ? "show active" : "")">
+
+                @ContentItemContainer(content)
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+@code {
+
+}

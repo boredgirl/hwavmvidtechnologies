@@ -1,0 +1,87 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable 
+
+@inject NavigationManager NavigationManager
+@inject ChatHubService ChatHubService
+@inject BlazorPagerService<ChatHubBlacklistUser> BlazorPagerServiceChatHubBlacklistUser
+
+@using System.Linq
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Extensions
+@using Oqtane.ChatHubs.Models
+@using BlazorPager
+@using Oqtane.ChatHubs.Constants
+@using Microsoft.AspNetCore.SignalR.Client
+
+@if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+{
+
+    var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetBlacklistUserItems");
+
+    <h5>Blacklist users <span class="badge bg-success">NEW</span></h5>
+
+    <BlazorPagerComponent ApiQueryId="@Room.Id" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerBlacklistItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@Room.BlacklistUsers" Context="context" ItemsPerPage="@ChatHubConstants.BlacklistItems" TItemGeneric="@ChatHubBlacklistUser" Class="py-sm-3" Scrolling="@false">
+        <BlazorPagerItem>
+
+            <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
+                <div class="flex-fill">
+                    <button type="button" class="btn btn-sm btn-link">@context.BlacklistUserDisplayName</button>
+                </div>
+                <div class="flex-fill text-start">
+                    <button type="button" @onclick="@(() => BlazorPagerServiceChatHubBlacklistUser.RemoveItem(context, Room.Id))" class="btn btn-sm btn-danger">
+                        <span aria-hidden="true" style="font-size: 1.4rem; line-height: 0;">&times;</span> Remove User
+                    </button>
+                </div>
+            </div>
+
+        </BlazorPagerItem>
+    </BlazorPagerComponent>
+
+}
+
+@code {
+
+    [Parameter] public ChatHubRoom Room { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.BlazorPagerServiceChatHubBlacklistUser.OnRetrievedItems += RetrievedItems;
+        this.BlazorPagerServiceChatHubBlacklistUser.OnRemoveItem += RemoveItem;
+        this.BlazorPagerServiceChatHubBlacklistUser.OnError += Error;
+        await base.OnInitializedAsync();
+    }
+
+    public void RetrievedItems(List<ChatHubBlacklistUser> obj, int apiQueryId)
+    {
+        if (this.Room.Id == apiQueryId)
+        {
+            this.Room.BlacklistUsers.AddRange(obj);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public async void RemoveItem(BlazorPagerEvent<ChatHubBlacklistUser> obj)
+    {
+        if(this.Room.Id == obj.ApiQueryId)
+        {
+            await this.ChatHubService.RemoveBlacklistUser_Clicked(obj.Item.ChatHubUserId, obj.ApiQueryId);
+            this.Room.BlacklistUsers.Remove(obj.Item);
+            this.ChatHubService.RunUpdateUI();
+        }
+    }
+    public void Error(Exception exception, int apiQueryId)
+    {
+        if (this.Room.Id == apiQueryId)
+        {
+            this.ChatHubService.HandleException(exception);
+        }
+    }
+
+    public void Dispose()
+    {
+        this.BlazorPagerServiceChatHubBlacklistUser.OnRetrievedItems -= RetrievedItems;
+        this.BlazorPagerServiceChatHubBlacklistUser.OnRemoveItem -= RemoveItem;
+        this.BlazorPagerServiceChatHubBlacklistUser.OnError -= Error;
+    }
+
+}

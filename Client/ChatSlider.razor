@@ -1,0 +1,33 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+
+@inject NavigationManager NavigationManager
+@using Oqtane.ChatHubs.Constants
+
+@{
+    var macdonalds = NavigationManager.BaseUri + ChatHubConstants.ModulePath + "/macdonalds.png";
+}
+
+<div id="slidercaptions" class="carousel slide d-none d-xl-block px-1 px-sm-3 py-sm-3 py-5 mb-0 mb-sm-2 mt-sm-2 bg-secondary border border-primary" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#slidercaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="macdonalds slide"></button>
+        <button type="button" data-bs-target="#slidercaptions" data-bs-slide-to="1" aria-label="undefined slide"></button>
+    </div>
+    <div class="carousel-inner" style="height: 500px;">
+        <div class="carousel-item active">
+            <img src="@macdonalds" class="img-fluid w-100" alt="macdonalds">
+            <div class="carousel-caption d-none d-md-block">
+            <h5>macdonalds</h5>
+            <p>macdonalds pics</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#slidercaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#slidercaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

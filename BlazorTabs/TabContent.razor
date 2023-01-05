@@ -1,0 +1,23 @@
+﻿@namespace BlazorTabs
+
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+@ChildContent
+
+@code {
+
+    [CascadingParameter]
+    public ITabItem TabItem { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        this.TabItem.TabContent = ChildContent;
+        this.TabItem.UpdateTabContent();
+
+        return base.OnInitializedAsync();
+    }
+}

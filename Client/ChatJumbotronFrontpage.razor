@@ -1,0 +1,44 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+
+@inject NavigationManager NavigationManager
+@using Oqtane.ChatHubs.Constants
+
+<style type="text/css">
+
+    .mwahh {
+        background: linear-gradient(140deg, #bd6b6b 0%, #6644bb 28%, #007fff 98%);
+    }
+
+</style>
+
+<div class="w-100 mwahh text-center mt-0 mb-0 mb-sm-2 text-white border border-primary" style="height: 90px; padding-top: 30px;">
+
+    <small>Magenta Web Chat</small>
+
+</div>
+
+<div class="jumbotron jumbotron-fluid d-none d-xl-block px-1 px-sm-3 py-sm-3 py-5 mb-0 mb-sm-2 bg-secondary border border-primary">
+    <div class="container">
+
+        <div class="d-flex flex-wrap flex-sm-nowrap align-items-center">
+
+            <div class="p-0 pe-sm-3">
+                <img src="@(NavigationManager.BaseUri + ChatHubConstants.ModulePath + "/wasmchatlogo.png")" class="img-fluid" alt="preview" style="max-width: 256px;" />
+            </div>
+
+            <div class="p-0 ps-sm-3">
+
+                <h1 class="display-4">Video chat application</h1>
+                <p class="lead">This is a base video chat implementation in its beta version but free to use and have fun. Create a new post and start videochatting with friends or strangers.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,118 @@
+﻿@namespace Hwavmvid.Motorsport.Racewaymaps
+@inherits Motorsportracewaymapcreatorbase
+
+@using System
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using Hwavmvid.Motorsport.Shared.Items
+
+@inject Motorsportracewayservice Motorsportracewayservice
+
+<style type="text/css">
+
+    .motorsportdropzone {
+        position: absolute;
+        z-index: 4001;
+        display: none;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,216,0,0.3);
+        border: 3px dashed #ff006e;
+    }
+
+    .active-motorsportdropzone {
+        background-color: rgba(76, 255, 0, 0.3);
+        border: 3px dashed rgb(0, 255, 144);
+    }
+
+</style>
+
+<div class="p-1 p-sm-2 w-100 h-100 text-center bg-transparent">
+
+    @if (loading)
+    {
+        <div class="text-center w-100 p-3 bg-light text-dark">
+            <img src="/Modules/Oqtane.ChatHubs/hwavmvidmotorsportloading.gif" />
+        </div>
+    }
+
+    @if (!loading)
+    {
+
+        <div class="my-2">
+
+            @foreach (var item in Motorsportracewayservice.DraggableItems)
+            {
+                <div draggable="true" id="@(string.Concat(Shared.MotorsportConstants.draggableitemprefix, item.ElementId))" class="btn btn-sm btn-primary p-sm-4">
+                    @item.Type.ToString()
+                </div>
+            }
+
+        </div>
+
+        <div class="p-0 w-100 h-100">
+
+            <div class="mx-auto" style="width: @(containerwidth)px; height: @(containerheight)px;">
+
+                @foreach (var row in Motorsportracewayservice.Map.Rows)
+                {
+
+                    <div class="row p-0 g-0">
+
+                        @foreach (var col in Motorsportracewayservice.Map.Columns.Where(item => item.RowId == row.RowId))
+                        {
+
+                            <div class="col position-relative p-0" style="width: @(griditemwidth)px; height: @(griditemheight)px;">
+                                
+                                @foreach (var item in col.Racecars)
+                                {
+                                    <div class="position-absolute" style="z-index: @(item.ZIndex); background-color: @(item.BackgroundColor); transform: rotate(@(item.Rotation)deg); top: 0px; left: 0px;">
+
+                                        <img src="/Modules/Oqtane.ChatHubs/@(string.Concat(item.ImageUrl, item.ImageUrlExtension))" width="@item.ImageWidth" height="@item.ImageHeight" />
+
+                                    </div>
+                                }
+
+                                @foreach (var item in col.Streetways)
+                                {
+                                    <div class="position-absolute" style="z-index: @(item.ZIndex); background-color: @(item.BackgroundColor); transform: rotate(@(item.Rotation)deg); top: 0px; left: 0px;">
+
+                                        <img src="/Modules/Oqtane.ChatHubs/@(string.Concat(item.ImageUrl, item.ImageUrlExtension))" width="@item.ImageWidth" height="@item.ImageHeight" />
+
+                                    </div>
+                                }
+
+                                @foreach (var item in col.Buildings)
+                                {
+                                    <div class="position-absolute" style="z-index: @(item.ZIndex); background-color: @(item.BackgroundColor); transform: rotate(@(item.Rotation)deg); top: 0px; left: 0px;">
+
+                                        <img src="/Modules/Oqtane.ChatHubs/@(string.Concat(item.ImageUrl, item.ImageUrlExtension))" width="@item.ImageWidth" height="@item.ImageHeight" />
+
+                                    </div>
+                                }
+
+                                @foreach (var item in col.Platforms)
+                                {
+                                    <div class="position-absolute w-100 h-100" style="z-index: @(item.ZIndex); background-color: @(item.BackgroundColor); transform: rotate(@(item.Rotation)deg); top: 0px; left: 0px;">
+
+                                    </div>
+                                }
+
+                                <div id="@(string.Concat(Shared.MotorsportConstants.droppableitemprefix, col.ElementId))" class="motorsportdropzone motorsportdropzone-@(col.ElementId)" />
+
+                            </div>
+
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    }
+
+</div>

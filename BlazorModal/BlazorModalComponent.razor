@@ -1,0 +1,66 @@
+﻿@namespace BlazorModal
+@inherits BlazorModalBase
+@using Microsoft.AspNetCore.Components;
+
+<style type="text/css">
+
+    #@ElementId {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 1400;
+        background-color: rgba(0,0,0,0.6);
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .blazor-modal-centered-content {
+        position: absolute;
+        z-index: 1401;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid rgba(49,94,182,1);
+        overflow: auto;
+    }
+
+    @@media (max-width: 575px) {
+
+        .blazor-modal-centered-content {
+            width: 320px !important;
+            height: 420px !important;
+        }
+    }
+
+    @@media (min-width: 576px) {
+
+        .blazor-modal-centered-content {
+            width: 500px !important;
+            height: 420px !important;
+        }
+    }
+
+</style>
+
+<div id="@ElementId" style="display: none;">
+    <div class="blazor-modal-centered-content">
+        <div>
+            <div>
+                @BlazorModalHeader
+            </div>
+            <div>
+                @BlazorModalBody
+            </div>
+            <div>
+                @BlazorModalFooter
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

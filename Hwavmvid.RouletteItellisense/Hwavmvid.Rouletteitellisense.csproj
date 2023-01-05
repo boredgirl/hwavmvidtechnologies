@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AssemblyName>Hwavmvid.Rouletteitellisense</AssemblyName>
+    <OutputType>Library</OutputType>
+    <Version>1.0.0</Version>
+    <Product>Hwavmvid.Rouletteitellisense</Product>
+    <Authors>hwavmvid technologies</Authors>
+    <Company>hwavmvid technologies</Company>
+    <Copyright>hwavmvid technologies</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hwavmvid.Roulettebetoptions\Hwavmvid.Roulettebetoptions.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettebets\Hwavmvid.Roulettebets.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettecoins\Hwavmvid.Roulettecoins.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Rouletteshared\Hwavmvid.Rouletteshared.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulettesurface\Hwavmvid.Roulettesurface.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Roulette\Hwavmvid.Roulette.csproj" />
+  </ItemGroup>
+
+</Project>
