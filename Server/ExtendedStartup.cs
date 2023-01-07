@@ -36,6 +36,8 @@ using Hwavmvid.Roulettebetoptions;
 using Hwavmvid.Roulettebets;
 using Hwavmvid.Motorsport.Racewaymaps;
 using Oqtane.ChatHubs.Repository;
+using Microsoft.Extensions.Options;
+using Oqtane.Security;
 
 namespace Oqtane
 {
@@ -44,13 +46,17 @@ namespace Oqtane
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            }).AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             services.AddMemoryCache();
-
             services.TryAddHttpClientWithAuthenticationCookie();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<BlazorAlertsService, BlazorAlertsService>();
             services.AddScoped<BlazorDraggableListService, BlazorDraggableListService>();
@@ -112,7 +118,7 @@ namespace Oqtane
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseTenantResolution();
+            //app.UseTenantResolution();
             app.UseBlazorFrameworkFiles();
             app.UseRouting();
             app.UseCors("wasmcorspolicy");

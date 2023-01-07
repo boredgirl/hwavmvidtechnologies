@@ -1,175 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    
-    <id>Oqtane.ChatHubs</id>
-    <version>4.2.8517</version>
-    <authors>hwavmvid technologies</authors>
-    <owners>hwavmvid technologies</owners>
-    <title>ChatHubs</title>
-    <description>ChatHubs</description>
-    <copyright>hwavmvid technologies</copyright>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <projectUrl>https://github.com/boredanyway/aspnetcore.chathub.template</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/boredgirl/wasmwebcamapp/master/Server/wwwroot/Modules/Oqtane.ChatHubs/wasmchatlogo.png</iconUrl>
-    <tags>oqtane module</tags>
-    <releaseNotes></releaseNotes>
-    <summary>asp .net core blazor signalR entity framework video chat hub template</summary>
+	<metadata>
 
-    <dependencies>
-      <group targetFramework="net6.0">
-        <dependency id="Oqtane.Framework" version="3.0.0" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />        
-      </group>
-      <group targetFramework=".NETStandard2.0">
-        <dependency id="System.Drawing" version="5.0.2" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" version="6.0.0" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.0" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.AspNetCore.SignalR.Client.Core" version="6.0.0" exclude="Build,Analyzers" />
-        <dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
-        <dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
-      </group>
-      <group targetFramework=".NETStandard2.1">
-        <dependency id="Microsoft.AspNetCore.Http.Connections.Client" version="6.0.0" exclude="Build,Analyzers" />        
-      </group>
-      <group targetFramework=".NETStandard1.0">
-        <dependency id="System.Composition" version="1.0.31" exclude="Build,Analyzers" />
-        <dependency id="System.Composition.AttributedModel" version="4.6.2" exclude="Build,Analyzers" />
-        <dependency id="System.Composition.Convention" version="4.6.2" exclude="Build,Analyzers" />
-        <dependency id="System.Composition.Hosting" version="4.6.2" exclude="Build,Analyzers" />
-        <dependency id="System.Composition.Runtime" version="4.6.2" exclude="Build,Analyzers" />
-        <dependency id="System.Composition.TypedParts" version="4.6.2" exclude="Build,Analyzers" />
-      </group>
-    </dependencies>
-    
-  </metadata>
-  <files>    
-    
-    <file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Client.dll" target="lib\netstandard2.0" />
-    <file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Client.Core.dll" target="lib\netstandard2.0" />
-    <file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson.dll" target="lib\netstandard2.0" />
-    <file src="..\Assemblies\Microsoft.AspNetCore.Http.Connections.Client.dll" target="lib\netstandard2.1" />
-    <file src="..\Assemblies\System.Drawing.Common.dll" target="lib\netstandard2.0" />
-    <file src="..\Assemblies\Microsoft.CSharp.dll" target="lib\net6.0" />
-    <file src="..\Assemblies\System.Composition.AttributedModel.dll" target="lib\netstandard1.0" />
-    <file src="..\Assemblies\System.Composition.Convention.dll" target="lib\netstandard1.0" />
-    <file src="..\Assemblies\System.Composition.Hosting.dll" target="lib\netstandard1.0" />
-    <file src="..\Assemblies\System.Composition.Runtime.dll" target="lib\netstandard1.0" />
-    <file src="..\Assemblies\System.Composition.TypedParts.dll" target="lib\netstandard1.0" />
-    <file src="..\Assemblies\FFMpegCore.dll" target="lib\netstandard2.0" />
-    <file src="..\Assemblies\Instances.dll" target="lib\netstandard2.0" />
-    
-    <file src="..\Client\bin\Release\net6.0\Oqtane.ChatHubs.Client.Oqtane.dll" target="lib\net6.0" />
-    <file src="..\Client\bin\Release\net6.0\Oqtane.ChatHubs.Client.Oqtane.pdb" target="lib\net6.0" />
-    <file src="..\Server\bin\Release\net6.0\Oqtane.ChatHubs.Server.Oqtane.dll" target="lib\net6.0" />
-    <file src="..\Server\bin\Release\net6.0\Oqtane.ChatHubs.Server.Oqtane.pdb" target="lib\net6.0" />
-    <file src="..\Shared\bin\Release\net6.0\Oqtane.ChatHubs.Shared.Oqtane.dll" target="lib\net6.0" />
-    <file src="..\Shared\bin\Release\net6.0\Oqtane.ChatHubs.Shared.Oqtane.pdb" target="lib\net6.0" />
-    
-    <file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.dll" target="lib\net6.0" />
-    <file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.pdb" target="lib\net6.0" />
-    <file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.dll" target="lib\net6.0" />
-    <file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.pdb" target="lib\net6.0" />
-    <file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.dll" target="lib\net6.0" />
-    <file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.pdb" target="lib\net6.0" />
-    <file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.dll" target="lib\net6.0" />
-    <file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.pdb" target="lib\net6.0" />
-    <file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.dll" target="lib\net6.0" />
-    <file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.pdb" target="lib\net6.0" />
-    <file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.dll" target="lib\net6.0" />
-    <file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.pdb" target="lib\net6.0" />
-    <file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.dll" target="lib\net6.0" />
-    <file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.pdb" target="lib\net6.0" />
-    <file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.dll" target="lib\net6.0" />
-    <file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.pdb" target="lib\net6.0" />
-    <file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.dll" target="lib\net6.0" />
-    <file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.pdb" target="lib\net6.0" />
-    <file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.dll" target="lib\net6.0" />
-    <file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.pdb" target="lib\net6.0" />
-    <file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.dll" target="lib\net6.0" />
-    <file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.pdb" target="lib\net6.0" />
-    <file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.dll" target="lib\net6.0" />
-    <file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.pdb" target="lib\net6.0" />
-    <file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.dll" target="lib\net6.0" />
-    <file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.pdb" target="lib\net6.0" />
-    <file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.dll" target="lib\net6.0" />
-    <file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.pdb" target="lib\net6.0" />
-    <file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.dll" target="lib\net6.0" />
-    <file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.pdb" target="lib\net6.0" />
-    <file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.dll" target="lib\net6.0" />
-    <file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.pdb" target="lib\net6.0" />
-    <file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.dll" target="lib\net6.0" />
-    <file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.pdb" target="lib\net6.0" />
-    <file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.dll" target="lib\net6.0" />
-    <file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.pdb" target="lib\net6.0" />
-    <file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.dll" target="lib\net6.0" />
-    <file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulette\bin\Release\net6.0\Hwavmvid.Roulette.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulette\bin\Release\net6.0\Hwavmvid.Roulette.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettesurface\bin\Release\net6.0\Hwavmvid.Roulettesurface.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettesurface\bin\Release\net6.0\Hwavmvid.Roulettesurface.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettebetoptions\bin\Release\net6.0\Hwavmvid.Roulettebetoptions.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettebetoptions\bin\Release\net6.0\Hwavmvid.Roulettebetoptions.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Rouletteitellisense\bin\Release\net6.0\Hwavmvid.Rouletteitellisense.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Rouletteitellisense\bin\Release\net6.0\Hwavmvid.Rouletteitellisense.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Rouletteshared\bin\Release\net6.0\Hwavmvid.Rouletteshared.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Rouletteshared\bin\Release\net6.0\Hwavmvid.Rouletteshared.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettecoins\bin\Release\net6.0\Hwavmvid.Roulettecoins.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettecoins\bin\Release\net6.0\Hwavmvid.Roulettecoins.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettebets\bin\Release\net6.0\Hwavmvid.Roulettebets.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Roulettebets\bin\Release\net6.0\Hwavmvid.Roulettebets.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motorsport.Racewaymaps\bin\Release\net6.0\Hwavmvid.Motorsport.Racewaymaps.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motorsport.Racewaymaps\bin\Release\net6.0\Hwavmvid.Motorsport.Racewaymaps.pdb" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motorsport.Shared\bin\Release\net6.0\Hwavmvid.Motorsport.Shared.dll" target="lib\net6.0" />
-    <file src="..\Hwavmvid.Motorsport.Shared\bin\Release\net6.0\Hwavmvid.Motorsport.Shared.pdb" target="lib\net6.0" />
+		<id>Oqtane.ChatHubs</id>
+		<version>4.2.8517</version>
+		<authors>hwavmvid technologies</authors>
+		<owners>hwavmvid technologies</owners>
+		<title>ChatHubs</title>
+		<description>ChatHubs</description>
+		<copyright>hwavmvid technologies</copyright>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/boredanyway/aspnetcore.chathub.template</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/boredgirl/wasmwebcamapp/master/Server/wwwroot/Modules/Oqtane.ChatHubs/wasmchatlogo.png</iconUrl>
+		<tags>oqtane module</tags>
+		<releaseNotes></releaseNotes>
+		<summary>asp .net core blazor signalR entity framework video chat hub template</summary>
 
 
-    <file src="..\BlazorAccordion\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorAlerts\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorBrowserResize\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorColorPicker\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorDraggableList\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorDropdown\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorFileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorModal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorPager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorSelect\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorVideo\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorVideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorWindows\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorNotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorDynamicLayout\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorSlider\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorDevices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\BlazorDownload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Jsapinotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Blackjack\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Blackjack\wwwroot\images\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Roulette\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Roulettesurface\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Roulettebetoptions\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Rouletteitellisense\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Roulettecoins\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Roulettebets\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Motorsport.Racewaymaps\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Hwavmvid.Motorsport.Shared\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<dependencies>
+
+			<group targetFramework="net6.0">
+				<dependency id="Oqtane.Framework" version="3.2.1" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+			</group>
+
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="System.Drawing" version="5.0.2" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" version="6.0.3" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.3" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.AspNetCore.SignalR.Client.Core" version="6.0.3" exclude="Build,Analyzers" />
+				<dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
+				<dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
+			</group>
+
+			<group targetFramework=".NETStandard2.1">
+				<dependency id="Microsoft.AspNetCore.Http.Connections.Client" version="6.0.0" exclude="Build,Analyzers" />
+			</group>
+
+			<group targetFramework=".NETStandard1.0">
+				<dependency id="System.Composition" version="1.0.31" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.AttributedModel" version="4.6.2" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Convention" version="4.6.2" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Hosting" version="4.6.2" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Runtime" version="4.6.2" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.TypedParts" version="4.6.2" exclude="Build,Analyzers" />
+			</group>
+		</dependencies>
+
+	</metadata>
+
+	<files>
+
+		<file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Client.dll" target="lib\netstandard2.0" />
+		<file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Client.Core.dll" target="lib\netstandard2.0" />
+		<file src="..\Assemblies\Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson.dll" target="lib\netstandard2.0" />
+		<file src="..\Assemblies\Microsoft.AspNetCore.Http.Connections.Client.dll" target="lib\netstandard2.1" />
+		<file src="..\Assemblies\System.Drawing.Common.dll" target="lib\netstandard2.0" />
+		<file src="..\Assemblies\Microsoft.CSharp.dll" target="lib\net6.0" />
+		<file src="..\Assemblies\System.Composition.AttributedModel.dll" target="lib\netstandard1.0" />
+		<file src="..\Assemblies\System.Composition.Convention.dll" target="lib\netstandard1.0" />
+		<file src="..\Assemblies\System.Composition.Hosting.dll" target="lib\netstandard1.0" />
+		<file src="..\Assemblies\System.Composition.Runtime.dll" target="lib\netstandard1.0" />
+		<file src="..\Assemblies\System.Composition.TypedParts.dll" target="lib\netstandard1.0" />
+		<file src="..\Assemblies\FFMpegCore.dll" target="lib\netstandard2.0" />
+		<file src="..\Assemblies\Instances.dll" target="lib\netstandard2.0" />
+
+		<file src="..\Client\bin\Release\net6.0\Oqtane.ChatHubs.Client.Oqtane.dll" target="lib\net6.0" />
+		<file src="..\Client\bin\Release\net6.0\Oqtane.ChatHubs.Client.Oqtane.pdb" target="lib\net6.0" />
+		<file src="..\Server\bin\Release\net6.0\Oqtane.ChatHubs.Server.Oqtane.dll" target="lib\net6.0" />
+		<file src="..\Server\bin\Release\net6.0\Oqtane.ChatHubs.Server.Oqtane.pdb" target="lib\net6.0" />
+		<file src="..\Shared\bin\Release\net6.0\Oqtane.ChatHubs.Shared.Oqtane.dll" target="lib\net6.0" />
+		<file src="..\Shared\bin\Release\net6.0\Oqtane.ChatHubs.Shared.Oqtane.pdb" target="lib\net6.0" />
+
+		<file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.dll" target="lib\net6.0" />
+		<file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.pdb" target="lib\net6.0" />
+		<file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.dll" target="lib\net6.0" />
+		<file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.pdb" target="lib\net6.0" />
+		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.dll" target="lib\net6.0" />
+		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.pdb" target="lib\net6.0" />
+		<file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.dll" target="lib\net6.0" />
+		<file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.pdb" target="lib\net6.0" />
+		<file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.dll" target="lib\net6.0" />
+		<file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.pdb" target="lib\net6.0" />
+		<file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.dll" target="lib\net6.0" />
+		<file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.pdb" target="lib\net6.0" />
+		<file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.dll" target="lib\net6.0" />
+		<file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.pdb" target="lib\net6.0" />
+		<file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.dll" target="lib\net6.0" />
+		<file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.pdb" target="lib\net6.0" />
+		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.dll" target="lib\net6.0" />
+		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.pdb" target="lib\net6.0" />
+		<file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.dll" target="lib\net6.0" />
+		<file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.pdb" target="lib\net6.0" />
+		<file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.dll" target="lib\net6.0" />
+		<file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.pdb" target="lib\net6.0" />
+		<file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.dll" target="lib\net6.0" />
+		<file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.pdb" target="lib\net6.0" />
+		<file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.dll" target="lib\net6.0" />
+		<file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.pdb" target="lib\net6.0" />
+		<file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.dll" target="lib\net6.0" />
+		<file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.pdb" target="lib\net6.0" />
+		<file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.dll" target="lib\net6.0" />
+		<file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.pdb" target="lib\net6.0" />
+		<file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.dll" target="lib\net6.0" />
+		<file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.pdb" target="lib\net6.0" />
+		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.dll" target="lib\net6.0" />
+		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.pdb" target="lib\net6.0" />
+		<file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.dll" target="lib\net6.0" />
+		<file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.pdb" target="lib\net6.0" />
+		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.dll" target="lib\net6.0" />
+		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulette\bin\Release\net6.0\Hwavmvid.Roulette.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulette\bin\Release\net6.0\Hwavmvid.Roulette.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettesurface\bin\Release\net6.0\Hwavmvid.Roulettesurface.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettesurface\bin\Release\net6.0\Hwavmvid.Roulettesurface.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettebetoptions\bin\Release\net6.0\Hwavmvid.Roulettebetoptions.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettebetoptions\bin\Release\net6.0\Hwavmvid.Roulettebetoptions.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Rouletteitellisense\bin\Release\net6.0\Hwavmvid.Rouletteitellisense.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Rouletteitellisense\bin\Release\net6.0\Hwavmvid.Rouletteitellisense.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Rouletteshared\bin\Release\net6.0\Hwavmvid.Rouletteshared.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Rouletteshared\bin\Release\net6.0\Hwavmvid.Rouletteshared.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettecoins\bin\Release\net6.0\Hwavmvid.Roulettecoins.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettecoins\bin\Release\net6.0\Hwavmvid.Roulettecoins.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettebets\bin\Release\net6.0\Hwavmvid.Roulettebets.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Roulettebets\bin\Release\net6.0\Hwavmvid.Roulettebets.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motorsport.Racewaymaps\bin\Release\net6.0\Hwavmvid.Motorsport.Racewaymaps.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motorsport.Racewaymaps\bin\Release\net6.0\Hwavmvid.Motorsport.Racewaymaps.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motorsport.Shared\bin\Release\net6.0\Hwavmvid.Motorsport.Shared.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Motorsport.Shared\bin\Release\net6.0\Hwavmvid.Motorsport.Shared.pdb" target="lib\net6.0" />
 
 
-    <file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffmpeg.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffplay.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
-    <file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffprobe.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorAccordion\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorAlerts\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorBrowserResize\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorColorPicker\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorDraggableList\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorDropdown\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorFileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorModal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorPager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorSelect\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorVideo\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorVideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorWindows\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorNotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorDynamicLayout\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorSlider\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorDevices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\BlazorDownload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Jsapinotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Blackjack\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Blackjack\wwwroot\images\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Roulette\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Roulettesurface\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Roulettebetoptions\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Rouletteitellisense\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Roulettecoins\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Roulettebets\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Motorsport.Racewaymaps\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Motorsport.Shared\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 
-    <file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 
-  </files>
+		<file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffmpeg.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffplay.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\ffprobe.exe" target="wwwroot/Modules/Oqtane.ChatHubs" />
+
+		<file src="..\Server\wwwroot\Modules\Oqtane.ChatHubs\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+
+	</files>
 </package>

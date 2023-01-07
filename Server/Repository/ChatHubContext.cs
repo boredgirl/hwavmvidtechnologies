@@ -6,13 +6,21 @@ using Oqtane.ChatHubs.Models;
 using Oqtane.Infrastructure;
 using Oqtane.Repository.Databases.Interfaces;
 using Oqtane.Models;
+using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Oqtane.Extensions;
+using Oqtane.Migrations.Framework;
 
 namespace Oqtane.ChatHubs.Repository
 {
-    public class ChatHubContext : DBContextBase, IService, IMultiDatabase
+    public class ChatHubContext : DBContextBase, ITransientService, IMultiDatabase
     {
-        public ITenantManager TenantManager { get; set; }
-        public IHttpContextAccessor HttpContextAccessor { get; set; }
+
+        private readonly ITenantResolver _tenantResolver;
+        private readonly ITenantManager _tenantManager;
+        private readonly IHttpContextAccessor _accessor;
+        private string _connectionString;
+        private string _databaseType;
 
         public virtual DbSet<ChatHubRoom> ChatHubRoom { get; set; }
         public virtual DbSet<ChatHubRoomChatHubUser> ChatHubRoomChatHubUser { get; set; }
@@ -35,10 +43,54 @@ namespace Oqtane.ChatHubs.Repository
 
         public ChatHubContext(ITenantManager tenantManager, IHttpContextAccessor accessor) : base(tenantManager, accessor)
         {
-            this.TenantManager = tenantManager;
-            this.HttpContextAccessor = accessor;
+            _connectionString = String.Empty;
+            _tenantManager = tenantManager;
+            _accessor = accessor;
         }
-        
+
+        public Oqtane.Databases.Interfaces.IDatabase ActiveDatabase { get; private set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ReplaceService<IMigrationsAssembly, MultiDatabaseMigrationsAssembly>();
+
+            if (string.IsNullOrEmpty(_connectionString))
+            {
+
+                Tenant tenant;
+                if (_tenantResolver != null)
+                {
+                    tenant = _tenantResolver.GetTenant();
+                }
+                else
+                {
+                    tenant = _tenantManager.GetTenant();
+                }
+
+                if (tenant != null)
+                {
+                    _connectionString = tenant.DBConnectionString
+                        .Replace("|DataDirectory|", AppDomain.CurrentDomain.GetData("DataDirectory")?.ToString());
+                    _databaseType = tenant.DBType;
+                }
+            }
+
+            if (!String.IsNullOrEmpty(_databaseType))
+            {
+                var type = Type.GetType(_databaseType);
+                ActiveDatabase = Activator.CreateInstance(type) as Oqtane.Databases.Interfaces.IDatabase;
+            }
+
+            if (!string.IsNullOrEmpty(_connectionString) && ActiveDatabase != null)
+            {
+                optionsBuilder.UseOqtaneDatabase(ActiveDatabase, _connectionString);
+            }
+
+            _tenantManager.SetTenant(1);
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             this.OnModelCreatingExtended(modelBuilder);
