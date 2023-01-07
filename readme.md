@@ -6,7 +6,7 @@
 
 -> short installation guide for hwavmvid project installation
 
--> install vs and sql server
+-> install vs and sql server and ssms
 -> search for control panel -> programs -> install features -> under iis enable websockets and leave webdav disabled
 
 -> open vs and clone the hwavmvid project into folder on desktop
@@ -22,14 +22,9 @@
 
 
 -----------------------------------------------------------------------------------------------------
-deprecated installation instructions use commit earlier
-migrating to oqtane.3.2.1
-for now resolve dependencies in oqtane server project
-
-<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.3" />
-<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
-<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.3" />
-<PackageReference Include="Microsoft.Composition" Version="1.0.31" />
+deprecated installation instructions
+migrated to oqtane.3.2.1
+follow the notes and use new framework version
 -----------------------------------------------------------------------------------------------------
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=SMWJYALAKFEWC)
