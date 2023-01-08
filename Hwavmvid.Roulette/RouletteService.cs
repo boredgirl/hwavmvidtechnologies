@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hwavmvid.Rouletteshared.Events;
 using Hwavmvid.Rouletteshared.Items;
+using Hwavmvid.Rouletteshared.Enums;
 
 namespace Hwavmvid.Roulette
 {
@@ -14,11 +15,11 @@ namespace Hwavmvid.Roulette
         private IJSObjectReference javascriptfile;
         private IJSRuntime jsruntime;
 
-        public event Action OnPlayRouletteGame;
+        public event Action OnPlayNewRouletteGame;
         public event Action OnStopRouletteGame;
         public event Action<RouletteEvent> OnWinItemDetected;
-        
-        public bool playing { get; set; } = false;
+
+        public RouletteGameStatus GameStatus = RouletteGameStatus.StartNewGame;
 
         public RouletteService(IJSRuntime jsRuntime)
         {
@@ -31,7 +32,7 @@ namespace Hwavmvid.Roulette
         }
         public void PlayNewRouletteGame()
         {
-            this.OnPlayRouletteGame?.Invoke();
+            this.OnPlayNewRouletteGame?.Invoke();
         }
         public void StopRouletteGame()
         {

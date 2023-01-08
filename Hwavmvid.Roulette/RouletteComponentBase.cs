@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Hwavmvid.Rouletteshared.Items;
 using Hwavmvid.Rouletteshared.Events;
+using Hwavmvid.Rouletteshared.Enums;
 
 namespace Hwavmvid.Roulette
 {
@@ -49,7 +50,7 @@ namespace Hwavmvid.Roulette
 
         protected override async Task OnInitializedAsync()
         {
-            this.RouletteService.OnPlayRouletteGame += async () => await this.Play_Clicked();
+            this.RouletteService.OnPlayNewRouletteGame += async () => await this.Play_Clicked();
             this.RouletteService.OnStopRouletteGame += async () => await this.Stop_Clicked();
 
             this.Map = this.GetRouletteMap();
@@ -58,7 +59,6 @@ namespace Hwavmvid.Roulette
             this.InitRouletteCarpet();
             this.InitRouletteNumbers();
             this.InitRouletteRaceway();
-            this.InitRouletteBall();
 
             this.loading = false;
 
@@ -76,14 +76,16 @@ namespace Hwavmvid.Roulette
         {
             this.winitem = null;
             this.roulettecircleradius = 17.5;
-            this.RouletteService.playing = true;
+            this.RouletteService.GameStatus = Rouletteshared.Enums.RouletteGameStatus.Playing;
             await this.UpdateUI();
 
+            this.InitRouletteBall();
             this.RunRouletteBall();
         }
         public async Task Stop_Clicked()
         {
-            this.RouletteService.playing = false;
+            this.RemoveRouletteItem(this.ball.RowId, this.ball.ColumnId, ball);
+            this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
             await this.UpdateUI();
         }
 
@@ -161,13 +163,11 @@ namespace Hwavmvid.Roulette
             this.AddRouletteItem(this.ballraceway.RowId, this.ballraceway.ColumnId, this.ballraceway);
         }
 
-        public RouletteBall ball { get; set; }
+        public RouletteBall ball { get; set; }  = new RouletteBall() { Id = Guid.NewGuid().ToString() };
         public void InitRouletteBall()
         {
-            this.ball = new RouletteBall();
             this.ball.RowId = 2;
-            this.ball.ColumnId = 2;
-            this.ball.Id = Guid.NewGuid().ToString();
+            this.ball.ColumnId = 2;            
             this.ball.ZIndex = 1000;
             this.ball.Opacity = 1;
             this.ball.BackgroundColor = this.Transparent;
@@ -180,13 +180,12 @@ namespace Hwavmvid.Roulette
         }
         public async void RunRouletteBall()
         {
-
             Random rndm = new Random();
             int ballpower = rndm.Next(1900 / 4, 2698 / 2);
             int delay = 9;
             int i = 0;
 
-            while (this.RouletteService.playing)
+            while (this.RouletteService.GameStatus == RouletteGameStatus.Playing)
             {
                 i++;
                 if (ballpower - i == 400)
@@ -219,9 +218,14 @@ namespace Hwavmvid.Roulette
                     this.roulettecircleradius = 11.5;
                     delay = 28;
                 }
-                if (ballpower - i == 10)
+                if (ballpower - i == 20)
                 {
                     this.roulettecircleradius = 11.0;
+                    delay = 37;
+                }
+                if (ballpower - i == 10)
+                {
+                    this.roulettecircleradius = 10.5;
                     delay = 42;
                 }
                 if (ballpower == i)
@@ -232,15 +236,12 @@ namespace Hwavmvid.Roulette
                 this.GetNextCircleCoor(this.ball, RouletteDirection.right);
                 this.AddRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
 
-                await this.UpdateUI();                
-                await InvokeAsync(async () =>
-                {
-                    await Task.Delay(Convert.ToInt32(delay));
-                });
+                await this.UpdateUI();
+                await Task.Delay(Convert.ToInt32(delay));
 
                 if (this.roulettecircleradius == 10.0)
                 {
-                    this.RouletteService.playing = false;
+                    this.RouletteService.GameStatus = RouletteGameStatus.ResultTable;
 
                     try
                     {
@@ -360,7 +361,7 @@ namespace Hwavmvid.Roulette
                     this.AddRouletteItem(container.item.RowId, container.item.ColumnId, container.item);
                 }
 
-                if (!this.RouletteService.playing && this.winitem != null)
+                if (this.RouletteService.GameStatus == RouletteGameStatus.ResultTable && this.winitem != null)
                 {
                     var itens = this.NumberItems.FirstOrDefault(item => item.Value == winitem.Value);
                     if (itens != null)
@@ -374,12 +375,12 @@ namespace Hwavmvid.Roulette
                     }
                 }
 
-                if (!this.RouletteService.playing)
+                if (this.RouletteService.GameStatus != RouletteGameStatus.Playing)
                     await this.UpdateUI();
 
                 await InvokeAsync(async () =>
                 {
-                    await Task.Delay(this.RouletteService.playing ? 40 : 180);
+                    await Task.Delay(this.RouletteService.GameStatus == RouletteGameStatus.Playing ? 40 : 180);
                 });
 
                 i--;
@@ -441,7 +442,7 @@ namespace Hwavmvid.Roulette
         }
         public void Dispose()
         {
-            this.RouletteService.OnPlayRouletteGame -= async () => await this.Play_Clicked();
+            this.RouletteService.OnPlayNewRouletteGame -= async () => await this.Play_Clicked();
             this.RouletteService.OnStopRouletteGame -= async () => await this.Stop_Clicked();
         }
 

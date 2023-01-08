@@ -1,4 +1,5 @@
 ﻿@namespace Hwavmvid.Roulette
+@implements IDisposable
 
 @using System
 @using System.Linq
@@ -12,13 +13,13 @@
 
     <div class="my-1">
 
-        <button @onclick="@(() => RouletteService.PlayNewRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.playing ? true : false)">
+        <button @onclick="@(() => RouletteService.PlayNewRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.GameStatus == Rouletteshared.Enums.RouletteGameStatus.Playing ? true : false)">
             Play new game
         </button>
-
-        <button @onclick="@(() => RouletteService.StopRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.playing ? false : true)">
+        
+        <button @onclick="@(() => RouletteService.StopRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.GameStatus == Rouletteshared.Enums.RouletteGameStatus.Playing ? false : true)">
             Stop game
-        </button>
+        </button>        
 
     </diV>
 
@@ -26,4 +27,19 @@
 
 @code {
 
+    protected override Task OnInitializedAsync()
+    {
+        this.RouletteService.OnStopRouletteGame += OnStopRouletteGame;
+        return base.OnInitializedAsync();
+    }
+
+    public void OnStopRouletteGame()
+    {
+        this.StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        this.RouletteService.OnStopRouletteGame -= OnStopRouletteGame;
+    }
 }

@@ -28,6 +28,7 @@ namespace Hwavmvid.Rouletteitellisense
 
         protected override async Task OnInitializedAsync()
         {
+            this.RouletteService.OnStopRouletteGame += GameStopped;
             this.RouletteService.OnWinItemDetected += WinItemDetected;
             this.RoulettecoinsService.OnItemDropped += ItemDropped;
             this.RouletteBetsService.UpdateUI += UpdateUI;
@@ -215,22 +216,14 @@ namespace Hwavmvid.Rouletteitellisense
             {
                 this.StateHasChanged();
             });
+        }
 
-            // prepare for new single player bet id
-            await this.InvokeAsync(() =>
-            {
-                Task.Delay(14000).ContinueWith((task) =>
-                {
-                    this.InvokeAsync(() =>
-                    {
-                        this.RouletteService.playing = false;
-                        this.RouletteBetsService.BetItems.Clear();
-                        this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
-                        this.DroppedItem = null;
-                        this.StateHasChanged();
-                    });
-                });
-            });
+        private void GameStopped()
+        {
+            this.RouletteBetsService.BetItems.Clear();
+            this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
+            this.DroppedItem = null;
+            this.StateHasChanged();
         }
 
         public async void UpdateUI()
@@ -242,6 +235,7 @@ namespace Hwavmvid.Rouletteitellisense
         }
         public void Dispose()
         {
+            this.RouletteService.OnPlayNewRouletteGame -= GameStopped;
             this.RouletteService.OnWinItemDetected -= WinItemDetected;
             this.RoulettecoinsService.OnItemDropped -= ItemDropped;
             this.RouletteBetsService.UpdateUI -= UpdateUI;
