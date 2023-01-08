@@ -212,10 +212,7 @@ namespace Hwavmvid.Rouletteitellisense
                 }
             }
 
-            await this.InvokeAsync(() =>
-            {
-                this.StateHasChanged();
-            });
+            this.UpdateUI();
         }
 
         private void GameStopped()

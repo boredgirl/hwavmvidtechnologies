@@ -53,22 +53,26 @@ namespace Hwavmvid.Roulette
             this.RouletteService.OnPlayNewRouletteGame += async () => await this.Play_Clicked();
             this.RouletteService.OnStopRouletteGame += async () => await this.Stop_Clicked();
 
-            this.Map = this.GetRouletteMap();
-            this.NumberItems = this.GetRouletteNumbers();
-
-            this.InitRouletteCarpet();
-            this.InitRouletteNumbers();
-            this.InitRouletteRaceway();
-
-            this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
-            this.loading = false;
-
             await base.OnInitializedAsync();
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
+            {
+                this.Map = this.GetRouletteMap();
+                this.NumberItems = this.GetRouletteNumbers();
+
+                this.InitRouletteCarpet();
+                this.InitRouletteNumbers();
+                this.InitRouletteRaceway();
+
+                this.ResetVariables();
+                this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
+
+                this.loading = false;
+
                 this.RunRouletteNumbers();
+            }
 
             await base.OnAfterRenderAsync(firstRender);
         }
@@ -86,6 +90,8 @@ namespace Hwavmvid.Roulette
         public async Task Stop_Clicked()
         {
             this.RemoveRouletteItem(this.ball.RowId, this.ball.ColumnId, ball);
+
+            this.ResetVariables();
             this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
             await this.UpdateUI();
         }
@@ -113,10 +119,10 @@ namespace Hwavmvid.Roulette
             return map;
         }
 
-        private double numberscircleradius = 10.0;
-        private double numberscirclemiddle_x = 20.5;
-        private double numberscirclemiddle_y = 19.5;
-        private double numberscirclesegmentslength = totalnumbers;
+        private const double numberscircleradius = 10.0;
+        private const double numberscirclemiddle_x = 20.5;
+        private const double numberscirclemiddle_y = 19.5;
+        private const double numberscirclesegmentslength = totalnumbers;
 
         public RouletteCarpet carpet { get; set; } = new RouletteCarpet() { Id = Guid.NewGuid().ToString() };
         public void InitRouletteCarpet()
@@ -213,12 +219,12 @@ namespace Hwavmvid.Roulette
                 if (ballpower - i == 37)
                 {
                     this.roulettecircleradius = 11.5;
-                    delay = 28;
+                    delay = 17;
                 }
                 if (ballpower - i == 17)
                 {
                     this.roulettecircleradius = 10.5;
-                    delay = 42;
+                    delay = 20;
                 }
                 if (ballpower == i)
                     this.roulettecircleradius = 10.0;
@@ -228,11 +234,10 @@ namespace Hwavmvid.Roulette
                 this.GetNextCircleCoor(this.ball, RouletteDirection.right);
                 this.AddRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
 
-                await this.UpdateUI();
-                await InvokeAsync(async () =>
-                {
-                    await Task.Delay(Convert.ToInt32(delay));
-                });
+                if (i % 2 == 0)
+                    this.StateHasChanged();
+
+                await Task.Delay(Convert.ToInt32(delay * 2));
 
                 if (ballpower == i)
                 {
@@ -253,7 +258,7 @@ namespace Hwavmvid.Roulette
                         Console.WriteLine(exception.Message);
                     }
 
-                    await this.UpdateUI();
+                    this.StateHasChanged();
                 }
             }
         }
@@ -279,8 +284,8 @@ namespace Hwavmvid.Roulette
                 else if (number.Value % 2 == 1)
                     number.BackgroundColor = this.Red;
 
-                double coor_x = this.numberscirclemiddle_x + (double)Math.Cos(2 * Math.PI * (i + circlecalcdiff) / this.numberscirclesegmentslength) * this.numberscircleradius;
-                double coor_y = this.numberscirclemiddle_y + (double)Math.Sin(2 * Math.PI * (i + circlecalcdiff) / this.numberscirclesegmentslength) * this.numberscircleradius;
+                double coor_x = numberscirclemiddle_x + (double)Math.Cos(2 * Math.PI * (i + circlecalcdiff) / numberscirclesegmentslength) * numberscircleradius;
+                double coor_y = numberscirclemiddle_y + (double)Math.Sin(2 * Math.PI * (i + circlecalcdiff) / numberscirclesegmentslength) * numberscircleradius;
 
                 number.RowId = Convert.ToInt32(coor_y);
                 number.ColumnId = Convert.ToInt32(coor_x);
@@ -345,8 +350,8 @@ namespace Hwavmvid.Roulette
                 {
                     this.RemoveRouletteItem(container.item.RowId, container.item.ColumnId, container.item);
 
-                    double coor_x = this.numberscirclemiddle_x + (double) Math.Cos(2 * Math.PI * (container.index + 2 + circlecalcdiff) / this.numberscirclesegmentslength) * this.numberscircleradius;
-                    double coor_y = this.numberscirclemiddle_y + (double) Math.Sin(2 * Math.PI * (container.index + 2 + circlecalcdiff) / this.numberscirclesegmentslength) * this.numberscircleradius;
+                    double coor_x = numberscirclemiddle_x + (double) Math.Cos(2 * Math.PI * (container.index + 2 + circlecalcdiff) / numberscirclesegmentslength) * numberscircleradius;
+                    double coor_y = numberscirclemiddle_y + (double) Math.Sin(2 * Math.PI * (container.index + 2 + circlecalcdiff) / numberscirclesegmentslength) * numberscircleradius;
 
                     container.item.RowId = Convert.ToInt32(coor_y);
                     container.item.ColumnId = Convert.ToInt32(coor_x);
@@ -400,14 +405,22 @@ namespace Hwavmvid.Roulette
         }
 
         private double roulettecircleradius { get; set; } = 17.5;
-        private double roulettecirclemiddle_x { get; set; } = 20.5;
-        private double roulettecirclemiddle_y { get; set; } = 19.5;
-        private double roulettecirclesegmentslength { get; set; } = totalnumbers;
+
+        private const double roulettecirclemiddle_x = 20.5;
+        private const double roulettecirclemiddle_y = 19.5;
+        private const double roulettecirclesegmentslength = totalnumbers;
         private int roulettecirclecontextsegment { get; set; } = 0;
+
+        private void ResetVariables()
+        {
+            this.roulettecircleradius = 17.5;
+            this.roulettecirclecontextsegment = 0;
+        }
+
         public void GetNextCircleCoor(RouletteItem rouletteitem, RouletteDirection direction)
         {
             
-            if (!(this.roulettecirclecontextsegment < this.roulettecirclesegmentslength) ||
+            if (!(this.roulettecirclecontextsegment < roulettecirclesegmentslength) ||
                 !(this.roulettecirclecontextsegment > -(roulettecirclesegmentslength)))
             {
                 this.roulettecirclecontextsegment = 0;
@@ -419,8 +432,8 @@ namespace Hwavmvid.Roulette
             if (direction == RouletteDirection.left)
                 this.roulettecirclecontextsegment--;
 
-            double coor_x = this.roulettecirclemiddle_x + (double) Math.Cos(2 * Math.PI * (this.roulettecirclecontextsegment + circlecalcdiff) / this.roulettecirclesegmentslength) * this.roulettecircleradius;
-            double coor_y = this.roulettecirclemiddle_y + (double) Math.Sin(2 * Math.PI * (this.roulettecirclecontextsegment + circlecalcdiff) / this.roulettecirclesegmentslength) * this.roulettecircleradius;
+            double coor_x = roulettecirclemiddle_x + (double) Math.Cos(2 * Math.PI * (this.roulettecirclecontextsegment + circlecalcdiff) / roulettecirclesegmentslength) * this.roulettecircleradius;
+            double coor_y = roulettecirclemiddle_y + (double) Math.Sin(2 * Math.PI * (this.roulettecirclecontextsegment + circlecalcdiff) / roulettecirclesegmentslength) * this.roulettecircleradius;
 
             rouletteitem.RowId = Convert.ToInt32(coor_y);
             rouletteitem.ColumnId = Convert.ToInt32(coor_x);
