@@ -12,14 +12,14 @@ namespace Hwavmvid.Roulette
     public class RouletteService : IDisposable
     {
 
-        private IJSObjectReference javascriptfile;
+        private IJSObjectReference javascriptfile { get; set; } = null;
         private IJSRuntime jsruntime;
 
         public event Action OnPlayNewRouletteGame;
         public event Action OnStopRouletteGame;
         public event Action<RouletteEvent> OnWinItemDetected;
 
-        public RouletteGameStatus GameStatus = RouletteGameStatus.StartNewGame;
+        public RouletteGameStatus GameStatus { get; set; } = RouletteGameStatus.StartNewGame;
 
         public RouletteService(IJSRuntime jsRuntime)
         {
