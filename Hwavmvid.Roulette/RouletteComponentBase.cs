@@ -60,6 +60,7 @@ namespace Hwavmvid.Roulette
             this.InitRouletteNumbers();
             this.InitRouletteRaceway();
 
+            this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
             this.loading = false;
 
             await base.OnInitializedAsync();
@@ -76,7 +77,7 @@ namespace Hwavmvid.Roulette
         {
             this.winitem = null;
             this.roulettecircleradius = 17.5;
-            this.RouletteService.GameStatus = Rouletteshared.Enums.RouletteGameStatus.Playing;
+            this.RouletteService.GameStatus = RouletteGameStatus.Playing;
             await this.UpdateUI();
 
             this.InitRouletteBall();
@@ -117,17 +118,15 @@ namespace Hwavmvid.Roulette
         private double numberscirclemiddle_y = 19.5;
         private double numberscirclesegmentslength = totalnumbers;
 
-        public RouletteCarpet carpet { get; set; }
+        public RouletteCarpet carpet { get; set; } = new RouletteCarpet() { Id = Guid.NewGuid().ToString() };
         public void InitRouletteCarpet()
         {
             foreach (var row in this.Map.Rows)
             {
                 foreach (var container in this.Map.Columns.Where(item => item.RowId == row.RowId).Select((item, index) => new { item = item, index = index }))
                 {
-                    this.carpet = new RouletteCarpet();
                     this.carpet.RowId = row.RowId;
                     this.carpet.ColumnId = container.index + 1;
-                    this.carpet.Id = Guid.NewGuid().ToString();
                     this.carpet.ZIndex = 1;
                     this.carpet.Opacity = 1;
                     this.carpet.BackgroundColor = this.Carpetgreen;
@@ -143,13 +142,11 @@ namespace Hwavmvid.Roulette
             }
         }
 
-        public RouletteBallRaceway ballraceway { get; set; }
+        public RouletteBallRaceway ballraceway { get; set; } = new RouletteBallRaceway() { Id = Guid.NewGuid().ToString() };
         public void InitRouletteRaceway()
         {
-            this.ballraceway = new RouletteBallRaceway();
             this.ballraceway.RowId = 1;
             this.ballraceway.ColumnId = 1;
-            this.ballraceway.Id = Guid.NewGuid().ToString();
             this.ballraceway.ZIndex = 100;
             this.ballraceway.Opacity = 1;
             this.ballraceway.BackgroundColor = this.Transparent;
@@ -206,7 +203,7 @@ namespace Hwavmvid.Roulette
                 if (ballpower - i == 100)
                 {
                     this.roulettecircleradius = 13.5;
-                    delay = 12;
+                    delay = 13;
                 }
                 if (ballpower - i == 64)
                 {
@@ -218,12 +215,7 @@ namespace Hwavmvid.Roulette
                     this.roulettecircleradius = 11.5;
                     delay = 28;
                 }
-                if (ballpower - i == 20)
-                {
-                    this.roulettecircleradius = 11.0;
-                    delay = 37;
-                }
-                if (ballpower - i == 10)
+                if (ballpower - i == 17)
                 {
                     this.roulettecircleradius = 10.5;
                     delay = 42;
@@ -237,9 +229,12 @@ namespace Hwavmvid.Roulette
                 this.AddRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
 
                 await this.UpdateUI();
-                await Task.Delay(Convert.ToInt32(delay));
+                await InvokeAsync(async () =>
+                {
+                    await Task.Delay(Convert.ToInt32(delay));
+                });
 
-                if (this.roulettecircleradius == 10.0)
+                if (ballpower == i)
                 {
                     this.RouletteService.GameStatus = RouletteGameStatus.ResultTable;
 
@@ -304,13 +299,11 @@ namespace Hwavmvid.Roulette
 
             return numbers;
         }
-        public RouletteNumbers numbers { get; set; }
+        public RouletteNumbers numbers { get; set; } = new RouletteNumbers() { Id = Guid.NewGuid().ToString() };
         public void InitRouletteNumbers()
         {
-            this.numbers = new RouletteNumbers();
             this.numbers.RowId = 1;
             this.numbers.ColumnId = 1;
-            this.numbers.Id = Guid.NewGuid().ToString();
             this.numbers.ZIndex = 100;
             this.numbers.Opacity = 1;
             this.numbers.BackgroundColor = this.Transparent;
