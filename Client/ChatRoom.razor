@@ -38,10 +38,10 @@
                     <span class="bg-light">
                         @string.Format("[{0}]", item.CreatedOn.ToLocalTime().ToString(ChatWindowDatePattern))
                     </span>
-                    <span>
+                    <span style="color: @item.User.Settings.UsernameColor">
                         <strong>@item.User.DisplayName:</strong>
                     </span>
-                    <span>
+                    <span style="color: @item.User.Settings.MessageColor">
                         @((MarkupString)HighlightOwnUsername(ReplaceYoutubeLinksAsync(HttpUtility.HtmlEncode(item.Content)), ChatHubService.ConnectedUser.DisplayName))
                     </span>
                 </div>
@@ -51,10 +51,10 @@
                     <span class="bg-light">
                         @string.Format("[{0}]", item.CreatedOn.ToLocalTime().ToString(ChatWindowDatePattern))
                     </span>
-                    <span>
+                    <span style="color: @item.User.Settings.UsernameColor">
                         <strong>@item.User.DisplayName:</strong>
                     </span>
-                    <span>
+                    <span style="color: @item.User.Settings.MessageColor">
                         @((MarkupString)HighlightOwnUsername(ReplaceYoutubeLinksAsync(HttpUtility.HtmlEncode(item.Content)), ChatHubService.ConnectedUser.DisplayName))
                     </span>
                 </div>

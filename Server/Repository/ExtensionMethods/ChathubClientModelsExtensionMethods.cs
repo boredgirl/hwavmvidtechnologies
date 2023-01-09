@@ -94,7 +94,7 @@ namespace Oqtane.ChatHubs.Repository
                 Id = obj.Id,
                 ChatHubUserId = obj.ChatHubUserId,
                 MessageColor = obj.MessageColor,
-                UsernameColor = obj.MessageColor,
+                UsernameColor = obj.UsernameColor,
                 CreatedBy = obj.CreatedBy,
                 CreatedOn = obj.CreatedOn,
                 ModifiedBy = obj.ModifiedBy,

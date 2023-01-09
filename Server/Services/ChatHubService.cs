@@ -109,8 +109,7 @@ namespace Oqtane.ChatHubs.Services
         }
         public ChatHubUser CreateChatHubUserClientModel(ChatHubUser user)
         {
-            ChatHubSettings chatHubSettings = this.chatHubRepository.GetSetting(user.UserId);
-            ChatHubSettings chatHubSettingsClientModel = chatHubSettings != null ? this.CreateChatHubSettingClientModel(chatHubSettings) : null;
+            ChatHubSettings chatHubSettingsClientModel = this.chatHubRepository.GetSetting(user.UserId).ClientModel();
 
             return new ChatHubUser()
             {

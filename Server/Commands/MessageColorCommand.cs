@@ -24,7 +24,7 @@ namespace Oqtane.ChatHubs.Commands
 
             if(!string.IsNullOrEmpty(messageColor))
             {
-                var settings = caller.Settings;                
+                var settings = context.ChatHubRepository.GetSetting(callerContext.UserId);                
                 settings.MessageColor = messageColor;
                 await context.ChatHubRepository.UpdateSetting(settings);
 
