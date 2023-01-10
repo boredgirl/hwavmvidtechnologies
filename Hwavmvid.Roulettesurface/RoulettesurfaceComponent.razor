@@ -27,7 +27,7 @@
                 
                     <div class="col-sm-12 position-relative">
 
-                        @if (WinItem != null && WinItem.Value == item.Value)
+                        @if (RoulettesurfaceService.WinItem != null && RoulettesurfaceService.WinItem.Value == item.Value)
                         {
                             <button type="button" class="btn btn-sm btn-rounded w-100 h-100 btn-primary numberitemscontainerheight" disabled="@(true)">
                                 <strong style="font-size: 1.2rem">
@@ -70,7 +70,7 @@
 
                                 <div class="col-sm-4 position-relative">
 
-                                    @if (WinItem != null && WinItem.Value == item.Value)
+                                    @if (RoulettesurfaceService.WinItem != null && RoulettesurfaceService.WinItem.Value == item.Value)
                                     {
                                         <button type="button" class="btn btn-sm btn-rounded btn-primary w-100 h-100 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(true)">
                                             <strong style="font-size: 1.2rem;">@item.Value</strong>

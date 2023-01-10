@@ -9,30 +9,30 @@
 
 <div class="p-1 p-sm-2 text-center bg-transparent">
 
-    @if (loading)
+    @if (RouletteService.loading)
     {
         <div class="mx-auto p-0 " style="width: 420px">
-            <div class="d-flex align-items-center justify-content-center w-100 p-3 bg-white text-dark" style="width: @(containerwidth)px; height: @(containerheight)px;">
+            <div class="d-flex align-items-center justify-content-center w-100 p-3 bg-white text-dark" style="width: @(RouletteService.containerwidth)px; height: @(RouletteService.containerheight)px;">
                 <img src="/Modules/Oqtane.ChatHubs/rouletteloading.gif" />
             </div>
         </div>
     }
 
-    @if (!loading)
+    @if (!RouletteService.loading)
     {
         <div class="mx-auto p-0" style="width: 420px">
 
-            <div class="roulette-map" style="width: @(containerwidth)px; height: @(containerheight)px;">
+            <div class="roulette-map" style="width: @(RouletteService.containerwidth)px; height: @(RouletteService.containerheight)px;">
 
-                @foreach (var row in Map.Rows)
+                @foreach (var row in RouletteService.Map.Rows)
                 {
 
                     <div class="row p-0 g-0">
 
-                        @foreach (var col in Map.Columns.Where(item => item.RowId == row.RowId))
+                        @foreach (var col in RouletteService.Map.Columns.Where(item => item.RowId == row.RowId))
                         {                            
 
-                            <div class="col position-relative p-0" style="width: @(griditemwidth)px; height: @(griditemheight)px;">
+                            <div class="col position-relative p-0" style="width: @(RouletteService.griditemwidth)px; height: @(RouletteService.griditemheight)px;">
                                 
                                 @foreach (var item in col.Items)
                                 {

@@ -13,7 +13,7 @@
 
     <div class="my-1">
 
-        <button @onclick="@(() => RouletteService.PlayNewRouletteGame())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.GameStatus == Rouletteshared.Enums.RouletteGameStatus.Playing ? true : false)">
+        <button @onclick="@(() => RouletteService.Play_Clicked())" type="button" class="btn btn-sm btn-primary p-2 p-sm-4 lead" style="font-size: 0.88rem;" disabled="@(RouletteService.GameStatus == Rouletteshared.Enums.RouletteGameStatus.Playing ? true : false)">
             Play new game
         </button>
         

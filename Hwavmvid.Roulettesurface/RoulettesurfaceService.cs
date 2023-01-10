@@ -14,6 +14,7 @@ namespace Hwavmvid.Roulettesurface
         private IJSObjectReference javascriptfile;
 
         public List<RoulettesurfaceNumber> NumberItems { get; set; } = new List<RoulettesurfaceNumber>();
+        public RouletteNumber WinItem { get; set; }
 
         public string Black { get; set; } = "black";
         public string Red { get; set; } = "red";

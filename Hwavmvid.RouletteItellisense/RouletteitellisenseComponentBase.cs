@@ -215,6 +215,7 @@ namespace Hwavmvid.Rouletteitellisense
                 }
             }
 
+            this.RoulettesurfaceService.WinItem = e.WinItem;
             this.UpdateUI();
         }
 
@@ -223,6 +224,11 @@ namespace Hwavmvid.Rouletteitellisense
             this.RouletteBetsService.BetItems.Clear();
             this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
             this.DroppedItem = null;
+
+            this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
+            this.RouletteService.RemoveRouletteItem(this.RouletteService.ball.RowId, this.RouletteService.ball.ColumnId, this.RouletteService.ball);
+            this.RouletteService.ResetVariables();
+
             this.StateHasChanged();
         }
 

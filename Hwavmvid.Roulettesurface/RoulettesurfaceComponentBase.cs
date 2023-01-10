@@ -9,33 +9,18 @@ using Hwavmvid.Rouletteshared.Events;
 
 namespace Hwavmvid.Roulettesurface
 {
-    public class RoulettesurfaceComponentBase : ComponentBase, IAsyncDisposable
+    public class RoulettesurfaceComponentBase : ComponentBase
     {
 
         [Inject] public RoulettesurfaceService RoulettesurfaceService { get; set; }
         [Inject] public RouletteService RouletteService { get; set; }
 
-        public const int NumberItemsContainerHeight = 400;        
-        public RouletteNumber WinItem { get; set; }
+        public const int NumberItemsContainerHeight = 400;
 
         protected override async Task OnInitializedAsync()
         {
-            this.RouletteService.OnWinItemDetected += WinItemDetected;
             await base.OnInitializedAsync();
         }
 
-        public void WinItemDetected(RouletteEvent e)
-        {
-            this.WinItem = e.WinItem;
-            this.StateHasChanged();
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await InvokeAsync(() =>
-            {
-                this.RouletteService.OnWinItemDetected -= WinItemDetected;
-            });            
-        }
     }
 }
