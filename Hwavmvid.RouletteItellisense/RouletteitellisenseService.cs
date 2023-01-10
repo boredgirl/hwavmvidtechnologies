@@ -13,8 +13,8 @@ namespace Hwavmvid.Rouletteitellisense
         private IJSObjectReference javascriptfile;
         private IJSRuntime jsruntime;
 
-        public string ContextGameId { get; set; } = Guid.NewGuid().ToString();
-        public int ContextGameValue { get; set; }
+        public string ContextGameId { get; set; }
+        public int? ContextGameValue { get; set; }
 
         public RouletteitellisenseService(IJSRuntime jsRuntime)
         {

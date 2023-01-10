@@ -9,26 +9,20 @@ using Hwavmvid.Rouletteshared.Enums;
 namespace Hwavmvid.Roulette
 {
 
-    public class RouletteService : IDisposable
+    public class RouletteService
     {
 
-        private IJSObjectReference javascriptfile { get; set; } = null;
         private IJSRuntime jsruntime;
 
         public event Action OnPlayNewRouletteGame;
         public event Action OnStopRouletteGame;
         public event Action<RouletteEvent> OnWinItemDetected;
 
-        public RouletteGameStatus GameStatus { get; set; } = RouletteGameStatus.StartNewGame;
+        public RouletteGameStatus GameStatus { get; set; }
 
         public RouletteService(IJSRuntime jsRuntime)
         {
             this.jsruntime = jsRuntime;
-        }
-        public async Task InitRouletteService()
-        {
-            this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>(
-               "import", "/Modules/Oqtane.ChatHubs/roulettejsinterop.js");
         }
         public void PlayNewRouletteGame()
         {
@@ -41,15 +35,6 @@ namespace Hwavmvid.Roulette
         public void ExposeWinItem(RouletteNumber item)
         {
             this.OnWinItemDetected?.Invoke(new RouletteEvent() { WinItem = item });
-        }
-        public async Task<string> Prompt(string message)
-        {
-            return await this.javascriptfile.InvokeAsync<string>("showPrompt", message);
-        }
-        public void Dispose()
-        {
-            if (javascriptfile != null)
-                this.javascriptfile.DisposeAsync();
         }
 
     }

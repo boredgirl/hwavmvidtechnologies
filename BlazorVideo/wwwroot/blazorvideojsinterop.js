@@ -886,6 +886,7 @@ export class locallivestreamwebscreenitem extends livestreamitem {
                     latency: { ideal: 1.0 },
                     noiseSuppression: { ideal: true },
                     autoGainControl: { ideal: true },
+                    suppressLocalAudioPlayback: false,
                 },
                 video: {
                     width: { ideal: 640 },
@@ -893,7 +894,10 @@ export class locallivestreamwebscreenitem extends livestreamitem {
                     frameRate: { ideal: __selfblazorvideomap.framerate },
                     facingMode: { ideal: "environment" },
                     displaySurface: { ideal: 'application' },
-                }
+                },
+                surfaceSwitching: "include",
+                selfBrowserSurface: "include",
+                systemAudio: "include",
             };
 
             this.constrains['deviceId'] = __selflocallivestreamwebscreen.videoelementid;

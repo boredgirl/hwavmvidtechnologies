@@ -621,13 +621,20 @@ namespace Oqtane.ChatHubs.Hubs
         [AllowAnonymous]
         public async Task<IList<ChatHubViewer>[]> GetChatHubViewers(List<int> roomIds)
         {
-            IList<ChatHubViewer>[] viewerListArray = new IList<ChatHubViewer>[roomIds.Count()];
-            foreach(var item in roomIds.Select((roomId, index) => new { roomId = roomId, index = index }))
+            try
             {
-                viewerListArray[item.index] = await this.chatHubRepository.GetViewersByRoomIdAsync(item.roomId);
-            }
+                IList<ChatHubViewer>[] viewerListArray = new IList<ChatHubViewer>[roomIds.Count()];
+                foreach (var item in roomIds.Select((roomId, index) => new { roomId = roomId, index = index }))
+                {
+                    viewerListArray[item.index] = await this.chatHubRepository.GetViewersByRoomIdAsync(item.roomId);
+                }
 
-            return viewerListArray;
+                return viewerListArray;
+            }
+            catch (Exception exception)
+            {
+                throw new HubException(exception.Message);
+            }            
         }
 
         [AllowAnonymous]

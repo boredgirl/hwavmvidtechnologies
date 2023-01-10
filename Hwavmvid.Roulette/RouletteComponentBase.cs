@@ -17,7 +17,7 @@ namespace Hwavmvid.Roulette
 
         [Inject] public RouletteService RouletteService { get; set; }
 
-        public RouletteMap Map { get; set; }
+        public RouletteMap Map { get; set; } = null;
         public List<RouletteNumber> NumberItems = new List<RouletteNumber>();
 
         public const double containerwidth = rows * griditemwidth;
@@ -188,7 +188,7 @@ namespace Hwavmvid.Roulette
             int delay = 9;
             int i = 0;
 
-            while (this.RouletteService.GameStatus == RouletteGameStatus.Playing)
+            while (true)
             {
                 i++;
                 if (ballpower - i == 400)
@@ -229,13 +229,19 @@ namespace Hwavmvid.Roulette
                 if (ballpower == i)
                     this.roulettecircleradius = 10.0;
 
-
-                this.RemoveRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
-                this.GetNextCircleCoor(this.ball, RouletteDirection.right);
-                this.AddRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
+                try
+                {
+                    this.RemoveRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
+                    this.GetNextCircleCoor(this.ball, RouletteDirection.right);
+                    this.AddRouletteItem(this.ball.RowId, this.ball.ColumnId, this.ball);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
 
                 if (i % 2 == 0)
-                    this.StateHasChanged();
+                    await this.UpdateUI();
 
                 await Task.Delay(Convert.ToInt32(delay * 2));
 
@@ -251,11 +257,13 @@ namespace Hwavmvid.Roulette
                         {
                             this.winitem = columnitem as RouletteNumber;
                             this.RouletteService.ExposeWinItem(winitem);
+                            break;
                         }
                     }
                     catch (Exception exception)
                     {
                         Console.WriteLine(exception.Message);
+                        break;
                     }
 
                     this.StateHasChanged();
@@ -376,11 +384,8 @@ namespace Hwavmvid.Roulette
                 if (this.RouletteService.GameStatus != RouletteGameStatus.Playing)
                     await this.UpdateUI();
 
-                await InvokeAsync(async () =>
-                {
-                    await Task.Delay(this.RouletteService.GameStatus == RouletteGameStatus.Playing ? 40 : 180);
-                });
-
+                await Task.Delay(this.RouletteService.GameStatus == RouletteGameStatus.Playing ? 40 : 180);
+                
                 i--;
             }
         }

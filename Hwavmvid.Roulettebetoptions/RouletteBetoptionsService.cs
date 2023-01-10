@@ -17,8 +17,6 @@ namespace Hwavmvid.Roulettebetoptions
 
         public List<RouletteBetoptionsItem> Items { get; set; } = new List<RouletteBetoptionsItem>();
 
-        public event Action<RouletteEvent> OnWinItemDetected;
-
         public RouletteBetoptionsService(IJSRuntime jsruntime)
         {
             this.jsruntime = jsruntime;
@@ -30,10 +28,6 @@ namespace Hwavmvid.Roulettebetoptions
         public async Task InitRouletteService()
         {
             this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/roulettebetoptionsjsinterop.js");
-        }
-        public void ExposeWinItem(RouletteNumber item)
-        {
-            this.OnWinItemDetected?.Invoke(new RouletteEvent() { WinItem = item });
         }
         public async Task<string> Prompt(string message)
         {

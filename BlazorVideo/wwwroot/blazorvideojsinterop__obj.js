@@ -524,6 +524,7 @@ export function initblazorvideo(dotnetobjref, id1, id2, type, sourceType, framer
                             latency: { ideal: 1.0 },
                             noiseSuppression: { ideal: true },
                             autoGainControl: { ideal: true },
+                            suppressLocalAudioPlayback: false,
                         },
                         video: {
                             width: { ideal: 640 },
@@ -531,7 +532,10 @@ export function initblazorvideo(dotnetobjref, id1, id2, type, sourceType, framer
                             frameRate: { ideal: framerate },
                             facingMode: { ideal: "environment" },
                             displaySurface: { ideal: 'application' },
-                        }
+                        },
+                        surfaceSwitching: "include",
+                        selfBrowserSurface: "include",
+                        systemAudio: "include",
                     };
 
                     this.constrains['deviceId'] = __selflocallivestreamwebscreen.videoelementid;

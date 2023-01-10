@@ -14,7 +14,7 @@ using Hwavmvid.Rouletteshared.Events;
 
 namespace Hwavmvid.Rouletteitellisense
 {
-    public class RouletteitellisenseComponentBase : ComponentBase, IDisposable
+    public class RouletteitellisenseComponentBase : ComponentBase, IAsyncDisposable
     {
 
         [Inject] public RouletteitellisenseService RouletteitellisenseService { get; set; }
@@ -33,6 +33,9 @@ namespace Hwavmvid.Rouletteitellisense
             this.RoulettecoinsService.OnItemDropped += ItemDropped;
             this.RouletteBetsService.UpdateUI += UpdateUI;
             this.RouletteBetsService.ItemRemoved += BetItemRemoved;
+
+            this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
+            this.RouletteitellisenseService.ContextGameValue = null;
 
             await base.OnInitializedAsync();
         }
@@ -70,8 +73,8 @@ namespace Hwavmvid.Rouletteitellisense
 
             this.StateHasChanged();
         }
-        public async void WinItemDetected(RouletteEvent e)
-        {            
+        public void WinItemDetected(RouletteEvent e)
+        {
 
             foreach (var betitem in this.RouletteBetsService.BetItems)
             {
@@ -102,7 +105,7 @@ namespace Hwavmvid.Rouletteitellisense
                         betitem.Status = RouletteBetStatus.Lost;
                     }
                 }
-                
+
                 if (betitem.Betoption != null)
                 {
 
@@ -145,7 +148,7 @@ namespace Hwavmvid.Rouletteitellisense
                             this.RouletteitellisenseService.ContextGameValue -= (betitem.Coin.Value);
                             betitem.Status = RouletteBetStatus.Lost;
                         }
-                        
+
                     }
                     if (betitem.Betoption.Key == RouletteBetoptionsType.SecondTwelve)
                     {
@@ -158,7 +161,7 @@ namespace Hwavmvid.Rouletteitellisense
                         {
                             this.RouletteitellisenseService.ContextGameValue -= (betitem.Coin.Value);
                             betitem.Status = RouletteBetStatus.Lost;
-                        }                        
+                        }
                     }
 
                     if (betitem.Betoption.Key == RouletteBetoptionsType.FirstTwelve)
@@ -173,7 +176,7 @@ namespace Hwavmvid.Rouletteitellisense
                             this.RouletteitellisenseService.ContextGameValue -= (betitem.Coin.Value);
                             betitem.Status = RouletteBetStatus.Lost;
                         }
-                        
+
                     }
                     if (betitem.Betoption.Key == RouletteBetoptionsType.SecondTwelve)
                     {
@@ -187,7 +190,7 @@ namespace Hwavmvid.Rouletteitellisense
                             this.RouletteitellisenseService.ContextGameValue -= (betitem.Coin.Value);
                             betitem.Status = RouletteBetStatus.Lost;
                         }
-                        
+
                     }
                     if (betitem.Betoption.Key == RouletteBetoptionsType.ThirdTwelve)
                     {
@@ -201,7 +204,7 @@ namespace Hwavmvid.Rouletteitellisense
                             this.RouletteitellisenseService.ContextGameValue -= (betitem.Coin.Value);
                             betitem.Status = RouletteBetStatus.Lost;
                         }
-                        
+
                     }
                 }
 
@@ -230,13 +233,17 @@ namespace Hwavmvid.Rouletteitellisense
                 this.StateHasChanged();
             });
         }
-        public void Dispose()
+
+        public async ValueTask DisposeAsync()
         {
-            this.RouletteService.OnPlayNewRouletteGame -= GameStopped;
-            this.RouletteService.OnWinItemDetected -= WinItemDetected;
-            this.RoulettecoinsService.OnItemDropped -= ItemDropped;
-            this.RouletteBetsService.UpdateUI -= UpdateUI;
-            this.RouletteBetsService.ItemRemoved -= BetItemRemoved;
+            await InvokeAsync(() =>
+            {
+                this.RouletteService.OnPlayNewRouletteGame -= GameStopped;
+                this.RouletteService.OnWinItemDetected -= WinItemDetected;
+                this.RoulettecoinsService.OnItemDropped -= ItemDropped;
+                this.RouletteBetsService.UpdateUI -= UpdateUI;
+                this.RouletteBetsService.ItemRemoved -= BetItemRemoved;
+            });
         }
 
     }
