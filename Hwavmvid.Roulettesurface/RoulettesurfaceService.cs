@@ -16,6 +16,8 @@ namespace Hwavmvid.Roulettesurface
         public List<RoulettesurfaceNumber> NumberItems { get; set; } = new List<RoulettesurfaceNumber>();
         public RouletteNumber WinItem { get; set; }
 
+        public event Action UpdateUI;
+
         public string Black { get; set; } = "black";
         public string Red { get; set; } = "red";
         public string Carpetgreen { get; set; } = "rgba(33,109,70,0.8)"; // #216d46
@@ -50,6 +52,11 @@ namespace Hwavmvid.Roulettesurface
             }
 
             return items;
+        }
+
+        public void InvokeUpdateUI()
+        {
+            this.UpdateUI?.Invoke();
         }
 
         public void Dispose()

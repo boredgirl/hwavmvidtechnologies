@@ -216,6 +216,7 @@ namespace Hwavmvid.Rouletteitellisense
             }
 
             this.RoulettesurfaceService.WinItem = e.WinItem;
+            this.RoulettesurfaceService.InvokeUpdateUI();
             this.UpdateUI();
         }
 

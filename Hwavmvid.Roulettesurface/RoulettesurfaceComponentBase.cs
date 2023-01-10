@@ -9,7 +9,7 @@ using Hwavmvid.Rouletteshared.Events;
 
 namespace Hwavmvid.Roulettesurface
 {
-    public class RoulettesurfaceComponentBase : ComponentBase
+    public class RoulettesurfaceComponentBase : ComponentBase, IDisposable
     {
 
         [Inject] public RoulettesurfaceService RoulettesurfaceService { get; set; }
@@ -19,8 +19,19 @@ namespace Hwavmvid.Roulettesurface
 
         protected override async Task OnInitializedAsync()
         {
+            this.RoulettesurfaceService.UpdateUI += UpdateUI;
             await base.OnInitializedAsync();
         }
 
+        public void UpdateUI()
+        {
+            this.StateHasChanged();
+        }
+
+        public void Dispose()
+        {
+            this.RoulettesurfaceService.UpdateUI -= UpdateUI;
+            this.StateHasChanged();
+        }
     }
 }
