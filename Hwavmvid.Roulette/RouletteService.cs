@@ -20,7 +20,7 @@ namespace Hwavmvid.Roulette
         public event Action<RouletteEvent> OnWinItemDetected;
         public event Action UupdateUI;
 
-        public RouletteGameStatus GameStatus { get; set; }
+        public RouletteGameStatus GameStatus { get; set; } = RouletteGameStatus.StartNewGame;
 
         public RouletteService(IJSRuntime jsRuntime)
         {

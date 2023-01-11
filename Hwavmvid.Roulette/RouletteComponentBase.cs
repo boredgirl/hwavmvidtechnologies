@@ -33,8 +33,11 @@ namespace Hwavmvid.Roulette
                     this.RouletteService.Map = this.RouletteService.GetRouletteMap();
                 }
 
-                this.RouletteService.RemoveRouletteItem(this.RouletteService.ball.RowId, this.RouletteService.ball.ColumnId, this.RouletteService.ball);
-                this.RouletteService.ResetVariables();
+                if (RouletteService.GameStatus != RouletteGameStatus.StartNewGame)
+                {
+                    this.RouletteService.RemoveRouletteItem(this.RouletteService.ball.RowId, this.RouletteService.ball.ColumnId, this.RouletteService.ball);
+                    this.RouletteService.ResetVariables();
+                }
 
                 // if not already initialized roulette service ??
                 if (string.IsNullOrEmpty(RouletteService.carpet.BackgroundColor))

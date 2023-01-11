@@ -33,9 +33,7 @@ namespace Hwavmvid.Rouletteitellisense
             this.RoulettecoinsService.OnItemDropped += ItemDropped;
             this.RouletteBetsService.UpdateUI += UpdateUI;
             this.RouletteBetsService.ItemRemoved += BetItemRemoved;
-
             this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
-            this.RouletteitellisenseService.ContextGameValue = null;
 
             await base.OnInitializedAsync();
         }
@@ -225,6 +223,9 @@ namespace Hwavmvid.Rouletteitellisense
             this.RouletteBetsService.BetItems.Clear();
             this.RouletteitellisenseService.ContextGameId = Guid.NewGuid().ToString();
             this.DroppedItem = null;
+
+            this.RoulettesurfaceService.WinItem = null;
+            this.RoulettesurfaceService.InvokeUpdateUI();
 
             this.RouletteService.GameStatus = RouletteGameStatus.StartNewGame;
             this.RouletteService.RemoveRouletteItem(this.RouletteService.ball.RowId, this.RouletteService.ball.ColumnId, this.RouletteService.ball);

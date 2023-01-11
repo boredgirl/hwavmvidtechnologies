@@ -14,7 +14,7 @@ namespace Hwavmvid.Rouletteitellisense
         private IJSRuntime jsruntime;
 
         public string ContextGameId { get; set; }
-        public int? ContextGameValue { get; set; }
+        public int? ContextGameValue { get; set; } = 0;
 
         public RouletteitellisenseService(IJSRuntime jsRuntime)
         {
