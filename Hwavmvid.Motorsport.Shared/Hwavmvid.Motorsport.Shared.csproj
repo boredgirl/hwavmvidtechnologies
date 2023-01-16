@@ -3,21 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
-
+	
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Events\" />
-    <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
