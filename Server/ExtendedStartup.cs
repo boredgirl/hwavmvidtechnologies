@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Oqtane.ChatHubs.Hubs;
 using Oqtane.Extensions;
 using Oqtane.Infrastructure;
@@ -38,6 +37,7 @@ using Hwavmvid.Motorsport.Racewaymaps;
 using Oqtane.ChatHubs.Repository;
 using Microsoft.Extensions.Options;
 using Oqtane.Security;
+using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Oqtane
 {
@@ -49,10 +49,7 @@ namespace Oqtane
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            }).AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                });
+            });
 
             services.AddMemoryCache();
             services.TryAddHttpClientWithAuthenticationCookie();
@@ -107,9 +104,9 @@ namespace Oqtane
                     options.MaximumReceiveMessageSize = Int64.MaxValue;
                     options.StreamBufferCapacity = Int32.MaxValue;
                 })
-                .AddNewtonsoftJsonProtocol(options =>
+                .AddJsonProtocol(options =>
                 {
-                    options.PayloadSerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.PayloadSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
                 });
         }
 
