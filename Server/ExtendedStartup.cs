@@ -1,4 +1,5 @@
-﻿using BlazorAlerts;
+﻿using System;
+using BlazorAlerts;
 using BlazorBrowserResize;
 using BlazorColorPicker;
 using BlazorDraggableList;
@@ -12,9 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.Extensions.DependencyInjection;
 using Oqtane.ChatHubs.Hubs;
-using Oqtane.Extensions;
 using Oqtane.Infrastructure;
-using System;
 using BlazorDynamicLayout;
 using Oqtane.ChatHubs.Models;
 using BlazorVideoPlayer;
@@ -34,10 +33,8 @@ using Hwavmvid.Roulettecoins;
 using Hwavmvid.Roulettebetoptions;
 using Hwavmvid.Roulettebets;
 using Hwavmvid.Motorsport.Racewaymaps;
-using Oqtane.ChatHubs.Repository;
-using Microsoft.Extensions.Options;
 using Oqtane.Security;
-using Microsoft.AspNetCore.SignalR.Protocol;
+using Newtonsoft.Json;
 
 namespace Oqtane
 {
@@ -49,6 +46,9 @@ namespace Oqtane
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddMemoryCache();
@@ -104,10 +104,7 @@ namespace Oqtane
                     options.MaximumReceiveMessageSize = Int64.MaxValue;
                     options.StreamBufferCapacity = Int32.MaxValue;
                 })
-                .AddJsonProtocol(options =>
-                {
-                    options.PayloadSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
-                });
+                .AddNewtonsoftJsonProtocol(options => { options.PayloadSerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
