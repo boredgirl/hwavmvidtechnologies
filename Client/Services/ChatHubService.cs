@@ -167,7 +167,17 @@ namespace Oqtane.ChatHubs.Services
                 options.Headers.Add("platform", "Oqtane");
                 options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
             })
-            .AddNewtonsoftJsonProtocol(options => { options.PayloadSerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; })
+            .AddJsonProtocol(options =>
+            {
+                options.PayloadSerializerOptions.WriteIndented = false;
+                options.PayloadSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                options.PayloadSerializerOptions.AllowTrailingCommas = true;
+                options.PayloadSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+                options.PayloadSerializerOptions.DefaultBufferSize = 4096;
+                options.PayloadSerializerOptions.MaxDepth = 41;
+                options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+            })
             .Build();
         }
         public void RegisterHubConnectionHandlers()

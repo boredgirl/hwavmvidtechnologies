@@ -34,7 +34,6 @@ using Hwavmvid.Roulettebetoptions;
 using Hwavmvid.Roulettebets;
 using Hwavmvid.Motorsport.Racewaymaps;
 using Oqtane.Security;
-using Newtonsoft.Json;
 
 namespace Oqtane
 {
@@ -46,9 +45,17 @@ namespace Oqtane
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            }).AddNewtonsoftJson(options =>
+            })
+            .AddJsonOptions(options =>
             {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.JsonSerializerOptions.WriteIndented = false;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                options.JsonSerializerOptions.AllowTrailingCommas = true;
+                options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+                options.JsonSerializerOptions.DefaultBufferSize = 4096;
+                options.JsonSerializerOptions.MaxDepth = 41;
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
 
             services.AddMemoryCache();
@@ -104,7 +111,17 @@ namespace Oqtane
                     options.MaximumReceiveMessageSize = Int64.MaxValue;
                     options.StreamBufferCapacity = Int32.MaxValue;
                 })
-                .AddNewtonsoftJsonProtocol(options => { options.PayloadSerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
+                .AddJsonProtocol(options =>
+                {
+                    options.PayloadSerializerOptions.WriteIndented = false;
+                    options.PayloadSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                    options.PayloadSerializerOptions.AllowTrailingCommas = true;
+                    options.PayloadSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+                    options.PayloadSerializerOptions.DefaultBufferSize = 4096;
+                    options.PayloadSerializerOptions.MaxDepth = 41;
+                    options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

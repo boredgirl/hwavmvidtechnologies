@@ -19,18 +19,28 @@
 
 		<dependencies>
 			
-			<dependency id="Oqtane.Framework" version="3.3.1" exclude="Build,Analyzers" />
+			<group targetFramework="net6.0">
 
-			<dependency id="Microsoft.AspNetCore.Mvc.NewtonsoftJson" version="6.0.0" exclude="Build,Analyzers" />
-			<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.3" exclude="Build,Analyzers" />
-			<dependency id="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" version="6.0.3" exclude="Build,Analyzers" />
-			<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
-			<dependency id="Microsoft.AspNetCore.Http.Connections.Client" version="6.0.0" exclude="Build,Analyzers" />
-			<dependency id="System.Composition" version="6.0.0" exclude="Build,Analyzers" />
-			<dependency id="System.Drawing" version="6.0.0" exclude="Build,Analyzers" />
-			<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
-			<dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
-			<dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
+				<dependency id="Oqtane.Framework" version="3.2.1" exclude="Build,Analyzers" />
+
+				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.3" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.AspNetCore.SignalR.Client.Core" version="6.0.3" exclude="Build,Analyzers" />
+				
+			</group>
+
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="System.Drawing" version="5.0.2" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+				<dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
+				<dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
+
+				<dependency id="System.Composition" version="7.0.0" />
+				<dependency id="System.Composition.AttributedModel" version="7.0.0" />
+				<dependency id="System.Composition.TypedParts" version="7.0.0" />
+				<dependency id="System.Composition.Hosting" version="7.0.0" />
+				<dependency id="System.Composition.Runtime" version="7.0.0" />
+				<dependency id="System.Composition.Convention" version="7.0.0" />
+			</group>
 
 		</dependencies>
 

@@ -48,8 +48,6 @@ namespace Oqtane.ChatHubs.Repository
             _accessor = accessor;
         }
 
-        public Oqtane.Databases.Interfaces.IDatabase ActiveDatabase { get; private set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.ReplaceService<IMigrationsAssembly, MultiDatabaseMigrationsAssembly>();
@@ -75,19 +73,7 @@ namespace Oqtane.ChatHubs.Repository
                 }
             }
 
-            if (!String.IsNullOrEmpty(_databaseType))
-            {
-                var type = Type.GetType(_databaseType);
-                ActiveDatabase = Activator.CreateInstance(type) as Oqtane.Databases.Interfaces.IDatabase;
-            }
-
-            if (!string.IsNullOrEmpty(_connectionString) && ActiveDatabase != null)
-            {
-                optionsBuilder.UseOqtaneDatabase(ActiveDatabase, _connectionString);
-            }
-
             _tenantManager.SetTenant(1);
-
             base.OnConfiguring(optionsBuilder);
         }
 
