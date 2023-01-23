@@ -22,8 +22,9 @@
 
 
 -----------------------------------------------------------------------------------------------------
--> if not work resolve packages in oqtane client and server project manual
+-> if not work resolve package references in oqtane client and server files project manual
 
+```cs
 <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
 <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.3" />
 
@@ -38,6 +39,8 @@
 <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 <PackageReference Include="FFMpegCore" Version="4.7.0" />
 <PackageReference Include="Instances" Version="1.6.1" />
+```
+
 -----------------------------------------------------------------------------------------------------
 demo website here <a href="https://mihcelle.hwavmvid.com/" target="_blank">https://mihcelle.hwavmvid.com/</a>
 -----------------------------------------------------------------------------------------------------
