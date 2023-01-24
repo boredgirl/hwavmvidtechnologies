@@ -70,11 +70,13 @@
 
                 <div class="ms-none ms-sm-auto px-1">
 
+                    <!--
                     <Microsoft.AspNetCore.Components.Authorization.AuthorizeView Roles="@RoleNames.Admin">
                         <Authorized Context="_context">
                             <button type="button" class="btn btn-sm btn-link bg-white border border-light d-none d-md-block" @onclick="@(async() => await ChatHubService.CreateExampleUserData(context.Id))">Create user data</button>
                         </Authorized>
                     </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+                    -->
 
                     <button type="button" class="btn btn-sm btn-dark rounded-0" @onclick="@(async () => await ChatHubService.EnterRoom_Clicked(context.Id, context.ModuleId))">Enter</button>
                     @if (ChatHubService.ConnectedUser?.UserId == context.CreatorId || ChatHubService.ConnectedUser?.Username == "host")

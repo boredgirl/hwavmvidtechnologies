@@ -4,11 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <Version>4.2.8817</Version>
-    <Authors>hwavmvid technologies</Authors>
+    <Authors>hwavmvid vega</Authors>
     <Company>hwavmvid technologies</Company>
     <Description>Just another ChatHub Module for the Oqtane Framework</Description>
     <Product>Oqtane.ChatHubs</Product>
-    <Copyright>hwavmvid technologies</Copyright>
+    <Copyright>hwavmvid corp.</Copyright>
+	<PackageProjectUrl>https://mihcelle.hwavmvid.com/</PackageProjectUrl>
     <AssemblyName>Oqtane.ChatHubs.Client.Oqtane</AssemblyName>
   </PropertyGroup>
 

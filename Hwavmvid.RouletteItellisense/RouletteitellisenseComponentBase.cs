@@ -39,10 +39,13 @@ namespace Hwavmvid.Rouletteitellisense
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-
             if (firstRender)
             {
-                await this.RoulettecoinsService.InitJsMap(this.RouletteBetoptionsService.Items, this.RoulettesurfaceService.NumberItems);
+                try
+                {
+                    await this.RoulettecoinsService.InitJsMap(this.RouletteBetoptionsService.Items, this.RoulettesurfaceService.NumberItems);
+                }
+                catch (Exception exception) { Console.WriteLine(exception.Message); }
             }
 
             await base.OnAfterRenderAsync(firstRender);

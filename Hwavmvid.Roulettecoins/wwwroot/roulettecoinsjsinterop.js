@@ -4,80 +4,113 @@ export function initroulettecoins(dotnetobjref, elementId, type) {
 
         draggablelistmap: function (dotnetobjref, elementId) {
 
-            this.addevents = function () {
+            this.addevents = async function () {
 
-                document.getElementById(elementId).addEventListener('dragstart', function (event) {
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
 
-                    event.dataTransfer.effectAllowed = "move";
+                    jsitem.addEventListener('dragstart', function (e) {
 
-                    var id = event.target.id;
-                    var arr = id.split('-');
-                    var coinid = arr[arr.length - 1];
+                        if (e.target != null) {
 
-                    var exceptDropzone = '.roulettedropzone-' + coinid;
-                    var dropzones = document.querySelectorAll('.roulettedropzone:not(' + exceptDropzone + ')');
-                    Array.prototype.forEach.call(dropzones, function (item) {
+                            e.dataTransfer.effectAllowed = "move";
 
-                        item.style.display = "block";
+                            var id = e.target.id;
+                            var arr = id.split('-');
+                            var coinid = arr[arr.length - 1];
+
+                            if (coinid != null) {
+
+                                var exceptDropzone = '.roulettedropzone-' + coinid;
+                                var dropzones = document.querySelectorAll('.roulettedropzone:not(' + exceptDropzone + ')');
+
+                                if (dropzones != null) {
+
+                                    Array.prototype.forEach.call(dropzones, function (item) {
+
+                                        item.style.display = "block";
+                                    });
+                                }
+
+                                e.dataTransfer.setData("coinid", coinid);
+                            }
+                        }
                     });
+                    jsitem.addEventListener('dragend', function (e) {
 
-                    event.dataTransfer.setData("coinid", coinid);
-                });
-                document.getElementById(elementId).addEventListener('dragend', function (event) {
+                        var dropzones = document.getElementsByClassName('roulettedropzone');
+                        if (dropzones != null) {
 
-                    var dropzones = document.getElementsByClassName('roulettedropzone');
-                    Array.prototype.forEach.call(dropzones, function (item) {
+                            Array.prototype.forEach.call(dropzones, function (item) {
 
-                        item.style.display = "none";
-                        item.classList.remove('active-roulettedropzone');
+                                item.style.display = "none";
+                                item.classList.remove('active-roulettedropzone');
+                            });
+                        }
                     });
-                });
+                }
             };
-            this.removeevents = function () {
+            this.removeevents = async function () {
 
-                document.getElementById(elementId).removeEventListener("dragstart", (item, e) => { });
-                document.getElementById(elementId).removeEventListener("dragend", (item, e) => { });
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
+
+                    try {
+                        jsitem.removeEventListener("dragstart", (item, e) => { });
+                        jsitem.removeEventListener("dragend", (item, e) => { });
+                    } catch (err) { }
+                }
             };
         },
         droppablelistmap: function (dotnetobjref, elementId) {
 
-            this.addevents = function () {
+            this.addevents = async function () {
 
-                document.getElementById(elementId).addEventListener('dragenter', function (event) {
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
 
-                    event.target.classList.add('active-roulettedropzone');
-                });
-                document.getElementById(elementId).addEventListener('dragleave', function (event) {
+                    jsitem.addEventListener('dragenter', function (e) {
 
-                    if (event.target.classList !== undefined) {
+                        if (e.target != null)
+                            e.target.classList.add('active-roulettedropzone');
+                    });
+                    jsitem.addEventListener('dragleave', function (e) {
 
-                        event.target.classList.remove('active-roulettedropzone');
-                    }
-                });
-                document.getElementById(elementId).addEventListener('dragover', function (event) {
+                        if (e.target !== null)
+                            e.target.classList.remove('active-roulettedropzone');
+                    });
+                    jsitem.addEventListener('dragover', function (e) {
 
-                    event.preventDefault();
-                    event.dataTransfer.dropEffect = 'move';
-                });
-                document.getElementById(elementId).addEventListener('drop', function (event) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    });
+                    jsitem.addEventListener('drop', function (e) {
 
-                    event.preventDefault();
+                        e.preventDefault();
+                        if (e.target != null) {
 
-                    var id = event.target.id;
-                    var arr = id.split('-');
-                    var droppedfieldid = arr[arr.length - 1];
+                            var id = e.target.id;
+                            var arr = id.split('-');
+                            var droppedfieldid = arr[arr.length - 1];
 
-                    var coinid = event.dataTransfer.getData('coinid');
-                    console.log(coinid, droppedfieldid)
-                    dotnetobjref.invokeMethodAsync('ItemDropped', coinid, droppedfieldid);
-                });
+                            var coinid = e.dataTransfer.getData('coinid');
+                            dotnetobjref.invokeMethodAsync('ItemDropped', coinid, droppedfieldid);
+                        }
+                    });
+                }
             };
-            this.removeevents = function () {
+            this.removeevents = async function () {
 
-                document.getElementById(elementId).removeEventListener("dragenter", (item, e) => {});
-                document.getElementById(elementId).removeEventListener("dragleave", (item, e) => { });
-                document.getElementById(elementId).removeEventListener("dragover", (item, e) => { });
-                document.getElementById(elementId).removeEventListener("drop", (item, e) => { });
+                var jsitem = document.getElementById(elementId);
+                if (jsitem != null) {
+
+                    try {
+                        jsitem.removeEventListener("dragenter", (item, e) => { });
+                        jsitem.removeEventListener("dragleave", (item, e) => { });
+                        jsitem.removeEventListener("dragover", (item, e) => { });
+                        jsitem.removeEventListener("drop", (item, e) => { });
+                    } catch (err) { }
+                }
             };            
         },
     };

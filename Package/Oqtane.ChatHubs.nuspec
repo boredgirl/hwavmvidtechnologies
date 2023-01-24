@@ -4,11 +4,11 @@
 
 		<id>Oqtane.ChatHubs</id>
 		<version>4.2.8817</version>
-		<authors>hwavmvid technologies</authors>
+		<Authors>hwavmvid vega</Authors>
 		<owners>hwavmvid technologies</owners>
 		<title>ChatHubs</title>
 		<description>ChatHubs</description>
-		<copyright>hwavmvid technologies</copyright>
+		<Copyright>hwavmvid corp.</Copyright>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/boredanyway/aspnetcore.chathub.template</projectUrl>

@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
     <Product>BlazorVideoPlayer</Product>
-    <Authors>hwavmvid technologies</Authors>
+    <Authors>hwavmvid vega</Authors>
     <Company>hwavmvid technologies</Company>
-    <Copyright>hwavmvid technologies</Copyright>
+    <Copyright>hwavmvid corp.</Copyright>
+	<PackageProjectUrl>https://mihcelle.hwavmvid.com/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

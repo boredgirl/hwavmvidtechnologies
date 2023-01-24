@@ -938,6 +938,7 @@ namespace Oqtane.ChatHubs.Services
                 if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
                 {
                     this.TryHandleException(task);
+                    this.BlazorAlertsService.NewBlazorAlert("Wait for it maybe a minute. Your data will be created.");
                 }
             });
         }

@@ -46,52 +46,60 @@ namespace Hwavmvid.Roulettecoins
             if (this.javascriptfile == null)
                 this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/roulettecoinsjsinterop.js");
         }
-        public async Task InitJsMap(List<RouletteBetoptionsItem> betoptionitems, List<RoulettesurfaceNumber> surfacenumberitems)
+        public async Task InitJsMap(List<RouletteBetoptionsItem> betoptionitems = null, List<RoulettesurfaceNumber> surfacenumberitems = null)
         {
 
             this.betoptionitems = betoptionitems;
             this.surfacenumberitems = surfacenumberitems;
 
             await this.InitRouletteService();
-            if (this.javascriptfile != null)
+            if (this.javascriptfile != null && this.betoptionitems != null && this.surfacenumberitems != null)
             {
 
-                if (!this.draggablejsmaps.Any())
+                this.draggablejsmaps.Clear();
+                this.droppablejsmaps.Clear();
+
+                try
                 {
                     foreach (var coinitem in this.CoinItems)
                     {
                         var obj = await this.javascriptfile.InvokeAsync<IJSObjectReference>("initroulettecoins", this.dotNetObjectReference, string.Concat(RouletteConstants.draggableitemprefix, coinitem.Id), "draggable");
-                        
-                        await obj.InvokeVoidAsync("removeevents");
-                        await obj.InvokeVoidAsync("addevents");
+                        if (obj != null)
+                        {
+                            await obj.InvokeVoidAsync("removeevents");
+                            await obj.InvokeVoidAsync("addevents");
 
-                        this.draggablejsmaps.Add(new RoulettecoinsMap() { Id = coinitem.Id, JSObjectReference = obj });
+                            this.draggablejsmaps.Add(new RoulettecoinsMap() { Id = coinitem.Id, JSObjectReference = obj });
+                        }
                     }
-                }                
+                } catch (Exception exception) {}
 
-                if (!this.droppablejsmaps.Any())
+                try
                 {
-
-                    foreach (var betoptionitem in betoptionitems)
+                    foreach (var betoptionitem in this.betoptionitems)
                     {
                         var obj = await this.javascriptfile.InvokeAsync<IJSObjectReference>("initroulettecoins", this.dotNetObjectReference, string.Concat(RouletteConstants.droppableitemprefix, betoptionitem.Key.ToString()), "droppable");
+                        if (obj != null)
+                        {
+                            await obj.InvokeVoidAsync("removeevents");
+                            await obj.InvokeVoidAsync("addevents");
 
-                        await obj.InvokeVoidAsync("removeevents");
-                        await obj.InvokeVoidAsync("addevents");
-
-                        this.droppablejsmaps.Add(new RoulettecoinsMap() { Id = betoptionitem.Key.ToString(), JSObjectReference = obj });
+                            this.droppablejsmaps.Add(new RoulettecoinsMap() { Id = betoptionitem.Key.ToString(), JSObjectReference = obj });
+                        }
                     }
 
-                    foreach (var surfacenumberitem in surfacenumberitems)
+                    foreach (var surfacenumberitem in this.surfacenumberitems)
                     {
                         var obj = await this.javascriptfile.InvokeAsync<IJSObjectReference>("initroulettecoins", this.dotNetObjectReference, string.Concat(RouletteConstants.droppableitemprefix, surfacenumberitem.Value.ToString()), "droppable");
+                        if (obj != null)
+                        {
+                            await obj.InvokeVoidAsync("removeevents");
+                            await obj.InvokeVoidAsync("addevents");
 
-                        await obj.InvokeVoidAsync("removeevents");
-                        await obj.InvokeVoidAsync("addevents");
-
-                        this.droppablejsmaps.Add(new RoulettecoinsMap() { Id = surfacenumberitem.Value.ToString(), JSObjectReference = obj });
+                            this.droppablejsmaps.Add(new RoulettecoinsMap() { Id = surfacenumberitem.Value.ToString(), JSObjectReference = obj });
+                        }
                     }
-                }
+                } catch (Exception exception) {}
             }
         }
         
