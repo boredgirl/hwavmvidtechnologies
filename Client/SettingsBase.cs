@@ -35,7 +35,7 @@ namespace Oqtane.ChatHubs
                 this.BlazorColorPickerService.OnBlazorColorPickerContextColorChangedEvent += this.OnColorPickerChangeExecute;
 
                 Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
-                this.backgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#fff0f0");
+                this.backgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#f0f0f0");
                 this.maxUserNameCharacters = this.SettingService.GetSetting(settings, "MaxUserNameCharacters", "20");
                 this.framerate = this.SettingService.GetSetting(settings, "Framerate", "24");
                 this.videoBitsPerSecond = this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000");
