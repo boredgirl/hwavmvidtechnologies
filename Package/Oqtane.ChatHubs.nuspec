@@ -4,11 +4,11 @@
 
 		<id>Oqtane.ChatHubs</id>
 		<version>4.2.8817</version>
-		<Authors>hwavmvid vega</Authors>
+		<authors>hwavmvid vega</authors>
 		<owners>hwavmvid technologies</owners>
 		<title>ChatHubs</title>
 		<description>ChatHubs</description>
-		<Copyright>hwavmvid corp.</Copyright>
+		<copyright>hwavmvid corp.</copyright>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/boredanyway/aspnetcore.chathub.template</projectUrl>
@@ -21,7 +21,7 @@
 			
 			<group targetFramework="net6.0">
 
-				<dependency id="Oqtane.Framework" version="3.2.1" exclude="Build,Analyzers" />
+				<dependency id="Oqtane.Framework" version="3.3.1" exclude="Build,Analyzers" />
 
 				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.3" exclude="Build,Analyzers" />
 				<dependency id="Microsoft.AspNetCore.SignalR.Client.Core" version="6.0.3" exclude="Build,Analyzers" />

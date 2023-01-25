@@ -4,11 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <Version>4.2.8817</Version>
-    <Authors>hwavmvid vega</Authors>
+    <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <Description>Just another ChatHub Module for the Oqtane Framework</Description>
     <Product>Oqtane.ChatHubs</Product>
-    <Copyright>hwavmvid corp.</Copyright>
+    <copyright>hwavmvid corp.</copyright>
 	<PackageProjectUrl>https://mihcelle.hwavmvid.com/</PackageProjectUrl>
     <AssemblyName>Oqtane.ChatHubs.Client.Oqtane</AssemblyName>
   </PropertyGroup>
@@ -74,8 +74,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Oqtane.Client" Version="3.2.1" />
-    <PackageReference Include="Oqtane.Shared" Version="3.2.1" />
+    <PackageReference Include="Oqtane.Client" Version="3.3.1" />
+    <PackageReference Include="Oqtane.Shared" Version="3.3.1" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -6,14 +6,14 @@
 
 -> short installation guide for hwavmvid project installation
 
--> install vs and sql server and ssms and asp net core sdk and runtime version 6.0.3
+-> install vs and sql server and ssms and asp net core sdk and runtime version 6.0.3 and webdeploy3.6 and urlrewritemodule
 -> search for control panel -> programs -> install features -> under iis enable websockets and leave webdav disabled
 
 -> open vs and clone the hwavmvid project into folder on desktop
 -> whenever you want copy package to oqtane project rebuild solution in debug mode or create package in release mode
 
 -> open vs and clone the oqtane project into folder on desktop named oqtane.framework
--> in vs click view -> open git repository and checkout commit from end of year oqtane version 3.2.1
+-> in vs click view -> open git repository and checkout commit from end of year oqtane version 3.3.1
 
 -> in vs open the server project properties and enable ssl connection in debug section
 -> then run the project with iisexpress and during installation use host as oqtane username
