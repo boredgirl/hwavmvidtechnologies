@@ -10,15 +10,15 @@ namespace Hwavmvid.Blackjack
     public class BlackjackComponentBase : ComponentBase
     {
 
-        public BlackjackCardDeck ContextCardDeck { get; set; }
+        public BlackjackCardDeck ContextCardDeck { get; set; } = null;
         public List<BlackjackCard> DealerCards { get; set; } = new List<BlackjackCard>();
         public List<BlackjackCard> ClientCards { get; set; } = new List<BlackjackCard>();
         public BlackjackGameStatus GameStatus { get; set; } = BlackjackGameStatus.NewGame;
 
-        protected override async Task OnInitializedAsync()
+        protected override Task OnInitializedAsync()
         {
             this.ContextCardDeck = this.GetNewCarddeck();
-            await base.OnInitializedAsync();
+            return base.OnInitializedAsync();
         }
 
         public BlackjackCardDeck GetNewCarddeck()
