@@ -53,7 +53,7 @@
                 string id = propertyValue.ToString();
                 bool activeTab = ActiveTabId == id;
 
-                <button class="nav-link position-relative ellipsis @(activeTab ? "active text-white" : "")" @onclick="() => BlazorDynamicLayoutService.TabClicked(id)" style="height: 48px; max-width: 120px;" role="tab" aria-selected="@activeTab">
+                <button class="nav-link position-relative ellipsis @(activeTab ? "active" : "text-white")" @onclick="() => BlazorDynamicLayoutService.TabClicked(id)" style="height: 48px; max-width: 120px;" role="tab" aria-selected="@activeTab">
                     @TabItemContainer(tab)
                 </button>
             }
