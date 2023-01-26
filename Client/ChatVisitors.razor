@@ -7,6 +7,8 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Models
+@using System.Collections.Generic
+@using System.Linq
 
 <AuthorizeView>
     <Authorizing>
@@ -25,7 +27,7 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Last 24 hours visitors display
+                            Last 24 hours visitors display with total visitors of @(ChatHubService.Display.Items.SelectMany(item => item).Select(item => item.Key).Count())
                           </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -37,7 +39,7 @@
                                 {
                                     <div class="p-1">
 
-                                        <button class="btn btn-primary btn-lg p-5" type="button" disabled>
+                                        <button class="btn btn-primary btn-lg px-2 py-4" type="button" disabled>
 
                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>   
                                             at @list.FirstOrDefault().Value.CreatedOn.ToString("hh tt") @list.Count() visitors

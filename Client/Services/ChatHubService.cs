@@ -977,13 +977,13 @@ namespace Oqtane.ChatHubs.Services
         public ChatHubVisitorsDisplay Display { get; set; } = new ChatHubVisitorsDisplay() { Items = null };
         public async Task GetVisitorsDisplay(int moduleId)
         {
-            await this.Connection.InvokeAsync<List<List<KeyValuePair<int, ChatHubConnection>>>>("GetVisitorsDisplay", moduleId).ContinueWith((task) =>
+            await this.Connection.InvokeAsync<ChatHubVisitorsDisplay>("GetVisitorsDisplay", moduleId).ContinueWith((task) =>
             {
                 if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
                 {
                     if (this.TryHandleException(task))
                         return;
-                    this.Display.Items = task.Result;
+                    this.Display = task.Result;
                     this.RunUpdateUI();
                 }
             });

@@ -1623,7 +1623,7 @@ namespace Oqtane.ChatHubs.Hubs
         }
         
         [AllowAnonymous]
-        public async Task<List<List<KeyValuePair<int, ChatHubConnection>>>> GetVisitorsDisplay(int moduleId)
+        public async Task<ChatHubVisitorsDisplay> GetVisitorsDisplay(int moduleId)
         {
             
             // do please bebi add module id to connection model in database to query by connections by module id
@@ -1648,7 +1648,7 @@ namespace Oqtane.ChatHubs.Hubs
                 }
             }
 
-            return display.Items;
+            return display;
         }
 
         public async Task UpdateRoomCreator(ChatHubRoom room, List<string> exceptConnectionIds)
