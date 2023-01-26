@@ -1639,10 +1639,9 @@ namespace Oqtane.ChatHubs.Hubs
                     if (list != null && list.Any())
                     {
                         var dictionnary = new List<KeyValuePair<int, ChatHubConnection>>();
-                        foreach (var item in list.Select((item, index) => new { item = item, index = index }))
+                        foreach (var item in list.Select((connection, index) => new { connection = connection, index = index }))
                         {
-                            if (item.item != null)
-                                dictionnary.Add(new KeyValuePair<int, ChatHubConnection>(item.item.CreatedOn.Hour, item.item.ClientModel()));
+                            dictionnary.Add(new KeyValuePair<int, ChatHubConnection>(item.connection.CreatedOn.Hour, item.connection.ClientModel()));
                         }
                         display.Items.Add(dictionnary);
                     }
