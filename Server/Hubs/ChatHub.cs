@@ -28,6 +28,7 @@ using FFMpegCore.Enums;
 using FFMpegCore.Pipes;
 using Hwavmvid.Motiondetection;
 using System.Text;
+using System.Text.Json;
 
 namespace Oqtane.ChatHubs.Hubs
 {
@@ -1619,6 +1620,36 @@ namespace Oqtane.ChatHubs.Hubs
             {
                 throw new HubException(exception.Message);
             }
+        }
+        
+        [AllowAnonymous]
+        public async Task<List<List<KeyValuePair<int, ChatHubConnection>>>> GetVisitorsDisplay(int moduleId)
+        {
+            
+            // do please bebi add module id to connection model in database to query by connections by module id
+            var moduleConnections = await this.chatHubRepository.Connections().Where(item => item.CreatedOn >= (DateTime.Now.AddHours(-24))).ToListAsync();
+            var display = new ChatHubVisitorsDisplay();
+            display.Items = new List<List<KeyValuePair<int, ChatHubConnection>>>();
+
+            if (moduleConnections != null && moduleConnections.Any())
+            {
+                var lists = moduleConnections.GroupBy(item => item.CreatedOn.Hour);
+                foreach (var list in lists)
+                {
+                    if (list != null && list.Any())
+                    {
+                        var dictionnary = new List<KeyValuePair<int, ChatHubConnection>>();
+                        foreach (var item in list.Select((item, index) => new { item = item, index = index }))
+                        {
+                            if (item.item != null)
+                                dictionnary.Add(new KeyValuePair<int, ChatHubConnection>(item.item.CreatedOn.Hour, item.item.ClientModel()));
+                        }
+                        display.Items.Add(dictionnary);
+                    }
+                }
+            }
+
+            return display.Items;
         }
 
         public async Task UpdateRoomCreator(ChatHubRoom room, List<string> exceptConnectionIds)

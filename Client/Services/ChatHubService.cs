@@ -26,6 +26,7 @@ using BlazorBrowserResize;
 using BlazorNotifications;
 using BlazorVideoPlayer;
 using BlazorDevices;
+using System.Text.Json;
 
 namespace Oqtane.ChatHubs.Services
 {
@@ -971,6 +972,21 @@ namespace Oqtane.ChatHubs.Services
 
             var fileName = Guid.NewGuid().ToString() + ".mp4";
             await this.chatHubMap.InvokeVoidAsync("downloadcapturedvideoitem", fileName, dataUri);
+        }
+
+        public ChatHubVisitorsDisplay Display { get; set; } = new ChatHubVisitorsDisplay() { Items = null };
+        public async Task GetVisitorsDisplay(int moduleId)
+        {
+            await this.Connection.InvokeAsync<List<List<KeyValuePair<int, ChatHubConnection>>>>("GetVisitorsDisplay", moduleId).ContinueWith((task) =>
+            {
+                if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
+                {
+                    if (this.TryHandleException(task))
+                        return;
+                    this.Display.Items = task.Result;
+                    this.RunUpdateUI();
+                }
+            });
         }
 
         public void RunUpdateUI()

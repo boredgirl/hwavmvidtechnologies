@@ -46,6 +46,7 @@ namespace Oqtane.ChatHubs
         [Inject] protected BlazorModalService BlazorModalService { get; set; }
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }
         [Inject] protected JsapinotificationService JsapinotificationService { get; set; }
+
         public ChatHubRoom contextRoom { get; set; }
 
         public string GuestUsername { get; set; } = string.Empty;
@@ -134,6 +135,8 @@ namespace Oqtane.ChatHubs
                 Stringpics.StringpicsItellisense itellisense = new Stringpics.StringpicsItellisense();
                 string consoleitem = itellisense.GetStringPic("car", Stringpics.StringpicsOutputType.console);
                 await this.ChatHubService.ConsoleLog(consoleitem);
+
+                await this.ChatHubService.GetVisitorsDisplay(ModuleState.ModuleId);
 
                 bool granted = await this.JsapinotificationService.RequestPermission();
                 if (granted)
