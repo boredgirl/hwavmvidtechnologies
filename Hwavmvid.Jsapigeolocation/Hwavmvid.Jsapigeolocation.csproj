@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>9.0</LangVersion>
+		<RazorLangVersion>3.0</RazorLangVersion>
+		<AssemblyName>Hwavmvid.Jsapigeolocation</AssemblyName>
+		<OutputType>Library</OutputType>
+		<Version>1.0.0</Version>
+		<Product>Hwavmvid.Jsapigeolocation</Product>
+		<authors>hwavmvid vega</authors>
+		<Company>hwavmvid technologies</Company>
+		<copyright>hwavmvid corp.</copyright>
+		<PackageProjectUrl>https://mihcelle.hwavmvid.com/</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>

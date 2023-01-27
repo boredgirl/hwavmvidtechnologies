@@ -78,6 +78,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Motorsport.Raceway
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Motorsport.Shared", "Hwavmvid.Motorsport.Shared\Hwavmvid.Motorsport.Shared.csproj", "{635FFEE0-4467-403E-872E-22921664ABDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Jsapigeolocation", "Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj", "{B9E34451-D37A-4D25-A53D-852C9122C1F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -775,6 +777,24 @@ Global
 		{635FFEE0-4467-403E-872E-22921664ABDC}.Wasm|iPhone.Build.0 = Debug|Any CPU
 		{635FFEE0-4467-403E-872E-22921664ABDC}.Wasm|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{635FFEE0-4467-403E-872E-22921664ABDC}.Wasm|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|iPhone.Build.0 = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|Any CPU.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|iPhone.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|iPhone.Build.0 = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B9E34451-D37A-4D25-A53D-852C9122C1F0}.Wasm|iPhoneSimulator.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
