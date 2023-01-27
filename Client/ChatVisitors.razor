@@ -13,47 +13,47 @@
 <AuthorizeView>
     <Authorizing>
 
-        <text>loading chart..</text>
+        <text>loading items..</text>
 
     </Authorizing>
     <Authorized>
 
         @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected && ChatHubService.Display.Items != null)
         {
-            <div class="p-2 p-xl-4 bg-white w-100 mb-0 mb-sm-2 border border-primary">
+            <div class="p-2 bg-white w-100 mb-0 mb-sm-2 border border-primary">
                 <div class="p-0 p-sm-1">
 
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Last 24 hours visitors display with total visitors of @(ChatHubService.Display.Items.SelectMany(item => item).Select(item => item.Key).Count())
-                          </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body">
-                              
-                              <div class="d-flex flex-nowrap bd-highlight">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Last 24 hours visitors display with total visitors of @(ChatHubService.Display.Items.SelectMany(item => item).Select(item => item.Key).Count())
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                
+                                <div class="accordion-body">
+                                    <div class="d-flex flex-nowrap bd-highlight">
 
-                                @foreach (var list in ChatHubService.Display.Items)
-                                {
-                                    <div class="p-1">
+                                        @foreach (var list in ChatHubService.Display.Items)
+                                        {
+                                            <div class="p-1">
+                                                <button class="btn btn-primary btn-md px-2 py-4" type="button" disabled>
 
-                                        <button class="btn btn-primary btn-lg px-2 py-4" type="button" disabled>
-
-                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>   
-                                            at @list.FirstOrDefault().Value.CreatedOn.ToString("hh tt") @list.Count() visitors
-
-                                        </button>
+                                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>   
+                                                    
+                                                    <span class="lead">
+                                                        at @list.FirstOrDefault().Value.CreatedOn.ToString("hh tt")<br />
+                                                        @list.Count() site visits
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        }
 
                                     </div>
-                                }
-
+                                </div>
                             </div>
-
-                          </div>
                         </div>
-                      </div>
                     </div>
 
                 </div>
