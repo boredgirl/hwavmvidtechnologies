@@ -14,6 +14,7 @@ namespace Oqtane.ChatHubs.Models
 
         [NotMapped] public virtual ChatHubUser User { get; set; }
         [NotMapped] public virtual ICollection<ChatHubCam> Cams { get; set; }
+        [NotMapped] public virtual ICollection<ChatHubGeolocation> Geolocations { get; set; }
 
     }
 }

@@ -145,6 +145,17 @@ namespace Oqtane.ChatHubs.Repository
                 .HasForeignKey(d => d.ChatHubRoomId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            /*
+            // Relation
+            // One-to-many
+            // ChatHubGeolocation / ChatHubConnection
+            modelBuilder.Entity<ChatHubConnection>()
+                .HasMany(c => c.Geolocations)
+                .WithOne(g => g.Connection)
+                .HasForeignKey(g => g.ChatHubConnectionId)
+                .OnDelete(DeleteBehavior.NoAction);
+            */
+
             // Relation
             // One-to-many
             // ChatHubMessage / ChatHubPhotos

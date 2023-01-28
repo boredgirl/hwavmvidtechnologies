@@ -11,6 +11,7 @@ export function initgeolocationmap(dotnetobjref) {
                 latitude: 0;
                 longitude: 0;
                 altitude: 0;
+                altitudeaccuracy: 0;
                 accuracy: 0;
                 heading: 0;
                 speed: 0;
@@ -21,6 +22,7 @@ export function initgeolocationmap(dotnetobjref) {
                 this.latitude = __context.latitude;
                 this.longitude = __context.longitude;
                 this.altitude = __context.altitude;
+                this.altitudeaccuracy = __context.altitudeaccuracy;
                 this.accuracy = __context.accuracy;
                 this.heading = __context.heading;
                 this.speed = __context.speed;
@@ -77,6 +79,7 @@ export function initgeolocationmap(dotnetobjref) {
                         __context.latitude = coords.latitude;
                         __context.longitude = coords.longitude;
                         __context.altitude = coords.altitude;
+                        __context.altitudeaccuracy = coords.altitudeaccuracy;
                         __context.accuracy = coords.accuracy;
                         __context.heading = coords.heading;
                         __context.speed = coords.speed;
