@@ -1,4 +1,4 @@
-export function getcurrentposition(dotnetobjref) {
+export function initgeolocationmap(dotnetobjref) {
 
     var __obj = {
 
@@ -49,13 +49,14 @@ export function getcurrentposition(dotnetobjref) {
 
                             console.log("geo location permissions changed")
                             __context.state = result.state;
+                            dotnetobjref.invokeMethodAsync("permissionschanged", result.state);
                         }
                     });
                 });
 
                 return promise;
             };
-            requestcurrentposition = async function () {
+            requestcoords = async function () {
 
                 if (__obj.state != "granted") {
 

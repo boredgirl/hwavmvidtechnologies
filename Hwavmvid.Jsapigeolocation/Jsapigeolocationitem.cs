@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hwavmvid.Jsapigeolocation
 {
-    public class Jsapigeolocationmodel
+    public class Jsapigeolocationitem
     {
         public double latitude { get; set; }
         public double longitude { get; set; }
