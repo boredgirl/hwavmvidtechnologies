@@ -49,7 +49,6 @@ export function initgeolocationmap(dotnetobjref, elementid) {
                         }
                         result.onchange = function () {
 
-                            console.log("geo location permissions changed")
                             __context.state = result.state;
                             dotnetobjref.invokeMethodAsync("Permissionschanged", result.state);
                         }
@@ -93,7 +92,6 @@ export function initgeolocationmap(dotnetobjref, elementid) {
                         resolve();
                     }
 
-                    console.log("getcurrentposition");
                     navigator.geolocation.getCurrentPosition(success, error, options);
                 });
 

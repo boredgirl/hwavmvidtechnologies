@@ -47,7 +47,7 @@ namespace Hwavmvid.Jsapigeolocation
         {
             await this.Map.InvokeVoidAsync("requestcoords");
         }
-        public async Task Rendergooglemapposition(double latitude, double longitude)
+        public async Task Rendergooglemapposition(double? latitude, double? longitude)
         {
             await this.Map.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
         }

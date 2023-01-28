@@ -43,6 +43,7 @@
             await this.Jsapigeolocationservice.InitGeolocationMap(this.geolocationcanvasid);
             await this.Jsapigeolocationservice.Getgeolocationpermissions();
             await this.Jsapigeolocationservice.Getgeolocation();
+            //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
         }
 
         await base.OnAfterRenderAsync(firstRender);
