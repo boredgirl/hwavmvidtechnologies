@@ -1,8 +1,8 @@
-export function initgeolocationmap(dotnetobjref, elementid) {
+export function initgeolocationmap(dotnetobjref, componentid, elementid) {
 
     var __obj = {
 
-        geomap: function (dotnetobjref, googlemapcanvasid) {
+        geomap: function (dotnetobjref, componentid, googlemapcanvasid) {
 
             var __context = this;
             this.state = ""; // granted, prompt, denied
@@ -82,7 +82,7 @@ export function initgeolocationmap(dotnetobjref, elementid) {
 
                         var obj = new __context.coordsobj();
                         console.log(JSON.stringify(obj));
-                        dotnetobjref.invokeMethodAsync("Pushcoords", JSON.stringify(obj));
+                        dotnetobjref.invokeMethodAsync("Pushcoords", componentid, JSON.stringify(obj));
                         resolve();
                     }
 
@@ -119,5 +119,5 @@ export function initgeolocationmap(dotnetobjref, elementid) {
             };
         }
     }
-    return new __obj.geomap(dotnetobjref, elementid);
+    return new __obj.geomap(dotnetobjref, componentid, elementid);
 }

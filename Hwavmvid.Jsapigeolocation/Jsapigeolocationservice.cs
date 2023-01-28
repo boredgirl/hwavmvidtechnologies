@@ -1,6 +1,7 @@
 using Microsoft.JSInterop;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -12,14 +13,13 @@ namespace Hwavmvid.Jsapigeolocation
         
         public IJSRuntime JsRuntime { get; set; }
         public IJSObjectReference Module { get; set; }
-        public IJSObjectReference Map { get; set; }
 
         public DotNetObjectReference<Jsapigeolocationservice> DotNetObjectRef;
 
         public event Action<Jsapigeolocationpermissionsevent> OnGeolocationpermisssionsChanged;
         public event Action OnUpdateUI;
 
-        public Jsapigeolocationitem item { get; set; }
+        public List<Jsapigeolocationmap> Mapitems { get; set; } = new List<Jsapigeolocationmap>();
 
         public Jsapigeolocationservice(IJSRuntime jsRuntime)
         {
@@ -34,29 +34,56 @@ namespace Hwavmvid.Jsapigeolocation
                 this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/jsapigeolocationjsinterop.js");
             }
         }
-        public async Task InitGeolocationMap(string elementid)
+        public async Task InitGeolocationMap(string componentid, string elementid)
         {
-            this.Map = await this.Module.InvokeAsync<IJSObjectReference>("initgeolocationmap", this.DotNetObjectRef, elementid);
+            var contextmap = this.Getmap(componentid);
+            if (contextmap == null)
+            {
+                contextmap = new Jsapigeolocationmap() { Id = componentid, Item = null };
+                contextmap.Jsmapreference = await this.Module.InvokeAsync<IJSObjectReference>("initgeolocationmap", this.DotNetObjectRef, componentid, elementid);
+                this.Mapitems.Add(contextmap);
+            }                
         }
 
-        public async Task Getgeolocationpermissions()
+        public Jsapigeolocationmap Getmap(string id)
         {
-            await this.Map.InvokeVoidAsync("requestpermissions");
+            return this.Mapitems.FirstOrDefault(item => item.Id == id);
         }
-        public async Task Getgeolocation()
+        public void Removemap(string id)
         {
-            await this.Map.InvokeVoidAsync("requestcoords");
+            var map = this.Getmap(id);
+            if (map != null)
+                this.Mapitems.Remove(map);
         }
-        public async Task Rendergooglemapposition(double? latitude, double? longitude)
+
+        public async Task Getgeolocationpermissions(string id)
         {
-            await this.Map.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
+            var map = this.Getmap(id);
+            if (map != null)
+                await map.Jsmapreference.InvokeVoidAsync("requestpermissions");
+        }
+        public async Task Getgeolocation(string id)
+        {
+            var map = this.Getmap(id);
+            if (map != null)
+                await map.Jsmapreference.InvokeVoidAsync("requestcoords");
+        }
+        public async Task Rendergooglemapposition(string id, double? latitude, double? longitude)
+        {
+            var map = this.Getmap(id);
+            if (map != null)
+                await map.Jsmapreference.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
         }
 
         [JSInvokable("Pushcoords")]
-        public async void Pushcoords(string coords)
+        public async void Pushcoords(string id, string coords)
         {
-            this.item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
-            this.UpdateUI();
+            var map = this.Getmap(id);
+            if (map != null)
+            {
+                map.Item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
+                this.UpdateUI();
+            }
 
             //await this.Rendergooglemapposition(item.latitude, item.longitude);
             //this.UpdateUI();

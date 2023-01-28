@@ -1,6 +1,6 @@
 ﻿@namespace Hwavmvid.Jsapigeolocation
 @inherits ComponentBase
-@implements IDisposable
+@implements IAsyncDisposable
 @inject Jsapigeolocationservice Jsapigeolocationservice
 
 @using System.Linq
@@ -12,10 +12,14 @@
 
 <div>
 
-    @if (Jsapigeolocationservice.item != null && Jsapigeolocationservice.item.latitude != null && Jsapigeolocationservice.item.longitude != null)
+    @{
+        var contextmap = Jsapigeolocationservice.Getmap(ComponentId);
+    }
+
+    @if (contextmap != null && contextmap.Item != null && contextmap.Item.latitude != null && contextmap.Item.longitude != null)
     {
-        <div class="lead"><small>latitude: @Jsapigeolocationservice.item.latitude</small></div>
-        <div class="lead"><small>longitude: @Jsapigeolocationservice.item.longitude</small></div>
+        <div class="lead"><small>latitude: @contextmap.Item.latitude</small></div>
+        <div class="lead"><small>longitude: @contextmap.Item.longitude</small></div>
     }
     
 </div>
@@ -24,14 +28,16 @@
 
 @code {
 
-
+    public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
     public string permissionstate { get; set; } = string.Empty;
-    public string geolocationcanvasid { get; set; } = string.Concat("geolocationcanvasid", "-", Guid.NewGuid().ToString().Replace("-", "_"));
+    public string geolocationcanvasid { get; set; }
 
     protected override Task OnInitializedAsync()
     {
         this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged += Geolocationpermissionschanged;
         this.Jsapigeolocationservice.OnUpdateUI += UpdateUI;
+
+        this.geolocationcanvasid = string.Concat("geolocationcanvasid", "-", this.ComponentId);
         return base.OnInitializedAsync();
     }
 
@@ -40,9 +46,9 @@
         if (firstRender)
         {
             await this.Jsapigeolocationservice.Initgeolocationservice();
-            await this.Jsapigeolocationservice.InitGeolocationMap(this.geolocationcanvasid);
-            await this.Jsapigeolocationservice.Getgeolocationpermissions();
-            await this.Jsapigeolocationservice.Getgeolocation();
+            await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationcanvasid);
+            await this.Jsapigeolocationservice.Getgeolocationpermissions(this.ComponentId);
+            await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
             //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
         }
 
@@ -62,9 +68,16 @@
         });
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged -= Geolocationpermissionschanged;
         this.Jsapigeolocationservice.OnUpdateUI -= UpdateUI;
+
+        foreach (var item in this.Jsapigeolocationservice.Mapitems.ToList())
+        {
+            if (item.Jsmapreference != null)
+                await item.Jsmapreference.DisposeAsync();
+        }
+        this.Jsapigeolocationservice.Mapitems.Clear();
     }
 }
