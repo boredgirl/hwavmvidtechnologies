@@ -6,16 +6,32 @@
 @using System.Linq
 @using System.Collections.Generic
 
+<!--
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+-->
 
-<h3>JsapigeolocationComponent</h3>
+<div>
+
+    @if (Jsapigeolocationservice.item != null && Jsapigeolocationservice.item.latitude != null && Jsapigeolocationservice.item.longitude != null)
+    {
+        <div class="lead"><small>latitude: @Jsapigeolocationservice.item.latitude</small></div>
+        <div class="lead"><small>longitude: @Jsapigeolocationservice.item.longitude</small></div>
+    }
+    
+</div>
+
+<div id="@geolocationcanvasid"></div>
 
 @code {
 
+
     public string permissionstate { get; set; } = string.Empty;
+    public string geolocationcanvasid { get; set; } = string.Concat("geolocationcanvasid", "-", Guid.NewGuid().ToString().Replace("-", "_"));
 
     protected override Task OnInitializedAsync()
     {
         this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged += Geolocationpermissionschanged;
+        this.Jsapigeolocationservice.OnUpdateUI += UpdateUI;
         return base.OnInitializedAsync();
     }
 
@@ -24,7 +40,9 @@
         if (firstRender)
         {
             await this.Jsapigeolocationservice.Initgeolocationservice();
-            await this.Jsapigeolocationservice.InitGeolocationMap();
+            await this.Jsapigeolocationservice.InitGeolocationMap(this.geolocationcanvasid);
+            await this.Jsapigeolocationservice.Getgeolocationpermissions();
+            await this.Jsapigeolocationservice.Getgeolocation();
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -35,8 +53,17 @@
         this.permissionstate = e.Permissionsstate;
     }
 
+    public void UpdateUI()
+    {
+        InvokeAsync(() =>
+        {
+            this.StateHasChanged();
+        });
+    }
+
     public void Dispose()
     {
         this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged -= Geolocationpermissionschanged;
+        this.Jsapigeolocationservice.OnUpdateUI -= UpdateUI;
     }
 }

@@ -19,12 +19,13 @@ namespace Hwavmvid.Jsapigeolocation
         public event Action<Jsapigeolocationpermissionsevent> OnGeolocationpermisssionsChanged;
         public event Action OnUpdateUI;
 
-        public Jsapigeolocationitem item { get; set; } = new Jsapigeolocationitem();
+        public Jsapigeolocationitem item { get; set; }
 
         public Jsapigeolocationservice(IJSRuntime jsRuntime)
         {
             this.JsRuntime = jsRuntime;
             this.DotNetObjectRef = DotNetObjectReference.Create(this);
+            this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/geolocationscript.js");
         }
         public async Task Initgeolocationservice()
         {
@@ -33,25 +34,32 @@ namespace Hwavmvid.Jsapigeolocation
                 this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/jsapigeolocationjsinterop.js");
             }
         }
-        public async Task InitGeolocationMap()
+        public async Task InitGeolocationMap(string elementid)
         {
-            this.Map = await this.Module.InvokeAsync<IJSObjectReference>("initgeolocationmap", this.DotNetObjectRef);
+            this.Map = await this.Module.InvokeAsync<IJSObjectReference>("initgeolocationmap", this.DotNetObjectRef, elementid);
         }
 
         public async Task Getgeolocationpermissions()
         {
-            await this.Map.InvokeVoidAsync("requestpsermissions");
+            await this.Map.InvokeVoidAsync("requestpermissions");
         }
         public async Task Getgeolocation()
         {
             await this.Map.InvokeVoidAsync("requestcoords");
         }
+        public async Task Rendergooglemapposition(double latitude, double longitude)
+        {
+            await this.Map.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
+        }
 
         [JSInvokable("Pushcoords")]
-        public void Pushcoords(string coords)
+        public async void Pushcoords(string coords)
         {
             this.item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
             this.UpdateUI();
+
+            //await this.Rendergooglemapposition(item.latitude, item.longitude);
+            //this.UpdateUI();
         }
 
         [JSInvokable("Permissionschanged")]
@@ -62,7 +70,7 @@ namespace Hwavmvid.Jsapigeolocation
 
         public void UpdateUI()
         {
-            this.OnUpdateUI.Invoke();
+            this.OnUpdateUI?.Invoke();
         }
 
         public void Dispose()

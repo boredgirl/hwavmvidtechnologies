@@ -1,8 +1,8 @@
-export function initgeolocationmap(dotnetobjref) {
+export function initgeolocationmap(dotnetobjref, elementid) {
 
     var __obj = {
 
-        geomap: function (dotnetobjref) {
+        geomap: function (dotnetobjref, googlemapcanvasid) {
 
             var __context = this;
             this.state = ""; // granted, prompt, denied
@@ -51,19 +51,16 @@ export function initgeolocationmap(dotnetobjref) {
 
                             console.log("geo location permissions changed")
                             __context.state = result.state;
-                            dotnetobjref.invokeMethodAsync("permissionschanged", result.state);
+                            dotnetobjref.invokeMethodAsync("Permissionschanged", result.state);
                         }
+
+                        resolve();
                     });
                 });
 
                 return promise;
             };
-            this.requestcoords = async function () {
-
-                if (__obj.state != "granted") {
-
-                    await __context.requestpermissions();
-                }
+            this.requestcoords = function () {
 
                 var promise = new Promise((resolve) => {
 
@@ -73,32 +70,36 @@ export function initgeolocationmap(dotnetobjref) {
                         maximumAge: 0
                     };
 
-                    function success(pos) {
+                    function success(position) {
 
-                        var coords = pos.coords;
+                        var coords = position.coords;
                         __context.latitude = coords.latitude;
                         __context.longitude = coords.longitude;
                         __context.altitude = coords.altitude;
-                        __context.altitudeaccuracy = coords.altitudeaccuracy;
+                        __context.altitudeaccuracy = coords.altitudeAccuracy;
                         __context.accuracy = coords.accuracy;
                         __context.heading = coords.heading;
                         __context.speed = coords.speed;
 
                         var obj = new __context.coordsobj();
-                        dotnetobjref.invokeMethodAsync("pushcoords", JSON.stringify(obj));
+                        console.log(JSON.stringify(obj));
+                        dotnetobjref.invokeMethodAsync("Pushcoords", JSON.stringify(obj));
+                        resolve();
                     }
 
                     function error(err) {
 
                         console.log(err.message);
+                        resolve();
                     }
 
+                    console.log("getcurrentposition");
                     navigator.geolocation.getCurrentPosition(success, error, options);
                 });
 
                 return promise;
             };
-            this.rendergooglemapposition = function (latitude, longitude, googlemapcanvasid) {
+            this.rendergooglemapposition = function (latitude, longitude) {
 
                 var googlemapsmarkertitle = "Context department";
                 var latitudelongitude = new google.maps.LatLng(latitude, longitude);
@@ -120,5 +121,5 @@ export function initgeolocationmap(dotnetobjref) {
             };
         }
     }
-    return new __obj.geomap(dotnetobjref);
+    return new __obj.geomap(dotnetobjref, elementid);
 }
