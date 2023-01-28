@@ -66,6 +66,7 @@
     <ProjectReference Include="..\BlazorWindows\BlazorWindows.csproj" />
     <ProjectReference Include="..\BlazorDevices\BlazorDevices.csproj" />
     <ProjectReference Include="..\BlazorDownload\BlazorDownload.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj" />
     <ProjectReference Include="..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />
     <ProjectReference Include="..\Hwavmvid.Jsapinotifications\Hwavmvid.Jsapinotifications.csproj" />
     <ProjectReference Include="..\Hwavmvid.Blackjack\Hwavmvid.Blackjack.csproj" />

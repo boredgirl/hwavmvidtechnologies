@@ -1,0 +1,81 @@
+﻿@namespace Oqtane.ChatHubs
+@inherits ModuleBase
+@implements IDisposable
+@inject ChatHubService ChatHubService
+
+@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.SignalR.Client
+@using Oqtane.ChatHubs.Services
+@using Oqtane.ChatHubs.Models
+@using Hwavmvid.Jsapigeolocation
+
+<AuthorizeView>
+    <Authorizing>
+
+        <text>loading geolocation map..</text>
+
+    </Authorizing>
+    <Authorized>
+
+        @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
+        {
+            <div class="p-2 bg-white w-100 mb-0 mb-sm-2 border border-primary">
+                <div class="p-0 p-sm-1">
+
+                    <div class="accordion accordion-flush" id="geolocationflushaccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="geolocationflushheading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#geolocationflushcollapse" aria-expanded="false" aria-controls="geolocationflushcollapse">
+                                    Geolocation map for each connected user device
+                                </button>
+                            </h2>
+                            <div id="geolocationflushcollapse" class="accordion-collapse collapse" aria-labelledby="geolocationflushheading" data-bs-parent="#geolocationflushaccordion">
+                                
+                                <div class="accordion-body">
+                                    <div class="d-flex flex-nowrap bd-highlight">
+
+                                        @foreach (var list in ChatHubService.ConnectedUser.Connections)
+                                        {
+                                            <div class="p-1">
+                                                
+                                                <Jsapigeolocationcomponent></Jsapigeolocationcomponent>
+
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUI(sender, e);
+        base.OnInitialized();
+    }
+
+    public void UpdateUI(object sender, EventArgs e)
+    {
+        InvokeAsync(() =>
+        {
+            this.StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        this.ChatHubService.OnUpdateUI -= (object sender, EventArgs e) => UpdateUI(sender, e);
+    }
+}

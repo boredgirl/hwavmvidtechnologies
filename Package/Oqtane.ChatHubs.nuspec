@@ -99,6 +99,8 @@
 		<file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.dll" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Jsapinotifications\bin\Release\net6.0\Hwavmvid.Jsapinotifications.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Jsapigeolocation\bin\Release\net6.0\Hwavmvid.Jsapigeolocation.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Jsapigeolocation\bin\Release\net6.0\Hwavmvid.Jsapigeolocation.pdb" target="lib\net6.0" />		
 		<file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.dll" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Blackjack\bin\Release\net6.0\Hwavmvid.Blackjack.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Roulette\bin\Release\net6.0\Hwavmvid.Roulette.dll" target="lib\net6.0" />
@@ -140,6 +142,7 @@
 		<file src="..\BlazorDevices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDownload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Jsapinotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Jsapigeolocation\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />		
 		<file src="..\Hwavmvid.Blackjack\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Blackjack\wwwroot\images\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Roulette\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />

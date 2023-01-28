@@ -48,6 +48,8 @@ XCOPY "..\Hwavmvid.Stringpics\bin\Debug\net6.0\Hwavmvid.Stringpics.dll" "..\..\o
 XCOPY "..\Hwavmvid.Stringpics\bin\Debug\net6.0\Hwavmvid.Stringpics.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Jsapinotifications\bin\Debug\net6.0\Hwavmvid.Jsapinotifications.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Jsapinotifications\bin\Debug\net6.0\Hwavmvid.Jsapinotifications.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Jsapigeolocation\bin\Debug\net6.0\Hwavmvid.Jsapigeolocation.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Jsapigeolocation\bin\Debug\net6.0\Hwavmvid.Jsapigeolocation.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Blackjack\bin\Debug\net6.0\Hwavmvid.Blackjack.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Blackjack\bin\Debug\net6.0\Hwavmvid.Blackjack.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Roulette\bin\Debug\net6.0\Hwavmvid.Roulette.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
@@ -64,7 +66,6 @@ XCOPY "..\Hwavmvid.Roulettecoins\bin\Debug\net6.0\Hwavmvid.Roulettecoins.dll" ".
 XCOPY "..\Hwavmvid.Roulettecoins\bin\Debug\net6.0\Hwavmvid.Roulettecoins.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Roulettebets\bin\Debug\net6.0\Hwavmvid.Roulettebets.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Roulettebets\bin\Debug\net6.0\Hwavmvid.Roulettebets.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-
 XCOPY "..\Hwavmvid.Motorsport.Racewaymaps\bin\Debug\net6.0\Hwavmvid.Motorsport.Racewaymaps.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Motorsport.Racewaymaps\bin\Debug\net6.0\Hwavmvid.Motorsport.Racewaymaps.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Motorsport.Shared\bin\Debug\net6.0\Hwavmvid.Motorsport.Shared.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y

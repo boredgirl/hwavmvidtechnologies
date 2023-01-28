@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components;
 using Hwavmvid.Jsapinotifications;
+using Hwavmvid.Jsapigeolocation;
 using Hwavmvid.Blackjack;
 using Hwavmvid.Roulette;
 using Hwavmvid.Rouletteitellisense;
@@ -85,6 +86,7 @@ namespace Oqtane
             services.AddScoped<BlazorPagerService<ChatHubBlacklistUser>, BlazorPagerService<ChatHubBlacklistUser>>();
             services.AddScoped<BlazorPagerService<ChatHubWhitelistUser>, BlazorPagerService<ChatHubWhitelistUser>>();
             services.AddScoped<JsapinotificationService, JsapinotificationService>();
+            services.AddScoped<Jsapigeolocationservice, Jsapigeolocationservice>();
             services.AddScoped<BlackjackService, BlackjackService>();
             services.AddScoped<RouletteService, RouletteService>();
             services.AddScoped<RoulettesurfaceService, RoulettesurfaceService>();

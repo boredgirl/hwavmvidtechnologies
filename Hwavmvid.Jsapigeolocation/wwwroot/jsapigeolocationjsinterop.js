@@ -8,13 +8,13 @@ export function initgeolocationmap(dotnetobjref) {
             this.state = ""; // granted, prompt, denied
             this.geolocation = {
 
-                latitude: 0;
-                longitude: 0;
-                altitude: 0;
-                altitudeaccuracy: 0;
-                accuracy: 0;
-                heading: 0;
-                speed: 0;
+                latitude: 0,
+                longitude: 0,
+                altitude: 0,
+                altitudeaccuracy: 0,
+                accuracy: 0,
+                heading: 0,
+                speed: 0,
             };
 
             this.coordsobj = function() {

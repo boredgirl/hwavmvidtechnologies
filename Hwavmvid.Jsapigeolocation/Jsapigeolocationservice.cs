@@ -16,9 +16,7 @@ namespace Hwavmvid.Jsapigeolocation
 
         public DotNetObjectReference<Jsapigeolocationservice> DotNetObjectRef;
 
-        public event Action<Jsapigeolocationpermissionsevent> OnGeolocationDetected;
         public event Action<Jsapigeolocationpermissionsevent> OnGeolocationpermisssionsChanged;
-
         public event Action OnUpdateUI;
 
         public Jsapigeolocationitem item { get; set; } = new Jsapigeolocationitem();
