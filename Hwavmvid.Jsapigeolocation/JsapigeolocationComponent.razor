@@ -1,0 +1,42 @@
+﻿@namespace Hwavmvid.Jsapigeolocation
+@inherits ComponentBase
+@implements IDisposable
+@inject Jsapigeolocationservice Jsapigeolocationservice
+
+@using System.Linq
+@using System.Collections.Generic
+
+
+<h3>JsapigeolocationComponent</h3>
+
+@code {
+
+    public string permissionstate { get; set; } = string.Empty;
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged += Geolocationpermissionschanged;
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.Jsapigeolocationservice.Initgeolocationservice();
+            await this.Jsapigeolocationservice.InitGeolocationMap();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public void Geolocationpermissionschanged(Jsapigeolocationpermissionsevent e)
+    {
+        this.permissionstate = e.Permissionsstate;
+    }
+
+    public void Dispose()
+    {
+        this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged -= Geolocationpermissionschanged;
+    }
+}

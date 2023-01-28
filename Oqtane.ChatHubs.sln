@@ -78,7 +78,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Motorsport.Raceway
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Motorsport.Shared", "Hwavmvid.Motorsport.Shared\Hwavmvid.Motorsport.Shared.csproj", "{635FFEE0-4467-403E-872E-22921664ABDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hwavmvid.Jsapigeolocation", "Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj", "{B9E34451-D37A-4D25-A53D-852C9122C1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Jsapigeolocation", "Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj", "{B9E34451-D37A-4D25-A53D-852C9122C1F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

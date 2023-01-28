@@ -4,9 +4,9 @@ export function initgeolocationmap(dotnetobjref) {
 
         geomap: function (dotnetobjref) {
 
-            __context = this;
-            state = ""; // granted, prompt, denied
-            geolocation: {
+            var __context = this;
+            this.state = ""; // granted, prompt, denied
+            this.geolocation = {
 
                 latitude: 0;
                 longitude: 0;
@@ -17,7 +17,7 @@ export function initgeolocationmap(dotnetobjref) {
                 speed: 0;
             };
 
-            coordsobj: function() {
+            this.coordsobj = function() {
 
                 this.latitude = __context.latitude;
                 this.longitude = __context.longitude;
@@ -26,8 +26,8 @@ export function initgeolocationmap(dotnetobjref) {
                 this.accuracy = __context.accuracy;
                 this.heading = __context.heading;
                 this.speed = __context.speed;
-            }
-            requestpermissions = function () {
+            };
+            this.requestpermissions = function () {
 
                 var promise = new Promise((resolve) => {
 
@@ -58,7 +58,7 @@ export function initgeolocationmap(dotnetobjref) {
 
                 return promise;
             };
-            requestcoords = async function () {
+            this.requestcoords = async function () {
 
                 if (__obj.state != "granted") {
 
@@ -98,7 +98,7 @@ export function initgeolocationmap(dotnetobjref) {
 
                 return promise;
             };
-            rendergooglemapposition = function (latitude, longitude, googlemapcanvasid) {
+            this.rendergooglemapposition = function (latitude, longitude, googlemapcanvasid) {
 
                 var googlemapsmarkertitle = "Context department";
                 var latitudelongitude = new google.maps.LatLng(latitude, longitude);
