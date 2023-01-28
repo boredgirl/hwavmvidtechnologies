@@ -40,6 +40,7 @@ namespace Oqtane.ChatHubs.Repository
         public virtual DbSet<ChatHubRoomChatHubWhitelistUser> ChatHubRoomChatHubWhitelistUser { get; set; }
         public virtual DbSet<ChatHubBlacklistUser> ChatHubBlacklistUser { get; set; }
         public virtual DbSet<ChatHubRoomChatHubBlacklistUser> ChatHubRoomChatHubBlacklistUser { get; set; }
+        public virtual DbSet<ChatHubGeolocation> ChatHubGeolocation { get; set; }
 
         public ChatHubContext(ITenantManager tenantManager, IHttpContextAccessor accessor) : base(tenantManager, accessor)
         {
@@ -145,16 +146,14 @@ namespace Oqtane.ChatHubs.Repository
                 .HasForeignKey(d => d.ChatHubRoomId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            /*
             // Relation
             // One-to-many
             // ChatHubGeolocation / ChatHubConnection
-            modelBuilder.Entity<ChatHubConnection>()
-                .HasMany(c => c.Geolocations)
-                .WithOne(g => g.Connection)
+            modelBuilder.Entity<ChatHubGeolocation>()
+                .HasOne(g => g.Connection)
+                .WithMany(c => c.Geolocations)
                 .HasForeignKey(g => g.ChatHubConnectionId)
                 .OnDelete(DeleteBehavior.NoAction);
-            */
 
             // Relation
             // One-to-many

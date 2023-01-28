@@ -53,10 +53,14 @@ namespace Oqtane.ChatHubs.Migrations
             entityBuilderChatHubBlacklistUser.Create();
             var entityBuilderChatHubRoomChatHubBlacklistUser = new ChatHubRoomChatHubBlacklistUserEntityBuilder(migrationBuilder, ActiveDatabase);
             entityBuilderChatHubRoomChatHubBlacklistUser.Create();
+            var entityBuilderChatHubGeolocation = new ChatHubGeolocationEntityBuilder(migrationBuilder, ActiveDatabase);
+            entityBuilderChatHubGeolocation.Create();
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            var entityBuilderChatHubGeolocation = new ChatHubGeolocationEntityBuilder(migrationBuilder, ActiveDatabase);
+            entityBuilderChatHubGeolocation.Drop();
             var entityBuilderUser = new ChatHubUserEntityBuilder(migrationBuilder, ActiveDatabase);
             entityBuilderUser.Drop();
             var entityBuilderChatHubRoomChatHubBlacklistUser = new ChatHubRoomChatHubBlacklistUserEntityBuilder(migrationBuilder, ActiveDatabase);

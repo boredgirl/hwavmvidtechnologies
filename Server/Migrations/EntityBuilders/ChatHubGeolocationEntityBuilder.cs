@@ -26,13 +26,13 @@ namespace Oqtane.ChatHubs.Migrations.EntityBuilders
             Id = AddAutoIncrementColumn(table, "Id");
             ChatHubConnectionId = AddIntegerColumn(table, "ChatHubConnectionId");
             state = AddStringColumn(table, "state", 41, false, true);
-            latitude = AddDecimalColumn(table, "latitude", 38, 28, true);
-            longitude = AddDecimalColumn(table, "longitude", 38, 28, true);
-            altitude = AddDecimalColumn(table, "altitude", 38, 28, true);
-            altitudeaccuracy = AddDecimalColumn(table, "altitudeaccuracy", 38, 28, true);
-            accuracy = AddDecimalColumn(table, "accuracy", 38, 28, true);
-            heading = AddDecimalColumn(table, "heading", 38, 28, true);
-            speed = AddDecimalColumn(table, "speed", 38, 28, true);
+            latitude = AddDecimalColumn(table, "latitude", 8, 8, true);
+            longitude = AddDecimalColumn(table, "longitude", 8, 8, true);
+            altitude = AddDecimalColumn(table, "altitude", 8, 8, true);
+            altitudeaccuracy = AddDecimalColumn(table, "altitudeaccuracy", 8, 8, true);
+            accuracy = AddDecimalColumn(table, "accuracy", 8, 8, true);
+            heading = AddDecimalColumn(table, "heading", 8, 8, true);
+            speed = AddDecimalColumn(table, "speed", 8, 8, true);
 
             AddAuditableColumns(table);
             return this;
