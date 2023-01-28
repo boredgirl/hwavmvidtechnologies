@@ -59,8 +59,6 @@ namespace Oqtane.ChatHubs.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            var entityBuilderChatHubGeolocation = new ChatHubGeolocationEntityBuilder(migrationBuilder, ActiveDatabase);
-            entityBuilderChatHubGeolocation.Drop();
             var entityBuilderUser = new ChatHubUserEntityBuilder(migrationBuilder, ActiveDatabase);
             entityBuilderUser.Drop();
             var entityBuilderChatHubRoomChatHubBlacklistUser = new ChatHubRoomChatHubBlacklistUserEntityBuilder(migrationBuilder, ActiveDatabase);
@@ -73,6 +71,8 @@ namespace Oqtane.ChatHubs.Migrations
             entityBuilderChatHubWhitelistUser.Drop();
             var entityBuilderChatHubRoomChatHubModerator = new ChatHubRoomChatHubModeratorEntityBuilder(migrationBuilder, ActiveDatabase);
             entityBuilderChatHubRoomChatHubModerator.Drop();
+            var entityBuilderChatHubGeolocation = new ChatHubGeolocationEntityBuilder(migrationBuilder, ActiveDatabase);
+            entityBuilderChatHubGeolocation.Drop();
             var entityBuilderModerator = new ChatHubModeratorEntityBuilder(migrationBuilder, ActiveDatabase);
             entityBuilderModerator.Drop();
             var entityBuilderIgnore = new ChatHubIgnoreEntityBuilder(migrationBuilder, ActiveDatabase);

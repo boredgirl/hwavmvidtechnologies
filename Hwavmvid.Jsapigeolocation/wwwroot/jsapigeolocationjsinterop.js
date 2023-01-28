@@ -98,6 +98,26 @@ export function initgeolocationmap(dotnetobjref) {
 
                 return promise;
             };
+            rendergooglemapposition = function (latitude, longitude, googlemapcanvasid) {
+
+                var googlemapsmarkertitle = "Context department";
+                var latitudelongitude = new google.maps.LatLng(latitude, longitude);
+
+                var googlemapoptions = {
+                    zoom: 16,
+                    center: latitudelongitude,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var googlemapcanvas = document.getElementById(googlemapcanvasid);
+                var map = new google.maps.Map(googlemapcanvas, googlemapoptions);
+
+                var marker = new google.maps.Marker({
+                    position: latitudelongitude,
+                    map: map,
+                    title: googlemapsmarkertitle
+                });
+            };
         }
     }
     return new __obj.geomap(dotnetobjref);
