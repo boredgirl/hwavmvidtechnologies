@@ -15,7 +15,7 @@
 <div>
 
     @{
-        var contextmap = Jsapigeolocationservice.Getmap(ComponentId);
+        contextmap = Jsapigeolocationservice.Getmap(ComponentId);
     }
 
     @if (contextmap != null && contextmap.Item != null && contextmap.Item.latitude != null && contextmap.Item.longitude != null && contextmap.Item.accuracy != null)
@@ -51,8 +51,8 @@
 @code {
 
     public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
-    public string permissionstate { get; set; } = string.Empty;
     public string geolocationmapid { get; set; }
+    public Jsapigeolocationmap contextmap { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -70,7 +70,19 @@
             await this.Jsapigeolocationservice.Initgeolocationservice();
             await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationmapid);
             await this.Jsapigeolocationservice.Getgeolocationpermissions(this.ComponentId);
-            await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
+            
+            await Task.Run(async () =>
+            {
+                while (true)
+                {
+                    await InvokeAsync(async () =>
+                    {
+                        await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
+                        await Task.Delay(1000 * 10);
+                    });
+                }
+            });            
+            
             //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
         }
 
@@ -79,7 +91,8 @@
 
     public void Geolocationpermissionschanged(Jsapigeolocationpermissionsevent e)
     {
-        this.permissionstate = e.Permissionsstate;
+        if (this.contextmap != null)
+            this.contextmap.Permissionstate = e.Permissionsstate;
     }
 
     public void UpdateUI()

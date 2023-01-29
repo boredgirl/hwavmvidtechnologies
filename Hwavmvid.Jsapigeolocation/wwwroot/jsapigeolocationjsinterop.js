@@ -50,9 +50,10 @@ export function initgeolocationmap(dotnetobjref, componentid, elementid) {
                         result.onchange = function () {
 
                             __context.state = result.state;
-                            dotnetobjref.invokeMethodAsync("Permissionschanged", result.state);
+                            dotnetobjref.invokeMethodAsync("Permissionschanged", componentid, result.state);
                         }
 
+                        dotnetobjref.invokeMethodAsync("Permissionschanged", componentid, result.state);
                         resolve();
                     });
                 });
@@ -71,7 +72,9 @@ export function initgeolocationmap(dotnetobjref, componentid, elementid) {
 
                     function success(position) {
 
+                        var timestamp = position.timestamp;
                         var coords = position.coords;
+
                         __context.latitude = coords.latitude;
                         __context.longitude = coords.longitude;
                         __context.altitude = coords.altitude;

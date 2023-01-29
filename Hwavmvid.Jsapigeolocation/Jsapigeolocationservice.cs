@@ -60,23 +60,23 @@ namespace Hwavmvid.Jsapigeolocation
             if (map != null)
                 await map.Jsmapreference.InvokeVoidAsync("requestpermissions");
         }
-        public async Task Getgeolocation(string id)
+        public async Task Getgeolocation(string componentid)
         {
-            var map = this.Getmap(id);
+            var map = this.Getmap(componentid);
             if (map != null)
                 await map.Jsmapreference.InvokeVoidAsync("requestcoords");
         }
-        public async Task Rendergooglemapposition(string id, double? latitude, double? longitude)
+        public async Task Rendergooglemapposition(string componentid, double? latitude, double? longitude)
         {
-            var map = this.Getmap(id);
+            var map = this.Getmap(componentid);
             if (map != null)
                 await map.Jsmapreference.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
         }
 
         [JSInvokable("Pushcoords")]
-        public async void Pushcoords(string id, string coords)
+        public async void Pushcoords(string componentid, string coords)
         {
-            var map = this.Getmap(id);
+            var map = this.Getmap(componentid);
             if (map != null)
             {
                 map.Item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
@@ -88,8 +88,14 @@ namespace Hwavmvid.Jsapigeolocation
         }
 
         [JSInvokable("Permissionschanged")]
-        public void Permissionschanged(string permissionsstate)
+        public void Permissionschanged(string componentid, string permissionsstate)
         {
+            var map = this.Getmap(componentid);
+            if (map != null)
+            {
+                map.Permissionstate = permissionsstate;
+            }
+
             this.OnGeolocationpermisssionsChanged?.Invoke(new Jsapigeolocationpermissionsevent() { Permissionsstate = permissionsstate });
         }
 

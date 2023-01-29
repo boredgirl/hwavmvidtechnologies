@@ -12,5 +12,6 @@ namespace Hwavmvid.Jsapigeolocation
         public string Id { get; set; }
         public Jsapigeolocationitem Item { get; set; }
         public IJSObjectReference Jsmapreference { get; set; }
+        public string Permissionstate { get; set; }
     }
 }
