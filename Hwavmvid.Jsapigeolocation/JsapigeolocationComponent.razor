@@ -50,13 +50,14 @@
 
 @code {
 
+    [Parameter] public int Getgeolocationcoordsintervall { get; set; } = 1000 * 10;
+
     public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
     public string geolocationmapid { get; set; }
     public Jsapigeolocationmap contextmap { get; set; }
 
     protected override Task OnInitializedAsync()
     {
-        this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged += Geolocationpermissionschanged;
         this.Jsapigeolocationservice.OnUpdateUI += UpdateUI;
 
         this.geolocationmapid = string.Concat("geolocationmapid", "-", this.ComponentId);
@@ -78,7 +79,7 @@
                     await InvokeAsync(async () =>
                     {
                         await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
-                        await Task.Delay(1000 * 10);
+                        await Task.Delay(this.Getgeolocationcoordsintervall);
                     });
                 }
             });            
@@ -87,12 +88,6 @@
         }
 
         await base.OnAfterRenderAsync(firstRender);
-    }
-
-    public void Geolocationpermissionschanged(Jsapigeolocationpermissionsevent e)
-    {
-        if (this.contextmap != null)
-            this.contextmap.Permissionstate = e.Permissionsstate;
     }
 
     public void UpdateUI()
@@ -105,7 +100,6 @@
 
     public async ValueTask DisposeAsync()
     {
-        this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged -= Geolocationpermissionschanged;
         this.Jsapigeolocationservice.OnUpdateUI -= UpdateUI;
 
         foreach (var item in this.Jsapigeolocationservice.Mapitems.ToList())
