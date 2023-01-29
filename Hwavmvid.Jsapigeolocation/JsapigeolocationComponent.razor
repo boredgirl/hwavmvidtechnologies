@@ -18,10 +18,30 @@
         var contextmap = Jsapigeolocationservice.Getmap(ComponentId);
     }
 
-    @if (contextmap != null && contextmap.Item != null && contextmap.Item.latitude != null && contextmap.Item.longitude != null)
+    @if (contextmap != null && contextmap.Item != null && contextmap.Item.latitude != null && contextmap.Item.longitude != null && contextmap.Item.accuracy != null)
     {
-        <div class="lead"><small>latitude: @contextmap.Item.latitude</small></div>
-        <div class="lead"><small>longitude: @contextmap.Item.longitude</small></div>
+        <table class="table table-success">
+            <thead>
+                <tr>
+                    <th scope="col">latitude</th>
+                    <th scope="col">longitude</th>
+                    <th scope="col">accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">
+                        <div class="lead"><small>@contextmap.Item.latitude</small></div>
+                    </th>
+                    <th scope="col">
+                        <div class="lead"><small>@contextmap.Item.longitude</small></div>
+                    </th>
+                    <th scope="col">
+                        <div class="lead"><small>@contextmap.Item.accuracy</small></div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
     }
     
 </div>

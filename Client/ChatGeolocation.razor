@@ -28,7 +28,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="geolocationflushheading">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#geolocationflushcollapse" aria-expanded="false" aria-controls="geolocationflushcollapse">
-                                    Geolocation map for each connected user device
+                                    Geolocation map for each connected user device for @ChatHubService.ConnectedUser.DisplayName
                                 </button>
                             </h2>
                             <div id="geolocationflushcollapse" class="accordion-collapse collapse" aria-labelledby="geolocationflushheading" data-bs-parent="#geolocationflushaccordion">
@@ -36,10 +36,11 @@
                                 <div class="accordion-body">
                                     <div class="d-flex flex-nowrap bd-highlight">
 
-                                        @foreach (var list in ChatHubService.ConnectedUser.Connections)
+                                        @foreach (var connection in ChatHubService.ConnectedUser.Connections)
                                         {
                                             <div class="p-1">
                                                 
+                                                <small class="bg-info lead">connection_id: @connection.ConnectionId</small>
                                                 <JsapigeolocationComponent></JsapigeolocationComponent>
 
                                             </div>
