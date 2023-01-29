@@ -15,6 +15,7 @@ namespace Hwavmvid.Jsapigeolocation
         public IJSObjectReference Module { get; set; } = null;
         public DotNetObjectReference<Jsapigeolocationservice> DotNetObjectRef { get; set; }
 
+        public event Action<Jsapigeolocationpositionevent> OnGeolocationpositionReceived;
         public event Action<Jsapigeolocationpermissionsevent> OnGeolocationpermisssionsChanged;
         public event Action OnUpdateUI;
 
@@ -80,6 +81,7 @@ namespace Hwavmvid.Jsapigeolocation
             if (map != null)
             {
                 map.Item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
+                this.OnGeolocationpositionReceived?.Invoke(new Jsapigeolocationpositionevent() { permissionstate = map.Permissionstate, Item = map.Item });
                 this.UpdateUI();
             }
 

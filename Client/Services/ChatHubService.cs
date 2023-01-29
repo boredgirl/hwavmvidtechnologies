@@ -27,6 +27,7 @@ using BlazorNotifications;
 using BlazorVideoPlayer;
 using BlazorDevices;
 using System.Text.Json;
+using Hwavmvid.Jsapigeolocation;
 
 namespace Oqtane.ChatHubs.Services
 {
@@ -46,6 +47,7 @@ namespace Oqtane.ChatHubs.Services
         public BlazorVideoPlayerService BlazorVideoPlayerService { get; set; }
         public BlazorNotificationsService BlazorNotificationsService { get; set; }
         public BlazorDevicesService BlazorDevicesService { get; set; }
+        public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
 
         public int ModuleId { get; set; }
         public string ContextRoomId { get; set; }
@@ -88,7 +90,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, BlazorVideoService blazorVideoService, BlazorVideoPlayerService blazorVideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, BlazorVideoService blazorVideoService, BlazorVideoPlayerService blazorVideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -102,6 +104,7 @@ namespace Oqtane.ChatHubs.Services
             this.BlazorVideoPlayerService = blazorVideoPlayerService;
             this.BlazorNotificationsService = blazorNotificationService;
             this.BlazorDevicesService = blazorDevicesService;
+            this.Jsapigeolocationservice = jsapigeolocationservice;
 
             this.BlazorVideoService.StartVideoEvent += async (BlazorVideoModel model) => await this.StartCam(model);
             this.BlazorVideoService.StopVideoEvent += async (BlazorVideoModel model) => await this.StopCam(model);
@@ -126,6 +129,8 @@ namespace Oqtane.ChatHubs.Services
             this.UpdateRoomCreator += OnUpdateRoomCreator;
             this.OnClearHistoryEvent += OnClearHistoryExecute;
             this.OnMatchedEvent += MatchedEventExecute;
+
+            this.Jsapigeolocationservice.OnGeolocationpositionReceived += async (Jsapigeolocationpositionevent item) => await GeolocationreceivedAsync(item);
 
             this.BlazorDevicesService.OnAudioDeviceChanged += async (BlazorDevicesEvent e) => await OnAudioDeviceChanged(e);
             this.BlazorDevicesService.OnMicrophoneDeviceChanged += async (BlazorDevicesEvent e) => await OnMicrophoneDeviceChanged(e);
@@ -989,6 +994,29 @@ namespace Oqtane.ChatHubs.Services
             });
         }
 
+        public async Task GeolocationreceivedAsync(Jsapigeolocationpositionevent obj)
+        {
+            ChatHubGeolocation position = new ChatHubGeolocation();
+
+            position.state = obj.permissionstate;
+            position.latitude = obj.Item.latitude;
+            position.longitude = obj.Item.longitude;
+            position.altitude = obj.Item.altitude;
+            position.altitudeaccuracy = obj.Item.altitudeaccuracy;
+            position.accuracy = obj.Item.accuracy;
+            position.heading = obj.Item.heading;
+            position.speed = obj.Item.speed;
+
+            await this.Connection.InvokeAsync("AddGeolocationPosition", position).ContinueWith((task) =>
+            {
+                if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
+                {
+                    if (this.TryHandleException(task))
+                        return;
+                }
+            });
+        }
+
         public void RunUpdateUI()
         {
             this.OnUpdateUI.Invoke(this, EventArgs.Empty);
@@ -1018,6 +1046,8 @@ namespace Oqtane.ChatHubs.Services
             this.UpdateRoomCreator -= OnUpdateRoomCreator;
             this.OnClearHistoryEvent -= OnClearHistoryExecute;
             this.OnMatchedEvent -= MatchedEventExecute;
+
+            this.Jsapigeolocationservice.OnGeolocationpositionReceived -= async (Jsapigeolocationpositionevent item) => await GeolocationreceivedAsync(item);
 
             this.BlazorDevicesService.OnAudioDeviceChanged -= async (BlazorDevicesEvent e) => await OnAudioDeviceChanged(e);
             this.BlazorDevicesService.OnMicrophoneDeviceChanged -= async (BlazorDevicesEvent e) => await OnMicrophoneDeviceChanged(e);

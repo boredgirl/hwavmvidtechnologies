@@ -1651,6 +1651,24 @@ namespace Oqtane.ChatHubs.Hubs
             return display;
         }
 
+        [AllowAnonymous]
+        public async Task AddGeolocationPosition(ChatHubGeolocation position)
+        {
+            var contextUser = await this.GetChatHubUserAsync();
+            var connection = await this.chatHubRepository.Connections().FirstOrDefaultAsync(item => item.ConnectionId == Context.ConnectionId);
+
+            if (connection != null)
+            {
+                position.ChatHubConnectionId = connection.ClientModel().Id;
+                position.CreatedOn = DateTime.Now;
+                position.CreatedBy = contextUser.Username;
+                position.ModifiedOn = DateTime.Now;
+                position.ModifiedBy = contextUser.Username;
+
+                this.chatHubRepository.AddGeolocation(position);
+            }
+        }
+
         public async Task UpdateRoomCreator(ChatHubRoom room, List<string> exceptConnectionIds)
         {
             try

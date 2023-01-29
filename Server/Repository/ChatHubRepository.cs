@@ -465,6 +465,12 @@ namespace Oqtane.ChatHubs.Repository
             }
             return ChatHubCamSequence;
         }
+        public ChatHubGeolocation AddGeolocation(ChatHubGeolocation position)
+        {
+            this._db.ChatHubGeolocation.Add(position);
+            this._db.SaveChanges();
+            return position;
+        }
 
         #endregion
 
