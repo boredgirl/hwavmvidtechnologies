@@ -12,9 +12,8 @@ namespace Hwavmvid.Jsapigeolocation
     {
         
         public IJSRuntime JsRuntime { get; set; }
-        public IJSObjectReference Module { get; set; }
-
-        public DotNetObjectReference<Jsapigeolocationservice> DotNetObjectRef;
+        public IJSObjectReference Module { get; set; } = null;
+        public DotNetObjectReference<Jsapigeolocationservice> DotNetObjectRef { get; set; }
 
         public event Action<Jsapigeolocationpermissionsevent> OnGeolocationpermisssionsChanged;
         public event Action OnUpdateUI;
@@ -25,7 +24,6 @@ namespace Hwavmvid.Jsapigeolocation
         {
             this.JsRuntime = jsRuntime;
             this.DotNetObjectRef = DotNetObjectReference.Create(this);
-            this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/geolocationscript.js");
         }
         public async Task Initgeolocationservice()
         {
@@ -39,7 +37,7 @@ namespace Hwavmvid.Jsapigeolocation
             var contextmap = this.Getmap(componentid);
             if (contextmap == null)
             {
-                contextmap = new Jsapigeolocationmap() { Id = componentid, Item = null };
+                contextmap = new Jsapigeolocationmap() { Id = componentid, Item = null, Jsmapreference = null };
                 contextmap.Jsmapreference = await this.Module.InvokeAsync<IJSObjectReference>("initgeolocationmap", this.DotNetObjectRef, componentid, elementid);
                 this.Mapitems.Add(contextmap);
             }                
@@ -49,16 +47,16 @@ namespace Hwavmvid.Jsapigeolocation
         {
             return this.Mapitems.FirstOrDefault(item => item.Id == id);
         }
-        public void Removemap(string id)
+        public void Removemap(string componentid)
         {
-            var map = this.Getmap(id);
+            var map = this.Getmap(componentid);
             if (map != null)
                 this.Mapitems.Remove(map);
         }
 
-        public async Task Getgeolocationpermissions(string id)
+        public async Task Getgeolocationpermissions(string componentid)
         {
-            var map = this.Getmap(id);
+            var map = this.Getmap(componentid);
             if (map != null)
                 await map.Jsmapreference.InvokeVoidAsync("requestpermissions");
         }

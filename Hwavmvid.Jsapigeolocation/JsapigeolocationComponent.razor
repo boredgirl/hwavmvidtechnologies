@@ -5,6 +5,8 @@
 
 @using System.Linq
 @using System.Collections.Generic
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
 
 <!--
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
@@ -24,20 +26,20 @@
     
 </div>
 
-<div id="@geolocationcanvasid"></div>
+<div id="@geolocationmapid"></div>
 
 @code {
 
     public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
     public string permissionstate { get; set; } = string.Empty;
-    public string geolocationcanvasid { get; set; }
+    public string geolocationmapid { get; set; }
 
     protected override Task OnInitializedAsync()
     {
         this.Jsapigeolocationservice.OnGeolocationpermisssionsChanged += Geolocationpermissionschanged;
         this.Jsapigeolocationservice.OnUpdateUI += UpdateUI;
 
-        this.geolocationcanvasid = string.Concat("geolocationcanvasid", "-", this.ComponentId);
+        this.geolocationmapid = string.Concat("geolocationmapid", "-", this.ComponentId);
         return base.OnInitializedAsync();
     }
 
@@ -46,7 +48,7 @@
         if (firstRender)
         {
             await this.Jsapigeolocationservice.Initgeolocationservice();
-            await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationcanvasid);
+            await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationmapid);
             await this.Jsapigeolocationservice.Getgeolocationpermissions(this.ComponentId);
             await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
             //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
