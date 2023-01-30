@@ -41,7 +41,7 @@
                                             <div class="p-1">
                                                 
                                                 <small class="bg-info lead">connection_id: @connection.ConnectionId</small>
-                                                <JsapigeolocationComponent Getgeolocationcoordsintervall="(1000 * 10)"></JsapigeolocationComponent>
+                                                <JsapigeolocationComponent Getgeolocationcoordsintervall="@geoLocatiionPositionInterval"></JsapigeolocationComponent>
 
                                             </div>
                                         }
@@ -61,10 +61,16 @@
 
 @code {
 
-    protected override void OnInitialized()
+    [Inject] protected ISettingService SettingService { get; set; }
+
+    public int geoLocatiionPositionInterval { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
+        Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+        this.geoLocatiionPositionInterval = Int32.Parse(this.SettingService.GetSetting(settings, "GeoLocationPositionInterval", "41000"));
         this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUI(sender, e);
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 
     public void UpdateUI(object sender, EventArgs e)
