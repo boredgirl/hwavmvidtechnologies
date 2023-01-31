@@ -100,25 +100,25 @@ export function initgeolocationmap(dotnetobjref, componentid, elementid) {
 
                 return promise;
             };
-            this.rendergooglemapposition = function (latitude, longitude) {
+            this.renderbingmapposition = function (latitude, longitude) {
 
-                var googlemapsmarkertitle = "Context department";
-                var latitudelongitude = new google.maps.LatLng(latitude, longitude);
+                try
+                {
 
-                var googlemapoptions = {
-                    zoom: 16,
-                    center: latitudelongitude,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
+                    var map = new Microsoft.Maps.Map("#" + elementid, {
+                        //credentials: 'bing map key',
+                        center: new Microsoft.Maps.Location(latitude, longitude)
+                    });
 
-                var googlemapcanvas = document.getElementById(googlemapcanvasid);
-                var map = new google.maps.Map(googlemapcanvas, googlemapoptions);
+                    var marker = new Microsoft.Maps.Pushpin(center, {
+                        title: 'detected device',
+                        subTitle: 'location granted though',
+                        text: '17'
+                    });
 
-                var marker = new google.maps.Marker({
-                    position: latitudelongitude,
-                    map: map,
-                    title: googlemapsmarkertitle
-                });
+                    map.entities.push(marker);
+                }
+                catch (err) { console.log(err) };
             };
         }
     }

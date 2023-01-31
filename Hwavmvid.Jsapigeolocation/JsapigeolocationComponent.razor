@@ -12,7 +12,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 -->
 
-<div>
+<div class="d-flex flex-wrap">
 
     @{
         contextmap = Jsapigeolocationservice.Getmap(ComponentId);
@@ -20,33 +20,38 @@
 
     @if (contextmap != null && contextmap.Item != null && contextmap.Item.latitude != null && contextmap.Item.longitude != null && contextmap.Item.accuracy != null)
     {
-        <table class="table table-success">
-            <thead>
-                <tr>
-                    <th scope="col">latitude</th>
-                    <th scope="col">longitude</th>
-                    <th scope="col">accuracy</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="col">
-                        <div class="lead"><small>@contextmap.Item.latitude</small></div>
-                    </th>
-                    <th scope="col">
-                        <div class="lead"><small>@contextmap.Item.longitude</small></div>
-                    </th>
-                    <th scope="col">
-                        <div class="lead"><small>@contextmap.Item.accuracy</small></div>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
+
+        <div id="@geolocationmapid" style="position:relative; width:412px; height:240px; background-image: url('/Modules/Oqtane.ChatHubs/worldmapnews.png'); background-repeat: no-repeat; background-size: cover;"></div>
+
+        <div>
+
+            <table class="table table-success">
+                <thead>
+                    <tr>
+                        <th scope="col">latitude</th>
+                        <th scope="col">longitude</th>
+                        <th scope="col">accuracy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="col">
+                            <div class="lead"><small>@contextmap.Item.latitude</small></div>
+                        </th>
+                        <th scope="col">
+                            <div class="lead"><small>@contextmap.Item.longitude</small></div>
+                        </th>
+                        <th scope="col">
+                            <div class="lead"><small>@contextmap.Item.accuracy</small></div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
     }
     
 </div>
-
-<div id="@geolocationmapid"></div>
 
 @code {
 
@@ -71,7 +76,7 @@
             await this.Jsapigeolocationservice.Initgeolocationservice();
             await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationmapid);
             await this.Jsapigeolocationservice.Getgeolocationpermissions(this.ComponentId);
-            
+
             await Task.Run(async () =>
             {
                 while (true)
@@ -83,7 +88,7 @@
                     });
                 }
             });            
-            
+
             //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
         }
 

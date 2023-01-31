@@ -25,6 +25,7 @@ namespace Oqtane.ChatHubs
         public string audioBitsPerSecond { get; set; }
         public string videoSegmentsLength { get; set; }
         public string geoLocationPositionInterval { get; set; }
+        public string bingMapsApiKey { get; set; }
         public string regularExpression { get; set; }
 
         public List<string> regularExpressions = new List<string>();
@@ -43,6 +44,7 @@ namespace Oqtane.ChatHubs
                 this.audioBitsPerSecond = this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800");
                 this.videoSegmentsLength = this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400");
                 this.geoLocationPositionInterval = this.SettingService.GetSetting(settings, "GeoLocationPositionInterval", "41000");
+                this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
                 this.regularExpressions = this.SettingService.GetSetting(settings, "RegularExpression", "").Split(";delimiter;", StringSplitOptions.RemoveEmptyEntries).ToList();
             }
             catch (Exception ex)
@@ -76,6 +78,9 @@ namespace Oqtane.ChatHubs
                 await this.SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
 
                 this.SettingService.SetSetting(settings, "GeoLocationPositionInterval", this.geoLocationPositionInterval);
+                await this.SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
+
+                this.SettingService.SetSetting(settings, "BingMapsApiKey", this.bingMapsApiKey);
                 await this.SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
 
                 this.SettingService.SetSetting(settings, "RegularExpression", string.Join(";delimiter;", regularExpressions));

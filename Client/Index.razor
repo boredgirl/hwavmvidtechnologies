@@ -309,7 +309,7 @@
     <div class="d-flex flex-column my-2 px-2">
         <div class="ms-auto bg-danger">
             <small>
-                <a href="https://github.com/boredgirl/hwavmvid" target="_blank" class="text-white" title="oqtane chathub module">Wasmchat Project At Github</a>
+                <a href="https://github.com/boredgirl/hwavmvidtechnologies" target="_blank" class="text-white" title="asp net core framework module">Wasmchat Project At Github</a>
             </small>
         </div>
     </div>
@@ -325,4 +325,9 @@
 
 @code {
 
+    public override List<Resource> Resources => new List<Resource>()
+    {
+		// bing maps script tag
+        new Resource { ResourceType = ResourceType.Script, Url = string.Concat("https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=", bingMapsApiKey), CrossOrigin = "anonymous", Level = ResourceLevel.Module },
+	};
 }

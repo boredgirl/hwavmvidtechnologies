@@ -67,11 +67,11 @@ namespace Hwavmvid.Jsapigeolocation
             if (map != null)
                 await map.Jsmapreference.InvokeVoidAsync("requestcoords");
         }
-        public async Task Rendergooglemapposition(string componentid, double? latitude, double? longitude)
+        public async Task Renderbingmapposition(string componentid, double? latitude, double? longitude)
         {
             var map = this.Getmap(componentid);
             if (map != null)
-                await map.Jsmapreference.InvokeVoidAsync("rendergooglemapposition", latitude, longitude);
+                await map.Jsmapreference.InvokeVoidAsync("renderbingmapposition", latitude, longitude);
         }
 
         [JSInvokable("Pushcoords")]
@@ -82,11 +82,10 @@ namespace Hwavmvid.Jsapigeolocation
             {
                 map.Item = JsonSerializer.Deserialize<Jsapigeolocationitem>(coords);
                 this.OnGeolocationpositionReceived?.Invoke(new Jsapigeolocationpositionevent() { permissionstate = map.Permissionstate, Item = map.Item });
+
+                await this.Renderbingmapposition(componentid, map.Item.latitude, map.Item.longitude);
                 this.UpdateUI();
             }
-
-            //await this.Rendergooglemapposition(item.latitude, item.longitude);
-            //this.UpdateUI();
         }
 
         [JSInvokable("Permissionschanged")]

@@ -60,6 +60,8 @@ namespace Oqtane.ChatHubs
         public int audioBitsPerSecond { get; set; }
         public int videoSegmentsLength { get; set; }
 
+        public string bingMapsApiKey { get; set; }
+
         public int InnerHeight = 0;
         public int InnerWidth = 0;
 
@@ -82,6 +84,8 @@ namespace Oqtane.ChatHubs
             this.videoBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "VideoBitsPerSecond", "14000"));
             this.audioBitsPerSecond = Int32.Parse(this.SettingService.GetSetting(settings, "AudioBitsPerSecond", "12800"));
             this.videoSegmentsLength = Int32.Parse(this.SettingService.GetSetting(settings, "VideoSegmentsLength", "2400"));
+
+            this.bingMapsApiKey = this.SettingService.GetSetting(settings, "BingMapsApiKey", "");
 
             this.BlazorDynamicLayoutService.TabItemClickedEvent += OnTabItemClickedExecute;
             this.BlazorDynamicLayoutService.OnErrorEvent += OnBlazorDynamicLayoutErrorExecute;
