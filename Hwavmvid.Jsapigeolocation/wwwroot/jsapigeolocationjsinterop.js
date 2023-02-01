@@ -100,25 +100,47 @@ export function initgeolocationmap(dotnetobjref, componentid, elementid) {
 
                 return promise;
             };
+
+            this.map = undefined;
+            this.mapmarker = undefined;
+            this.maprequestcounter = 0;
+
             this.renderbingmapposition = function (latitude, longitude) {
 
-                try
-                {
+                try {
+                    __context.maprequestcounter++;
 
-                    var map = new Microsoft.Maps.Map("#" + elementid, {
-                        //credentials: 'bing map key',
-                        center: new Microsoft.Maps.Location(latitude, longitude),
-                        zoom: 14,
-                        mapTypeId: Microsoft.Maps.MapTypeId.aerial,
-                    });
+                    var iselement = document.getElementById(elementid);
+                    if (iselement != null && __context.map == undefined) {
 
-                    var marker = new Microsoft.Maps.Pushpin(map.getCenter(), {
-                        title: 'detected device',
-                        subTitle: 'location granted though',
-                        text: '17'
-                    });
+                        __context.map = new Microsoft.Maps.Map("#" + elementid, {
+                            //credentials: 'bing map key',
+                            center: new Microsoft.Maps.Location(latitude, longitude),
+                            zoom: 14,
+                            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                        });
 
-                    map.entities.push(marker);
+                        __context.mapmarker = new Microsoft.Maps.Pushpin(__context.map.getCenter(), {
+                            title: 'detected device',
+                            subTitle: 'location granted though',
+                            text: '17' + '[' + __context.maprequestcounter + ']',
+                        });
+
+                        __context.map.entities.push(__context.mapmarker);
+                    }
+
+                    if (iselement != null && __context.map != undefined) {
+
+                        __context.map.setOptions({
+
+                            center: new Microsoft.Maps.Location(latitude, longitude),
+                        });
+
+                        __context.mapmarker.setOptions({
+
+                            text: '17' + '[' + __context.maprequestcounter + ']',
+                        });
+                    }
                 }
                 catch (err) { console.log(err) };
             };
