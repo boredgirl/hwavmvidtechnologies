@@ -101,7 +101,13 @@ namespace Oqtane
 
             services.AddCors(option =>
             {
-                option.AddPolicy("wasmcorspolicy", (builder) => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+                option.AddPolicy("wasmcorspolicy", (builder) =>
+                {
+                    builder.SetIsOriginAllowedToAllowWildcardSubdomains()
+                           .SetIsOriginAllowed(isOriginAllowed => true)
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
             });
 
             services.AddSignalR()

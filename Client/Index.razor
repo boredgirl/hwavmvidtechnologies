@@ -328,7 +328,7 @@
     public override List<Resource> Resources => new List<Resource>()
     {
 		// bing maps script tag
-        new Resource { ResourceType = ResourceType.Script, Url = string.Concat("https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=", bingMapsApiKey), CrossOrigin = "anonymous", Level = ResourceLevel.Module },
+        new Resource { ResourceType = ResourceType.Script, Url = string.Concat("https://www.bing.com/api/maps/mapcontrol?key=", bingMapsApiKey), Level = ResourceLevel.Module },
 
         // jquery slim minified
         new Resource { ResourceType = ResourceType.Script, Url = "https://code.jquery.com/jquery-3.6.3.slim.min.js", Integrity = "sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=", CrossOrigin = "anonymous", Level = ResourceLevel.Module },

@@ -107,10 +107,12 @@ export function initgeolocationmap(dotnetobjref, componentid, elementid) {
 
                     var map = new Microsoft.Maps.Map("#" + elementid, {
                         //credentials: 'bing map key',
-                        center: new Microsoft.Maps.Location(latitude, longitude)
+                        center: new Microsoft.Maps.Location(latitude, longitude),
+                        zoom: 14,
+                        mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                     });
 
-                    var marker = new Microsoft.Maps.Pushpin(center, {
+                    var marker = new Microsoft.Maps.Pushpin(map.getCenter(), {
                         title: 'detected device',
                         subTitle: 'location granted though',
                         text: '17'
