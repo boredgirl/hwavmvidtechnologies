@@ -87,6 +87,7 @@ namespace Oqtane
             services.AddScoped<BlazorPagerService<ChatHubWhitelistUser>, BlazorPagerService<ChatHubWhitelistUser>>();
             services.AddScoped<JsapinotificationService, JsapinotificationService>();
             services.AddScoped<Jsapigeolocationservice, Jsapigeolocationservice>();
+            services.AddScoped<Jsapibingmapservice, Jsapibingmapservice>();
             services.AddScoped<BlackjackService, BlackjackService>();
             services.AddScoped<RouletteService, RouletteService>();
             services.AddScoped<RoulettesurfaceService, RoulettesurfaceService>();

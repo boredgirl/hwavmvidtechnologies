@@ -1665,7 +1665,13 @@ namespace Oqtane.ChatHubs.Hubs
                 position.ModifiedOn = DateTime.Now;
                 position.ModifiedBy = contextUser.Username;
 
-                this.chatHubRepository.AddGeolocation(position);
+                position = this.chatHubRepository.AddGeolocation(position);
+            }
+
+            foreach (var room in await this.chatHubRepository.GetRoomsByCreator(contextUser.UserId).ToListAsync())
+            {
+                var exceptConnectionIds = this.chatHubService.GetAllExceptConnectionIds(contextUser);
+                await this.Clients.GroupExcept(room.Id.ToString(), exceptConnectionIds).SendAsync("UpdateBingMap", room.Id, connection.Id, position.ClientModel());
             }
         }
 

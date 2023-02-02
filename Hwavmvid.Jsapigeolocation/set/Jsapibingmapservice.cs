@@ -39,6 +39,7 @@ namespace Hwavmvid.Jsapigeolocation
                 contextmap = new Jsapibingmapmap() { Id = componentid, Item = null, Jsmapreference = null };
                 contextmap.Jsmapreference = await this.Module.InvokeAsync<IJSObjectReference>("initbingmapmap", this.DotNetObjectRef, componentid, elementid);
                 this.Mapitems.Add(contextmap);
+                this.OnUpdateUI?.Invoke();
             }                
         }
 

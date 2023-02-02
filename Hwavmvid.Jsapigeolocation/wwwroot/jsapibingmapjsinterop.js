@@ -2,7 +2,7 @@ export function initbingmapmap(dotnetobjref, componentid, elementid) {
 
     var __obj = {
 
-        geomap: function (dotnetobjref, componentid, googlemapcanvasid) {
+        bingmap: function (dotnetobjref, componentid, googlemapcanvasid) {
 
             var __context = this;
             this.state = ""; // granted, prompt, denied
@@ -74,5 +74,5 @@ export function initbingmapmap(dotnetobjref, componentid, elementid) {
         }
     }
 
-    return new __obj.geomap(dotnetobjref, componentid, elementid);
+    return new __obj.bingmap(dotnetobjref, componentid, elementid);
 }

@@ -48,6 +48,7 @@ namespace Oqtane.ChatHubs.Services
         public BlazorNotificationsService BlazorNotificationsService { get; set; }
         public BlazorDevicesService BlazorDevicesService { get; set; }
         public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
+        public Jsapibingmapservice Jsapibingmapservice { get; set; }
 
         public int ModuleId { get; set; }
         public string ContextRoomId { get; set; }
@@ -75,7 +76,8 @@ namespace Oqtane.ChatHubs.Services
         public event Action<ChatHubCam, int> OnAddChatHubCamEvent;
         public event Action<ChatHubCam, int> OnRemoveChatHubCamEvent;
         public event Action<string, string, string> OnDownloadBytesEvent;
-        public event Action<int, ChatHubUser> UpdateRoomCreator;
+        public event Action<int, ChatHubUser> OnUpdateRoomCreatorEvent;
+        public event Action<int, int, ChatHubGeolocation> Onupdatebingmapevent;
         public event EventHandler<int> OnClearHistoryEvent;
         public event EventHandler<string> OnMatchedEvent;
 
@@ -90,7 +92,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, BlazorVideoService blazorVideoService, BlazorVideoPlayerService blazorVideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, BlazorVideoService blazorVideoService, BlazorVideoPlayerService blazorVideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -105,6 +107,7 @@ namespace Oqtane.ChatHubs.Services
             this.BlazorNotificationsService = blazorNotificationService;
             this.BlazorDevicesService = blazorDevicesService;
             this.Jsapigeolocationservice = jsapigeolocationservice;
+            this.Jsapibingmapservice = jsapibingmapservice;
 
             this.BlazorVideoService.StartVideoEvent += async (BlazorVideoModel model) => await this.StartCam(model);
             this.BlazorVideoService.StopVideoEvent += async (BlazorVideoModel model) => await this.StopCam(model);
@@ -126,7 +129,8 @@ namespace Oqtane.ChatHubs.Services
             this.OnAddChatHubCamEvent += OnAddChatHubCamExecute;
             this.OnRemoveChatHubCamEvent += OnRemoveChatHubCamExecute;
             this.OnDownloadBytesEvent += async (string dataURI, string roomId, string camId) => await OnDownloadBytesExecuteAsync(dataURI, roomId, camId);
-            this.UpdateRoomCreator += OnUpdateRoomCreator;
+            this.OnUpdateRoomCreatorEvent += OnUpdateRoomCreatorExecute;
+            this.Onupdatebingmapevent += async (int roomId, int connectionId, ChatHubGeolocation position) => await Onupdatebingmapexecute(roomId, connectionId, position);
             this.OnClearHistoryEvent += OnClearHistoryExecute;
             this.OnMatchedEvent += MatchedEventExecute;
 
@@ -212,7 +216,8 @@ namespace Oqtane.ChatHubs.Services
             this.Connection.On("AddWaitingRoomItem", (ChatHubWaitingRoomItem waitingRoomItem) => OnAddChatHubWaitingRoomItemEvent(this, waitingRoomItem));
             this.Connection.On("RemovedWaitingRoomItem", (ChatHubWaitingRoomItem waitingRoomItem) => OnRemovedChatHubWaitingRoomItemEvent(this, waitingRoomItem));
             this.Connection.On("DownloadBytes", (string dataURI, string id, string connectionId) => OnDownloadBytesEvent(dataURI, id, connectionId));
-            this.Connection.On("UpdateRoomCreator", (int roomId, ChatHubUser user) => UpdateRoomCreator(roomId, user));
+            this.Connection.On("UpdateRoomCreator", (int roomId, ChatHubUser user) => OnUpdateRoomCreatorEvent(roomId, user));
+            this.Connection.On("UpdateBingMap", (int roomId, int connectionId, ChatHubGeolocation position) => Onupdatebingmapevent(roomId, connectionId, position));
             this.Connection.On("AddCam", (ChatHubCam cam, int roomId) => OnAddChatHubCamEvent(cam, roomId));
             this.Connection.On("RemoveCam", (ChatHubCam cam, int roomId) => OnRemoveChatHubCamEvent(cam, roomId));
             this.Connection.On("ClearHistory", (int roomId) => OnClearHistoryEvent(this, roomId));
@@ -309,12 +314,21 @@ namespace Oqtane.ChatHubs.Services
                 }
             });
         }
-        public void OnUpdateRoomCreator(int roomId, ChatHubUser creator)
+        public void OnUpdateRoomCreatorExecute(int roomId, ChatHubUser creator)
         {
             var room = this.Rooms.FirstOrDefault(item => item.Id == roomId);
             if(room != null)
             {
                 room.Creator = creator;
+                this.RunUpdateUI();
+            }
+        }
+        public async Task Onupdatebingmapexecute(int roomId, int connectionId, ChatHubGeolocation position)
+        {
+            var room = this.Rooms.FirstOrDefault(item => item.Id == roomId);
+            if (room != null)
+            {
+                await this.Jsapibingmapservice.Renderbingmapposition(connectionId.ToString(), position.latitude, position.longitude);
                 this.RunUpdateUI();
             }
         }
@@ -1043,7 +1057,8 @@ namespace Oqtane.ChatHubs.Services
             this.OnAddChatHubCamEvent -= OnAddChatHubCamExecute;
             this.OnRemoveChatHubCamEvent -= OnRemoveChatHubCamExecute;
             this.OnDownloadBytesEvent -= async (string dataURI, string id, string camId) => await OnDownloadBytesExecuteAsync(dataURI, id, camId);
-            this.UpdateRoomCreator -= OnUpdateRoomCreator;
+            this.OnUpdateRoomCreatorEvent -= OnUpdateRoomCreatorExecute;
+            this.Onupdatebingmapevent -= async (int roomId, int connectionId, ChatHubGeolocation position) => await Onupdatebingmapexecute(roomId, connectionId, position);
             this.OnClearHistoryEvent -= OnClearHistoryExecute;
             this.OnMatchedEvent -= MatchedEventExecute;
 

@@ -19,6 +19,7 @@
 @using Hwavmvid.Roulettesurface
 @using Hwavmvid.Motorsport.Racewaymaps
 @using Hwavmvid.Motorsport.Shared
+@using Hwavmvid.Jsapigeolocation
 
 <link href="/Modules/Oqtane.ChatHubs/blazoralerts.min.css" rel="stylesheet" />
 <link href="/Modules/Oqtane.ChatHubs/chat-hub-stylesheets.css" rel="stylesheet" />
@@ -113,6 +114,10 @@
 
                             <LivestreamItemContainer Context="context">
                                 
+                                <div style="visibility: hidden; width: 0px !important; height: 0px !important;">
+                                    <ChatGeolocation></ChatGeolocation>
+                                </div>
+
                                 <div class="video-container w-100 h-100">
 
                                     @if (ChatHubService.ConnectedUser?.UserId == context.CreatorId)
@@ -167,6 +172,8 @@
 
                                                 </Authorized>                                            
                                             </AuthorizeView>
+
+                                            <Jsapibingmapcomponent ComponentId="@context.Creator.Connections.FirstOrDefault(item => item.ConnectionId == ChatHubService.Connection.ConnectionId).Id.ToString()"></Jsapibingmapcomponent>
                                         }
                                     }
                                     else
@@ -207,6 +214,8 @@
                                                             </div>
                                                         </div>
                                                     }
+
+                                                    <Jsapibingmapcomponent ComponentId="@connection.Id.ToString()"></Jsapibingmapcomponent>
                                                 }
                                             }
                                         }

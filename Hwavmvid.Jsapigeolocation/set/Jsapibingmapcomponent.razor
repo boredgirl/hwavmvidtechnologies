@@ -8,16 +8,16 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 
-<div class="d-flex flex-wrap align-items-center">
+<div class="d-flex flex-wrap align-items-center p-1">
 
     @{
         contextmap = Jsapibingmapservice.Getmap(ComponentId);
     }
 
-    @if (contextmap != null && contextmap.Item != null)
+    @if (contextmap != null)
     {
 
-        <div id="@bingmapid" style="position:relative; width:412px; height:240px; background-image: url('/Modules/Oqtane.ChatHubs/worldmapnews.png'); background-repeat: no-repeat; background-size: cover;"></div>
+        <div id="@bingmapid" style="position:relative; width:412px; height:240px; background-image: url('/Modules/Oqtane.ChatHubs/worldmap.png'); background-repeat: no-repeat; background-size: cover;"></div>
 
     }
     
@@ -25,9 +25,8 @@
 
 @code {
 
-    [Parameter] public int Getgeolocationcoordsintervall { get; set; } = 1000 * 10;
+    [Parameter] public string ComponentId { get; set; }
 
-    public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
     public string bingmapid { get; set; }
     public Jsapibingmapmap contextmap { get; set; }
 
@@ -35,7 +34,7 @@
     {
         this.Jsapibingmapservice.OnUpdateUI += UpdateUI;
 
-        this.bingmapid = string.Concat("bingmapid", "-", this.ComponentId);
+        this.bingmapid = string.Concat("bingjsmapid", "-", this.ComponentId);
         return base.OnInitializedAsync();
     }
 
@@ -44,7 +43,7 @@
         if (firstRender)
         {
             await this.Jsapibingmapservice.Initbingmapservice();
-            await this.Jsapibingmapservice.Initbingmapmap(this.ComponentId, this.bingmapid);           
+            await this.Jsapibingmapservice.Initbingmapmap(this.ComponentId, this.bingmapid);
         }
 
         await base.OnAfterRenderAsync(firstRender);

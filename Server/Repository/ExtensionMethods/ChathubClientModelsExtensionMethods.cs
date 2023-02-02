@@ -154,5 +154,28 @@ namespace Oqtane.ChatHubs.Repository
 
             return device;
         }
+
+        public static ChatHubGeolocation ClientModel(this ChatHubGeolocation obj)
+        {
+            ChatHubGeolocation device = new ChatHubGeolocation()
+            {
+                Id = obj.Id,
+                ChatHubConnectionId = obj.ChatHubConnectionId,
+                state = obj.state,
+                latitude = obj.latitude,
+                longitude = obj.longitude,
+                altitude = obj.altitude,
+                altitudeaccuracy = obj.altitudeaccuracy,
+                accuracy = obj.accuracy,
+                heading = obj.heading,
+                speed = obj.speed,
+                CreatedBy = obj.CreatedBy,
+                CreatedOn = obj.CreatedOn,
+                ModifiedBy = obj.ModifiedBy,
+                ModifiedOn = obj.ModifiedOn,
+            };
+
+            return device;
+        }
     }
 }
