@@ -328,7 +328,7 @@ namespace Oqtane.ChatHubs.Services
             var room = this.Rooms.FirstOrDefault(item => item.Id == roomId);
             if (room != null)
             {
-                await this.Jsapibingmapservice.Renderbingmapposition(connectionId.ToString(), position.latitude, position.longitude);
+                await this.Jsapibingmapservice.Renderbingmapposition(string.Concat("roomid", roomId, "connectionid", connectionId.ToString()), position.latitude, position.longitude);
                 this.RunUpdateUI();
             }
         }

@@ -173,7 +173,7 @@
                                                 </Authorized>                                            
                                             </AuthorizeView>
 
-                                            <Jsapibingmapcomponent ComponentId="@context.Creator.Connections.FirstOrDefault(item => item.ConnectionId == ChatHubService.Connection.ConnectionId).Id.ToString()"></Jsapibingmapcomponent>
+                                            <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id, "connectionid", context.Creator.Connections.FirstOrDefault(item => item.ConnectionId == ChatHubService.Connection.ConnectionId).Id.ToString()))"></Jsapibingmapcomponent>
                                         }
                                     }
                                     else
@@ -215,7 +215,7 @@
                                                         </div>
                                                     }
 
-                                                    <Jsapibingmapcomponent ComponentId="@connection.Id.ToString()"></Jsapibingmapcomponent>
+                                                    <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id, "connectionid", connection.Id.ToString()))"></Jsapibingmapcomponent>
                                                 }
                                             }
                                         }
