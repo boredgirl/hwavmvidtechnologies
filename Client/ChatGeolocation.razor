@@ -36,15 +36,12 @@
                                 <div class="accordion-body">
                                     <div class="d-flex flex-wrap bd-highlight">
 
-                                        @foreach (var connection in ChatHubService.ConnectedUser.Connections)
-                                        {
-                                            <div class="p-1">
+                                        <div class="p-1">
                                                 
-                                                <small class="bg-info">connection_id: @connection.ConnectionId</small>
-                                                <Jsapigeolocationcomponent Getgeolocationcoordsintervall="@geoLocatiionPositionInterval"></Jsapigeolocationcomponent>
+                                            <small class="bg-info">connection_id: @ChatHubService.Connection.ConnectionId</small>
+                                            <Jsapigeolocationcomponent Getgeolocationcoordsintervall="@geoLocatiionPositionInterval"></Jsapigeolocationcomponent>
 
-                                            </div>
-                                        }
+                                        </div>
 
                                     </div>
                                 </div>
