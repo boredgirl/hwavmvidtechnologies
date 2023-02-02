@@ -1,0 +1,72 @@
+﻿@namespace Hwavmvid.Jsapigeolocation
+@inherits ComponentBase
+@implements IAsyncDisposable
+@inject Jsapibingmapservice Jsapibingmapservice
+
+@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<div class="d-flex flex-wrap align-items-center">
+
+    @{
+        contextmap = Jsapibingmapservice.Getmap(ComponentId);
+    }
+
+    @if (contextmap != null && contextmap.Item != null)
+    {
+
+        <div id="@bingmapid" style="position:relative; width:412px; height:240px; background-image: url('/Modules/Oqtane.ChatHubs/worldmapnews.png'); background-repeat: no-repeat; background-size: cover;"></div>
+
+    }
+    
+</div>
+
+@code {
+
+    [Parameter] public int Getgeolocationcoordsintervall { get; set; } = 1000 * 10;
+
+    public string ComponentId { get; set; } = Guid.NewGuid().ToString().Replace("-", "_");
+    public string bingmapid { get; set; }
+    public Jsapibingmapmap contextmap { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        this.Jsapibingmapservice.OnUpdateUI += UpdateUI;
+
+        this.bingmapid = string.Concat("bingmapid", "-", this.ComponentId);
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.Jsapibingmapservice.Initbingmapservice();
+            await this.Jsapibingmapservice.Initbingmapmap(this.ComponentId, this.bingmapid);           
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public void UpdateUI()
+    {
+        InvokeAsync(() =>
+        {
+            this.StateHasChanged();
+        });
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        this.Jsapibingmapservice.OnUpdateUI -= UpdateUI;
+
+        foreach (var item in this.Jsapibingmapservice.Mapitems.ToList())
+        {
+            if (item.Jsmapreference != null)
+                await item.Jsmapreference.DisposeAsync();
+        }
+        this.Jsapibingmapservice.Mapitems.Clear();
+    }
+}
