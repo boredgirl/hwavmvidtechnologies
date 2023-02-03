@@ -129,51 +129,57 @@
                                             var microphoneDefaultDevice = context.Devices.FirstOrDefault(item => item.Type == ChatHubDeviceType.Microphone.ToString());
                                             var webcamDefaultDevice = context.Devices.FirstOrDefault(item => item.Type == ChatHubDeviceType.Webcam.ToString());
 
-                                            <BlazorVideoComponent Id1="@context.Id.ToString()"
-                                                                    Id2="@activeCamModel.Id.ToString()" 
-                                                                    Type="@BlazorVideoType.LocalLivestream" 
-                                                                    BackgroundColor="@context.BackgroundColor" 
-                                                                    Name="@context.Title" 
-                                                                    Status="@(context.Creator.Connections.Any(c => context.Cams.Any(cam => cam.ChatHubConnectionId == c.Id && cam.Status == ChatHubCamStatus.Broadcasting.ToString())) ? BlazorVideoStatusType.Live : BlazorVideoStatusType.Offline)" 
-                                                                    Viewers="@context.Viewers.Count()" 
-                                                                    Framerate="@framerate" 
-                                                                    VideoBitsPerSecond="@videoBitsPerSecond" 
-                                                                    AudioBitsPerSecond="@audioBitsPerSecond" 
-                                                                    VideoSegmentsLength="@videoSegmentsLength" 
-                                                                    AudioDefaultDeviceId="@(audioDefaultDevice?.DefaultDeviceId ?? string.Empty)"
-                                                                    MicrophoneDefaultDeviceId="@(microphoneDefaultDevice?.DefaultDeviceId ?? string.Empty)"
-                                                                    WebcamDefaultDeviceId="@(webcamDefaultDevice?.DefaultDeviceId ?? string.Empty)"
-                                                                    >
-                                            </BlazorVideoComponent>
+                                            <div class="d-flex flex-wrap flex-md-nowrap w-100 h-100 position-relative">
 
-                                            <AuthorizeView Context="authorizedcontext">
-                                                <Authorized>
+                                                <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
+                                                    <BlazorVideoComponent Id1="@context.Id.ToString()"
+                                                                            Id2="@activeCamModel.Id.ToString()" 
+                                                                            Type="@BlazorVideoType.LocalLivestream" 
+                                                                            BackgroundColor="@context.BackgroundColor" 
+                                                                            Name="@context.Title" 
+                                                                            Status="@(context.Creator.Connections.Any(c => context.Cams.Any(cam => cam.ChatHubConnectionId == c.Id && cam.Status == ChatHubCamStatus.Broadcasting.ToString())) ? BlazorVideoStatusType.Live : BlazorVideoStatusType.Offline)" 
+                                                                            Viewers="@context.Viewers.Count()" 
+                                                                            Framerate="@framerate" 
+                                                                            VideoBitsPerSecond="@videoBitsPerSecond" 
+                                                                            AudioBitsPerSecond="@audioBitsPerSecond" 
+                                                                            VideoSegmentsLength="@videoSegmentsLength" 
+                                                                            AudioDefaultDeviceId="@(audioDefaultDevice?.DefaultDeviceId ?? string.Empty)"
+                                                                            MicrophoneDefaultDeviceId="@(microphoneDefaultDevice?.DefaultDeviceId ?? string.Empty)"
+                                                                            WebcamDefaultDeviceId="@(webcamDefaultDevice?.DefaultDeviceId ?? string.Empty)"
+                                                                            >
+                                                    </BlazorVideoComponent>
 
-                                                    @{
-                                                        var motionlabel = string.Concat("motion-label-", context.Id.ToString(), "-", activeCamModel.Id.ToString());
-                                                    }
+                                                    <AuthorizeView Context="authorizedcontext">
+                                                        <Authorized>
 
-                                                    <div class="position-absolute motiondetection" style="z-index: 1; display: none; top: 42px; left: 10px;">
+                                                            @{
+                                                                var motionlabel = string.Concat("motion-label-", context.Id.ToString(), "-", activeCamModel.Id.ToString());
+                                                            }
 
-                                                        <div class="position-relative d-inline">
+                                                            <div class="position-absolute motiondetection" style="z-index: 1; display: none; top: 42px; left: 10px;">
 
-                                                            <span>
-                                                                <input type="number" step="200" style="width: 82px;" class="form-control form-control-sm" @bind="@context.Motiondetectionfluctation" />
-                                                            </span>
+                                                                <div class="position-relative d-inline">
 
-                                                            <span class="form-check">
-                                                                <input type="checkbox" id="@motionlabel" class="form-check-input" @bind="@context.Motiondetection" />
-                                                                <label for="@motionlabel" class="form-check-label" style="text-shadow: -1px -1px white;">Enable md</label>
-                                                            </span>
+                                                                    <span>
+                                                                        <input type="number" step="200" style="width: 82px;" class="form-control form-control-sm" @bind="@context.Motiondetectionfluctation" />
+                                                                    </span>
 
-                                                        </div>
+                                                                    <span class="form-check">
+                                                                        <input type="checkbox" id="@motionlabel" class="form-check-input" @bind="@context.Motiondetection" />
+                                                                        <label for="@motionlabel" class="form-check-label" style="text-shadow: -1px -1px white;">Enable md</label>
+                                                                    </span>
 
-                                                    </div>
+                                                                </div>
 
-                                                </Authorized>                                            
-                                            </AuthorizeView>
+                                                            </div>
 
-                                            <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id, "connectionid", context.Creator.Connections.FirstOrDefault(item => item.ConnectionId == ChatHubService.Connection.ConnectionId).Id.ToString()))"></Jsapibingmapcomponent>
+                                                        </Authorized>                                            
+                                                    </AuthorizeView>
+                                                </div>
+                                                <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
+                                                    <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id.ToString(), "connectionid", context.Creator.Connections.FirstOrDefault(item => item.ConnectionId == ChatHubService.Connection.ConnectionId).Id.ToString()))"></Jsapibingmapcomponent>
+                                                </div>
+                                            </div>
                                         }
                                     }
                                     else
@@ -194,28 +200,42 @@
                                             {                                            
                                                 if (connection.Cams != null)
                                                 {
-                                                    BlazorVideoStatusType status = BlazorVideoStatusType.Offline;
-                                                    var broadcastingCams = connection.Cams.Where(cam => cam.Status == ChatHubCamStatus.Broadcasting.ToString()).ToList();
-                                                    if (context.Cams.Any(cam => broadcastingCams.Any(item => cam.Id == item.Id)))
-                                                    {
-                                                        status = BlazorVideoStatusType.Live;
-                                                    }
-                                                    var activeCamModel = ChatHubService.GetCamByRoom(context, connection.ConnectionId);
-                                                    if (activeCamModel != null)
-                                                    {
-                                                        <BlazorVideoComponent Id1="@context.Id.ToString()" Id2="@activeCamModel.Id.ToString()" Type="@BlazorVideoType.RemoteLivestream" BackgroundColor="@context.BackgroundColor" Name="@context.Title" Status="@status" Viewers="@context.Viewers.Count()" Framerate="@framerate" VideoBitsPerSecond="@videoBitsPerSecond" AudioBitsPerSecond="@audioBitsPerSecond" VideoSegmentsLength="@videoSegmentsLength"></BlazorVideoComponent>
-                                                    }
-                                                    else if (activeCamModel == null)
-                                                    {
-                                                        <div class="card bg-light w-100 text-start m-md-1" style="height: 198px;">
-                                                            <div class="card-body">
-                                                                <h6 class="card-subtitle mb-2 text-muted">@context.Title</h6>
-                                                                <p class="card-text">No webcam found from @(context.Creator.DisplayName).</p>
-                                                            </div>
-                                                        </div>
-                                                    }
+                                                    <div class="d-flex flex-wrap flex-md-nowrap w-100 h-100 position-relative">
 
-                                                    <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id, "connectionid", connection.Id.ToString()))"></Jsapibingmapcomponent>
+                                                        <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
+
+                                                            @{
+                                                                BlazorVideoStatusType status = BlazorVideoStatusType.Offline;
+                                                                var broadcastingCams = connection.Cams.Where(cam => cam.Status == ChatHubCamStatus.Broadcasting.ToString()).ToList();
+                                                            }
+                                                            @if (context.Cams.Any(cam => broadcastingCams.Any(item => cam.Id == item.Id)))
+                                                            {
+                                                                status = BlazorVideoStatusType.Live;
+                                                            }
+                                                            @{
+                                                                var activeCamModel = ChatHubService.GetCamByRoom(context, connection.ConnectionId);
+                                                            }
+                                                            @if (activeCamModel != null)
+                                                            {
+                                                                <BlazorVideoComponent Id1="@context.Id.ToString()" Id2="@activeCamModel.Id.ToString()" Type="@BlazorVideoType.RemoteLivestream" BackgroundColor="@context.BackgroundColor" Name="@context.Title" Status="@status" Viewers="@context.Viewers.Count()" Framerate="@framerate" VideoBitsPerSecond="@videoBitsPerSecond" AudioBitsPerSecond="@audioBitsPerSecond" VideoSegmentsLength="@videoSegmentsLength"></BlazorVideoComponent>
+                                                            }
+                                                            else if (activeCamModel == null)
+                                                            {
+                                                                <div class="card bg-light w-100 text-start m-md-1" style="height: 198px;">
+                                                                    <div class="card-body">
+                                                                        <h6 class="card-subtitle mb-2 text-muted">@context.Title</h6>
+                                                                        <p class="card-text">No webcam found from @(context.Creator.DisplayName).</p>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+
+                                                        <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
+                                                            <Jsapibingmapcomponent ComponentId="@(string.Concat("roomid", context.Id.ToString(), "connectionid", connection.Id.ToString()))"></Jsapibingmapcomponent>
+                                                        </div>
+
+                                                    </div>
+                                                        
                                                 }
                                             }
                                         }

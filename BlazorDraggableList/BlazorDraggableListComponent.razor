@@ -27,27 +27,29 @@
 
     @@media(min-width: 576px) {
         .draggable-container-horizontal {
-            column-count: 2;
+            column-count: 1;
             column-gap: 0;
         }
 
             .draggable-container-horizontal .draggable-item {
-                display: initial;
-                vertical-align: initial;
+                display: inline-block;
+                vertical-align: middle;
                 width: 100%;
+                height: 206px;
         }
     }
 
     @@media(min-width: 768px) {
         .draggable-container-horizontal {
-            column-count: 2;
+            column-count: 1;
             column-gap: 0;
         }
 
             .draggable-container-horizontal .draggable-item {
-                display: initial;
-                vertical-align: initial;
+                display: inline-block;
+                vertical-align: middle;
                 width: 100%;
+                height: 206px;
             }
     }
 
@@ -60,8 +62,8 @@
             .draggable-container-horizontal .draggable-item {
                 display: inline-block;
                 vertical-align: middle;
-                width: 30% !important;
-
+                width: 100% !important;
+                height: 206px !important;
             }
     }
 
@@ -74,12 +76,12 @@
             .draggable-container-horizontal .draggable-item {
                 display: inline-block;
                 vertical-align: middle;
-                width: 275px !important;
-                height: 206px !important
+                width: 49.4% !important;
+                height: 206px !important;
             }
     }
 
-    @@media(min-width: 1400px) {
+    @@media(min-width: 1800px) {
         .draggable-container-horizontal {
             column-count: initial;
             column-gap: initial;
@@ -88,19 +90,19 @@
             .draggable-container-horizontal .draggable-item {
                 display: inline-block;
                 vertical-align: middle;
-                width: 275px !important;
-                height: 206px !important
+                width: 32.4% !important;
+                height: 206px !important;
             }
     }
 
     @@media(max-width: 575px) {
         .draggable-container-horizontal {
-            column-count: 2;
+            column-count: 1;
             column-gap: 0;
         }
 
             .draggable-container-horizontal .draggable-item {
-                display: initial;
+                display: inline-block;
                 vertical-align: initial;
                 width: 100%;
             }
@@ -113,8 +115,8 @@
         }
 
             .draggable-container-horizontal .draggable-item {
-                display: initial;
-                vertical-align: initial;
+                display: inline-block;
+                vertical-align: middle;
                 width: 100%;
             }
     }
