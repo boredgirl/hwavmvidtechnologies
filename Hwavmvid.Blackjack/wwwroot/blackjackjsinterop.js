@@ -1,4 +1,9 @@
 
-export function showPrompt(message) {
-  return prompt(message, 'Type anything here');
+export function blackjackjsinerop() {
+
+    var blackjackmap = function() {
+
+    };
+
+    return new blackjackmap();
 }

@@ -8,8 +8,8 @@ namespace Hwavmvid.Blackjack
     public class BlackjackService : IDisposable
     {
 
-        private IJSObjectReference javascriptfile;
-        private IJSRuntime jsruntime;
+        public IJSObjectReference javascriptfile { get; set; }
+        public IJSRuntime jsruntime { get; set; }
 
         public BlackjackService(IJSRuntime jsRuntime)
         {
@@ -18,13 +18,8 @@ namespace Hwavmvid.Blackjack
 
         public async Task InitBlackjackService()
         {
-            this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>(
-               "import", "/Modules/Oqtane.ChatHubs/blackjackjsinterop.js");
-        }
-
-        public async Task<string> Prompt(string message)
-        {
-            return await this.javascriptfile.InvokeAsync<string>("showPrompt", message);
+            if (this.javascriptfile == null)
+                this.javascriptfile = await this.jsruntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blackjackjsinterop.js");
         }
 
         public void Dispose()
