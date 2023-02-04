@@ -73,19 +73,20 @@
             await this.Jsapigeolocationservice.InitGeolocationMap(this.ComponentId, this.geolocationmapid);
             await this.Jsapigeolocationservice.Getgeolocationpermissions(this.ComponentId);
 
-            await Task.Run(async () =>
+            try
             {
-                while (true)
+                await Task.Run(async () =>
                 {
-                    await InvokeAsync(async () =>
+                    while (this.Jsapigeolocationservice.Getmap(this.ComponentId) != null)
                     {
-                        await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
-                        await Task.Delay(this.Getgeolocationcoordsintervall);
-                    });
-                }
-            });            
-
-            //await this.Jsapigeolocationservice.Rendergooglemapposition(this.Jsapigeolocationservice.item.latitude, this.Jsapigeolocationservice.item.longitude);
+                        await InvokeAsync(async () =>
+                        {
+                            await this.Jsapigeolocationservice.Getgeolocation(this.ComponentId);
+                            await Task.Delay(this.Getgeolocationcoordsintervall);
+                        });
+                    }
+                });
+            } catch (Exception exception) { Console.WriteLine(exception.Message); }
         }
 
         await base.OnAfterRenderAsync(firstRender);
