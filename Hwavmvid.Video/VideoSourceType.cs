@@ -1,6 +1,6 @@
-﻿namespace BlazorVideo
+﻿namespace Hwavmvid.Video
 {
-    public enum BlazorVideoSourceType
+    public enum VideoSourceType
     {
 
         Webcams,

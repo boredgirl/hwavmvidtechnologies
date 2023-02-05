@@ -2,7 +2,7 @@
 
 @using BlazorFileUpload
 @using BlazorSelect
-@using BlazorColorPicker
+@using Hwavmvid.ColorPicker
 
 @inherits EditBase
 
@@ -28,8 +28,8 @@
             <label for="BackgroundColor" class="control-label">Background Color: </label>
         </td>
         <td>
-            <BlazorSelectComponent SelectionItems="@BlazorColorPickerSelectionItems" SelectedItem="@BlazorColorPickerActiveType.ToString()" SelectEvent="@BlazorColorPicker_OnSelect"></BlazorSelectComponent>
-            <BlazorColorPickerComponent ContextColor="@backgroundcolor" ColorPickerType="@BlazorColorPickerActiveType"></BlazorColorPickerComponent>
+            <BlazorSelectComponent SelectionItems="@ColorPickerSelectionItems" SelectedItem="@ColorPickerActiveType.ToString()" SelectEvent="@ColorPicker_OnSelect"></BlazorSelectComponent>
+            <ColorPickerComponent ContextColor="@backgroundcolor" ColorPickerType="@ColorPickerActiveType"></ColorPickerComponent>
         </td>
     </tr>
     <tr>

@@ -1,6 +1,6 @@
-﻿namespace BlazorColorPicker
+﻿namespace Hwavmvid.ColorPicker
 {
-    public enum BlazorColorPickerType
+    public enum ColorPickerType
     {
         HTML5ColorPicker,
         CustomColorPicker,

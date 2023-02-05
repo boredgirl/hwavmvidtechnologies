@@ -1,0 +1,11 @@
+﻿@namespace Hwavmvid.Accordion
+
+@ChildContent
+
+@code {
+
+    [CascadingParameter] public AccordionItem AccordionItem { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+}

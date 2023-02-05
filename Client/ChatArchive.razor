@@ -9,7 +9,7 @@
 @using Oqtane.ChatHubs.Constants
 @using BlazorPager
 @using Oqtane.ChatHubs.Services
-@using BlazorVideoPlayer
+@using Hwavmvid.VideoPlayer
 @using Oqtane.ChatHubs.Models
 @using Oqtane.ChatHubs.Enums
 @using System.Linq
@@ -52,7 +52,7 @@
 
                     </div>
 
-                    <BlazorVideoPlayerComponent TotalVideoSequences="@context.TotalVideoSequences" MapId="@Guid.NewGuid().ToString()" ParameterId1="@context.ChatHubRoomId.ToString()" ParameterId2="@context.Id.ToString()" Name="@(string.Concat("Cam Id: ", context.Id.ToString()))" BackgroundColor="#7FFFD4"></BlazorVideoPlayerComponent>
+                    <VideoPlayerComponent TotalVideoSequences="@context.TotalVideoSequences" MapId="@Guid.NewGuid().ToString()" ParameterId1="@context.ChatHubRoomId.ToString()" ParameterId2="@context.Id.ToString()" Name="@(string.Concat("Cam Id: ", context.Id.ToString()))" BackgroundColor="#7FFFD4"></VideoPlayerComponent>
 
                     <div class="text-center my-1">
 

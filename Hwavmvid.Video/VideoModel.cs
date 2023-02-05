@@ -3,9 +3,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BlazorVideo
+namespace Hwavmvid.Video
 {
-    public class BlazorVideoModel
+    public class VideoModel
     {
 
         public Guid MapId { get; set; }
@@ -14,8 +14,8 @@ namespace BlazorVideo
 
         public string Id1 { get; set; }
         public string Id2 { get; set; }
-        public BlazorVideoType Type { get; set; }
-        public BlazorVideoSourceType SourceType { get; set; }
+        public VideoType Type { get; set; }
+        public VideoSourceType SourceType { get; set; }
         public IJSObjectReference JsObjRef { get; set; }
         public bool VideoOverlay { get; set; }
         public string AudioOuputId { get; set; }

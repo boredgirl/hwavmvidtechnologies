@@ -4,10 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>BlazorVideoPlayer</AssemblyName>
+    <AssemblyName>Hwavmvid.Video</AssemblyName>
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
-    <Product>BlazorVideoPlayer</Product>
+    <Product>Hwavmvid.Video</Product>
     <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>
@@ -19,14 +19,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorSlider\BlazorSlider.csproj" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorSelect\BlazorSelect.csproj" />
+  </ItemGroup>
+  
 </Project>

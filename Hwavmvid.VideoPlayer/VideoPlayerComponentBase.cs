@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorVideoPlayer
+namespace Hwavmvid.VideoPlayer
 {
-    public class BlazorVideoPlayerComponentBase : ComponentBase, IDisposable
+    public class VideoPlayerComponentBase : ComponentBase, IDisposable
     {
 
-        [Inject] public BlazorVideoPlayerService BlazorVideoPlayerService { get; set; }
+        [Inject] public VideoPlayerService VideoPlayerService { get; set; }
         [Inject] public BlazorSliderService BlazorSliderService { get; set; }
         [Parameter] public string MapId { get; set; }
         [Parameter] public string ParameterId1 { get; set; }
@@ -24,7 +24,7 @@ namespace BlazorVideoPlayer
         protected override async Task OnInitializedAsync()
         {
             this.BlazorSliderService.SliderValueOnChange += async (obj) => await OnSliderValueChangeExecute(obj);
-            this.BlazorVideoPlayerService.RunUpdateUI += UpdateUIStateHasChanged;
+            this.VideoPlayerService.RunUpdateUI += UpdateUIStateHasChanged;
 
             await base.OnInitializedAsync();
         }
@@ -33,9 +33,9 @@ namespace BlazorVideoPlayer
         {
             if (firstRender) 
             {
-                await this.BlazorVideoPlayerService.InitBlazorVideoPlayer();
-                await this.BlazorVideoPlayerService.InitBlazorVideoMap(this.MapId, this.ParameterId1, this.ParameterId2);
-                await this.BlazorVideoPlayerService.GetFirstSequence(this.MapId);
+                await this.VideoPlayerService.InitVideoPlayer();
+                await this.VideoPlayerService.InitVideoMap(this.MapId, this.ParameterId1, this.ParameterId2);
+                await this.VideoPlayerService.GetFirstSequence(this.MapId);
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -43,7 +43,7 @@ namespace BlazorVideoPlayer
 
         private async Task OnSliderValueChangeExecute(BlazorSliderEvent obj)
         {
-            var map = this.BlazorVideoPlayerService.GetBlazorVideoMap(obj.Id);
+            var map = this.VideoPlayerService.GetVideoMap(obj.Id);
             if (map != null)
             {
                 if (!map.SliderValueChanged)
@@ -52,8 +52,8 @@ namespace BlazorVideoPlayer
                     map.SliderCurrentValue = obj.SliderNewValue;
                     map.SliderValueChanged = true;
 
-                    this.BlazorVideoPlayerService.BlazorVideoServiceExtension.GetNextSequenceOnSliderValueChanged(map.MapId);
-                    await this.BlazorVideoPlayerService.ClearVideoBuffer(map.MapId);
+                    this.VideoPlayerService.VideoServiceExtension.GetNextSequenceOnSliderValueChanged(map.MapId);
+                    await this.VideoPlayerService.ClearVideoBuffer(map.MapId);
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace BlazorVideoPlayer
         {
             if (this.MapId == MapId)
             {
-                var map = this.BlazorVideoPlayerService.GetBlazorVideoMap(this.MapId);
+                var map = this.VideoPlayerService.GetVideoMap(this.MapId);
                 if (map != null)
                 {
                     this.InvokeAsync(() =>
@@ -81,7 +81,7 @@ namespace BlazorVideoPlayer
         public void Dispose()
         {
             this.BlazorSliderService.SliderValueOnChange -= async (obj) => await OnSliderValueChangeExecute(obj);
-            this.BlazorVideoPlayerService.RunUpdateUI -= UpdateUIStateHasChanged;
+            this.VideoPlayerService.RunUpdateUI -= UpdateUIStateHasChanged;
         }
 
     }

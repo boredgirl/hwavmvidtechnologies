@@ -1,11 +1,11 @@
 ﻿@namespace Oqtane.ChatHubs
 @inherits SettingsBase
 @using System.Text.RegularExpressions
-@using BlazorColorPicker
+@using Hwavmvid.ColorPicker
 
 <div class="mb-3">
     <label class="form-label">Background Color</label>
-    <BlazorColorPickerComponent ContextColor="@backgroundColor" ColorPickerType="@BlazorColorPicker.BlazorColorPickerType.HTML5ColorPicker"></BlazorColorPickerComponent>
+    <ColorPickerComponent ContextColor="@backgroundColor" ColorPickerType="@ColorPickerType.HTML5ColorPicker"></ColorPickerComponent>
 </div>
 
 <div class="mb-3">

@@ -15,7 +15,7 @@ using System.Net;
 using BlazorDraggableList;
 using BlazorFileUpload;
 using BlazorBrowserResize;
-using BlazorVideo;
+using Hwavmvid.Video;
 using Oqtane.ChatHubs.Models;
 using BlazorModal;
 using Oqtane.Models;
@@ -34,7 +34,6 @@ namespace Oqtane.ChatHubs
         [Inject] protected ISettingService SettingService { get; set; }
         [Inject] protected NavigationManager NavigationManager { get; set; }
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected SiteState SiteState { get; set; }
         [Inject] protected BlazorAlertsService BlazorAlertsService { get; set; }
         [Inject] protected ChatHubService ChatHubService { get; set; }
         [Inject] protected BlazorBrowserResizeService BrowserResizeService { get; set; }
@@ -42,7 +41,7 @@ namespace Oqtane.ChatHubs
         [Inject] protected CookieService CookieService { get; set; }
         [Inject] protected BlazorDraggableListService BlazorDraggableListService { get; set; }
         [Inject] protected BlazorFileUploadService BlazorFileUploadService { get; set; }
-        [Inject] protected BlazorVideoService BlazorVideoService { get; set; }
+        [Inject] protected VideoService VideoService { get; set; }
         [Inject] protected BlazorModalService BlazorModalService { get; set; }
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }
         [Inject] protected JsapinotificationService JsapinotificationService { get; set; }
@@ -89,7 +88,7 @@ namespace Oqtane.ChatHubs
 
             this.BlazorDynamicLayoutService.TabItemClickedEvent += OnTabItemClickedExecute;
             this.BlazorDynamicLayoutService.OnErrorEvent += OnBlazorDynamicLayoutErrorExecute;
-            this.BlazorVideoService.OnError += OnBlazorVideoErrorExecute;
+            this.VideoService.OnError += OnVideoErrorExecute;
             this.BrowserResizeService.BrowserResizeServiceExtension.OnResize += BrowserHasResized;
             this.BlazorDraggableListService.BlazorDraggableListServiceExtension.OnDropEvent += OnDraggableListDropEventExecute;
             this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUI();
@@ -174,7 +173,7 @@ namespace Oqtane.ChatHubs
                         {
                             var activeCamModel = ChatHubService.GetCamByRoom(room, ChatHubService.Connection.ConnectionId);
                             if (activeCamModel != null)
-                                await this.BlazorVideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
+                                await this.VideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
                         }
                         else
                         {
@@ -184,7 +183,7 @@ namespace Oqtane.ChatHubs
                                 {
                                     var activeCamModel = ChatHubService.GetCamByRoom(room, connection.ConnectionId);
                                     if (activeCamModel != null)
-                                        await this.BlazorVideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
+                                        await this.VideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
                                 }
                             }
                         }
@@ -264,7 +263,7 @@ namespace Oqtane.ChatHubs
                     Content = message,
                     Type = BlazorNotificationType.Danger });
         }
-        private void OnBlazorVideoErrorExecute(string message)
+        private void OnVideoErrorExecute(string message)
         {
             this.ChatHubService.BlazorNotificationsService.AddNotification(
                 new NotificationItem() { 
@@ -282,7 +281,7 @@ namespace Oqtane.ChatHubs
                 {
                     var activeCamModel = ChatHubService.GetCamByRoom(room, ChatHubService.Connection.ConnectionId);
                     if (activeCamModel != null)
-                        await this.BlazorVideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
+                        await this.VideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
                 }
                 else
                 {
@@ -292,19 +291,13 @@ namespace Oqtane.ChatHubs
                         {
                             var activeCamModel = ChatHubService.GetCamByRoom(room, connection.ConnectionId);
                             if (activeCamModel != null)
-                                await this.BlazorVideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
+                                await this.VideoService.RestartStreamTaskIfExists(room.Id.ToString(), activeCamModel.Id.ToString());
                         }
                     }
                 }
             }
         }
 
-        public override List<Resource> Resources => new List<Resource>()
-        {
-            new Resource { ResourceType = ResourceType.Script, Bundle = "jQuery", Url = "https://code.jquery.com/jquery-3.2.1.slim.min.js", Integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", CrossOrigin = "anonymous", Location = ResourceLocation.Body, Declaration = ResourceDeclaration.Local },
-            new Resource { ResourceType = ResourceType.Script, Bundle = "IoButtons", Url = "https://buttons.github.io/buttons.js", CrossOrigin = "anonymous", Location = ResourceLocation.Body, Declaration = ResourceDeclaration.Local },
-            new Resource { ResourceType = ResourceType.Script, Bundle = "Popper", Url = "https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js", Integrity = "sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p", CrossOrigin = "anonymous", Location = ResourceLocation.Body, Declaration = ResourceDeclaration.Local },
-        };
         public async void UpdateUI()
         {
             await InvokeAsync(() =>
@@ -316,7 +309,7 @@ namespace Oqtane.ChatHubs
         {
             this.BlazorDynamicLayoutService.TabItemClickedEvent -= OnTabItemClickedExecute;
             this.BlazorDynamicLayoutService.OnErrorEvent -= OnBlazorDynamicLayoutErrorExecute;
-            this.BlazorVideoService.OnError -= OnBlazorVideoErrorExecute;
+            this.VideoService.OnError -= OnVideoErrorExecute;
             this.BlazorDraggableListService.BlazorDraggableListServiceExtension.OnDropEvent -= OnDraggableListDropEventExecute;
             this.BrowserResizeService.BrowserResizeServiceExtension.OnResize -= BrowserHasResized;
             this.ChatHubService.OnUpdateUI -= (object sender, EventArgs e) => UpdateUI();

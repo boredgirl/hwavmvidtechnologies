@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorColorPicker;
+using Hwavmvid.ColorPicker;
 
 namespace Oqtane.ChatHubs
 {
@@ -16,7 +16,7 @@ namespace Oqtane.ChatHubs
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public HttpClient httpClient { get; set; }
         [Inject] public ISettingService SettingService { get; set; }
-        [Inject] public BlazorColorPickerService BlazorColorPickerService { get; set; }
+        [Inject] public ColorPickerService ColorPickerService { get; set; }
 
         public string backgroundColor { get; set; }
         public string maxUserNameCharacters { get; set; }
@@ -34,7 +34,7 @@ namespace Oqtane.ChatHubs
         {
             try
             {
-                this.BlazorColorPickerService.OnBlazorColorPickerContextColorChangedEvent += this.OnColorPickerChangeExecute;
+                this.ColorPickerService.OnColorPickerContextColorChangedEvent += this.OnColorPickerChangeExecute;
 
                 Dictionary<string, string> settings = await this.SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
                 this.backgroundColor = this.SettingService.GetSetting(settings, "BackgroundColor", "#f0f0f0");
@@ -117,14 +117,14 @@ namespace Oqtane.ChatHubs
             }
         }
 
-        private void OnColorPickerChangeExecute(BlazorColorPickerEvent obj)
+        private void OnColorPickerChangeExecute(ColorPickerEvent obj)
         {
             this.backgroundColor = obj.ContextColor;
         }
 
         public void Dispose()
         {
-            this.BlazorColorPickerService.OnBlazorColorPickerContextColorChangedEvent -= this.OnColorPickerChangeExecute;
+            this.ColorPickerService.OnColorPickerContextColorChangedEvent -= this.OnColorPickerChangeExecute;
         }
 
     }

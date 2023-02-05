@@ -5,7 +5,7 @@
 @inject BlazorPagerService<ChatHubUser> BlazorPagerServiceChatHubUser
 
 @using BlazorFileUpload
-@using BlazorVideo
+@using Hwavmvid.Video
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Models
 @using System.Linq
@@ -133,7 +133,7 @@
 
 @code {
 
-    [Inject] public BlazorVideoService BlazorVideoService { get; set; }
+    [Inject] public VideoService VideoService { get; set; }
     [Inject] public ChatHubService ChatHubService { get; set; }
 
     [Parameter] public ChatHubRoom room { get; set; }

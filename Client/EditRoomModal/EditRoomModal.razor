@@ -3,7 +3,7 @@
 
 @using BlazorFileUpload
 @using BlazorSelect
-@using BlazorColorPicker
+@using Hwavmvid.ColorPicker
 @using BlazorModal
 @using BlazorDevices
 
@@ -28,8 +28,8 @@
             </div>
             <div class="mb-2">
                 <label for="backgroundcolor" class="form-label">Backgroundcolor</label>
-                <BlazorSelectComponent SelectionItems="@BlazorColorPickerSelectionItems" SelectedItem="@BlazorColorPickerActiveType.ToString()" SelectEvent="@BlazorColorPicker_OnSelect"></BlazorSelectComponent>
-                <BlazorColorPickerComponent ContextColor="@backgroundcolor" ColorPickerType="@BlazorColorPickerActiveType"></BlazorColorPickerComponent>
+                <BlazorSelectComponent SelectionItems="@ColorPickerSelectionItems" SelectedItem="@ColorPickerActiveType.ToString()" SelectEvent="@ColorPicker_OnSelect"></BlazorSelectComponent>
+                <ColorPickerComponent ContextColor="@backgroundcolor" ColorPickerType="@ColorPickerActiveType"></ColorPickerComponent>
             </div>
             <div class="mb-2">
                 <label for="type" class="form-label">Type</label>

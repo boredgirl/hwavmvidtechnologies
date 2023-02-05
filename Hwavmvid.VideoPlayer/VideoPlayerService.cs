@@ -4,43 +4,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorVideoPlayer
+namespace Hwavmvid.VideoPlayer
 {
 
-    public class BlazorVideoPlayerService : IAsyncDisposable
+    public class VideoPlayerService : IAsyncDisposable
     {
 
-        public List<BlazorVideoPlayerModel> BlazorVideoPlayerMaps { get; set; } = new List<BlazorVideoPlayerModel>();
+        public List<VideoPlayerModel> VideoPlayerMaps { get; set; } = new List<VideoPlayerModel>();
         public IJSObjectReference Module { get; set; }
         public IJSRuntime JsRuntime { get; set; }
 
-        public DotNetObjectReference<BlazorVideoPlayerServiceExtension> DotNetObjectRef;
-        public BlazorVideoPlayerServiceExtension BlazorVideoServiceExtension;
+        public DotNetObjectReference<VideoPlayerServiceExtension> DotNetObjectRef;
+        public VideoPlayerServiceExtension VideoServiceExtension;
 
         public event Action<string> RunUpdateUI;
         public event Action<string> OnError;
 
-        public BlazorVideoPlayerService(IJSRuntime jsRuntime)
+        public VideoPlayerService(IJSRuntime jsRuntime)
         {
             this.JsRuntime = jsRuntime;
-            this.BlazorVideoServiceExtension = new BlazorVideoPlayerServiceExtension(this);
-            this.DotNetObjectRef = DotNetObjectReference.Create(this.BlazorVideoServiceExtension);
+            this.VideoServiceExtension = new VideoPlayerServiceExtension(this);
+            this.DotNetObjectRef = DotNetObjectReference.Create(this.VideoServiceExtension);
         }
-        public async Task InitBlazorVideoPlayer()
+        public async Task InitVideoPlayer()
         {
             if (this.Module == null)
             {
                 this.Module = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazorvideoplayerjsinterop.js");
             }
         }
-        public async Task InitBlazorVideoMap(string mapid, string parameterId1, string parameterId2)
+        public async Task InitVideoMap(string mapid, string parameterId1, string parameterId2)
         {
             IJSObjectReference jsobjref = await this.Module.InvokeAsync<IJSObjectReference>("initblazorvideoplayer", this.DotNetObjectRef, mapid);
-            var map = this.BlazorVideoPlayerMaps.FirstOrDefault(item => item.MapId == mapid);
+            var map = this.VideoPlayerMaps.FirstOrDefault(item => item.MapId == mapid);
             if (map == null)
             {
-                this.BlazorVideoPlayerMaps.Add(
-                    new BlazorVideoPlayerModel()
+                this.VideoPlayerMaps.Add(
+                    new VideoPlayerModel()
                     {
                         MapId = mapid,
                         ParameterId1 = parameterId1,
@@ -56,23 +56,23 @@ namespace BlazorVideoPlayer
                 map.JsObjRef = jsobjref;
         }
 
-        public BlazorVideoPlayerModel GetBlazorVideoMap(string mapid)
+        public VideoPlayerModel GetVideoMap(string mapid)
         {
-            return this.BlazorVideoPlayerMaps.FirstOrDefault(item => item.MapId == mapid);
+            return this.VideoPlayerMaps.FirstOrDefault(item => item.MapId == mapid);
         }
 
-        public void RemoveBlazorVideoMap(string mapId)
+        public void RemoveVideoMap(string mapId)
         {
-            var obj = this.BlazorVideoPlayerMaps.FirstOrDefault(item => item.MapId == mapId);
+            var obj = this.VideoPlayerMaps.FirstOrDefault(item => item.MapId == mapId);
             if (obj != null)
             {
-                this.BlazorVideoPlayerMaps.Remove(obj);
+                this.VideoPlayerMaps.Remove(obj);
             }
         }
 
         public async Task GetFirstSequence(string mapid)
         {
-            var obj = this.GetBlazorVideoMap(mapid);
+            var obj = this.GetVideoMap(mapid);
             if (obj != null && obj.JsObjRef != null)
             {
                 await obj.JsObjRef.InvokeVoidAsync("initremotelivestream");
@@ -81,7 +81,7 @@ namespace BlazorVideoPlayer
         }
         public async Task StartVideo(string mapid)
         {
-            var obj = this.GetBlazorVideoMap(mapid);
+            var obj = this.GetVideoMap(mapid);
             if (obj != null && obj.JsObjRef != null)
             {
                 obj.VideoOverlay = false;
@@ -94,16 +94,16 @@ namespace BlazorVideoPlayer
 
         public async Task ClearVideoBuffer(string mapid)
         {
-            var obj = this.GetBlazorVideoMap(mapid);
+            var obj = this.GetVideoMap(mapid);
             if (obj != null && obj.JsObjRef != null)
             {
                 await obj.JsObjRef.InvokeVoidAsync("clearvideobufferremotelivestream");
                 this.RunUpdateUI?.Invoke(obj.MapId);
             }
         }
-        public async Task AddVideoSequence(string mapid, BlazorVideoPlayerApiItem apiItem)
+        public async Task AddVideoSequence(string mapid, VideoPlayerApiItem apiItem)
         {
-            var obj = this.GetBlazorVideoMap(mapid);
+            var obj = this.GetVideoMap(mapid);
             if (obj != null && obj.JsObjRef != null)
             {
                 if (obj.SliderValueChanged && !apiItem.SliderValueChanged)
@@ -122,7 +122,7 @@ namespace BlazorVideoPlayer
         }
         public async Task ContinueVideo(string mapid)
         {
-            var obj = this.GetBlazorVideoMap(mapid);
+            var obj = this.GetVideoMap(mapid);
             if (obj != null && obj.JsObjRef != null)
                 await obj.JsObjRef.InvokeVoidAsync("continueremotelivestream");
         }
@@ -133,7 +133,7 @@ namespace BlazorVideoPlayer
         }
         public async ValueTask DisposeAsync()
         {
-            foreach (var map in this.BlazorVideoPlayerMaps)
+            foreach (var map in this.VideoPlayerMaps)
             {
                 if (map.JsObjRef != null)
                 {
@@ -146,22 +146,22 @@ namespace BlazorVideoPlayer
 
     }
 
-    public class BlazorVideoPlayerServiceExtension
+    public class VideoPlayerServiceExtension
     {
 
-        public BlazorVideoPlayerService BlazorVideoPlayerService { get; set; }
+        public VideoPlayerService VideoPlayerService { get; set; }
 
-        public event Action<BlazorVideoPlayerModel> OnGetNextSequence;
+        public event Action<VideoPlayerModel> OnGetNextSequence;
 
-        public BlazorVideoPlayerServiceExtension(BlazorVideoPlayerService blazorVideoService)
+        public VideoPlayerServiceExtension(VideoPlayerService VideoService)
         {
-            this.BlazorVideoPlayerService = blazorVideoService;
+            this.VideoPlayerService = VideoService;
         }
 
         [JSInvokable("GetNextSequence")]
         public async void GetNextSequence(string mapid)
         {
-            var map = this.BlazorVideoPlayerService.GetBlazorVideoMap(mapid);
+            var map = this.VideoPlayerService.GetVideoMap(mapid);
             if (map != null)
             {
                 if (!map.SliderValueChanged)
@@ -172,7 +172,7 @@ namespace BlazorVideoPlayer
         }
         public async void GetNextSequenceOnSliderValueChanged(string mapid)
         {
-            var map = this.BlazorVideoPlayerService.GetBlazorVideoMap(mapid);
+            var map = this.VideoPlayerService.GetVideoMap(mapid);
             if (map != null)
             {
                 if (map.SliderValueChanged)

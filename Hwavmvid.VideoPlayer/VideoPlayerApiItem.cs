@@ -1,6 +1,6 @@
-﻿namespace BlazorVideoPlayer
+﻿namespace Hwavmvid.VideoPlayer
 {
-    public class BlazorVideoPlayerApiItem
+    public class VideoPlayerApiItem
     {
 
         public string Base64DataUri { get; set; }

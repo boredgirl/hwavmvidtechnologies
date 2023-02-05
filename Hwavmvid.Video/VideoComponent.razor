@@ -1,5 +1,5 @@
-﻿@namespace BlazorVideo
-@inherits BlazorVideoComponentBase
+﻿@namespace Hwavmvid.Video
+@inherits VideoComponentBase
 
 <style type="text/css">
 
@@ -41,7 +41,7 @@
 <div class="video-item-@(Id1 + Id2) p-0 p-sm-0 p-md-1 w-100 h-100 position-relative">
 
     @{
-        var map = BlazorVideoService.BlazorVideoMaps.FirstOrDefault(item => item.Id1 == Id1 && item.Id2 == Id2);
+        var map = VideoService.VideoMaps.FirstOrDefault(item => item.Id1 == Id1 && item.Id2 == Id2);
         if (map != null)
         {
             IsVideoOverlay = map.VideoOverlay;
@@ -49,7 +49,7 @@
         }
     }
 
-    @if (Type == BlazorVideoType.LocalLivestream)
+    @if (Type == VideoType.LocalLivestream)
     {
         if (!IsVideoOverlay)
         {
@@ -64,8 +64,8 @@
             <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white">@Viewers <span class="oi oi-camera-slr"></span></button>
             @if (!IsVideoOverlay)
             {
-                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await BlazorVideoService.TakeSnapshot(Id1, Id2, BlazorVideoSnapshotActivatorType.LocalUser)"><span class="oi oi-image"></span><span class="video-item-ellipsis"></span></button>
-                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await BlazorVideoService.StopVideoChat(Id1, Id2)"><span class="oi oi-media-pause"></span><span class="video-item-ellipsis"> [loc.]</span></button>
+                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await VideoService.TakeSnapshot(Id1, Id2, VideoSnapshotActivatorType.LocalUser)"><span class="oi oi-image"></span><span class="video-item-ellipsis"></span></button>
+                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await VideoService.StopVideoChat(Id1, Id2)"><span class="oi oi-media-pause"></span><span class="video-item-ellipsis"> [loc.]</span></button>
             }
         </div>
 
@@ -75,7 +75,7 @@
 
         </div>        
 
-        if (VideoSourceSelectedItem == BlazorVideoSourceType.Websource)
+        if (VideoSourceSelectedItem == VideoSourceType.Websource)
         {
             <div class="p-1 bg-white position-absolute" style="z-index: 2; bottom: 10px; right: 10px">
 
@@ -87,7 +87,7 @@
         <div class="video-item-resize-container-@(Id1 + Id2) position-relative w-100 h-100">
 
             <div class="align-items-center justify-content-center px-3 position-absolute w-100 h-100 @(IsVideoOverlay == true ? "d-flex" : "d-none")" style="z-index: 1;">
-                <button class="btn btn-lg btn-link text-white bg-dark p-sm-2" type="button" @onclick="async () => await BlazorVideoService.StartVideoChat(Id1, Id2)">
+                <button class="btn btn-lg btn-link text-white bg-dark p-sm-2" type="button" @onclick="async () => await VideoService.StartVideoChat(Id1, Id2)">
 
                     ▷ @Name
 
@@ -98,7 +98,7 @@
 
                 <video id="local-livestream-element-id-@(Id1 + Id2)" class="video-item-element mb-0 w-100 h-100" controls></video>
 
-                @if (VideoSourceSelectedItem == BlazorVideoSourceType.Webcams)
+                @if (VideoSourceSelectedItem == VideoSourceType.Webcams)
                 {
                     <div class="position-absolute video-item-devices bg-white p-1" style="z-index: 2; top: 0px; right: 0px;">
                         <div class="input-group" style="padding: 0.125rem 0.25rem 0.1rem 0.25rem">
@@ -118,28 +118,28 @@
         </div>
     }
 
-    @if (Type == BlazorVideoType.RemoteLivestream)
+    @if (Type == VideoType.RemoteLivestream)
     {
 
         <div class="position-absolute" style="z-index: 1; top: 12px; left: 10px;">
             <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white">@Viewers <span class="oi oi-camera-slr"></span></button>
             @if (!IsVideoOverlay)
             {
-                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await BlazorVideoService.TakeSnapshot(Id1, Id2, BlazorVideoSnapshotActivatorType.RemoteUser)"><span class="oi oi-image"></span><span class="video-item-ellipsis"></span></button>
-                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await BlazorVideoService.StopVideoChat(Id1, Id2)"><span class="oi oi-media-pause"></span><span class="video-item-ellipsis"> [rem.]</span></button>
+                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await VideoService.TakeSnapshot(Id1, Id2, VideoSnapshotActivatorType.RemoteUser)"><span class="oi oi-image"></span><span class="video-item-ellipsis"></span></button>
+                <button type="button" class="text-danger p-1 badge bg-white d-inline border border-white" @onclick="async () => await VideoService.StopVideoChat(Id1, Id2)"><span class="oi oi-media-pause"></span><span class="video-item-ellipsis"> [rem.]</span></button>
             }
         </div>
 
         <div class="video-item-resize-container-@(Id1 + Id2) position-relative w-100 h-100">
 
             <div class="align-items-center justify-content-center px-3 position-absolute w-100 h-100 @(IsVideoOverlay == true ? "d-flex" : "d-none")" style="z-index: 1;">
-                <button class="btn btn-lg btn-link text-white bg-dark p-sm-2" type="button" @onclick="async () => await BlazorVideoService.StartVideoChat(Id1, Id2)">
+                <button class="btn btn-lg btn-link text-white bg-dark p-sm-2" type="button" @onclick="async () => await VideoService.StartVideoChat(Id1, Id2)">
 
-                    @if (Status == BlazorVideoStatusType.Live)
+                    @if (Status == VideoStatusType.Live)
                     {
                         <span class="oi oi-media-play text-danger"></span> @Name
                     }
-                    @if (Status == BlazorVideoStatusType.Offline)
+                    @if (Status == VideoStatusType.Offline)
                     {
                         <span class="oi oi-media-pause text-info"></span> @Name
                     }

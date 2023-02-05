@@ -1,4 +1,4 @@
-﻿@namespace BlazorAccordion
+﻿@namespace Hwavmvid.Accordion
 
 <CascadingValue Value="this">
 
@@ -7,13 +7,13 @@
         <div class="card-header" id="headline-@this.Id.ToString()">
             <h4 class="mb-0">
                 <button class="btn btn-link" id="headline-@this.Id.ToString()" data-toggle="collapse" data-target="#collapse-@this.Id.ToString()" aria-expanded="true" aria-controls="collapse-@this.Id.ToString()">
-                    @BlazorAccordionHeader
+                    @AccordionHeader
                 </button>
             </h4>
 
             <div id="collapse-@this.Id.ToString()" class="collapse show" aria-labelledby="headline-@this.Id.ToString()" data-parent="#@AccordionContainer.Id">
                 <div class="card-body">
-                    @BlazorAccordionBody
+                    @AccordionBody
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
 
 @code {
 
-    [CascadingParameter] public BlazorAccordionContainer AccordionContainer { get; set; }
+    [CascadingParameter] public AccordionContainer AccordionContainer { get; set; }
 
-    [Parameter] public RenderFragment BlazorAccordionHeader { get; set; }
-    [Parameter] public RenderFragment BlazorAccordionBody { get; set; }
+    [Parameter] public RenderFragment AccordionHeader { get; set; }
+    [Parameter] public RenderFragment AccordionBody { get; set; }
 
     public Guid Id { get; set; }
 

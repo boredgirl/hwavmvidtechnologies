@@ -4,10 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>BlazorAccordion</AssemblyName>
+    <AssemblyName>Hwavmvid.Accordion</AssemblyName>
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
-    <Product>BlazorAccordion</Product>
+    <Product>Hwavmvid.Accordion</Product>
     <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>

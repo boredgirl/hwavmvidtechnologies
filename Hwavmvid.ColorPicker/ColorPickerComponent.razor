@@ -1,14 +1,14 @@
-﻿@namespace BlazorColorPicker
-@inherits BlazorColorPickerComponentBase
+﻿@namespace Hwavmvid.ColorPicker
+@inherits ColorPickerComponentBase
 
 <div class="blazor-color-picker">
 
-    @if (ColorPickerType == BlazorColorPickerType.HTML5ColorPicker)
+    @if (ColorPickerType == ColorPickerType.HTML5ColorPicker)
     {
         <input type="color" value="@ContextColor" @onchange="@((ChangeEventArgs e) => ContextColor_OnChangeAsync(e.Value.ToString()))" class="w-100" />
     }
 
-    @if (ColorPickerType == BlazorColorPickerType.CustomColorPicker)
+    @if (ColorPickerType == ColorPickerType.CustomColorPicker)
     {
         <div class="custom-color-picker">
 

@@ -20,8 +20,8 @@ using Oqtane.ChatHubs.Enums;
 using Oqtane.ChatHubs.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-using BlazorVideo;
-using BlazorVideoPlayer;
+using Hwavmvid.Video;
+using Hwavmvid.VideoPlayer;
 using Microsoft.Extensions.Caching.Memory;
 using FFMpegCore;
 using FFMpegCore.Enums;
@@ -820,7 +820,7 @@ namespace Oqtane.ChatHubs.Hubs
             }
         }
         [AllowAnonymous]
-        public async Task<BlazorVideoPlayerApiItem> DowloadDataUri(string roomId, string camId, string lastSequenceId, int sliderCurrentValue, bool sliderValueChanged)
+        public async Task<VideoPlayerApiItem> DowloadDataUri(string roomId, string camId, string lastSequenceId, int sliderCurrentValue, bool sliderValueChanged)
         {
             try
             {
@@ -828,7 +828,7 @@ namespace Oqtane.ChatHubs.Hubs
                 var contextUser = await this.GetChatHubUserAsync();
                 var contextCam = await this.chatHubRepository.GetCamById(Convert.ToInt32(camId));
                 ChatHubCamSequence camSequence = null;
-                BlazorVideoPlayerApiItem apiItem = new BlazorVideoPlayerApiItem();
+                VideoPlayerApiItem apiItem = new VideoPlayerApiItem();
 
                 if (contextCam != null)
                 {
@@ -905,7 +905,7 @@ namespace Oqtane.ChatHubs.Hubs
         }
 
         [AllowAnonymous]
-        public async Task UploadSnapshotUri(string imageUri, int roomId, BlazorVideoSnapshotActivatorType snapshotActivatorType)
+        public async Task UploadSnapshotUri(string imageUri, int roomId, VideoSnapshotActivatorType snapshotActivatorType)
         {            
 
             var contextUser = await this.GetChatHubUserAsync();
@@ -952,7 +952,7 @@ namespace Oqtane.ChatHubs.Hubs
                 chatHubPhoto = this.chatHubRepository.AddPhoto(chatHubPhoto);
                 chatHubMessage = this.chatHubService.CreateChatHubMessageClientModel(chatHubMessage, contextUser, new List<ChatHubPhoto>() { chatHubPhoto});
 
-                if(snapshotActivatorType == BlazorVideoSnapshotActivatorType.LocalUser || snapshotActivatorType == BlazorVideoSnapshotActivatorType.RemoteUser)
+                if(snapshotActivatorType == VideoSnapshotActivatorType.LocalUser || snapshotActivatorType == VideoSnapshotActivatorType.RemoteUser)
                     await Clients.Group(contextRoom.Id.ToString()).SendAsync("AddMessage", chatHubMessage);
 
                 contextRoom.SnapshotUrl = chatHubPhoto.Source;

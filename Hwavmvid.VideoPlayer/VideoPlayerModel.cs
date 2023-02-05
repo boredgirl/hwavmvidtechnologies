@@ -1,9 +1,9 @@
 ﻿using Microsoft.JSInterop;
 using System;
 
-namespace BlazorVideoPlayer
+namespace Hwavmvid.VideoPlayer
 {
-    public class BlazorVideoPlayerModel
+    public class VideoPlayerModel
     {
 
         public string MapId { get; set; }

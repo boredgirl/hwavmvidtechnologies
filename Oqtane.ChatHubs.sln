@@ -26,15 +26,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorModal", "BlazorModal\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSelect", "BlazorSelect\BlazorSelect.csproj", "{965CF4D8-EB3C-4831-884E-080C93926BE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAccordion", "BlazorAccordion\BlazorAccordion.csproj", "{5E931E10-F983-4CAB-90BA-CB3F26DCD9CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Accordion", "Hwavmvid.Accordion\Hwavmvid.Accordion.csproj", "{5E931E10-F983-4CAB-90BA-CB3F26DCD9CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTabMenu", "BlazorTabMenu\BlazorTabMenu.csproj", "{5BC5FE1B-C3AF-43AC-9296-F97532B1CFB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDropdown", "BlazorDropdown\BlazorDropdown.csproj", "{42EF6326-4156-4157-A211-CE1953827D58}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorColorPicker", "BlazorColorPicker\BlazorColorPicker.csproj", "{7ACD450D-64F4-4001-8180-98CA4B951C5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.ColorPicker", "Hwavmvid.ColorPicker\Hwavmvid.ColorPicker.csproj", "{7ACD450D-64F4-4001-8180-98CA4B951C5A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorVideo", "BlazorVideo\BlazorVideo.csproj", "{022C1DAB-D2C5-4410-985A-A922A4A3D200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Video", "Hwavmvid.Video\Hwavmvid.Video.csproj", "{022C1DAB-D2C5-4410-985A-A922A4A3D200}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBrowserResize", "BlazorBrowserResize\BlazorBrowserResize.csproj", "{31D8888E-C4D2-41C3-AFF9-CEAF4C2F776B}"
 EndProject
@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorNotifications", "Blaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDynamicLayout", "BlazorDynamicLayout\BlazorDynamicLayout.csproj", "{00CC9D75-924A-4774-825A-C2E55A63FCC4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorVideoPlayer", "BlazorVideoPlayer\BlazorVideoPlayer.csproj", "{13189BED-8F29-4740-9673-B1ED1BDC5A99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.VideoPlayer", "Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj", "{13189BED-8F29-4740-9673-B1ED1BDC5A99}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlider", "BlazorSlider\BlazorSlider.csproj", "{9FD56C83-318A-40E8-BF49-E05994A56A02}"
 EndProject

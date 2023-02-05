@@ -8,7 +8,7 @@
 @using BlazorAlerts
 @using BlazorWindows
 @using BlazorTabs
-@using BlazorVideo
+@using Hwavmvid.Video
 @using Oqtane.ChatHubs.Models
 @using Oqtane.ChatHubs.Enums
 @using BlazorDropdown
@@ -132,12 +132,12 @@
                                             <div class="d-flex flex-wrap flex-md-nowrap w-100 h-100 position-relative">
 
                                                 <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
-                                                    <BlazorVideoComponent Id1="@context.Id.ToString()"
+                                                    <VideoComponent Id1="@context.Id.ToString()"
                                                                             Id2="@activeCamModel.Id.ToString()" 
-                                                                            Type="@BlazorVideoType.LocalLivestream" 
+                                                                            Type="@VideoType.LocalLivestream" 
                                                                             BackgroundColor="@context.BackgroundColor" 
                                                                             Name="@context.Title" 
-                                                                            Status="@(context.Creator.Connections.Any(c => context.Cams.Any(cam => cam.ChatHubConnectionId == c.Id && cam.Status == ChatHubCamStatus.Broadcasting.ToString())) ? BlazorVideoStatusType.Live : BlazorVideoStatusType.Offline)" 
+                                                                            Status="@(context.Creator.Connections.Any(c => context.Cams.Any(cam => cam.ChatHubConnectionId == c.Id && cam.Status == ChatHubCamStatus.Broadcasting.ToString())) ? VideoStatusType.Live : VideoStatusType.Offline)" 
                                                                             Viewers="@context.Viewers.Count()" 
                                                                             Framerate="@framerate" 
                                                                             VideoBitsPerSecond="@videoBitsPerSecond" 
@@ -147,7 +147,7 @@
                                                                             MicrophoneDefaultDeviceId="@(microphoneDefaultDevice?.DefaultDeviceId ?? string.Empty)"
                                                                             WebcamDefaultDeviceId="@(webcamDefaultDevice?.DefaultDeviceId ?? string.Empty)"
                                                                             >
-                                                    </BlazorVideoComponent>
+                                                    </VideoComponent>
 
                                                     <AuthorizeView Context="authorizedcontext">
                                                         <Authorized>
@@ -205,19 +205,19 @@
                                                         <div class="w-100 h-100 postion-relative" style="min-width: 320px !important;">
 
                                                             @{
-                                                                BlazorVideoStatusType status = BlazorVideoStatusType.Offline;
+                                                                VideoStatusType status = VideoStatusType.Offline;
                                                                 var broadcastingCams = connection.Cams.Where(cam => cam.Status == ChatHubCamStatus.Broadcasting.ToString()).ToList();
                                                             }
                                                             @if (context.Cams.Any(cam => broadcastingCams.Any(item => cam.Id == item.Id)))
                                                             {
-                                                                status = BlazorVideoStatusType.Live;
+                                                                status = VideoStatusType.Live;
                                                             }
                                                             @{
                                                                 var activeCamModel = ChatHubService.GetCamByRoom(context, connection.ConnectionId);
                                                             }
                                                             @if (activeCamModel != null)
                                                             {
-                                                                <BlazorVideoComponent Id1="@context.Id.ToString()" Id2="@activeCamModel.Id.ToString()" Type="@BlazorVideoType.RemoteLivestream" BackgroundColor="@context.BackgroundColor" Name="@context.Title" Status="@status" Viewers="@context.Viewers.Count()" Framerate="@framerate" VideoBitsPerSecond="@videoBitsPerSecond" AudioBitsPerSecond="@audioBitsPerSecond" VideoSegmentsLength="@videoSegmentsLength"></BlazorVideoComponent>
+                                                                <VideoComponent Id1="@context.Id.ToString()" Id2="@activeCamModel.Id.ToString()" Type="@VideoType.RemoteLivestream" BackgroundColor="@context.BackgroundColor" Name="@context.Title" Status="@status" Viewers="@context.Viewers.Count()" Framerate="@framerate" VideoBitsPerSecond="@videoBitsPerSecond" AudioBitsPerSecond="@audioBitsPerSecond" VideoSegmentsLength="@videoSegmentsLength"></VideoComponent>
                                                             }
                                                             else if (activeCamModel == null)
                                                             {
@@ -356,10 +356,11 @@
 
     public override List<Resource> Resources => new List<Resource>()
     {
+        new Resource { ResourceType = ResourceType.Script, Url = "https://code.jquery.com/jquery-3.6.3.slim.min.js", Integrity = "sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=", CrossOrigin = "anonymous", Level = ResourceLevel.Module },
+        new Resource { ResourceType = ResourceType.Script, Bundle = "IoButtons", Url = "https://buttons.github.io/buttons.js", CrossOrigin = "anonymous", Location = ResourceLocation.Body, Level = ResourceLevel.Module },
+        new Resource { ResourceType = ResourceType.Script, Bundle = "Popper", Url = "https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js", Integrity = "sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p", CrossOrigin = "anonymous", Location = ResourceLocation.Body, Level = ResourceLevel.Module },
+
 		// bing maps script tag
         new Resource { ResourceType = ResourceType.Script, Url = string.Concat("https://www.bing.com/api/maps/mapcontrol?key=", bingMapsApiKey), Level = ResourceLevel.Module },
-
-        // jquery slim minified
-        new Resource { ResourceType = ResourceType.Script, Url = "https://code.jquery.com/jquery-3.6.3.slim.min.js", Integrity = "sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=", CrossOrigin = "anonymous", Level = ResourceLevel.Module },
 	};
 }

@@ -53,7 +53,7 @@
     <ProjectReference Include="..\BlazorSlider\BlazorSlider.csproj" />
     <ProjectReference Include="..\BlazorAlerts\BlazorAlerts.csproj" />
     <ProjectReference Include="..\BlazorBrowserResize\BlazorBrowserResize.csproj" />
-    <ProjectReference Include="..\BlazorColorPicker\BlazorColorPicker.csproj" />
+    <ProjectReference Include="..\Hwavmvid.ColorPicker\Hwavmvid.ColorPicker.csproj" />
     <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
     <ProjectReference Include="..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
     <ProjectReference Include="..\BlazorFileUpload\BlazorFileUpload.csproj" />
@@ -61,8 +61,8 @@
     <ProjectReference Include="..\BlazorNotifications\BlazorNotifications.csproj" />
     <ProjectReference Include="..\BlazorPager\BlazorPager.csproj" />
     <ProjectReference Include="..\BlazorTabs\BlazorTabs.csproj" />
-    <ProjectReference Include="..\BlazorVideo\BlazorVideo.csproj" />
-    <ProjectReference Include="..\BlazorVideoPlayer\BlazorVideoPlayer.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Video\Hwavmvid.Video.csproj" />
+    <ProjectReference Include="..\Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj" />
     <ProjectReference Include="..\BlazorWindows\BlazorWindows.csproj" />
     <ProjectReference Include="..\BlazorDevices\BlazorDevices.csproj" />
     <ProjectReference Include="..\BlazorDownload\BlazorDownload.csproj" />

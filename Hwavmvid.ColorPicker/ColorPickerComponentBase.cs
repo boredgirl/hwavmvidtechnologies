@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace BlazorColorPicker
+namespace Hwavmvid.ColorPicker
 {
-    public class BlazorColorPickerComponentBase : ComponentBase
+    public class ColorPickerComponentBase : ComponentBase
     {
 
-        [Inject] public BlazorColorPickerService BlazorColorPickerService { get; set; }
+        [Inject] public ColorPickerService ColorPickerService { get; set; }
 
         [Parameter] public string ContextColor { get; set; }
-        [Parameter] public BlazorColorPickerType ColorPickerType { get; set; }
+        [Parameter] public ColorPickerType ColorPickerType { get; set; }
 
         [Parameter]
         public Dictionary<string, dynamic> ColorSet { get; set; } = new Dictionary<string, dynamic>()
@@ -46,7 +46,7 @@ namespace BlazorColorPicker
 
         protected override Task OnInitializedAsync()
         {
-            if(ColorPickerType == BlazorColorPickerType.CustomColorPicker && !string.IsNullOrEmpty(this.ColorSet.FirstOrDefault().Value?.itemcolor))
+            if(ColorPickerType == ColorPickerType.CustomColorPicker && !string.IsNullOrEmpty(this.ColorSet.FirstOrDefault().Value?.itemcolor))
             {
                 this.ContextColor = this.ColorSet.FirstOrDefault().Value.itemcolor;
             }
@@ -57,7 +57,7 @@ namespace BlazorColorPicker
         public void ContextColor_OnChangeAsync(string color)
         {
             this.ContextColor = color;
-            this.BlazorColorPickerService.InvokeColorPickerEvent(color);
+            this.ColorPickerService.InvokeColorPickerEvent(color);
         }
 
         public void ColorSetItem_OnClicked(KeyValuePair<string, dynamic> clickedkvpair)
@@ -69,7 +69,7 @@ namespace BlazorColorPicker
 
             this.ColorSet[clickedkvpair.Key] = new { itemchecked = true, itemcolor = clickedkvpair.Value.itemcolor };
             this.ContextColor = clickedkvpair.Value.itemcolor;
-            this.BlazorColorPickerService.InvokeColorPickerEvent(clickedkvpair.Value.itemcolor);
+            this.ColorPickerService.InvokeColorPickerEvent(clickedkvpair.Value.itemcolor);
             this.StateHasChanged();
         }
 

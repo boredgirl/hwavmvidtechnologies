@@ -1,5 +1,5 @@
 ﻿using BlazorAlerts;
-using BlazorColorPicker;
+using Hwavmvid.ColorPicker;
 using BlazorModal;
 using BlazorSelect;
 using BlazorNotifications;
@@ -24,10 +24,9 @@ namespace Oqtane.ChatHubs
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public HttpClient HttpClient { get; set; }
-        [Inject] public SiteState SiteState { get; set; }
         [Inject] public ChatHubService ChatHubService { get; set; }
         [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
-        [Inject] public BlazorColorPickerService BlazorColorPickerService { get; set; }
+        [Inject] public ColorPickerService ColorPickerService { get; set; }
         [Inject] public BlazorModalService BlazorModalService { get; set; }
         [Inject] public BlazorNotificationsService BlazorNotificationService { get; set; }
 
@@ -37,9 +36,9 @@ namespace Oqtane.ChatHubs
         protected readonly string FileUploadInputFileElementId = "EditComponentFileUploadInputFileContainer";
 
         public HashSet<string> SelectionItems { get; set; } = new HashSet<string>();
-        public HashSet<string> BlazorColorPickerSelectionItems { get; set; } = new HashSet<string>();
+        public HashSet<string> ColorPickerSelectionItems { get; set; } = new HashSet<string>();
 
-        public BlazorColorPickerType BlazorColorPickerActiveType { get; set; }
+        public ColorPickerType ColorPickerActiveType { get; set; }
 
         public int roomId = -1;
         public string title;
@@ -60,9 +59,9 @@ namespace Oqtane.ChatHubs
         {
             try
             {
-                this.BlazorColorPickerSelectionItems.Add(BlazorColorPickerType.HTML5ColorPicker.ToString());
-                this.BlazorColorPickerSelectionItems.Add(BlazorColorPickerType.CustomColorPicker.ToString());
-                this.BlazorColorPickerActiveType = BlazorColorPickerType.CustomColorPicker;
+                this.ColorPickerSelectionItems.Add(ColorPickerType.HTML5ColorPicker.ToString());
+                this.ColorPickerSelectionItems.Add(ColorPickerType.CustomColorPicker.ToString());
+                this.ColorPickerActiveType = ColorPickerType.CustomColorPicker;
 
                 this.SelectionItems.Add(ChatHubRoomType.Public.ToString());
                 this.SelectionItems.Add(ChatHubRoomType.Protected.ToString());
@@ -70,7 +69,7 @@ namespace Oqtane.ChatHubs
 
                 this.type = ChatHubRoomType.Public.ToString();
 
-                this.BlazorColorPickerService.OnBlazorColorPickerContextColorChangedEvent += OnBlazorColorPickerContextColorChangedExecute;
+                this.ColorPickerService.OnColorPickerContextColorChangedEvent += OnColorPickerContextColorChangedExecute;
                 this.ChatHubService.OnUpdateUI += (object sender, EventArgs e) => UpdateUIStateHasChanged();
             }
             catch (Exception ex)
@@ -218,12 +217,12 @@ namespace Oqtane.ChatHubs
             this.type = e.SelectedItem;
             this.UpdateUIStateHasChanged();
         }
-        public void BlazorColorPicker_OnSelect(BlazorSelectEvent e)
+        public void ColorPicker_OnSelect(BlazorSelectEvent e)
         {
-            this.BlazorColorPickerActiveType = (BlazorColorPickerType)Enum.Parse(typeof(BlazorColorPickerType), e.SelectedItem, true);
+            this.ColorPickerActiveType = (ColorPickerType)Enum.Parse(typeof(ColorPickerType), e.SelectedItem, true);
             this.UpdateUIStateHasChanged();
         }
-        private void OnBlazorColorPickerContextColorChangedExecute(BlazorColorPickerEvent obj)
+        private void OnColorPickerContextColorChangedExecute(ColorPickerEvent obj)
         {
             this.backgroundcolor = obj.ContextColor;
             this.UpdateUIStateHasChanged();
@@ -238,7 +237,7 @@ namespace Oqtane.ChatHubs
         }
         public void Dispose()
         {
-            this.BlazorColorPickerService.OnBlazorColorPickerContextColorChangedEvent -= OnBlazorColorPickerContextColorChangedExecute;
+            this.ColorPickerService.OnColorPickerContextColorChangedEvent -= OnColorPickerContextColorChangedExecute;
             this.ChatHubService.OnUpdateUI -= (object sender, EventArgs e) => UpdateUIStateHasChanged();
         }
 

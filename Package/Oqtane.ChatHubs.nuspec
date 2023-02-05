@@ -57,8 +57,8 @@
 
 		<file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.dll" target="lib\net6.0" />
 		<file src="..\BlazorAlerts\bin\Release\net6.0\BlazorAlerts.pdb" target="lib\net6.0" />
-		<file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.dll" target="lib\net6.0" />
-		<file src="..\BlazorAccordion\bin\Release\net6.0\BlazorAccordion.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Accordion\bin\Release\net6.0\Hwavmvid.Accordion.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Accordion\bin\Release\net6.0\Hwavmvid.Accordion.pdb" target="lib\net6.0" />
 		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.dll" target="lib\net6.0" />
 		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.pdb" target="lib\net6.0" />
 		<file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.dll" target="lib\net6.0" />
@@ -73,12 +73,12 @@
 		<file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.pdb" target="lib\net6.0" />
 		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.dll" target="lib\net6.0" />
 		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.pdb" target="lib\net6.0" />
-		<file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.dll" target="lib\net6.0" />
-		<file src="..\BlazorColorPicker\bin\Release\net6.0\BlazorColorPicker.pdb" target="lib\net6.0" />
-		<file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.dll" target="lib\net6.0" />
-		<file src="..\BlazorVideo\bin\Release\net6.0\BlazorVideo.pdb" target="lib\net6.0" />
-		<file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.dll" target="lib\net6.0" />
-		<file src="..\BlazorVideoPlayer\bin\Release\net6.0\BlazorVideoPlayer.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.ColorPicker\bin\Release\net6.0\Hwavmvid.ColorPicker.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.ColorPicker\bin\Release\net6.0\Hwavmvid.ColorPicker.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Video\bin\Release\net6.0\Hwavmvid.Video.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Video\bin\Release\net6.0\Hwavmvid.Video.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.VideoPlayer\bin\Release\net6.0\Hwavmvid.VideoPlayer.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.VideoPlayer\bin\Release\net6.0\Hwavmvid.VideoPlayer.pdb" target="lib\net6.0" />
 		<file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.dll" target="lib\net6.0" />
 		<file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.pdb" target="lib\net6.0" />
 		<file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.dll" target="lib\net6.0" />
@@ -123,18 +123,18 @@
 		<file src="..\Hwavmvid.Motorsport.Shared\bin\Release\net6.0\Hwavmvid.Motorsport.Shared.pdb" target="lib\net6.0" />
 
 
-		<file src="..\BlazorAccordion\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Accordion\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorAlerts\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorBrowserResize\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorColorPicker\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.ColorPicker\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDraggableList\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDropdown\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorFileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorModal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorPager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorSelect\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorVideo\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorVideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Video\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.VideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorWindows\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorNotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDynamicLayout\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />

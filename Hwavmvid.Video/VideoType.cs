@@ -1,6 +1,6 @@
-﻿namespace BlazorVideo
+﻿namespace Hwavmvid.Video
 {
-    public enum BlazorVideoType
+    public enum VideoType
     {
 
         LocalLivestream,

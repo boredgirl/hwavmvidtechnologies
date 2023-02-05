@@ -21,10 +21,10 @@ using Oqtane.ChatHubs.Extensions;
 using Oqtane.ChatHubs.Enums;
 using BlazorAlerts;
 using BlazorDraggableList;
-using BlazorVideo;
+using Hwavmvid.Video;
 using BlazorBrowserResize;
 using BlazorNotifications;
-using BlazorVideoPlayer;
+using Hwavmvid.VideoPlayer;
 using BlazorDevices;
 using System.Text.Json;
 using Hwavmvid.Jsapigeolocation;
@@ -43,8 +43,8 @@ namespace Oqtane.ChatHubs.Services
         public BlazorAlertsService BlazorAlertsService { get; set; }
         public BlazorDraggableListService BlazorDraggableListService { get; set; }
         public BlazorBrowserResizeService BrowserResizeService { get; set; }
-        public BlazorVideoService BlazorVideoService { get; set; }
-        public BlazorVideoPlayerService BlazorVideoPlayerService { get; set; }
+        public VideoService VideoService { get; set; }
+        public VideoPlayerService VideoPlayerService { get; set; }
         public BlazorNotificationsService BlazorNotificationsService { get; set; }
         public BlazorDevicesService BlazorDevicesService { get; set; }
         public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
@@ -92,7 +92,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, BlazorVideoService blazorVideoService, BlazorVideoPlayerService blazorVideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -102,19 +102,19 @@ namespace Oqtane.ChatHubs.Services
             this.BlazorAlertsService = blazorAlertsService;
             this.BlazorDraggableListService = blazorDraggableListService;
             this.BrowserResizeService = browserResizeService;
-            this.BlazorVideoService = blazorVideoService;
-            this.BlazorVideoPlayerService = blazorVideoPlayerService;
+            this.VideoService = VideoService;
+            this.VideoPlayerService = VideoPlayerService;
             this.BlazorNotificationsService = blazorNotificationService;
             this.BlazorDevicesService = blazorDevicesService;
             this.Jsapigeolocationservice = jsapigeolocationservice;
             this.Jsapibingmapservice = jsapibingmapservice;
 
-            this.BlazorVideoService.StartVideoEvent += async (BlazorVideoModel model) => await this.StartCam(model);
-            this.BlazorVideoService.StopVideoEvent += async (BlazorVideoModel model) => await this.StopCam(model);
-            this.BlazorVideoService.BlazorVideoServiceExtension.OnDataAvailableEventHandler += async (string data, string id1, string id2) => await OnDataAvailableEventHandlerExecute(data, id1, id2);
-            this.BlazorVideoService.TookSnapshotEvent += async (string imageUri, string roomId, string camId, BlazorVideoSnapshotActivatorType snapshotActivatorType) => await this.TookSnapshotEventExecute(imageUri, roomId, camId, snapshotActivatorType);
+            this.VideoService.StartVideoEvent += async (VideoModel model) => await this.StartCam(model);
+            this.VideoService.StopVideoEvent += async (VideoModel model) => await this.StopCam(model);
+            this.VideoService.VideoServiceExtension.OnDataAvailableEventHandler += async (string data, string id1, string id2) => await OnDataAvailableEventHandlerExecute(data, id1, id2);
+            this.VideoService.TookSnapshotEvent += async (string imageUri, string roomId, string camId, VideoSnapshotActivatorType snapshotActivatorType) => await this.TookSnapshotEventExecute(imageUri, roomId, camId, snapshotActivatorType);
 
-            this.BlazorVideoPlayerService.BlazorVideoServiceExtension.OnGetNextSequence += async (BlazorVideoPlayerModel item) => await OnGetNextSequenceExecute(item);
+            this.VideoPlayerService.VideoServiceExtension.OnGetNextSequence += async (VideoPlayerModel item) => await OnGetNextSequenceExecute(item);
 
             this.BlazorAlertsService.OnAlertConfirmed += OnAlertConfirmedExecute;
 
@@ -296,14 +296,14 @@ namespace Oqtane.ChatHubs.Services
         {
             try
             {
-                await this.BlazorVideoService.AppendBufferRemoteLivestream(dataURI, id, camId);
+                await this.VideoService.AppendBufferRemoteLivestream(dataURI, id, camId);
             }
             catch (Exception ex)
             {
                 this.HandleException(ex);
             }
         }
-        public async Task TookSnapshotEventExecute(string imageUri, string roomId, string camId, BlazorVideoSnapshotActivatorType snapshotActivatorType)
+        public async Task TookSnapshotEventExecute(string imageUri, string roomId, string camId, VideoSnapshotActivatorType snapshotActivatorType)
         {
             await this.Connection.InvokeAsync("UploadSnapshotUri", imageUri, Convert.ToInt32(roomId), snapshotActivatorType).ContinueWith((task) =>
             {
@@ -486,7 +486,7 @@ namespace Oqtane.ChatHubs.Services
                 }
             });
         }
-        public async Task StartCam(BlazorVideoModel model)
+        public async Task StartCam(VideoModel model)
         {
             await this.Connection.InvokeAsync("StartCam", Convert.ToInt32(model.Id1), Convert.ToInt32(model.Id2)).ContinueWith((task) =>
             {
@@ -497,7 +497,7 @@ namespace Oqtane.ChatHubs.Services
                 }
             });            
         }
-        public async Task StopCam(BlazorVideoModel model)
+        public async Task StopCam(VideoModel model)
         {
             await this.Connection.InvokeAsync("StopCam", Convert.ToInt32(model.Id1), Convert.ToInt32(model.Id2)).ContinueWith((task) =>
             {
@@ -837,18 +837,18 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        private async Task OnGetNextSequenceExecute(BlazorVideoPlayerModel obj)
+        private async Task OnGetNextSequenceExecute(VideoPlayerModel obj)
         {
-            await this.Connection.InvokeAsync<BlazorVideoPlayerApiItem>("DowloadDataUri", obj.ParameterId1, obj.ParameterId2, obj.LastSequenceId, obj.SliderCurrentValue, obj.SliderValueChanged).ContinueWith(async (task) =>
+            await this.Connection.InvokeAsync<VideoPlayerApiItem>("DowloadDataUri", obj.ParameterId1, obj.ParameterId2, obj.LastSequenceId, obj.SliderCurrentValue, obj.SliderValueChanged).ContinueWith(async (task) =>
             {
                 if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
                 {
                     if (this.TryHandleException(task))
                         return;
 
-                    BlazorVideoPlayerApiItem apiItem = task.Result;
+                    VideoPlayerApiItem apiItem = task.Result;
                     if (apiItem != null)
-                        await this.BlazorVideoPlayerService.AddVideoSequence(obj.MapId, apiItem);
+                        await this.VideoPlayerService.AddVideoSequence(obj.MapId, apiItem);
                 }
             });
         }       
@@ -1037,12 +1037,12 @@ namespace Oqtane.ChatHubs.Services
         }
         public void Dispose()
         {
-            this.BlazorVideoService.StartVideoEvent -= async (BlazorVideoModel model) => await this.StartCam(model);
-            this.BlazorVideoService.StopVideoEvent -= async (BlazorVideoModel model) => await this.StopCam(model);
-            this.BlazorVideoService.BlazorVideoServiceExtension.OnDataAvailableEventHandler -= async (string data, string id1, string id2) => await OnDataAvailableEventHandlerExecute(data, id1, id2);
-            this.BlazorVideoService.TookSnapshotEvent -= async (string imageUri, string roomId, string camId, BlazorVideoSnapshotActivatorType snapshotActivatorType) => await this.TookSnapshotEventExecute(imageUri, roomId, camId, snapshotActivatorType);
+            this.VideoService.StartVideoEvent -= async (VideoModel model) => await this.StartCam(model);
+            this.VideoService.StopVideoEvent -= async (VideoModel model) => await this.StopCam(model);
+            this.VideoService.VideoServiceExtension.OnDataAvailableEventHandler -= async (string data, string id1, string id2) => await OnDataAvailableEventHandlerExecute(data, id1, id2);
+            this.VideoService.TookSnapshotEvent -= async (string imageUri, string roomId, string camId, VideoSnapshotActivatorType snapshotActivatorType) => await this.TookSnapshotEventExecute(imageUri, roomId, camId, snapshotActivatorType);
 
-            this.BlazorVideoPlayerService.BlazorVideoServiceExtension.OnGetNextSequence -= async (BlazorVideoPlayerModel item) => await OnGetNextSequenceExecute(item);
+            this.VideoPlayerService.VideoServiceExtension.OnGetNextSequence -= async (VideoPlayerModel item) => await OnGetNextSequenceExecute(item);
 
             this.BlazorAlertsService.OnAlertConfirmed -= OnAlertConfirmedExecute;
 

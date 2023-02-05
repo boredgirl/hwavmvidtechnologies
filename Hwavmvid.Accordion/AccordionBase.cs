@@ -1,19 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
-namespace BlazorAccordion
+namespace Hwavmvid.Accordion
 {
-    public class BlazorAccordionBase : ComponentBase
+    public class AccordionBase : ComponentBase
     {
 
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public string Id { get; set; }
 
-        public IList<BlazorAccordionItem> AccordionItems { get; set; } = new List<BlazorAccordionItem>();
+        public IList<AccordionItem> AccordionItems { get; set; } = new List<AccordionItem>();
 
-        public BlazorAccordionItem ActiveAccordionItem { get; set; }
+        public AccordionItem ActiveAccordionItem { get; set; }
 
-        public void AddAccordionItem(BlazorAccordionItem item)
+        public void AddAccordionItem(AccordionItem item)
         {
             if(!this.AccordionItems.Contains(item))
             {
