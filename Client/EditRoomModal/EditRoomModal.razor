@@ -5,7 +5,7 @@
 @using BlazorSelect
 @using Hwavmvid.ColorPicker
 @using BlazorModal
-@using BlazorDevices
+@using Hwavmvid.Devices
 
 <BlazorModalComponent ElementId="@EditRoomModalElementId">
 
@@ -56,7 +56,7 @@
                     MicrophoneDefaultDevice != null && 
                     WebcamDefaultDevice != null)
                 {
-                    <BlazorDevicesComponent Id="@this.roomId.ToString()" AudioDefaultDevice="@AudioDefaultDevice" MicrophoneDefaultDevice="@MicrophoneDefaultDevice" WebcamDefaultDevice="@WebcamDefaultDevice"></BlazorDevicesComponent>
+                    <DevicesComponent Id="@this.roomId.ToString()" AudioDefaultDevice="@AudioDefaultDevice" MicrophoneDefaultDevice="@MicrophoneDefaultDevice" WebcamDefaultDevice="@WebcamDefaultDevice"></DevicesComponent>
                 }
             </div>
 

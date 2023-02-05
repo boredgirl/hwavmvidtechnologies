@@ -46,7 +46,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.VideoPlayer", "Hwa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlider", "BlazorSlider\BlazorSlider.csproj", "{9FD56C83-318A-40E8-BF49-E05994A56A02}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDevices", "BlazorDevices\BlazorDevices.csproj", "{76915D55-2CEE-4466-809F-BCFCD2D31708}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Devices", "Hwavmvid.Devices\Hwavmvid.Devices.csproj", "{76915D55-2CEE-4466-809F-BCFCD2D31708}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDownload", "BlazorDownload\BlazorDownload.csproj", "{D0AE41A0-5664-4377-9C8B-792A2D0C58D9}"
 EndProject

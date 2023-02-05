@@ -38,8 +38,8 @@ XCOPY "..\BlazorDynamicLayout\bin\Debug\net6.0\BlazorDynamicLayout.dll" "..\..\o
 XCOPY "..\BlazorDynamicLayout\bin\Debug\net6.0\BlazorDynamicLayout.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorSlider\bin\Debug\net6.0\BlazorSlider.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorSlider\bin\Debug\net6.0\BlazorSlider.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorDevices\bin\Debug\net6.0\BlazorDevices.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorDevices\bin\Debug\net6.0\BlazorDevices.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Devices\bin\Debug\net6.0\Hwavmvid.Devices.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Devices\bin\Debug\net6.0\Hwavmvid.Devices.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDownload\bin\Debug\net6.0\BlazorDownload.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDownload\bin\Debug\net6.0\BlazorDownload.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Motiondetection\bin\Debug\net6.0\Hwavmvid.Motiondetection.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y

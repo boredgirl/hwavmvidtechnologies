@@ -18,7 +18,7 @@ using BlazorDynamicLayout;
 using Oqtane.ChatHubs.Models;
 using Hwavmvid.VideoPlayer;
 using BlazorSlider;
-using BlazorDevices;
+using Hwavmvid.Devices;
 using BlazorDownload;
 using System.Net.Http;
 using System.Linq;
@@ -74,7 +74,7 @@ namespace Oqtane
             services.AddScoped<BlazorNotificationsService, BlazorNotificationsService>();
             services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();
             services.AddScoped<BlazorSliderService, BlazorSliderService>();
-            services.AddScoped<BlazorDevicesService, BlazorDevicesService>();
+            services.AddScoped<DevicesService, DevicesService>();
             services.AddScoped<BlazorDownloadService, BlazorDownloadService>();
             services.AddScoped<PagerService<ChatHubRoom>, PagerService<ChatHubRoom>>();
             services.AddScoped<PagerService<ChatHubUser>, PagerService<ChatHubUser>>();

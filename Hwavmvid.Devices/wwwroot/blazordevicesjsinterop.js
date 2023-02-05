@@ -1,10 +1,10 @@
-export function initblazordevices(dotnetobjref) {
+export function initdevices(dotnetobjref) {
 
     var __obj = {
 
-        blazordevicesmap: function (dotnetobjref) {
+        devicesmap: function (dotnetobjref) {
 
-            var __selfblazordevicesmap = this;
+            var __context = this;
 
             this.device = function (id, name) {
 
@@ -21,14 +21,14 @@ export function initblazordevices(dotnetobjref) {
 
             this.getitems = async function () {
 
-                await __selfblazordevicesmap.requestpermissions();
-                await __selfblazordevicesmap.setitems();
+                await __context.requestpermissions();
+                await __context.setitems();
 
                 var promise = new Promise(function (resolve) {
 
-                    dotnetobjref.invokeMethodAsync("AddAudios", JSON.stringify(__selfblazordevicesmap.items.audios));
-                    dotnetobjref.invokeMethodAsync("AddMicrophones", JSON.stringify(__selfblazordevicesmap.items.microphones));
-                    dotnetobjref.invokeMethodAsync("AddWebcams", JSON.stringify(__selfblazordevicesmap.items.webcams));
+                    dotnetobjref.invokeMethodAsync("AddAudios", JSON.stringify(__context.items.audios));
+                    dotnetobjref.invokeMethodAsync("AddMicrophones", JSON.stringify(__context.items.microphones));
+                    dotnetobjref.invokeMethodAsync("AddWebcams", JSON.stringify(__context.items.webcams));
 
                     resolve();
                 });
@@ -64,34 +64,34 @@ export function initblazordevices(dotnetobjref) {
                                 if (deviceInfo.kind == 'audiooutput') {
                                     option.text = deviceInfo.label || 'Speaker ' + (temp + 1);
 
-                                    var audiodevice = new __selfblazordevicesmap.device(option.value, option.text);
-                                    __selfblazordevicesmap.items.audios.push(audiodevice);
+                                    var audiodevice = new __context.device(option.value, option.text);
+                                    __context.items.audios.push(audiodevice);
                                 }
                                 else if (deviceInfo.kind == 'audioinput') {
                                     option.text = deviceInfo.label || "Microphone " + (temp + 1);
 
-                                    var microphonedevice = new __selfblazordevicesmap.device(option.value, option.text);
-                                    __selfblazordevicesmap.items.microphones.push(microphonedevice);
+                                    var microphonedevice = new __context.device(option.value, option.text);
+                                    __context.items.microphones.push(microphonedevice);
                                 }
                                 else if (deviceInfo.kind == 'videoinput') {
                                     option.text = deviceInfo.label || "Camera " + (temp + 1);
 
-                                    var webcamdevice = new __selfblazordevicesmap.device(option.value, option.text);
-                                    __selfblazordevicesmap.items.webcams.push(webcamdevice);
+                                    var webcamdevice = new __context.device(option.value, option.text);
+                                    __context.items.webcams.push(webcamdevice);
                                 }
                                 else {
                                     console.log("Found another device: ", deviceInfo);
                                 }
                             }
 
-                            __selfblazordevicesmap.items.audios.push(
-                                new __selfblazordevicesmap.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
+                            __context.items.audios.push(
+                                new __context.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
 
-                            __selfblazordevicesmap.items.microphones.push(
-                                new __selfblazordevicesmap.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
+                            __context.items.microphones.push(
+                                new __context.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
 
-                            __selfblazordevicesmap.items.webcams.push(
-                                new __selfblazordevicesmap.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
+                            __context.items.webcams.push(
+                                new __context.device("0000000000000000000000000000000000000000000000000000000000000000", "None"));
 
                             resolve();
                         })
@@ -107,5 +107,5 @@ export function initblazordevices(dotnetobjref) {
         }
     }
 
-    return new __obj.blazordevicesmap(dotnetobjref);
+    return new __obj.devicesmap(dotnetobjref);
 }

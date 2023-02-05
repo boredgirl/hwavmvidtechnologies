@@ -18,57 +18,33 @@
 		<summary>asp .net core blazor signalR entity framework video chat hub template</summary>
 
 		<dependencies>
-			
+
+			<!-- oqtane and signalr -->
 			<group targetFramework="net6.0">
 
 				<dependency id="Oqtane.Framework" version="3.3.1" exclude="Build,Analyzers" />
-
 				<dependency id="Microsoft.AspNetCore.SignalR.Client" version="6.0.3" exclude="Build,Analyzers" />
 				<dependency id="Microsoft.AspNetCore.SignalR.Client.Core" version="6.0.3" exclude="Build,Analyzers" />
-				
-			</group>
 
+			</group>
+			
+			<!-- drawing csharp and ffmpegcore -->
 			<group targetFramework=".NETStandard2.0">
+				
 				<dependency id="System.Drawing" version="5.0.2" exclude="Build,Analyzers" />
 				<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
 				<dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
 				<dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
-			</group>
-			
-			<!-- nuspec dependencies for system.composition -->
-			<group targetFramework=".NETFramework4.6.2">
-				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
-			</group>
-			<group targetFramework="net6.0">
-				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
-			</group>
-			<group targetFramework="net7.0">
-				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
-			</group>
-			<group targetFramework=".NETStandard2.0">
-				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
-				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
+				
 			</group>
 
+			<!-- nuspec dependencies for system.composition -->
+			<group targetFramework="net6.0">
+				
+				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
+				
+			</group>
+			
 		</dependencies>
 
 	</metadata>
@@ -116,8 +92,8 @@
 		<file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.pdb" target="lib\net6.0" />
 		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.dll" target="lib\net6.0" />
 		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.pdb" target="lib\net6.0" />
-		<file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.dll" target="lib\net6.0" />
-		<file src="..\BlazorDevices\bin\Release\net6.0\BlazorDevices.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Devices\bin\Release\net6.0\Hwavmvid.Devices.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Devices\bin\Release\net6.0\Hwavmvid.Devices.pdb" target="lib\net6.0" />
 		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.dll" target="lib\net6.0" />
 		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.dll" target="lib\net6.0" />
@@ -166,7 +142,7 @@
 		<file src="..\BlazorNotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDynamicLayout\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorSlider\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorDevices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Devices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDownload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Jsapinotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Jsapigeolocation\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />		

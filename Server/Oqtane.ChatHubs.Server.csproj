@@ -30,22 +30,13 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	  
-	  
-	  
-	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
-	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.3" />
-	  
-	  <PackageReference Include="System.Composition" Version="7.0.0" />
-	  <PackageReference Include="System.Composition.AttributedModel" Version="7.0.0" />
-	  <PackageReference Include="System.Composition.TypedParts" Version="7.0.0" />
-	  <PackageReference Include="System.Composition.Hosting" Version="7.0.0" />
-	  <PackageReference Include="System.Composition.Runtime" Version="7.0.0" />
-	  <PackageReference Include="System.Composition.Convention" Version="7.0.0" />
-
-	  <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
-	  <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-	  <PackageReference Include="FFMpegCore" Version="4.7.0" />
-	  <PackageReference Include="Instances" Version="1.6.1" />
+	<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.3" />
+	<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="6.0.3" />	  
+	<PackageReference Include="System.Composition" Version="7.0.0" />
+	<PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	<PackageReference Include="FFMpegCore" Version="4.7.0" />
+	<PackageReference Include="Instances" Version="1.6.1" />
     
   </ItemGroup>
 
@@ -64,7 +55,7 @@
     <ProjectReference Include="..\Hwavmvid.Video\Hwavmvid.Video.csproj" />
     <ProjectReference Include="..\Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj" />
     <ProjectReference Include="..\BlazorWindows\BlazorWindows.csproj" />
-    <ProjectReference Include="..\BlazorDevices\BlazorDevices.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Devices\Hwavmvid.Devices.csproj" />
     <ProjectReference Include="..\BlazorDownload\BlazorDownload.csproj" />
     <ProjectReference Include="..\Hwavmvid.Jsapigeolocation\Hwavmvid.Jsapigeolocation.csproj" />
     <ProjectReference Include="..\Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj" />

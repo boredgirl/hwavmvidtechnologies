@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorDevices;
+using Hwavmvid.Devices;
 
 namespace Oqtane.ChatHubs
 {
@@ -51,9 +51,9 @@ namespace Oqtane.ChatHubs
         public DateTime createdon;
         public DateTime modifiedon;
 
-        public BlazorDeviceItem AudioDefaultDevice { get; set; }
-        public BlazorDeviceItem MicrophoneDefaultDevice { get; set; }
-        public BlazorDeviceItem WebcamDefaultDevice { get; set; }
+        public DeviceItem AudioDefaultDevice { get; set; }
+        public DeviceItem MicrophoneDefaultDevice { get; set; }
+        public DeviceItem WebcamDefaultDevice { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -83,21 +83,21 @@ namespace Oqtane.ChatHubs
         {
             var audioDevice = await this.ChatHubService.GetDefaultDevice(this.roomId.ToString(), ChatHubDeviceType.Audio);
             if (audioDevice != null)
-                this.AudioDefaultDevice = new BlazorDeviceItem() { id = audioDevice.DefaultDeviceId, name = audioDevice.DefaultDeviceName };
+                this.AudioDefaultDevice = new DeviceItem() { id = audioDevice.DefaultDeviceId, name = audioDevice.DefaultDeviceName };
             else
-                this.AudioDefaultDevice = new BlazorDeviceItem() { id = String.Empty, name = String.Empty };
+                this.AudioDefaultDevice = new DeviceItem() { id = String.Empty, name = String.Empty };
 
             var microphoneDevice = await this.ChatHubService.GetDefaultDevice(this.roomId.ToString(), ChatHubDeviceType.Microphone);
             if (microphoneDevice != null)
-                this.MicrophoneDefaultDevice = new BlazorDeviceItem() { id = microphoneDevice.DefaultDeviceId, name = microphoneDevice.DefaultDeviceName };
+                this.MicrophoneDefaultDevice = new DeviceItem() { id = microphoneDevice.DefaultDeviceId, name = microphoneDevice.DefaultDeviceName };
             else
-                this.MicrophoneDefaultDevice = new BlazorDeviceItem() { id = String.Empty, name = String.Empty };
+                this.MicrophoneDefaultDevice = new DeviceItem() { id = String.Empty, name = String.Empty };
 
             var webcamDevice = await this.ChatHubService.GetDefaultDevice(this.roomId.ToString(), ChatHubDeviceType.Webcam);
             if (webcamDevice != null)
-                this.WebcamDefaultDevice = new BlazorDeviceItem() { id = webcamDevice.DefaultDeviceId, name = webcamDevice.DefaultDeviceName };
+                this.WebcamDefaultDevice = new DeviceItem() { id = webcamDevice.DefaultDeviceId, name = webcamDevice.DefaultDeviceName };
             else
-                this.WebcamDefaultDevice = new BlazorDeviceItem() { id = String.Empty, name = String.Empty };
+                this.WebcamDefaultDevice = new DeviceItem() { id = String.Empty, name = String.Empty };
         }
 
         public void InitCreateRoom()

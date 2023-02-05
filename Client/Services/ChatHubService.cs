@@ -25,7 +25,7 @@ using Hwavmvid.Video;
 using BlazorBrowserResize;
 using BlazorNotifications;
 using Hwavmvid.VideoPlayer;
-using BlazorDevices;
+using Hwavmvid.Devices;
 using System.Text.Json;
 using Hwavmvid.Jsapigeolocation;
 
@@ -46,7 +46,7 @@ namespace Oqtane.ChatHubs.Services
         public VideoService VideoService { get; set; }
         public VideoPlayerService VideoPlayerService { get; set; }
         public BlazorNotificationsService BlazorNotificationsService { get; set; }
-        public BlazorDevicesService BlazorDevicesService { get; set; }
+        public DevicesService DevicesService { get; set; }
         public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
         public Jsapibingmapservice Jsapibingmapservice { get; set; }
 
@@ -92,7 +92,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, BlazorNotificationsService blazorNotificationService, BlazorDevicesService blazorDevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, BlazorNotificationsService blazorNotificationService, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -105,7 +105,7 @@ namespace Oqtane.ChatHubs.Services
             this.VideoService = VideoService;
             this.VideoPlayerService = VideoPlayerService;
             this.BlazorNotificationsService = blazorNotificationService;
-            this.BlazorDevicesService = blazorDevicesService;
+            this.DevicesService = DevicesService;
             this.Jsapigeolocationservice = jsapigeolocationservice;
             this.Jsapibingmapservice = jsapibingmapservice;
 
@@ -136,9 +136,9 @@ namespace Oqtane.ChatHubs.Services
 
             this.Jsapigeolocationservice.OnGeolocationpositionReceived += async (Jsapigeolocationpositionevent item) => await GeolocationreceivedAsync(item);
 
-            this.BlazorDevicesService.OnAudioDeviceChanged += async (BlazorDevicesEvent e) => await OnAudioDeviceChanged(e);
-            this.BlazorDevicesService.OnMicrophoneDeviceChanged += async (BlazorDevicesEvent e) => await OnMicrophoneDeviceChanged(e);
-            this.BlazorDevicesService.OnWebcamDeviceChanged += async (BlazorDevicesEvent e) => await OnWebcamDeviceChanged(e);
+            this.DevicesService.OnAudioDeviceChanged += async (DevicesEvent e) => await OnAudioDeviceChanged(e);
+            this.DevicesService.OnMicrophoneDeviceChanged += async (DevicesEvent e) => await OnMicrophoneDeviceChanged(e);
+            this.DevicesService.OnWebcamDeviceChanged += async (DevicesEvent e) => await OnWebcamDeviceChanged(e);
 
             this.GetViewersTimer.Elapsed += new ElapsedEventHandler(async (object source, ElapsedEventArgs e) => await OnGetViewersTimerElapsed(source, e));
             this.GetViewersTimer.Interval = 10000;
@@ -705,7 +705,7 @@ namespace Oqtane.ChatHubs.Services
             return device;
         }
 
-        private async Task OnAudioDeviceChanged(BlazorDevicesEvent e)
+        private async Task OnAudioDeviceChanged(DevicesEvent e)
         {
             await this.Connection.InvokeAsync("SetDefaultDevice", Convert.ToInt32(e.Id), e.Item.id, e.Item.name, ChatHubDeviceType.Audio).ContinueWith((task) =>
             {
@@ -716,7 +716,7 @@ namespace Oqtane.ChatHubs.Services
                 }
             });
         }
-        private async Task OnMicrophoneDeviceChanged(BlazorDevicesEvent e)
+        private async Task OnMicrophoneDeviceChanged(DevicesEvent e)
         {
             await this.Connection.InvokeAsync("SetDefaultDevice", Convert.ToInt32(e.Id), e.Item.id, e.Item.name, ChatHubDeviceType.Microphone).ContinueWith((task) =>
             {
@@ -727,7 +727,7 @@ namespace Oqtane.ChatHubs.Services
                 }
             });
         }
-        private async Task OnWebcamDeviceChanged(BlazorDevicesEvent e)
+        private async Task OnWebcamDeviceChanged(DevicesEvent e)
         {
             await this.Connection.InvokeAsync("SetDefaultDevice", Convert.ToInt32(e.Id), e.Item.id, e.Item.name, ChatHubDeviceType.Webcam).ContinueWith((task) =>
             {
@@ -1064,9 +1064,9 @@ namespace Oqtane.ChatHubs.Services
 
             this.Jsapigeolocationservice.OnGeolocationpositionReceived -= async (Jsapigeolocationpositionevent item) => await GeolocationreceivedAsync(item);
 
-            this.BlazorDevicesService.OnAudioDeviceChanged -= async (BlazorDevicesEvent e) => await OnAudioDeviceChanged(e);
-            this.BlazorDevicesService.OnMicrophoneDeviceChanged -= async (BlazorDevicesEvent e) => await OnMicrophoneDeviceChanged(e);
-            this.BlazorDevicesService.OnWebcamDeviceChanged -= async (BlazorDevicesEvent e) => await OnWebcamDeviceChanged(e);
+            this.DevicesService.OnAudioDeviceChanged -= async (DevicesEvent e) => await OnAudioDeviceChanged(e);
+            this.DevicesService.OnMicrophoneDeviceChanged -= async (DevicesEvent e) => await OnMicrophoneDeviceChanged(e);
+            this.DevicesService.OnWebcamDeviceChanged -= async (DevicesEvent e) => await OnWebcamDeviceChanged(e);
 
             this.GetViewersTimer.Elapsed -= new ElapsedEventHandler(async (object source, ElapsedEventArgs e) => await OnGetViewersTimerElapsed(source, e));
         }
