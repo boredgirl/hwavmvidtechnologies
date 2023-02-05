@@ -2,24 +2,24 @@
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorFileUpload
+namespace Hwavmvid.FileUpload
 {
-    public class BlazorFileUploadService
+    public class FileUploadService
     {
 
         public IJSRuntime JSRuntime;
         public IJSObjectReference Module;
         public IJSObjectReference FileUploadMap;
 
-        public BlazorFileUploadServiceExtension BlazorFileUploadServiceExtension;
+        public FileUploadServiceExtension FileUploadServiceExtension;
 
-        public DotNetObjectReference<BlazorFileUploadServiceExtension> dotNetObjectReference;
+        public DotNetObjectReference<FileUploadServiceExtension> dotNetObjectReference;
 
-        public BlazorFileUploadService(IJSRuntime jsRuntime)
+        public FileUploadService(IJSRuntime jsRuntime)
         {
             this.JSRuntime = jsRuntime;
-            this.BlazorFileUploadServiceExtension = new BlazorFileUploadServiceExtension();
-            this.dotNetObjectReference = DotNetObjectReference.Create(this.BlazorFileUploadServiceExtension);
+            this.FileUploadServiceExtension = new FileUploadServiceExtension();
+            this.dotNetObjectReference = DotNetObjectReference.Create(this.FileUploadServiceExtension);
         }
 
         public async Task InitFileUploadDropzone(string inputFileId, string elementId)
@@ -30,15 +30,15 @@ namespace BlazorFileUpload
 
     }
 
-    public class BlazorFileUploadServiceExtension
+    public class FileUploadServiceExtension
     {
 
-        public event EventHandler<BlazorFileUploadEvent> OnDropEvent;
+        public event EventHandler<FileUploadEvent> OnDropEvent;
 
         [JSInvokable("OnDrop")]
         public void OnDrop(string elementId)
         {
-            BlazorFileUploadEvent eventParameters = new BlazorFileUploadEvent() { FileUploadDropzoneId = elementId };
+            FileUploadEvent eventParameters = new FileUploadEvent() { FileUploadDropzoneId = elementId };
             OnDropEvent?.Invoke(this, eventParameters);
         }
 

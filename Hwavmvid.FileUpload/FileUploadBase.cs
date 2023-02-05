@@ -6,13 +6,13 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BlazorFileUpload
+namespace Hwavmvid.FileUpload
 {
-    public class BlazorFileUploadBase : ComponentBase, IDisposable
+    public class FileUploadBase : ComponentBase, IDisposable
     {
 
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected BlazorFileUploadService BlazorFileUploadService { get; set; }
+        [Inject] protected FileUploadService FileUploadService { get; set; }
 
         [Parameter] public Dictionary<string, string> FileUploadHeaders { get; set; }
         [Parameter] public string ApiUrl { get; set; }
@@ -21,8 +21,8 @@ namespace BlazorFileUpload
 
         public int maxFiles { get; set; } = 10;
 
-        public event EventHandler<Dictionary<Guid, BlazorFileUploadModel>> OnUploadImagesEvent;
-        public Dictionary<Guid, BlazorFileUploadModel> FileUploadModels = new Dictionary<Guid, BlazorFileUploadModel>();
+        public event EventHandler<Dictionary<Guid, FileUploadModel>> OnUploadImagesEvent;
+        public Dictionary<Guid, FileUploadModel> FileUploadModels = new Dictionary<Guid, FileUploadModel>();
 
         public string Output { get; set; }
         public float progresswidth { get; set; }
@@ -31,7 +31,7 @@ namespace BlazorFileUpload
 
         protected override async Task OnInitializedAsync()
         {
-            this.BlazorFileUploadService.BlazorFileUploadServiceExtension.OnDropEvent += OnFileUploadDropEventExecute;
+            this.FileUploadService.FileUploadServiceExtension.OnDropEvent += OnFileUploadDropEventExecute;
             this.OnUploadImagesEvent += OnUploadImagesExecute;
 
             await base.OnInitializedAsync();
@@ -40,13 +40,13 @@ namespace BlazorFileUpload
         {
             if(firstRender)
             {
-                await this.BlazorFileUploadService.InitFileUploadDropzone(this.InputFileId, this.DropzoneElementId);
+                await this.FileUploadService.InitFileUploadDropzone(this.InputFileId, this.DropzoneElementId);
             }
 
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        public async Task OnBlazorFileUploadChange(InputFileChangeEventArgs e)
+        public async Task FileUploadChange(InputFileChangeEventArgs e)
         {
             var imageFormat = "image/png";
 
@@ -57,7 +57,7 @@ namespace BlazorFileUpload
                 await previewImage.OpenReadStream().ReadAsync(bytes);
                 var imageDataUrl = $"data:{imageFormat};base64,{Convert.ToBase64String(bytes)}";
 
-                var model = new BlazorFileUploadModel()
+                var model = new FileUploadModel()
                 {
                     Base64ImageUrl = imageDataUrl,
                     BrowserFile = iBrowserFile,
@@ -67,7 +67,7 @@ namespace BlazorFileUpload
             }
         }
 
-        private void OnUploadImagesExecute(object sender, Dictionary<Guid, BlazorFileUploadModel> e)
+        private void OnUploadImagesExecute(object sender, Dictionary<Guid, FileUploadModel> e)
         {
             Console.WriteLine("on upload images execute..");
         }
@@ -86,7 +86,7 @@ namespace BlazorFileUpload
             this.StateHasChanged();
         }
 
-        private async Task UploadFiles(Dictionary<Guid, BlazorFileUploadModel> models)
+        private async Task UploadFiles(Dictionary<Guid, FileUploadModel> models)
         {
             try
             {                
@@ -147,7 +147,7 @@ namespace BlazorFileUpload
             }
         }
 
-        private void OnFileUploadDropEventExecute(object sender, BlazorFileUploadEvent e)
+        private void OnFileUploadDropEventExecute(object sender, FileUploadEvent e)
         {
             if (this.DropzoneElementId == e.FileUploadDropzoneId)
             {

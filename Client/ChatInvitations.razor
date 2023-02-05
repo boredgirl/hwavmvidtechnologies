@@ -4,13 +4,13 @@
 
 @inject NavigationManager NavigationManager
 @inject ChatHubService ChatHubService
-@inject BlazorPagerService<ChatHubInvitation> BlazorPagerServiceChatHubInvitation
+@inject PagerService<ChatHubInvitation> PagerServiceChatHubInvitation
 
 @using System.Linq
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Extensions
 @using Oqtane.ChatHubs.Models
-@using BlazorPager
+@using Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
 @using Microsoft.AspNetCore.SignalR.Client
 
@@ -21,22 +21,22 @@
 
     <h5><span class="oi oi-list"></span> All Invitations <span class="badge bg-success">NEW</span></h5>
 
-    <BlazorPagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerInvitationItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.Invitations" Context="context" ItemsPerPage="@ChatHubConstants.InvitationItems" TItemGeneric="@ChatHubInvitation" Class="py-sm-3" Scrolling="@false">
-        <BlazorPagerItem>
+    <PagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerInvitationItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.Invitations" Context="context" ItemsPerPage="@ChatHubConstants.InvitationItems" TItemGeneric="@ChatHubInvitation" Class="py-sm-3" Scrolling="@false">
+        <PagerItem>
 
             <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
                 <div class="flex-fill">
                     <button type="button" @onclick="@(async () => await ChatHubService.FollowInvitation_Clicked(context.Id, context.RoomId))" class="btn btn-sm btn-link">@context.Hostname</button>
                 </div>
                 <div class="flex-fill text-start">
-                    <button type="button" @onclick="@(() => BlazorPagerServiceChatHubInvitation.RemoveItem(context, ModuleState.ModuleId))" class="btn btn-sm btn-danger">
+                    <button type="button" @onclick="@(() => PagerServiceChatHubInvitation.RemoveItem(context, ModuleState.ModuleId))" class="btn btn-sm btn-danger">
                         <span aria-hidden="true" style="font-size: 1.4rem; line-height: 0;">&times;</span> Remove Invitation
                     </button>
                 </div>
             </div>
 
-        </BlazorPagerItem>
-    </BlazorPagerComponent>
+        </PagerItem>
+    </PagerComponent>
 
 }
 
@@ -44,9 +44,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.BlazorPagerServiceChatHubInvitation.OnRetrievedItems += RetrievedItems;
-        this.BlazorPagerServiceChatHubInvitation.OnRemoveItem += RemoveItem;
-        this.BlazorPagerServiceChatHubInvitation.OnError += OnPagerInvitationError;
+        this.PagerServiceChatHubInvitation.OnRetrievedItems += RetrievedItems;
+        this.PagerServiceChatHubInvitation.OnRemoveItem += RemoveItem;
+        this.PagerServiceChatHubInvitation.OnError += OnPagerInvitationError;
         await base.OnInitializedAsync();
     }
 
@@ -58,7 +58,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(BlazorPagerEvent<ChatHubInvitation> obj)
+    public async void RemoveItem(PagerEvent<ChatHubInvitation> obj)
     {
         if (obj.ApiQueryId == ModuleState.ModuleId)
         {
@@ -78,9 +78,9 @@
 
     public void Dispose()
     {
-        this.BlazorPagerServiceChatHubInvitation.OnRetrievedItems -= RetrievedItems;
-        this.BlazorPagerServiceChatHubInvitation.OnRemoveItem -= RemoveItem;
-        this.BlazorPagerServiceChatHubInvitation.OnError -= OnPagerInvitationError;
+        this.PagerServiceChatHubInvitation.OnRetrievedItems -= RetrievedItems;
+        this.PagerServiceChatHubInvitation.OnRemoveItem -= RemoveItem;
+        this.PagerServiceChatHubInvitation.OnError -= OnPagerInvitationError;
     }
 
 }

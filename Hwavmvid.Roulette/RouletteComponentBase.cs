@@ -12,7 +12,7 @@ using Hwavmvid.Rouletteshared.Enums;
 namespace Hwavmvid.Roulette
 {
 
-    public class RouletteComponentBase : ComponentBase, IAsyncDisposable
+    public class RouletteComponentBase : ComponentBase, IDisposable
     {
 
         [Inject] public RouletteService RouletteService { get; set; }
@@ -66,7 +66,7 @@ namespace Hwavmvid.Roulette
             });
         }
 
-        public async ValueTask DisposeAsync()
+        public void Dispose()
         {
             this.RouletteService.UupdateUI += async () => await this.UpdateUI();
         }

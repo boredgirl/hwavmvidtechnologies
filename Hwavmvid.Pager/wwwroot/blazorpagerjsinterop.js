@@ -1,8 +1,8 @@
-﻿export function initblazorpager() {
+﻿export function initpager() {
 
     var __obj = {
 
-        blazorpagermap: function () {
+        pagermap: function () {
 
             this.scrollToElement = function (elementId) {
 
@@ -20,5 +20,5 @@
         }
     }
 
-    return new __obj.blazorpagermap();
+    return new __obj.pagermap();
 }

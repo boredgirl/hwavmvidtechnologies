@@ -16,7 +16,7 @@ using Oqtane.ChatHubs.Models;
 using Oqtane.ChatHubs.Enums;
 using Oqtane.ChatHubs.Constants;
 using Microsoft.EntityFrameworkCore;
-using BlazorPager;
+using Hwavmvid.Pager;
 using System.Collections.Generic;
 using FFMpegCore;
 using FFMpegCore.Enums;
@@ -351,7 +351,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}")]
         [ActionName("GetRooms")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubRoom>> GetRooms(int page, int items, int id)
+        public async Task<PagerApiItem<ChatHubRoom>> GetRooms(int page, int items, int id)
         {
             return await this.chatHubService.GetRooms(page, items, id, false);
         }
@@ -359,7 +359,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}")]
         [ActionName("GetUsers")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubUser>> GetUsers(int page, int items, int id)
+        public async Task<PagerApiItem<ChatHubUser>> GetUsers(int page, int items, int id)
         {
             return await this.chatHubService.GetUsers(page, items, id, false);
         }
@@ -367,7 +367,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetArchiveItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubCam>> GetArchiveItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubCam>> GetArchiveItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -381,7 +381,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetInvitationItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubInvitation>> GetInvitationItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubInvitation>> GetInvitationItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -395,7 +395,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetIgnoreItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -409,7 +409,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetIgnoredByItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -423,7 +423,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetModeratorItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubModerator>> GetModeratorItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubModerator>> GetModeratorItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -437,7 +437,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetBlacklistUserItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubBlacklistUser>> GetBlacklistUserItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubBlacklistUser>> GetBlacklistUserItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)
@@ -451,7 +451,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{page}/{items}/{id}/{connectionId}")]
         [ActionName("GetWhitelistUserItems")]
         [AllowAnonymous]
-        public async Task<BlazorPagerApiItem<ChatHubWhitelistUser>> GetWhitelistUserItems(int page, int items, int id, string connectionId)
+        public async Task<PagerApiItem<ChatHubWhitelistUser>> GetWhitelistUserItems(int page, int items, int id, string connectionId)
         {
             ChatHubUser user = await this.GetUser(connectionId);
             if (user != null)

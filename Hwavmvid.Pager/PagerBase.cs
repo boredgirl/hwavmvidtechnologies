@@ -5,16 +5,16 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorPager
+namespace Hwavmvid.Pager
 {
-    public partial class BlazorPagerBase<TBlazorPagerItem> : ComponentBase, IDisposable
+    public partial class PagerBase<TPagerItem> : ComponentBase, IDisposable
     {
 
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected BlazorPagerService<TBlazorPagerItem> BlazorPagerService { get; set; }
+        [Inject] protected PagerService<TPagerItem> PagerService { get; set; }
 
-        [Parameter] public RenderFragment<TBlazorPagerItem> BlazorPagerItem { get; set; }
-        [Parameter] public List<TBlazorPagerItem> ContextPageItems { get; set; }
+        [Parameter] public RenderFragment<TPagerItem> PagerItem { get; set; }
+        [Parameter] public List<TPagerItem> ContextPageItems { get; set; }
         [Parameter] public string Class { get; set; }
         [Parameter] public string ElementId { get; set; }
         [Parameter] public string GetItemsApiUrl { get; set; }
@@ -42,8 +42,8 @@ namespace BlazorPager
 
         protected override async Task OnInitializedAsync()
         {
-            this.BlazorPagerService.OnRemoveItem += OnRemoveItem;
-            this.BlazorPagerService.OnUpdateContext += (int apiQueryId) => UpdateContextComponent(apiQueryId);
+            this.PagerService.OnRemoveItem += OnRemoveItem;
+            this.PagerService.OnUpdateContext += (int apiQueryId) => UpdateContextComponent(apiQueryId);
 
             await this.UpdateContextAsync();
             await base.OnInitializedAsync();
@@ -61,7 +61,7 @@ namespace BlazorPager
         {
             if(firstRender)
             {
-                await this.BlazorPagerService.InitBlazorPagerService();
+                await this.PagerService.InitPagerService();
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -78,9 +78,9 @@ namespace BlazorPager
                 this.ContextPageItems.Clear();
 
                 var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
-                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<BlazorPagerApiItem<TBlazorPagerItem>>();
+                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<PagerApiItem<TPagerItem>>();
 
-                this.BlazorPagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
+                this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
                 this.PagesTotal = apiItem.Pages;
 
                 this.Loading = false;
@@ -90,12 +90,12 @@ namespace BlazorPager
                 });
                 
                 if (this.Scrolling)
-                    await this.BlazorPagerService.ScrollTop(this.ElementId);
+                    await this.PagerService.ScrollTop(this.ElementId);
                 
             }
             catch (Exception exception)
             {
-                this.BlazorPagerService.ThrowError(exception, this.ApiQueryId);
+                this.PagerService.ThrowError(exception, this.ApiQueryId);
             }
         }
         public async Task SetContextPageAsync(int index)
@@ -114,9 +114,9 @@ namespace BlazorPager
                 this.ContextPage++;
 
                 var getItemsResponse = await this.HttpClient.GetAsync(this.requestUri);
-                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<BlazorPagerApiItem<TBlazorPagerItem>>();
+                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<PagerApiItem<TPagerItem>>();
 
-                this.BlazorPagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
+                this.PagerService.ExposeItems(apiItem.Items, this.ApiQueryId);
                 this.PagesTotal = apiItem.Pages;
 
                 this.Loading = false;
@@ -127,7 +127,7 @@ namespace BlazorPager
             }
             catch (Exception exception)
             {
-                this.BlazorPagerService.ThrowError(exception, this.ApiQueryId);
+                this.PagerService.ThrowError(exception, this.ApiQueryId);
             }
         }
 
@@ -152,7 +152,7 @@ namespace BlazorPager
             await this.UpdateContextAsync();
         }
 
-        private async void OnRemoveItem(BlazorPagerEvent<TBlazorPagerItem> obj)
+        private async void OnRemoveItem(PagerEvent<TPagerItem> obj)
         {
             await Task.Delay(200).ContinueWith(async (task) =>
             {
@@ -162,8 +162,8 @@ namespace BlazorPager
 
         public void Dispose()
         {
-            this.BlazorPagerService.OnRemoveItem -= OnRemoveItem;
-            this.BlazorPagerService.OnUpdateContext -= (int apiQueryId) => UpdateContextComponent(apiQueryId);
+            this.PagerService.OnRemoveItem -= OnRemoveItem;
+            this.PagerService.OnUpdateContext -= (int apiQueryId) => UpdateContextComponent(apiQueryId);
         }
 
     }

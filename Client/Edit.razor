@@ -1,6 +1,6 @@
 ﻿@namespace Oqtane.ChatHubs
 
-@using BlazorFileUpload
+@using Hwavmvid.FileUpload
 @using BlazorSelect
 @using Hwavmvid.ColorPicker
 
@@ -57,7 +57,7 @@
                 var url = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), this.ChatHubService.ChatHubControllerApiUrl, "/postroomimageupload");
             }
 
-            <BlazorFileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@FileUploadInputFileElementId" DropzoneElementId="@FileUploadDropzoneContainerElementId"></BlazorFileUploadComponent>
+            <FileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@FileUploadInputFileElementId" DropzoneElementId="@FileUploadDropzoneContainerElementId"></FileUploadComponent>
 
             <br />
         </td>

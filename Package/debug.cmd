@@ -16,12 +16,12 @@ XCOPY "..\BlazorWindows\bin\Debug\net6.0\BlazorWindows.dll" "..\..\oqtane.framew
 XCOPY "..\BlazorWindows\bin\Debug\net6.0\BlazorWindows.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorTabs\bin\Debug\net6.0\BlazorTabs.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorTabs\bin\Debug\net6.0\BlazorTabs.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorPager\bin\Debug\net6.0\BlazorPager.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorPager\bin\Debug\net6.0\BlazorPager.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Pager\bin\Debug\net6.0\Hwavmvid.Pager.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Pager\bin\Debug\net6.0\Hwavmvid.Pager.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDraggableList\bin\Debug\net6.0\BlazorDraggableList.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDraggableList\bin\Debug\net6.0\BlazorDraggableList.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorFileUpload\bin\Debug\net6.0\BlazorFileUpload.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorFileUpload\bin\Debug\net6.0\BlazorFileUpload.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.FileUpload\bin\Debug\net6.0\Hwavmvid.FileUpload.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.FileUpload\bin\Debug\net6.0\Hwavmvid.FileUpload.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.ColorPicker\bin\Debug\net6.0\Hwavmvid.ColorPicker.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.ColorPicker\bin\Debug\net6.0\Hwavmvid.ColorPicker.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Video\bin\Debug\net6.0\Hwavmvid.Video.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y

@@ -4,13 +4,13 @@
 
 @inject NavigationManager NavigationManager
 @inject ChatHubService ChatHubService
-@inject BlazorPagerService<ChatHubIgnoredBy> BlazorPagerServiceChatHubIgnoredBy
+@inject PagerService<ChatHubIgnoredBy> PagerServiceChatHubIgnoredBy
 
 @using System.Linq
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Extensions
 @using Oqtane.ChatHubs.Models
-@using BlazorPager
+@using Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
 @using Microsoft.AspNetCore.SignalR.Client
 
@@ -21,8 +21,8 @@
 
     <h5><span class="oi oi-bug"></span> Ignored by users list <span class="badge bg-success">NEW</span></h5>
 
-    <BlazorPagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerIgnoredByItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredByUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoredByItems" TItemGeneric="@ChatHubIgnoredBy" Class="py-sm-3" Scrolling="@false">
-        <BlazorPagerItem>
+    <PagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerIgnoredByItems" GetItemsApiUrl="@getItemsApiUrl" ContextPageItems="@ChatHubService.IgnoredByUsers" Context="context" ItemsPerPage="@ChatHubConstants.IgnoredByItems" TItemGeneric="@ChatHubIgnoredBy" Class="py-sm-3" Scrolling="@false">
+        <PagerItem>
 
             <div class="d-flex" style="background-color: lightgoldenrodyellow; border-bottom: 1px solid #f1f1f1;">
                 <div class="flex-fill">
@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-        </BlazorPagerItem>
-    </BlazorPagerComponent>
+        </PagerItem>
+    </PagerComponent>
 
 }
 
@@ -39,8 +39,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.BlazorPagerServiceChatHubIgnoredBy.OnRetrievedItems += RetrievedItems;
-        this.BlazorPagerServiceChatHubIgnoredBy.OnError += Error;
+        this.PagerServiceChatHubIgnoredBy.OnRetrievedItems += RetrievedItems;
+        this.PagerServiceChatHubIgnoredBy.OnError += Error;
         await base.OnInitializedAsync();
     }
 
@@ -63,8 +63,8 @@
 
     public void Dispose()
     {
-        this.BlazorPagerServiceChatHubIgnoredBy.OnRetrievedItems -= RetrievedItems;
-        this.BlazorPagerServiceChatHubIgnoredBy.OnError -= Error;
+        this.PagerServiceChatHubIgnoredBy.OnRetrievedItems -= RetrievedItems;
+        this.PagerServiceChatHubIgnoredBy.OnError -= Error;
     }
 
 }

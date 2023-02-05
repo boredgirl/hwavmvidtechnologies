@@ -4,13 +4,13 @@
 
 @inject NavigationManager NavigationManager
 @inject ChatHubService ChatHubService
-@inject BlazorPagerService<ChatHubUser> BlazorPagerServiceChatHubUser
+@inject PagerService<ChatHubUser> PagerServiceChatHubUser
 
 @using System.Linq
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Extensions
 @using Oqtane.ChatHubs.Models
-@using BlazorPager
+@using Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
 @using Microsoft.AspNetCore.SignalR.Client
 
@@ -19,9 +19,9 @@
 
     var getItemsApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetUsers");
                         
-    <BlazorPagerComponent ElementId="WasmBlazorPagerUserlist" Class="WasmBlazorPagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
+    <PagerComponent ElementId="WasmHwavmvid.PagerUserlist" Class="WasmHwavmvid.PagerUserlist accordion" GetItemsApiUrl="@getItemsApiUrl" ItemsPerPage="@Constants.ChatHubConstants.UserlistItems" ContextPageItems="@room.Users" TItemGeneric="@ChatHubUser" Context="user" ApiQueryId="@room.Id" Scrolling="@false">
 
-        <BlazorPagerItem>
+        <PagerItem>
 
             @if (user.UserId == ChatHubService.ConnectedUser.UserId)
             {
@@ -104,9 +104,9 @@
                 </div>
             }
 
-        </BlazorPagerItem>
+        </PagerItem>
 
-    </BlazorPagerComponent>
+    </PagerComponent>
 
 }
 
@@ -122,8 +122,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.BlazorPagerServiceChatHubUser.OnRetrievedItems += RetrievedItems;
-        this.BlazorPagerServiceChatHubUser.OnError += Error;
+        this.PagerServiceChatHubUser.OnRetrievedItems += RetrievedItems;
+        this.PagerServiceChatHubUser.OnError += Error;
         await base.OnInitializedAsync();
     }
 
@@ -145,8 +145,8 @@
 
     public void Dispose()
     {
-        this.BlazorPagerServiceChatHubUser.OnRetrievedItems -= RetrievedItems;
-        this.BlazorPagerServiceChatHubUser.OnError -= Error;
+        this.PagerServiceChatHubUser.OnRetrievedItems -= RetrievedItems;
+        this.PagerServiceChatHubUser.OnError -= Error;
     }
 
 }

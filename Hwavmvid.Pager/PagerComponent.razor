@@ -1,5 +1,5 @@
-﻿@namespace BlazorPager
-@inherits BlazorPagerBase<TItemGeneric>
+﻿@namespace Hwavmvid.Pager
+@inherits PagerBase<TItemGeneric>
 
 @using System.Linq
 @using System.Collections.Generic
@@ -22,7 +22,7 @@
 
             @foreach (TItemGeneric item in ContextPageItems)
             {
-                @BlazorPagerItem(item)
+                @PagerItem(item)
             }
 
         </div>

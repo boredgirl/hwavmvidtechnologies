@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using BlazorAlerts;
 using System.Net;
 using BlazorDraggableList;
-using BlazorFileUpload;
+using Hwavmvid.FileUpload;
 using BlazorBrowserResize;
 using Hwavmvid.Video;
 using Oqtane.ChatHubs.Models;
@@ -21,7 +21,7 @@ using BlazorModal;
 using Oqtane.Models;
 using BlazorDropdown;
 using BlazorNotifications;
-using BlazorPager;
+using Hwavmvid.Pager;
 using BlazorDynamicLayout;
 using Hwavmvid.Jsapinotifications;
 
@@ -40,7 +40,7 @@ namespace Oqtane.ChatHubs
         [Inject] protected ScrollService ScrollService { get; set; }
         [Inject] protected CookieService CookieService { get; set; }
         [Inject] protected BlazorDraggableListService BlazorDraggableListService { get; set; }
-        [Inject] protected BlazorFileUploadService BlazorFileUploadService { get; set; }
+        [Inject] protected FileUploadService FileUploadService { get; set; }
         [Inject] protected VideoService VideoService { get; set; }
         [Inject] protected BlazorModalService BlazorModalService { get; set; }
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }

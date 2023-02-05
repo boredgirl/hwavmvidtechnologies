@@ -45,10 +45,10 @@
     <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
     <ProjectReference Include="..\BlazorDropdown\BlazorDropdown.csproj" />
     <ProjectReference Include="..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
-    <ProjectReference Include="..\BlazorFileUpload\BlazorFileUpload.csproj" />
+    <ProjectReference Include="..\Hwavmvid.FileUpload\Hwavmvid.FileUpload.csproj" />
     <ProjectReference Include="..\BlazorModal\BlazorModal.csproj" />
     <ProjectReference Include="..\BlazorNotifications\BlazorNotifications.csproj" />
-    <ProjectReference Include="..\BlazorPager\BlazorPager.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Pager\Hwavmvid.Pager.csproj" />
     <ProjectReference Include="..\BlazorSelect\BlazorSelect.csproj" />
     <ProjectReference Include="..\BlazorTabs\BlazorTabs.csproj" />
     <ProjectReference Include="..\Hwavmvid.Video\Hwavmvid.Video.csproj" />

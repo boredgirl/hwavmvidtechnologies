@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
-using BlazorPager;
+using Hwavmvid.Pager;
 using Microsoft.AspNetCore.Http;
 
 namespace Oqtane.ChatHubs.Services
@@ -269,7 +269,7 @@ namespace Oqtane.ChatHubs.Services
             };
         }
 
-        public async Task<BlazorPagerApiItem<ChatHubRoom>> GetRooms(int page, int items, int moduleId, bool renewCache)
+        public async Task<PagerApiItem<ChatHubRoom>> GetRooms(int page, int items, int moduleId, bool renewCache)
         {
             try
             {
@@ -277,8 +277,8 @@ namespace Oqtane.ChatHubs.Services
                                         moduleId, "_",
                                         page);
 
-                BlazorPagerApiItem<ChatHubRoom> cachedPagerApiItem = new BlazorPagerApiItem<ChatHubRoom>();
-                if (renewCache || !this.cache.TryGetValue<BlazorPagerApiItem<ChatHubRoom>>(pageKey, out cachedPagerApiItem))
+                PagerApiItem<ChatHubRoom> cachedPagerApiItem = new PagerApiItem<ChatHubRoom>();
+                if (renewCache || !this.cache.TryGetValue<PagerApiItem<ChatHubRoom>>(pageKey, out cachedPagerApiItem))
                 {
                     List<ChatHubRoom> lobbies = new List<ChatHubRoom>();
                     List<ChatHubRoom> rooms = new List<ChatHubRoom>();
@@ -310,14 +310,14 @@ namespace Oqtane.ChatHubs.Services
                     var itemsTotal = await this.chatHubRepository.Rooms().FilterByModuleId(moduleId).Where(item => item.Type != ChatHubRoomType.OneVsOne.ToString()).CountAsync();
                     int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                    BlazorPagerApiItem<ChatHubRoom> apiItem = new BlazorPagerApiItem<ChatHubRoom>()
+                    PagerApiItem<ChatHubRoom> apiItem = new PagerApiItem<ChatHubRoom>()
                     {
                         Items = lobbies,
                         Pages = pagesTotal,
                     };
 
                     var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
-                    cachedPagerApiItem = this.cache.Set<BlazorPagerApiItem<ChatHubRoom>>(pageKey, apiItem, cacheEntryOptions);
+                    cachedPagerApiItem = this.cache.Set<PagerApiItem<ChatHubRoom>>(pageKey, apiItem, cacheEntryOptions);
                 }
 
                 return cachedPagerApiItem;
@@ -327,7 +327,7 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception("Failed get lobbies by module id.");
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubUser>> GetUsers(int page, int items, int roomId, bool renewCache)
+        public async Task<PagerApiItem<ChatHubUser>> GetUsers(int page, int items, int roomId, bool renewCache)
         {
             try
             {
@@ -335,8 +335,8 @@ namespace Oqtane.ChatHubs.Services
                                         roomId, "_",
                                         page);
 
-                BlazorPagerApiItem<ChatHubUser> cachedPagerApiItem = new BlazorPagerApiItem<ChatHubUser>();
-                if (renewCache || !this.cache.TryGetValue<BlazorPagerApiItem<ChatHubUser>>(pageKey, out cachedPagerApiItem))
+                PagerApiItem<ChatHubUser> cachedPagerApiItem = new PagerApiItem<ChatHubUser>();
+                if (renewCache || !this.cache.TryGetValue<PagerApiItem<ChatHubUser>>(pageKey, out cachedPagerApiItem))
                 {
                     List<ChatHubUser> userClientModels = new List<ChatHubUser>();
                     List<ChatHubUser> dbUsers = new List<ChatHubUser>();
@@ -370,14 +370,14 @@ namespace Oqtane.ChatHubs.Services
                     var itemsTotal = await this.chatHubRepository.GetUsersByRoomId(roomId).Online().CountAsync();
                     int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                    BlazorPagerApiItem<ChatHubUser> apiItem = new BlazorPagerApiItem<ChatHubUser>()
+                    PagerApiItem<ChatHubUser> apiItem = new PagerApiItem<ChatHubUser>()
                     {
                         Items = userClientModels,
                         Pages = pagesTotal,
                     };
 
                     var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
-                    cachedPagerApiItem = this.cache.Set<BlazorPagerApiItem<ChatHubUser>>(pageKey, apiItem, cacheEntryOptions);
+                    cachedPagerApiItem = this.cache.Set<PagerApiItem<ChatHubUser>>(pageKey, apiItem, cacheEntryOptions);
                 }
 
                 return cachedPagerApiItem;
@@ -387,7 +387,7 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubCam>> GetArchiveItems(int page, int items, int moduleId, bool renewCache, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubCam>> GetArchiveItems(int page, int items, int moduleId, bool renewCache, ChatHubUser user)
         {
             try
             {
@@ -395,8 +395,8 @@ namespace Oqtane.ChatHubs.Services
                                         moduleId, "_",
                                         page);
 
-                BlazorPagerApiItem<ChatHubCam> cachedPagerApiItem = new BlazorPagerApiItem<ChatHubCam>();
-                if (renewCache || !this.cache.TryGetValue<BlazorPagerApiItem<ChatHubCam>>(pageKey, out cachedPagerApiItem))
+                PagerApiItem<ChatHubCam> cachedPagerApiItem = new PagerApiItem<ChatHubCam>();
+                if (renewCache || !this.cache.TryGetValue<PagerApiItem<ChatHubCam>>(pageKey, out cachedPagerApiItem))
                 {
                     List<ChatHubCam> videos = new List<ChatHubCam>();
                     var connections = await this.chatHubRepository.GetConnectionsByUserId(user.UserId).ToListAsync();
@@ -414,14 +414,14 @@ namespace Oqtane.ChatHubs.Services
                     var itemsTotal = videos.Count();
                     int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                    BlazorPagerApiItem<ChatHubCam> apiItem = new BlazorPagerApiItem<ChatHubCam>()
+                    PagerApiItem<ChatHubCam> apiItem = new PagerApiItem<ChatHubCam>()
                     {
                         Items = videos,
                         Pages = pagesTotal,
                     };
 
                     var cacheEntryOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
-                    cachedPagerApiItem = this.cache.Set<BlazorPagerApiItem<ChatHubCam>>(pageKey, apiItem, cacheEntryOptions);
+                    cachedPagerApiItem = this.cache.Set<PagerApiItem<ChatHubCam>>(pageKey, apiItem, cacheEntryOptions);
                 }
 
                 return cachedPagerApiItem;
@@ -431,11 +431,11 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubInvitation>> GetInvitationItems(int page, int items, int moduleId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubInvitation>> GetInvitationItems(int page, int items, int moduleId, ChatHubUser user)
         {
             try
             {
-                BlazorPagerApiItem<ChatHubInvitation> apiItem = null;
+                PagerApiItem<ChatHubInvitation> apiItem = null;
                 List<ChatHubInvitation> invitations = new List<ChatHubInvitation>();
 
                 var dbQuery = this.chatHubRepository.Invitations().Where(item => item.ChatHubUserId == user.UserId);
@@ -461,7 +461,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = invitations.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubInvitation>()
+                apiItem = new PagerApiItem<ChatHubInvitation>()
                 {
                     Items = invitations ?? new List<ChatHubInvitation>(),
                     Pages = pagesTotal,
@@ -474,11 +474,11 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int moduleId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubIgnore>> GetIgnoreItems(int page, int items, int moduleId, ChatHubUser user)
         {
             try
             {
-                BlazorPagerApiItem<ChatHubIgnore> apiItem = null;
+                PagerApiItem<ChatHubIgnore> apiItem = null;
                 List<ChatHubIgnore> ignores = new List<ChatHubIgnore>();
 
                 var dbQuery = this.chatHubRepository.Ignores().Include(item => item.User).Where(item => item.ChatHubUserId == user.UserId);
@@ -504,7 +504,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = ignores.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubIgnore>()
+                apiItem = new PagerApiItem<ChatHubIgnore>()
                 {
                     Items = ignores ?? new List<ChatHubIgnore>(),
                     Pages = pagesTotal,
@@ -517,11 +517,11 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int moduleId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubIgnoredBy>> GetIgnoredByItems(int page, int items, int moduleId, ChatHubUser user)
         {
             try
             {
-                BlazorPagerApiItem<ChatHubIgnoredBy> apiItem = null;
+                PagerApiItem<ChatHubIgnoredBy> apiItem = null;
                 List<ChatHubIgnoredBy> ignores = new List<ChatHubIgnoredBy>();
 
                 var dbQuery = this.chatHubRepository.Ignores().Include(item => item.User).Where(item => item.ChatHubIgnoredUserId == user.UserId);
@@ -547,7 +547,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = ignores.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubIgnoredBy>()
+                apiItem = new PagerApiItem<ChatHubIgnoredBy>()
                 {
                     Items = ignores ?? new List<ChatHubIgnoredBy>(),
                     Pages = pagesTotal,
@@ -560,12 +560,12 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubModerator>> GetModeratorItems(int page, int items, int roomId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubModerator>> GetModeratorItems(int page, int items, int roomId, ChatHubUser user)
         {
             try
             {
                 ChatHubRoom room = await this.chatHubRepository.GetRoomById(roomId);
-                BlazorPagerApiItem<ChatHubModerator> apiItem = null;
+                PagerApiItem<ChatHubModerator> apiItem = null;
                 List<ChatHubModerator> moderators = new List<ChatHubModerator>();
 
                 var dbQuery = this.chatHubRepository.GetModerators(room);
@@ -590,7 +590,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = moderators.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubModerator>()
+                apiItem = new PagerApiItem<ChatHubModerator>()
                 {
                     Items = moderators ?? new List<ChatHubModerator>(),
                     Pages = pagesTotal,
@@ -603,12 +603,12 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubBlacklistUser>> GetBlacklistUserItems(int page, int items, int roomId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubBlacklistUser>> GetBlacklistUserItems(int page, int items, int roomId, ChatHubUser user)
         {
             try
             {
                 ChatHubRoom room = await this.chatHubRepository.GetRoomById(roomId);
-                BlazorPagerApiItem<ChatHubBlacklistUser> apiItem = null;
+                PagerApiItem<ChatHubBlacklistUser> apiItem = null;
                 List<ChatHubBlacklistUser> blacklistUsers = new List<ChatHubBlacklistUser>();
 
                 var dbQuery = this.chatHubRepository.GetBlacklistUsers(room);
@@ -633,7 +633,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = blacklistUsers.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubBlacklistUser>()
+                apiItem = new PagerApiItem<ChatHubBlacklistUser>()
                 {
                     Items = blacklistUsers ?? new List<ChatHubBlacklistUser>(),
                     Pages = pagesTotal,
@@ -646,12 +646,12 @@ namespace Oqtane.ChatHubs.Services
                 throw new Exception(exception.Message);
             }
         }
-        public async Task<BlazorPagerApiItem<ChatHubWhitelistUser>> GetWhitelistUserItems(int page, int items, int roomId, ChatHubUser user)
+        public async Task<PagerApiItem<ChatHubWhitelistUser>> GetWhitelistUserItems(int page, int items, int roomId, ChatHubUser user)
         {
             try
             {
                 ChatHubRoom room = await this.chatHubRepository.GetRoomById(roomId);
-                BlazorPagerApiItem<ChatHubWhitelistUser> apiItem = null;
+                PagerApiItem<ChatHubWhitelistUser> apiItem = null;
                 List<ChatHubWhitelistUser> moderators = new List<ChatHubWhitelistUser>();
 
                 var dbQuery = this.chatHubRepository.GetWhitelistUsers(room);
@@ -676,7 +676,7 @@ namespace Oqtane.ChatHubs.Services
                 var itemsTotal = moderators.Count();
                 int pagesTotal = Convert.ToInt32(Math.Ceiling(itemsTotal / Convert.ToDouble(items)));
 
-                apiItem = new BlazorPagerApiItem<ChatHubWhitelistUser>()
+                apiItem = new PagerApiItem<ChatHubWhitelistUser>()
                 {
                     Items = moderators ?? new List<ChatHubWhitelistUser>(),
                     Pages = pagesTotal,

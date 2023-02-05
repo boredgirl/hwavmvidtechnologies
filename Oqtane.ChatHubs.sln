@@ -14,11 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAlerts", "BlazorAlert
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWindows", "BlazorWindows\BlazorWindows.csproj", "{39C78991-3C3E-4ABC-8F9E-7FA32DDD2501}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPager", "BlazorPager\BlazorPager.csproj", "{7DD2B998-C24D-4632-A69D-F689D406F7EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Pager", "Hwavmvid.Pager\Hwavmvid.Pager.csproj", "{7DD2B998-C24D-4632-A69D-F689D406F7EE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDraggableList", "BlazorDraggableList\BlazorDraggableList.csproj", "{2A9E17CF-A6AE-4505-92AA-15D2D9D1E7DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorFileUpload", "BlazorFileUpload\BlazorFileUpload.csproj", "{54A165C3-4EAC-4E0C-854E-0174D0B42E8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.FileUpload", "Hwavmvid.FileUpload\Hwavmvid.FileUpload.csproj", "{54A165C3-4EAC-4E0C-854E-0174D0B42E8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTabs", "BlazorTabs\BlazorTabs.csproj", "{A4837789-BDFF-47BB-B8DF-BD7C98B53464}"
 EndProject

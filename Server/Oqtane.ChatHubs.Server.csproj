@@ -56,10 +56,10 @@
     <ProjectReference Include="..\Hwavmvid.ColorPicker\Hwavmvid.ColorPicker.csproj" />
     <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
     <ProjectReference Include="..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
-    <ProjectReference Include="..\BlazorFileUpload\BlazorFileUpload.csproj" />
+    <ProjectReference Include="..\Hwavmvid.FileUpload\Hwavmvid.FileUpload.csproj" />
     <ProjectReference Include="..\BlazorModal\BlazorModal.csproj" />
     <ProjectReference Include="..\BlazorNotifications\BlazorNotifications.csproj" />
-    <ProjectReference Include="..\BlazorPager\BlazorPager.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Pager\Hwavmvid.Pager.csproj" />
     <ProjectReference Include="..\BlazorTabs\BlazorTabs.csproj" />
     <ProjectReference Include="..\Hwavmvid.Video\Hwavmvid.Video.csproj" />
     <ProjectReference Include="..\Hwavmvid.VideoPlayer\Hwavmvid.VideoPlayer.csproj" />

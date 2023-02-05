@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 
-namespace BlazorFileUpload
+namespace Hwavmvid.FileUpload
 {
-    public class BlazorFileUploadModel
+    public class FileUploadModel
     {
 
         public string Base64ImageUrl { get; set; }

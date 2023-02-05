@@ -1,6 +1,6 @@
-﻿@namespace BlazorFileUpload
+﻿@namespace Hwavmvid.FileUpload
 
-@inherits BlazorFileUploadBase
+@inherits FileUploadBase
 
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -18,7 +18,7 @@
 </style>
 
 <div class="my-1" style="overflow: hidden;">
-    <InputFile OnChange="@OnBlazorFileUploadChange" id="@InputFileId" multiple />
+    <InputFile OnChange="@FileUploadChange" id="@InputFileId" multiple />
 </div>
 
 <div class="w-100 my-1">

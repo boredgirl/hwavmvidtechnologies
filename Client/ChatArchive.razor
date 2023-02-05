@@ -3,11 +3,11 @@
 @implements IDisposable
 
 @inject ChatHubService ChatHubService
-@inject BlazorPagerService<ChatHubCam> BlazorPagerServiceChatHubCam
+@inject PagerService<ChatHubCam> PagerServiceChatHubCam
 @inject NavigationManager NavigationManager
 
 @using Oqtane.ChatHubs.Constants
-@using BlazorPager
+@using Hwavmvid.Pager
 @using Oqtane.ChatHubs.Services
 @using Hwavmvid.VideoPlayer
 @using Oqtane.ChatHubs.Models
@@ -27,8 +27,8 @@
             var archiveItemApiUrl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/GetArchiveItems");
         }
 
-        <BlazorPagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmBlazorPagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
-            <BlazorPagerItem>
+        <PagerComponent ApiQueryId="@ModuleState.ModuleId" HubConnectionId="@ChatHubService.Connection.ConnectionId" ElementId="WasmHwavmvid.PagerArchiveItems" GetItemsApiUrl="@archiveItemApiUrl" ContextPageItems="@ChatHubService.VideoCaptures" ItemsPerPage="@ChatHubConstants.ArchiveItems" Class="py-sm-3" Scrolling="@false">
+            <PagerItem>
 
                 <div class="mb-2 mb-sm-3 p-0 p-sm-1" style="width: 340px; display: inline-block; text-align: center;">
 
@@ -56,7 +56,7 @@
 
                     <div class="text-center my-1">
 
-                        <button type="button" @onclick="() => BlazorPagerServiceChatHubCam.RemoveItem(context, ModuleState.ModuleId)" class="btn btn-sm btn-primary">Delete</button>
+                        <button type="button" @onclick="() => PagerServiceChatHubCam.RemoveItem(context, ModuleState.ModuleId)" class="btn btn-sm btn-primary">Delete</button>
                     
                         @{
                             var mp4downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + ModuleState.ModuleId.ToString() + "/" + ".mp4");
@@ -70,8 +70,8 @@
 
                 </div>
 
-            </BlazorPagerItem>
-        </BlazorPagerComponent>
+            </PagerItem>
+        </PagerComponent>
 
     </div>
 
@@ -81,9 +81,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.BlazorPagerServiceChatHubCam.OnRetrievedItems += RetrievedItems;
-        this.BlazorPagerServiceChatHubCam.OnRemoveItem += RemoveItem;
-        this.BlazorPagerServiceChatHubCam.OnError += Error;
+        this.PagerServiceChatHubCam.OnRetrievedItems += RetrievedItems;
+        this.PagerServiceChatHubCam.OnRemoveItem += RemoveItem;
+        this.PagerServiceChatHubCam.OnError += Error;
         await base.OnInitializedAsync();
     }
 
@@ -95,7 +95,7 @@
             this.ChatHubService.RunUpdateUI();
         }
     }
-    public async void RemoveItem(BlazorPagerEvent<ChatHubCam> obj)
+    public async void RemoveItem(PagerEvent<ChatHubCam> obj)
     {
         if (obj.ApiQueryId == ModuleState.ModuleId)
         {
@@ -115,9 +115,9 @@
 
     public void Dispose()
     {
-        this.BlazorPagerServiceChatHubCam.OnRetrievedItems -= RetrievedItems;
-        this.BlazorPagerServiceChatHubCam.OnRemoveItem -= RemoveItem;
-        this.BlazorPagerServiceChatHubCam.OnError -= Error;
+        this.PagerServiceChatHubCam.OnRetrievedItems -= RetrievedItems;
+        this.PagerServiceChatHubCam.OnRemoveItem -= RemoveItem;
+        this.PagerServiceChatHubCam.OnError -= Error;
     }
 
 }

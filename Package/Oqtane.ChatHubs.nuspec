@@ -33,13 +33,40 @@
 				<dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
 				<dependency id="FFMpegCore" version="4.7.0" exclude="Build,Analyzers" />
 				<dependency id="Instances" version="1.6.1" exclude="Build,Analyzers" />
-
-				<dependency id="System.Composition" version="7.0.0" />
-				<dependency id="System.Composition.AttributedModel" version="7.0.0" />
-				<dependency id="System.Composition.TypedParts" version="7.0.0" />
-				<dependency id="System.Composition.Hosting" version="7.0.0" />
-				<dependency id="System.Composition.Runtime" version="7.0.0" />
-				<dependency id="System.Composition.Convention" version="7.0.0" />
+			</group>
+			
+			<!-- nuspec dependencies for system.composition -->
+			<group targetFramework=".NETFramework4.6.2">
+				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
+			</group>
+			<group targetFramework="net6.0">
+				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
+			</group>
+			<group targetFramework="net7.0">
+				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
+			</group>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="System.Composition" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.AttributedModel" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Convention" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Hosting" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.Runtime" version="7.0.0" exclude="Build,Analyzers" />
+				<dependency id="System.Composition.TypedParts" version="7.0.0" exclude="Build,Analyzers" />
 			</group>
 
 		</dependencies>
@@ -67,12 +94,12 @@
 		<file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.pdb" target="lib\net6.0" />
 		<file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.dll" target="lib\net6.0" />
 		<file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.pdb" target="lib\net6.0" />
-		<file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.dll" target="lib\net6.0" />
-		<file src="..\BlazorPager\bin\Release\net6.0\BlazorPager.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Pager\bin\Release\net6.0\Hwavmvid.Pager.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Pager\bin\Release\net6.0\Hwavmvid.Pager.pdb" target="lib\net6.0" />
 		<file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.dll" target="lib\net6.0" />
 		<file src="..\BlazorDraggableList\bin\Release\net6.0\BlazorDraggableList.pdb" target="lib\net6.0" />
-		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.dll" target="lib\net6.0" />
-		<file src="..\BlazorFileUpload\bin\Release\net6.0\BlazorFileUpload.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.FileUpload\bin\Release\net6.0\Hwavmvid.FileUpload.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.FileUpload\bin\Release\net6.0\Hwavmvid.FileUpload.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.ColorPicker\bin\Release\net6.0\Hwavmvid.ColorPicker.dll" target="lib\net6.0" />
 		<file src="..\Hwavmvid.ColorPicker\bin\Release\net6.0\Hwavmvid.ColorPicker.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Video\bin\Release\net6.0\Hwavmvid.Video.dll" target="lib\net6.0" />
@@ -129,9 +156,9 @@
 		<file src="..\Hwavmvid.ColorPicker\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDraggableList\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDropdown\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorFileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.FileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorModal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorPager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Pager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorSelect\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Video\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.VideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />

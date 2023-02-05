@@ -72,7 +72,7 @@ namespace Hwavmvid.Roulettecoins
                             this.draggablejsmaps.Add(new RoulettecoinsMap() { Id = coinitem.Id, JSObjectReference = obj });
                         }
                     }
-                } catch (Exception exception) {}
+                } catch (Exception exception) { Console.WriteLine(exception.Message); }
 
                 try
                 {
@@ -99,7 +99,7 @@ namespace Hwavmvid.Roulettecoins
                             this.droppablejsmaps.Add(new RoulettecoinsMap() { Id = surfacenumberitem.Value.ToString(), JSObjectReference = obj });
                         }
                     }
-                } catch (Exception exception) {}
+                } catch (Exception exception) { Console.WriteLine(exception.Message); }
             }
         }
         

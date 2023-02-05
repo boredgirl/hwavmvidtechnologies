@@ -347,7 +347,7 @@ namespace Hwavmvid.Video
                     await this.StartSequenceLocalLivestream(id1, id2);
 
                     if (i % 10 == 2)
-                        this.TakeSnapshot(id1, id2, VideoSnapshotActivatorType.System);
+                        await this.TakeSnapshot(id1, id2, VideoSnapshotActivatorType.System);
                     i++;
 
                     await Task.Delay(this.VideoSegmentsLength);

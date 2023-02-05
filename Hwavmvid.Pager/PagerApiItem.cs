@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace BlazorPager
+namespace Hwavmvid.Pager
 {
-    public class BlazorPagerApiItem<TItemGeneric>
+    public class PagerApiItem<TItemGeneric>
     {
 
         public List<TItemGeneric> Items { get; set; }

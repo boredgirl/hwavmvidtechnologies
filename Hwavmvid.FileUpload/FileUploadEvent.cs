@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BlazorFileUpload
+namespace Hwavmvid.FileUpload
 {
-    public class BlazorFileUploadEvent
+    public class FileUploadEvent
     {
 
         public string FileUploadDropzoneId { get; set; }
 
-        public BlazorFileUploadEvent() { }
+        public FileUploadEvent() { }
 
     }
 }

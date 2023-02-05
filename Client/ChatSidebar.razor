@@ -2,16 +2,16 @@
 @inherits ModuleBase
 
 @inject NavigationManager NavigationManager
-@inject BlazorPagerService<ChatHubUser> BlazorPagerServiceChatHubUser
+@inject PagerService<ChatHubUser> PagerServiceChatHubUser
 
-@using BlazorFileUpload
+@using Hwavmvid.FileUpload
 @using Hwavmvid.Video
 @using Oqtane.ChatHubs.Services
 @using Oqtane.ChatHubs.Models
 @using System.Linq
 @using Microsoft.AspNetCore.Components
 @using BlazorTabs
-@using BlazorPager
+@using Hwavmvid.Pager
 @using Oqtane.ChatHubs.Constants
 
 <div class="w-100 my-3" style="height: @(string.Format("{0}px", UserlistWindowHeight)); overflow: auto;">
@@ -49,7 +49,7 @@
                         headers.Add("moduleId", ModuleState.ModuleId.ToString());
                     }
 
-                    <BlazorFileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@(FileUploadInputFileElementId)" DropzoneElementId="@(FileUploadDropzoneContainerElementId)"></BlazorFileUploadComponent>
+                    <FileUploadComponent ApiUrl="@url" FileUploadHeaders="@headers" InputFileId="@(FileUploadInputFileElementId)" DropzoneElementId="@(FileUploadDropzoneContainerElementId)"></FileUploadComponent>
 
                 </div>
 
