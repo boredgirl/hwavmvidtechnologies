@@ -28,7 +28,7 @@ namespace Oqtane.ChatHubs
         [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
         [Inject] public BlazorModalService BlazorModalService { get; set; }
-        [Inject] public BlazorNotificationsService BlazorNotificationService { get; set; }
+        [Inject] public NotificationsService BlazorNotificationService { get; set; }
 
         public const string EditRoomModalElementId = "EditRoomModalElementId";
 
@@ -131,7 +131,7 @@ namespace Oqtane.ChatHubs
 
             room = await this.ChatHubService.CreateRoom(room);
             await this.CloseModal();
-            var item = new NotificationItem() { Id = Guid.NewGuid().ToString(), Title = "Notification", Content = "Successfully created room", Type = BlazorNotificationType.Success };
+            var item = new NotificationItem() { Id = Guid.NewGuid().ToString(), Title = "Notification", Content = "Successfully created room", Type = NotificationType.Success };
             this.BlazorNotificationService.AddNotification(item);
             StateHasChanged();
         }

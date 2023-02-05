@@ -1,4 +1,4 @@
-export function initblazornotifications(dotNetObjectReference) {
+export function initnotifications(dotNetObjectReference) {
 
     var __obj = {
 

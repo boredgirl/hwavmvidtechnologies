@@ -45,7 +45,7 @@ namespace Oqtane.ChatHubs.Services
         public BlazorBrowserResizeService BrowserResizeService { get; set; }
         public VideoService VideoService { get; set; }
         public VideoPlayerService VideoPlayerService { get; set; }
-        public BlazorNotificationsService BlazorNotificationsService { get; set; }
+        public NotificationsService BlazorNotificationsService { get; set; }
         public DevicesService DevicesService { get; set; }
         public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
         public Jsapibingmapservice Jsapibingmapservice { get; set; }
@@ -92,7 +92,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, BlazorNotificationsService blazorNotificationService, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService blazorNotificationService, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -752,7 +752,7 @@ namespace Oqtane.ChatHubs.Services
                 Id = Guid.NewGuid().ToString(),
                 Title = "Notification",
                 Content = String.Concat("Entered room ", room.Title, "."),
-                Type = BlazorNotificationType.Success,
+                Type = NotificationType.Success,
             };
 
             this.BlazorNotificationsService.AddNotification(notification);

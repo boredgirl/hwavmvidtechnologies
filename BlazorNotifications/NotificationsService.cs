@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace BlazorNotifications
 {
-    public class BlazorNotificationsService
+    public class NotificationsService
     {
 
         private IJSRuntime jsRuntime { get; set; }
         private IJSObjectReference moduleTask { get; set; }
         private IJSObjectReference notificationsMap { get; set; }
-        public DotNetObjectReference<BlazorNotificationsService> dotNetObjectReference { get; set; }
+        public DotNetObjectReference<NotificationsService> dotNetObjectReference { get; set; }
 
         public Action OnUpdateUI { get; set; }
         public EventHandler<NotificationItem> OnNotificationAdded { get; set; }
 
         public List<NotificationItem> NotificationItems = new List<NotificationItem>();
 
-        public BlazorNotificationsService(IJSRuntime jsRuntime)
+        public NotificationsService(IJSRuntime jsRuntime)
         {
             this.jsRuntime = jsRuntime;
             this.dotNetObjectReference = DotNetObjectReference.Create(this);
@@ -27,7 +27,7 @@ namespace BlazorNotifications
         public async Task InitNotificationsServiceAsync()
         {
             this.moduleTask = await this.jsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazornotificationsjsinterop.js");
-            this.notificationsMap = await this.moduleTask.InvokeAsync<IJSObjectReference>("initblazornotifications", this.dotNetObjectReference);
+            this.notificationsMap = await this.moduleTask.InvokeAsync<IJSObjectReference>("initnotifications", this.dotNetObjectReference);
         }
 
         public void AddNotification(NotificationItem item)

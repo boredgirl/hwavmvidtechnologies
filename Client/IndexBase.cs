@@ -194,7 +194,7 @@ namespace Oqtane.ChatHubs
             }
             catch
             {
-                this.ChatHubService.BlazorNotificationsService.AddNotification(new NotificationItem() { Id = Guid.NewGuid().ToString(), Content = "Failed swap room item.", Type = BlazorNotificationType.Danger });
+                this.ChatHubService.BlazorNotificationsService.AddNotification(new NotificationItem() { Id = Guid.NewGuid().ToString(), Content = "Failed swap room item.", Type = NotificationType.Danger });
             }
         }        
         public async Task LeaveRoom_Clicked(int roomId, int moduleId)
@@ -261,7 +261,7 @@ namespace Oqtane.ChatHubs
                     Id = Guid.NewGuid().ToString(),
                     Title = "Notification",
                     Content = message,
-                    Type = BlazorNotificationType.Danger });
+                    Type = NotificationType.Danger });
         }
         private void OnVideoErrorExecute(string message)
         {
@@ -270,7 +270,7 @@ namespace Oqtane.ChatHubs
                     Id = Guid.NewGuid().ToString(), 
                     Title = "Notification", 
                     Content = message, 
-                    Type = BlazorNotificationType.Danger });
+                    Type = NotificationType.Danger });
         }
 
         public async void RemovedWindow()

@@ -1,5 +1,5 @@
 ﻿@namespace BlazorNotifications
-@inherits BlazorNotificationsBase
+@inherits NotificationsBase
 
 @using System.Collections.Generic
 @using System.Linq
@@ -29,11 +29,11 @@
 
 </style>
 
-@if (BlazorNotificationsService.NotificationItems.Any())
+@if (NotificationsService.NotificationItems.Any())
 {
     <div class="blazor-notifications">
 
-        @foreach (var item in BlazorNotificationsService.NotificationItems.ToList())
+        @foreach (var item in NotificationsService.NotificationItems.ToList())
         {
             <div class="position-relative w-100 p-2 alert alert-@item.Type.ToString().ToLower() rounded-0 mb-0">
                 <h6 class="alert-heading">@item.Title</h6>

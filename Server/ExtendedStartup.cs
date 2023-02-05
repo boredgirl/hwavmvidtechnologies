@@ -71,7 +71,7 @@ namespace Oqtane
             services.AddScoped<VideoPlayerService, VideoPlayerService>();
             services.AddScoped<BlazorBrowserResizeService, BlazorBrowserResizeService>();
             services.AddScoped<BlazorModalService, BlazorModalService>();
-            services.AddScoped<BlazorNotificationsService, BlazorNotificationsService>();
+            services.AddScoped<NotificationsService, NotificationsService>();
             services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();
             services.AddScoped<BlazorSliderService, BlazorSliderService>();
             services.AddScoped<DevicesService, DevicesService>();

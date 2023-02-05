@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 
 namespace BlazorNotifications
 {
-    public class BlazorNotificationsBase : ComponentBase, IDisposable
+    public class NotificationsBase : ComponentBase, IDisposable
     {
 
-        [Inject] protected BlazorNotificationsService BlazorNotificationsService { get; set; }
+        [Inject] protected NotificationsService NotificationsService { get; set; }
 
         protected override void OnInitialized()
         {
-            this.BlazorNotificationsService.OnUpdateUI += this.OnUpdateUIExecute;
-            this.BlazorNotificationsService.OnNotificationAdded += (object sender, NotificationItem item) => this.OnNotificationAddedExecuteAsync(sender, item);
+            this.NotificationsService.OnUpdateUI += this.OnUpdateUIExecute;
+            this.NotificationsService.OnNotificationAdded += (object sender, NotificationItem item) => this.OnNotificationAddedExecuteAsync(sender, item);
             base.OnInitialized();
         }
 
@@ -20,7 +20,7 @@ namespace BlazorNotifications
         {
             if (firstRender)
             {
-                await this.BlazorNotificationsService.InitNotificationsServiceAsync();
+                await this.NotificationsService.InitNotificationsServiceAsync();
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -34,7 +34,7 @@ namespace BlazorNotifications
         private async void DelayedTask(NotificationItem item)
         {
             await Task.Delay(item.Timeout);
-            this.BlazorNotificationsService.RemoveNotification(item.Id);
+            this.NotificationsService.RemoveNotification(item.Id);
             await this.InvokeAsync(() => this.StateHasChanged());
         }
 
@@ -45,8 +45,8 @@ namespace BlazorNotifications
 
         public void Dispose()
         {
-            this.BlazorNotificationsService.OnUpdateUI -= this.OnUpdateUIExecute;
-            this.BlazorNotificationsService.OnNotificationAdded -= (object sender, NotificationItem item) => this.OnNotificationAddedExecuteAsync(sender, item);
+            this.NotificationsService.OnUpdateUI -= this.OnUpdateUIExecute;
+            this.NotificationsService.OnNotificationAdded -= (object sender, NotificationItem item) => this.OnNotificationAddedExecuteAsync(sender, item);
         }
 
     }

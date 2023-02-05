@@ -1,6 +1,6 @@
 ﻿namespace BlazorNotifications
 {
-    public enum BlazorNotificationType
+    public enum NotificationType
     {
         Info,
         Success,
