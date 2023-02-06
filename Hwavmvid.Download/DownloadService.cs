@@ -8,42 +8,42 @@ using System.Threading;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace BlazorDownload
+namespace Hwavmvid.Download
 {
-    public class BlazorDownloadService : IDisposable
+    public class DownloadService : IDisposable
     {
 
         private IJSRuntime JsRuntime { get; set; }
         private IJSObjectReference JsImport { get; set; }
         private HttpClient HttpClient { get; set; }
-        private List<BlazorDownloadMap> Maps { get; set; } = new List<BlazorDownloadMap>();
+        private List<DownloadMap> Maps { get; set; } = new List<DownloadMap>();
 
         public HubConnection HubConnection { get; set; }
         public string HubConnectionMethodName { get; set; }
-        public event Action<BlazorDownloadEvent> OnApiItemReceived;
-        public event Action<BlazorDownloadApiItem> OnUpdateProgress;
+        public event Action<DownloadEvent> OnApiItemReceived;
+        public event Action<DownloadApiItem> OnUpdateProgress;
 
-        public BlazorDownloadService(IJSRuntime jsRuntime, HttpClient httpClient)
+        public DownloadService(IJSRuntime jsRuntime, HttpClient httpClient)
         {
             this.JsRuntime = jsRuntime;
             this.HttpClient = httpClient;
             this.OnUpdateProgress += UpdateProgress;
         }
 
-        public async Task InitBlazorDownload(string id, string apiQueryId, string fileType, HubConnection hubConnection, string hubContextMethodName)
+        public async Task InitDownload(string id, string apiQueryId, string fileType, HubConnection hubConnection, string hubContextMethodName)
         {
             if (this.JsImport == null)
             {
-                this.JsImport = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/blazordownloadjsinterop.js");
+                this.JsImport = await this.JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Modules/Oqtane.ChatHubs/downloadjsinterop.js");
             }
 
             if (this.JsImport != null)
             {
-                var jsMap = await this.JsImport.InvokeAsync<IJSObjectReference>("initblazordownload");
-                BlazorDownloadMap map = this.GetMap(id);
+                var jsMap = await this.JsImport.InvokeAsync<IJSObjectReference>("initdownload");
+                DownloadMap map = this.GetMap(id);
                 if (map == null)
                 {
-                    var item = new BlazorDownloadMap()
+                    var item = new DownloadMap()
                     {
                         Id = id,
                         ApiQueryId = apiQueryId,
@@ -62,7 +62,7 @@ namespace BlazorDownload
             this.RegisterHubConnectionHandler(hubContextMethodName);
         }
 
-        public BlazorDownloadMap GetMap(string id)
+        public DownloadMap GetMap(string id)
         {
             return this.Maps.FirstOrDefault(item => item.Id == id);
         }
@@ -90,7 +90,7 @@ namespace BlazorDownload
             try
             {
                 var getItemsResponse = await this.HttpClient.GetAsync(requestUri);
-                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<BlazorDownloadApiItem>();
+                var apiItem = await getItemsResponse.Content.ReadFromJsonAsync<DownloadApiItem>();
 
                 this.DownloadCompleted(id, apiItem);
                 this.UpdateProgress(apiItem);
@@ -101,7 +101,7 @@ namespace BlazorDownload
             }
         }
 
-        public void DownloadCompleted(string id, BlazorDownloadApiItem item)
+        public void DownloadCompleted(string id, DownloadApiItem item)
         {
             
             var map = this.GetMap(id);
@@ -121,7 +121,7 @@ namespace BlazorDownload
 
         public void RegisterHubConnectionHandler(string hubConnectionMethod)
         {
-            this.HubConnection.On(hubConnectionMethod, (BlazorDownloadApiItem apiItem) => this.OnUpdateProgress(apiItem));
+            this.HubConnection.On(hubConnectionMethod, (DownloadApiItem apiItem) => this.OnUpdateProgress(apiItem));
         }
 
         public void RemoveHubConnectionHandler(string hubConnectionMethod)
@@ -129,9 +129,9 @@ namespace BlazorDownload
             this.HubConnection.Remove(hubConnectionMethod);
         }
 
-        public void UpdateProgress(BlazorDownloadApiItem apiItem)
+        public void UpdateProgress(DownloadApiItem apiItem)
         {
-            var eventItem = new BlazorDownloadEvent()
+            var eventItem = new DownloadEvent()
             {
                 ApiItem = apiItem,
             };

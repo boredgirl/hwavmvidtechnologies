@@ -86,16 +86,16 @@
 		<file src="..\BlazorBrowserResize\bin\Release\net6.0\BlazorBrowserResize.pdb" target="lib\net6.0" />
 		<file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.dll" target="lib\net6.0" />
 		<file src="..\BlazorDropdown\bin\Release\net6.0\BlazorDropdown.pdb" target="lib\net6.0" />
-		<file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.dll" target="lib\net6.0" />
-		<file src="..\BlazorNotifications\bin\Release\net6.0\BlazorNotifications.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Notifications\bin\Release\net6.0\Hwavmvid.Notifications.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Notifications\bin\Release\net6.0\Hwavmvid.Notifications.pdb" target="lib\net6.0" />
 		<file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.dll" target="lib\net6.0" />
 		<file src="..\BlazorDynamicLayout\bin\Release\net6.0\BlazorDynamicLayout.pdb" target="lib\net6.0" />
 		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.dll" target="lib\net6.0" />
 		<file src="..\BlazorSlider\bin\Release\net6.0\BlazorSlider.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Devices\bin\Release\net6.0\Hwavmvid.Devices.dll" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Devices\bin\Release\net6.0\Hwavmvid.Devices.pdb" target="lib\net6.0" />
-		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.dll" target="lib\net6.0" />
-		<file src="..\BlazorDownload\bin\Release\net6.0\BlazorDownload.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Download\bin\Release\net6.0\Hwavmvid.Download.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Download\bin\Release\net6.0\Hwavmvid.Download.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.dll" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Motiondetection\bin\Release\net6.0\Hwavmvid.Motiondetection.pdb" target="lib\net6.0" />
 		<file src="..\Hwavmvid.Stringpics\bin\Release\net6.0\Hwavmvid.Stringpics.dll" target="lib\net6.0" />
@@ -139,11 +139,11 @@
 		<file src="..\Hwavmvid.Video\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.VideoPlayer\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorWindows\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorNotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Notifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDynamicLayout\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorSlider\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Devices\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorDownload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Download\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Jsapinotifications\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Jsapigeolocation\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />		
 		<file src="..\Hwavmvid.Blackjack\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />

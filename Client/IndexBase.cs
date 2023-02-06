@@ -20,7 +20,7 @@ using Oqtane.ChatHubs.Models;
 using BlazorModal;
 using Oqtane.Models;
 using BlazorDropdown;
-using BlazorNotifications;
+using Hwavmvid.Notifications;
 using Hwavmvid.Pager;
 using BlazorDynamicLayout;
 using Hwavmvid.Jsapinotifications;
@@ -194,7 +194,7 @@ namespace Oqtane.ChatHubs
             }
             catch
             {
-                this.ChatHubService.BlazorNotificationsService.AddNotification(new NotificationItem() { Id = Guid.NewGuid().ToString(), Content = "Failed swap room item.", Type = NotificationType.Danger });
+                this.ChatHubService.NotificationsService.AddNotification(new NotificationItem() { Id = Guid.NewGuid().ToString(), Content = "Failed swap room item.", Type = NotificationType.Danger });
             }
         }        
         public async Task LeaveRoom_Clicked(int roomId, int moduleId)
@@ -256,7 +256,7 @@ namespace Oqtane.ChatHubs
 
         private void OnBlazorDynamicLayoutErrorExecute(string message)
         {
-            this.ChatHubService.BlazorNotificationsService.AddNotification(
+            this.ChatHubService.NotificationsService.AddNotification(
                 new NotificationItem() { 
                     Id = Guid.NewGuid().ToString(),
                     Title = "Notification",
@@ -265,7 +265,7 @@ namespace Oqtane.ChatHubs
         }
         private void OnVideoErrorExecute(string message)
         {
-            this.ChatHubService.BlazorNotificationsService.AddNotification(
+            this.ChatHubService.NotificationsService.AddNotification(
                 new NotificationItem() { 
                     Id = Guid.NewGuid().ToString(), 
                     Title = "Notification", 

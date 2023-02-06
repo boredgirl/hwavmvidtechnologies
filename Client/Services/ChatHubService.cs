@@ -23,7 +23,7 @@ using BlazorAlerts;
 using BlazorDraggableList;
 using Hwavmvid.Video;
 using BlazorBrowserResize;
-using BlazorNotifications;
+using Hwavmvid.Notifications;
 using Hwavmvid.VideoPlayer;
 using Hwavmvid.Devices;
 using System.Text.Json;
@@ -45,7 +45,7 @@ namespace Oqtane.ChatHubs.Services
         public BlazorBrowserResizeService BrowserResizeService { get; set; }
         public VideoService VideoService { get; set; }
         public VideoPlayerService VideoPlayerService { get; set; }
-        public NotificationsService BlazorNotificationsService { get; set; }
+        public NotificationsService NotificationsService { get; set; }
         public DevicesService DevicesService { get; set; }
         public Jsapigeolocationservice Jsapigeolocationservice { get; set; }
         public Jsapibingmapservice Jsapibingmapservice { get; set; }
@@ -92,7 +92,7 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService blazorNotificationService, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService Notificationservice, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
@@ -104,7 +104,7 @@ namespace Oqtane.ChatHubs.Services
             this.BrowserResizeService = browserResizeService;
             this.VideoService = VideoService;
             this.VideoPlayerService = VideoPlayerService;
-            this.BlazorNotificationsService = blazorNotificationService;
+            this.NotificationsService = Notificationservice;
             this.DevicesService = DevicesService;
             this.Jsapigeolocationservice = jsapigeolocationservice;
             this.Jsapibingmapservice = jsapibingmapservice;
@@ -755,7 +755,7 @@ namespace Oqtane.ChatHubs.Services
                 Type = NotificationType.Success,
             };
 
-            this.BlazorNotificationsService.AddNotification(notification);
+            this.NotificationsService.AddNotification(notification);
             this.RunUpdateUI();
         }
         private void OnRemoveChatHubRoomExecute(object sender, ChatHubRoom room)
@@ -933,7 +933,7 @@ namespace Oqtane.ChatHubs.Services
             }
 
             var item = new NotificationItem() { Id = Guid.NewGuid().ToString(), Title = "Notification", Content = message };
-            this.BlazorNotificationsService.AddNotification(item);
+            this.NotificationsService.AddNotification(item);
             this.RunUpdateUI();
         }
 

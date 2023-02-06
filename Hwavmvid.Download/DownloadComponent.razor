@@ -1,8 +1,8 @@
-﻿@namespace BlazorDownload
+﻿@namespace Hwavmvid.Download
 @inherits ComponentBase
 @implements IDisposable
 
-@inject BlazorDownloadService BlazorDownloadService
+@inject DownloadService DownloadService
 
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
@@ -51,9 +51,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.BlazorDownloadService.OnApiItemReceived += async (BlazorDownloadEvent e) => await OnApiItemReceived(e);
+        this.DownloadService.OnApiItemReceived += async (DownloadEvent e) => await OnApiItemReceived(e);
 
-        var map = this.BlazorDownloadService.GetMap(this.Id);
+        var map = this.DownloadService.GetMap(this.Id);
         if (map != null && map.LastApiItem != null)
         {
             this.ProgressTotal = map.LastApiItem.ProgressTotal;
@@ -72,7 +72,7 @@
     {
         if (firstRender)
         {
-            await this.BlazorDownloadService.InitBlazorDownload(this.Id, this.ApiQueryId, this.FileType, this.HubConnection, this.HubContextMethodName);
+            await this.DownloadService.InitDownload(this.Id, this.ApiQueryId, this.FileType, this.HubConnection, this.HubContextMethodName);
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -80,14 +80,14 @@
 
     public void StartDownloadFile()
     {
-        this.BlazorDownloadService.StartDownloadFile(this.Id, this.ApiUrl);
+        this.DownloadService.StartDownloadFile(this.Id, this.ApiUrl);
     }
 
-    public async Task OnApiItemReceived(BlazorDownloadEvent obj)
+    public async Task OnApiItemReceived(DownloadEvent obj)
     {
         if (this.ApiQueryId == obj.ApiItem.Id)
         {
-            var map = this.BlazorDownloadService.GetMap(this.Id);
+            var map = this.DownloadService.GetMap(this.Id);
             if (map != null)
             {
 
@@ -132,7 +132,7 @@
 
     public void Dispose()
     {
-        this.BlazorDownloadService.OnApiItemReceived -= async (BlazorDownloadEvent e) => await OnApiItemReceived(e);
+        this.DownloadService.OnApiItemReceived -= async (DownloadEvent e) => await OnApiItemReceived(e);
     }
 
 }

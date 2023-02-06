@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorNotifications
+namespace Hwavmvid.Notifications
 {
     public class NotificationsBase : ComponentBase, IDisposable
     {

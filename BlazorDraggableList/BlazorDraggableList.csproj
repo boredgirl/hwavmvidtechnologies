@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorDownload\BlazorDownload.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Download\Hwavmvid.Download.csproj" />
   </ItemGroup>
 
 </Project>

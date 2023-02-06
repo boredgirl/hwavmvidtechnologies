@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Video", "Hwavmvid.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBrowserResize", "BlazorBrowserResize\BlazorBrowserResize.csproj", "{31D8888E-C4D2-41C3-AFF9-CEAF4C2F776B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorNotifications", "BlazorNotifications\BlazorNotifications.csproj", "{7778FD39-9DE5-466B-B346-EE676BA68E1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Notifications", "Hwavmvid.Notifications\Hwavmvid.Notifications.csproj", "{7778FD39-9DE5-466B-B346-EE676BA68E1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDynamicLayout", "BlazorDynamicLayout\BlazorDynamicLayout.csproj", "{00CC9D75-924A-4774-825A-C2E55A63FCC4}"
 EndProject
@@ -48,7 +48,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlider", "BlazorSlide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Devices", "Hwavmvid.Devices\Hwavmvid.Devices.csproj", "{76915D55-2CEE-4466-809F-BCFCD2D31708}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDownload", "BlazorDownload\BlazorDownload.csproj", "{D0AE41A0-5664-4377-9C8B-792A2D0C58D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Download", "Hwavmvid.Download\Hwavmvid.Download.csproj", "{D0AE41A0-5664-4377-9C8B-792A2D0C58D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Motiondetection", "Hwavmvid.Motiondetection\Hwavmvid.Motiondetection.csproj", "{1AEE57B4-3728-4E64-ADF7-9D5025F3F3C7}"
 EndProject

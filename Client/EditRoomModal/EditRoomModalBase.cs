@@ -2,7 +2,7 @@
 using Hwavmvid.ColorPicker;
 using BlazorModal;
 using BlazorSelect;
-using BlazorNotifications;
+using Hwavmvid.Notifications;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Oqtane.ChatHubs.Services;
@@ -28,7 +28,7 @@ namespace Oqtane.ChatHubs
         [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
         [Inject] public BlazorModalService BlazorModalService { get; set; }
-        [Inject] public NotificationsService BlazorNotificationService { get; set; }
+        [Inject] public NotificationsService Notificationservice { get; set; }
 
         public const string EditRoomModalElementId = "EditRoomModalElementId";
 
@@ -132,7 +132,7 @@ namespace Oqtane.ChatHubs
             room = await this.ChatHubService.CreateRoom(room);
             await this.CloseModal();
             var item = new NotificationItem() { Id = Guid.NewGuid().ToString(), Title = "Notification", Content = "Successfully created room", Type = NotificationType.Success };
-            this.BlazorNotificationService.AddNotification(item);
+            this.Notificationservice.AddNotification(item);
             StateHasChanged();
         }
         public async Task OpenCreateRoomModal()

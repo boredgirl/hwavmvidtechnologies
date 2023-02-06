@@ -1,4 +1,4 @@
-﻿namespace BlazorNotifications
+﻿namespace Hwavmvid.Notifications
 {
     public enum NotificationType
     {

@@ -1,10 +1,10 @@
-export function initblazordownload() {
+export function initdownload() {
 
     var __obj = {
 
-        blazordownloadmap: function () {
+        downloadmap: function () {
 
-            var __selfblazordownloadmap = this;
+            var __context = this;
 
             this.downloadcapturedvideoitem = function (filename, base64str) {
 
@@ -16,7 +16,7 @@ export function initblazordownload() {
                 }
                 var blob = new Blob([arraybuffer], { type: "video/mp4;codecs=h264" });
                 var uri = URL.createObjectURL(blob);
-                __selfblazordownloadmap.invokedownload(filename, uri);
+                __context.invokedownload(filename, uri);
                 URL.revokeObjectURL(uri);
             };
 
@@ -35,5 +35,5 @@ export function initblazordownload() {
         }
     }
 
-    return new __obj.blazordownloadmap();
+    return new __obj.downloadmap();
 }

@@ -20,7 +20,7 @@ using Hwavmvid.Pager;
 using System.Collections.Generic;
 using FFMpegCore;
 using FFMpegCore.Enums;
-using BlazorDownload;
+using Hwavmvid.Download;
 
 namespace Oqtane.ChatHubs.Controllers
 {
@@ -466,7 +466,7 @@ namespace Oqtane.ChatHubs.Controllers
         [HttpGet("{connectionid}/{camid}/{roomid}/{moduleid}/{filetype}")]
         [ActionName("DownloadVideoCapture")]
         [AllowAnonymous]
-        public async Task<BlazorDownloadApiItem> DownloadVideoCapture(string connectionId, string camId, string roomId, string moduleId, string fileType)
+        public async Task<DownloadApiItem> DownloadVideoCapture(string connectionId, string camId, string roomId, string moduleId, string fileType)
         {
             try
             {
@@ -541,7 +541,7 @@ namespace Oqtane.ChatHubs.Controllers
                                     }
                                 }
 
-                                BlazorDownloadApiItem apiItem = new BlazorDownloadApiItem()
+                                DownloadApiItem apiItem = new DownloadApiItem()
                                 {
                                     Id = camId,
                                     ProgressTotal = camSequences.Count(),
@@ -570,7 +570,7 @@ namespace Oqtane.ChatHubs.Controllers
                                     video.item
                                 );                               
 
-                                BlazorDownloadApiItem apiItem = new BlazorDownloadApiItem()
+                                DownloadApiItem apiItem = new DownloadApiItem()
                                 {
                                     Id = camId,
                                     ProgressTotal = videos.Count(),
@@ -588,7 +588,7 @@ namespace Oqtane.ChatHubs.Controllers
                                 FFMpeg.ExtractAudio(tempFullPath, tempFullPathExtractedAudio);
                                 var base64uri = Convert.ToBase64String(await System.IO.File.ReadAllBytesAsync(tempFullPathExtractedAudio));
 
-                                BlazorDownloadApiItem mp3 = new BlazorDownloadApiItem()
+                                DownloadApiItem mp3 = new DownloadApiItem()
                                 {
                                     Id = camId,
                                     ProgressTotal = videos.Count(),
@@ -604,7 +604,7 @@ namespace Oqtane.ChatHubs.Controllers
                             if (fileType == ".mp4")
                             {
                                 var base64uri = Convert.ToBase64String(await System.IO.File.ReadAllBytesAsync(tempFullPath));
-                                BlazorDownloadApiItem mp4 = new BlazorDownloadApiItem()
+                                DownloadApiItem mp4 = new DownloadApiItem()
                                 {
                                     Id = camId,
                                     ProgressTotal = videos.Count(),

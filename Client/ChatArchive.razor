@@ -14,7 +14,7 @@
 @using Oqtane.ChatHubs.Enums
 @using System.Linq
 @using Microsoft.AspNetCore.SignalR.Client
-@using BlazorDownload
+@using Hwavmvid.Download
 
 @if (ChatHubService.Connection != null && ChatHubService.Connection.State == HubConnectionState.Connected)
 {
@@ -63,8 +63,8 @@
                             var mp3downloadapiurl = string.Concat(NavigationManager.BaseUri.Substring(0, NavigationManager.BaseUri.LastIndexOf('/')), ChatHubService.ChatHubControllerApiUrl, "/DownloadVideoCapture/" + ChatHubService.Connection.ConnectionId + "/" + context.Id.ToString() + "/" + @context.ChatHubRoomId.ToString() + "/" + ModuleState.ModuleId.ToString() + "/" + ".mp3");
                         }
 
-                        <BlazorDownloadComponent Id="@string.Concat(".mp4", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp4" DownloadButtonName=".mp4" ApiUrl="@mp4downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></BlazorDownloadComponent>
-                        <BlazorDownloadComponent Id="@string.Concat(".mp3", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp3" DownloadButtonName=".mp3" ApiUrl="@mp3downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></BlazorDownloadComponent>
+                        <DownloadComponent Id="@string.Concat(".mp4", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp4" DownloadButtonName=".mp4" ApiUrl="@mp4downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></DownloadComponent>
+                        <DownloadComponent Id="@string.Concat(".mp3", context.Id.ToString())" ApiQueryId="@context.Id.ToString()" FileType=".mp3" DownloadButtonName=".mp3" ApiUrl="@mp3downloadapiurl" HubConnection="@ChatHubService.Connection" HubContextMethodName="DownloadVideoCapture"></DownloadComponent>
 
                     </div>
 

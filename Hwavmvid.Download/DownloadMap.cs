@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BlazorDownload
+namespace Hwavmvid.Download
 {
-    public class BlazorDownloadMap
+    public class DownloadMap
     {
 
         public string Id { get; set; }
@@ -14,7 +14,7 @@ namespace BlazorDownload
         public bool DownloadInProgress { get; set; }
         public Task DownloadTask { get; set; }
         public CancellationTokenSource CancellationTokenSource { get; set; }
-        public BlazorDownloadApiItem LastApiItem { get; set; }
+        public DownloadApiItem LastApiItem { get; set; }
 
     }
 }

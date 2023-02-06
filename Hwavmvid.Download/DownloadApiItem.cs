@@ -1,6 +1,6 @@
-﻿namespace BlazorDownload
+﻿namespace Hwavmvid.Download
 {
-    public class BlazorDownloadApiItem
+    public class DownloadApiItem
     {
 
         public string Id { get; set; }

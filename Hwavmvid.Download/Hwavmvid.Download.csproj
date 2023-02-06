@@ -4,10 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>BlazorDownload</AssemblyName>
+    <AssemblyName>Hwavmvid.Download</AssemblyName>
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
-    <Product>BlazorDownload</Product>
+    <Product>Hwavmvid.Download</Product>
     <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>
