@@ -1,13 +1,13 @@
-﻿@namespace BlazorAlerts
+﻿@namespace Hwavmvid.Alerts
 
 @foreach(var item in Items)
 {
-    <div @key="item" class="blazoralerts-item" style="position: @item.Position.ToString().ToLower();">
-        <div class="blazoralerts-item-header">
+    <div @key="item" class="alerts-item" style="position: @item.Position.ToString().ToLower();">
+        <div class="alerts-item-header">
             @RenderHeadline(item.Headline)
             @RenderCloseButton(item)
         </div>
-        <div class="blazoralerts-item-body">
+        <div class="alerts-item-body">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-3">@RenderImage(item)</div>
@@ -46,24 +46,24 @@
     public RenderFragment<string> RenderHeadline { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderCloseButton { get; set; }
+    public RenderFragment<AlertsModel> RenderCloseButton { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderImage { get; set; }
+    public RenderFragment<AlertsModel> RenderImage { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderMessage { get; set; }
+    public RenderFragment<AlertsModel> RenderMessage { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderOkButton { get; set; }
+    public RenderFragment<AlertsModel> RenderOkButton { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderConfirmButton { get; set; }
+    public RenderFragment<AlertsModel> RenderConfirmButton { get; set; }
 
     [Parameter]
-    public RenderFragment<BlazorAlertsModel> RenderDenyButton { get; set; }
+    public RenderFragment<AlertsModel> RenderDenyButton { get; set; }
 
     [Parameter]
-    public IReadOnlyList<BlazorAlertsModel> Items { get; set; }
+    public IReadOnlyList<AlertsModel> Items { get; set; }
 
 }

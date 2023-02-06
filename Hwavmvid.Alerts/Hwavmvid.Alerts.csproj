@@ -4,10 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>BlazorAlerts</AssemblyName>
+    <AssemblyName>Hwavmvid.Alerts</AssemblyName>
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
-    <Product>BlazorAlerts</Product>
+    <Product>Hwavmvid.Alerts</Product>
     <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>

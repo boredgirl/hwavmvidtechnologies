@@ -10,11 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorAlerts;
+using Hwavmvid.Alerts;
 using System.Net;
 using BlazorDraggableList;
 using Hwavmvid.FileUpload;
-using BlazorBrowserResize;
+using Hwavmvid.BrowserResize;
 using Hwavmvid.Video;
 using Oqtane.ChatHubs.Models;
 using BlazorModal;
@@ -34,9 +34,9 @@ namespace Oqtane.ChatHubs
         [Inject] protected ISettingService SettingService { get; set; }
         [Inject] protected NavigationManager NavigationManager { get; set; }
         [Inject] protected HttpClient HttpClient { get; set; }
-        [Inject] protected BlazorAlertsService BlazorAlertsService { get; set; }
+        [Inject] protected AlertsService AlertsService { get; set; }
         [Inject] protected ChatHubService ChatHubService { get; set; }
-        [Inject] protected BlazorBrowserResizeService BrowserResizeService { get; set; }
+        [Inject] protected BrowserResizeService BrowserResizeService { get; set; }
         [Inject] protected ScrollService ScrollService { get; set; }
         [Inject] protected CookieService CookieService { get; set; }
         [Inject] protected BlazorDraggableListService BlazorDraggableListService { get; set; }

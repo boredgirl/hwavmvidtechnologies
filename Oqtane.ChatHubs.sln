@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oqtane.ChatHubs.Shared", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oqtane.ChatHubs.Package", "Package\Oqtane.ChatHubs.Package.csproj", "{C5CE512D-CBB7-4545-AF0F-9B6591A0C3A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAlerts", "BlazorAlerts\BlazorAlerts.csproj", "{B5D1B551-35BD-4512-B65A-8426005EC8A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Alerts", "Hwavmvid.Alerts\Hwavmvid.Alerts.csproj", "{B5D1B551-35BD-4512-B65A-8426005EC8A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWindows", "BlazorWindows\BlazorWindows.csproj", "{39C78991-3C3E-4ABC-8F9E-7FA32DDD2501}"
 EndProject
@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.ColorPicker", "Hwa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Video", "Hwavmvid.Video\Hwavmvid.Video.csproj", "{022C1DAB-D2C5-4410-985A-A922A4A3D200}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBrowserResize", "BlazorBrowserResize\BlazorBrowserResize.csproj", "{31D8888E-C4D2-41C3-AFF9-CEAF4C2F776B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.BrowserResize", "Hwavmvid.BrowserResize\Hwavmvid.BrowserResize.csproj", "{31D8888E-C4D2-41C3-AFF9-CEAF4C2F776B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Notifications", "Hwavmvid.Notifications\Hwavmvid.Notifications.csproj", "{7778FD39-9DE5-466B-B346-EE676BA68E1E}"
 EndProject

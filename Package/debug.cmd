@@ -4,8 +4,8 @@ XCOPY "..\Server\bin\Debug\net6.0\Oqtane.ChatHubs.Server.Oqtane.dll" "..\..\oqta
 XCOPY "..\Server\bin\Debug\net6.0\Oqtane.ChatHubs.Server.Oqtane.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Shared\bin\Debug\net6.0\Oqtane.ChatHubs.Shared.Oqtane.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Shared\bin\Debug\net6.0\Oqtane.ChatHubs.Shared.Oqtane.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorAlerts\bin\Debug\net6.0\BlazorAlerts.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorAlerts\bin\Debug\net6.0\BlazorAlerts.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Alerts\bin\Debug\net6.0\Hwavmvid.Alerts.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Alerts\bin\Debug\net6.0\Hwavmvid.Alerts.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Accordion\bin\Debug\net6.0\Hwavmvid.Accordion.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Accordion\bin\Debug\net6.0\Hwavmvid.Accordion.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorSelect\bin\Debug\net6.0\BlazorSelect.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
@@ -28,8 +28,8 @@ XCOPY "..\Hwavmvid.Video\bin\Debug\net6.0\Hwavmvid.Video.dll" "..\..\oqtane.fram
 XCOPY "..\Hwavmvid.Video\bin\Debug\net6.0\Hwavmvid.Video.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.VideoPlayer\bin\Debug\net6.0\Hwavmvid.VideoPlayer.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.VideoPlayer\bin\Debug\net6.0\Hwavmvid.VideoPlayer.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorBrowserResize\bin\Debug\net6.0\BlazorBrowserResize.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorBrowserResize\bin\Debug\net6.0\BlazorBrowserResize.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.BrowserResize\bin\Debug\net6.0\Hwavmvid.BrowserResize.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.BrowserResize\bin\Debug\net6.0\Hwavmvid.BrowserResize.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDropdown\bin\Debug\net6.0\BlazorDropdown.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorDropdown\bin\Debug\net6.0\BlazorDropdown.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\Hwavmvid.Notifications\bin\Debug\net6.0\Hwavmvid.Notifications.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y

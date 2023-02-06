@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BlazorAlerts
+namespace Hwavmvid.Alerts
 {
-    public class BlazorAlertsModel
+    public class AlertsModel
     {
 
         public string Id { get; set; }

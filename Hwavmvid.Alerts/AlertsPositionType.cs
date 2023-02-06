@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlazorAlerts
+namespace Hwavmvid.Alerts
 {
     public enum PositionType
     {

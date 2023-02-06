@@ -2,21 +2,21 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorBrowserResize
+namespace Hwavmvid.BrowserResize
 {
-    public class BlazorBrowserResizeService
+    public class BrowserResizeService
     {
 
         public IJSRuntime JsRuntime;
         public IJSObjectReference Module;
         public IJSObjectReference BrowserResizeMap;
-        public DotNetObjectReference<BlazorBrowserResizeServiceExtension> DotNetObjRef;
-        public BlazorBrowserResizeServiceExtension BrowserResizeServiceExtension;
+        public DotNetObjectReference<BrowserResizeServiceExtension> DotNetObjRef;
+        public BrowserResizeServiceExtension BrowserResizeServiceExtension;
 
-        public BlazorBrowserResizeService(IJSRuntime jsRuntime)
+        public BrowserResizeService(IJSRuntime jsRuntime)
         {
             this.JsRuntime = jsRuntime;
-            this.BrowserResizeServiceExtension = new BlazorBrowserResizeServiceExtension();
+            this.BrowserResizeServiceExtension = new BrowserResizeServiceExtension();
             this.DotNetObjRef = DotNetObjectReference.Create(this.BrowserResizeServiceExtension);
         }
         public async Task InitBrowserResizeService()
@@ -40,7 +40,7 @@ namespace BlazorBrowserResize
 
     }
 
-    public class BlazorBrowserResizeServiceExtension
+    public class BrowserResizeServiceExtension
     {
 
         public event Func<Task> OnResize;

@@ -1,8 +1,8 @@
 [
   {
-    "outputFileName": "wwwroot/blazoralerts.min.css",
+    "outputFileName": "wwwroot/alerts.min.css",
     "inputFiles": [
-      "blazoralerts.css"
+      "alerts.css"
     ],
     "minify": {
       "enabled": true,
@@ -10,9 +10,9 @@
     }
   },
   {
-    "outputFileName": "wwwroot/blazoralerts.min.js",
+    "outputFileName": "wwwroot/alerts.min.js",
     "inputFiles": [
-      "blazoralerts.js"
+      "alerts.js"
     ],
     "minify": {
       "enabled": true,

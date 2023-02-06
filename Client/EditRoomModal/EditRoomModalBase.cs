@@ -1,4 +1,4 @@
-﻿using BlazorAlerts;
+﻿using Hwavmvid.Alerts;
 using Hwavmvid.ColorPicker;
 using BlazorModal;
 using BlazorSelect;
@@ -25,7 +25,7 @@ namespace Oqtane.ChatHubs
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public HttpClient HttpClient { get; set; }
         [Inject] public ChatHubService ChatHubService { get; set; }
-        [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
+        [Inject] public AlertsService AlertsService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
         [Inject] public BlazorModalService BlazorModalService { get; set; }
         [Inject] public NotificationsService Notificationservice { get; set; }
@@ -181,7 +181,7 @@ namespace Oqtane.ChatHubs
 
                     await this.ChatHubService.UpdateRoom(room);
                     await this.CloseModal();
-                    this.BlazorAlertsService.NewBlazorAlert("Successfully edited room.", "[Javascript Application]", PositionType.Fixed);
+                    this.AlertsService.NewAlert("Successfully edited room.", "[Javascript Application]", PositionType.Fixed);
                 }
             }
             catch (Exception ex)

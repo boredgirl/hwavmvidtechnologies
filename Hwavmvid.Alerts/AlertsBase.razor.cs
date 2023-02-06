@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-namespace BlazorAlerts
+namespace Hwavmvid.Alerts
 {
-    public class BlazorAlertsBase : ComponentBase, IDisposable
+    public class AlertsBase : ComponentBase, IDisposable
     {
 
-        [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
+        [Inject] public AlertsService AlertsService { get; set; }
 
         protected override void OnInitialized()
         {
-            this.BlazorAlertsService.OnAlert += OnAlertExecute;
+            this.AlertsService.OnAlert += OnAlertExecute;
             base.OnInitialized();
         }
 
@@ -18,7 +18,7 @@ namespace BlazorAlerts
         {
             await this.InvokeAsync(() =>
             {
-                BlazorAlertsModel alert = new BlazorAlertsModel()
+                AlertsModel alert = new AlertsModel()
                 {
                     Id = !string.IsNullOrEmpty(id) ? id : Guid.NewGuid().ToString(),
                     Message = message,
@@ -28,37 +28,37 @@ namespace BlazorAlerts
                     CreatedOn = DateTime.Now
                 };
 
-                this.BlazorAlertsService.AddAlert(alert);
+                this.AlertsService.AddAlert(alert);
                 this.StateHasChanged();
             });
         }
 
         public void CloseAlert_OnClicked(string id)
         {
-            this.BlazorAlertsService.RemoveAlert(id);
+            this.AlertsService.RemoveAlert(id);
         }
 
-        public void ConfirmAlert_OnClicked(BlazorAlertsModel model)
+        public void ConfirmAlert_OnClicked(AlertsModel model)
         {
-            this.BlazorAlertsService.RemoveAlert(model.Id);
+            this.AlertsService.RemoveAlert(model.Id);
             if(model.ConfirmDialog)
             {
-                this.BlazorAlertsService.AlertConfirmed(model, true);
+                this.AlertsService.AlertConfirmed(model, true);
             }
         }
 
-        public void DenyAlert_OnClicked(BlazorAlertsModel model)
+        public void DenyAlert_OnClicked(AlertsModel model)
         {
-            this.BlazorAlertsService.RemoveAlert(model.Id);
+            this.AlertsService.RemoveAlert(model.Id);
             if (model.ConfirmDialog)
             {
-                this.BlazorAlertsService.AlertConfirmed(model, false);
+                this.AlertsService.AlertConfirmed(model, false);
             }
         }
 
         public void Dispose()
         {
-            this.BlazorAlertsService.OnAlert -= OnAlertExecute;
+            this.AlertsService.OnAlert -= OnAlertExecute;
         }
 
     }

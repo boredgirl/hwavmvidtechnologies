@@ -1,6 +1,6 @@
 ﻿using System;
-using BlazorAlerts;
-using BlazorBrowserResize;
+using Hwavmvid.Alerts;
+using Hwavmvid.BrowserResize;
 using Hwavmvid.ColorPicker;
 using BlazorDraggableList;
 using Hwavmvid.FileUpload;
@@ -63,13 +63,13 @@ namespace Oqtane
             services.TryAddHttpClientWithAuthenticationCookie();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<BlazorAlertsService, BlazorAlertsService>();
+            services.AddScoped<AlertsService, AlertsService>();
             services.AddScoped<BlazorDraggableListService, BlazorDraggableListService>();
             services.AddScoped<FileUploadService, FileUploadService>();
             services.AddScoped<ColorPickerService, ColorPickerService>();
             services.AddScoped<VideoService, VideoService>();
             services.AddScoped<VideoPlayerService, VideoPlayerService>();
-            services.AddScoped<BlazorBrowserResizeService, BlazorBrowserResizeService>();
+            services.AddScoped<BrowserResizeService, BrowserResizeService>();
             services.AddScoped<BlazorModalService, BlazorModalService>();
             services.AddScoped<NotificationsService, NotificationsService>();
             services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();

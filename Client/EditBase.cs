@@ -6,7 +6,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Oqtane.Shared;
-using BlazorAlerts;
+using Hwavmvid.Alerts;
 using System.Collections.Generic;
 using BlazorSelect;
 using Hwavmvid.ColorPicker;
@@ -22,7 +22,7 @@ namespace Oqtane.ChatHubs
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public HttpClient HttpClient { get; set; }
         [Inject] public ChatHubService ChatHubService { get; set; }
-        [Inject] public BlazorAlertsService BlazorAlertsService { get; set; }
+        [Inject] public AlertsService AlertsService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
 
         protected readonly string FileUploadDropzoneContainerElementId = "EditComponentFileUploadDropzoneContainer";

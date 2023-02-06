@@ -19,10 +19,10 @@ using Oqtane.Modules;
 using Oqtane.ChatHubs.Models;
 using Oqtane.ChatHubs.Extensions;
 using Oqtane.ChatHubs.Enums;
-using BlazorAlerts;
+using Hwavmvid.Alerts;
 using BlazorDraggableList;
 using Hwavmvid.Video;
-using BlazorBrowserResize;
+using Hwavmvid.BrowserResize;
 using Hwavmvid.Notifications;
 using Hwavmvid.VideoPlayer;
 using Hwavmvid.Devices;
@@ -40,9 +40,9 @@ namespace Oqtane.ChatHubs.Services
         public NavigationManager NavigationManager { get; set; }
         public SiteState SiteState { get; set; }        
         public ScrollService ScrollService { get; set; }
-        public BlazorAlertsService BlazorAlertsService { get; set; }
+        public AlertsService AlertsService { get; set; }
         public BlazorDraggableListService BlazorDraggableListService { get; set; }
-        public BlazorBrowserResizeService BrowserResizeService { get; set; }
+        public BrowserResizeService BrowserResizeService { get; set; }
         public VideoService VideoService { get; set; }
         public VideoPlayerService VideoPlayerService { get; set; }
         public NotificationsService NotificationsService { get; set; }
@@ -92,14 +92,14 @@ namespace Oqtane.ChatHubs.Services
             }
         }
 
-        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, BlazorAlertsService blazorAlertsService, BlazorDraggableListService blazorDraggableListService, BlazorBrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService Notificationservice, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
+        public ChatHubService(HttpClient httpClient, SiteState siteState, NavigationManager navigationManager, IJSRuntime JSRuntime, ScrollService scrollService, AlertsService AlertsService, BlazorDraggableListService blazorDraggableListService, BrowserResizeService browserResizeService, VideoService VideoService, VideoPlayerService VideoPlayerService, NotificationsService Notificationservice, DevicesService DevicesService, Jsapigeolocationservice jsapigeolocationservice, Jsapibingmapservice jsapibingmapservice) : base (httpClient)
         {
             this.HttpClient = httpClient;
             this.SiteState = siteState;
             this.NavigationManager = navigationManager;
             this.JSRuntime = JSRuntime;
             this.ScrollService = scrollService;
-            this.BlazorAlertsService = blazorAlertsService;
+            this.AlertsService = AlertsService;
             this.BlazorDraggableListService = blazorDraggableListService;
             this.BrowserResizeService = browserResizeService;
             this.VideoService = VideoService;
@@ -116,7 +116,7 @@ namespace Oqtane.ChatHubs.Services
 
             this.VideoPlayerService.VideoServiceExtension.OnGetNextSequence += async (VideoPlayerModel item) => await OnGetNextSequenceExecute(item);
 
-            this.BlazorAlertsService.OnAlertConfirmed += OnAlertConfirmedExecute;
+            this.AlertsService.OnAlertConfirmed += OnAlertConfirmedExecute;
 
             this.OnUpdateConnectedUserEvent += OnUpdateConnectedUserExecute;
             this.OnAddChatHubRoomEvent += OnAddChatHubRoomExecute;
@@ -147,7 +147,7 @@ namespace Oqtane.ChatHubs.Services
 
         private void MatchedEventExecute(object sender, string e)
         {
-            this.BlazorAlertsService.NewBlazorAlert(e, "Javascript Application", PositionType.Fixed);
+            this.AlertsService.NewAlert(e, "Javascript Application", PositionType.Fixed);
         }
 
         public async Task InitChatHubService()
@@ -251,7 +251,7 @@ namespace Oqtane.ChatHubs.Services
                  || this.Connection?.State == HubConnectionState.Connecting
                  || this.Connection?.State == HubConnectionState.Reconnecting)
                 {
-                    this.BlazorAlertsService.NewBlazorAlert($"The client is already connected. Trying establish new connection with guest name { GuestUsername }.", "Javascript Application", PositionType.Fixed);
+                    this.AlertsService.NewAlert($"The client is already connected. Trying establish new connection with guest name { GuestUsername }.", "Javascript Application", PositionType.Fixed);
                 }
 
                 this.BuildHubConnection(GuestUsername, ModuleId);
@@ -555,7 +555,7 @@ namespace Oqtane.ChatHubs.Services
             }
             catch
             {
-                this.BlazorAlertsService.NewBlazorAlert("Could not enable/archive room.");
+                this.AlertsService.NewAlert("Could not enable/archive room.");
             }
         }
         public async Task DeleteRoom_Clicked(int id)
@@ -566,7 +566,7 @@ namespace Oqtane.ChatHubs.Services
             }
             catch
             {
-                this.BlazorAlertsService.NewBlazorAlert("Could not delete room.");
+                this.AlertsService.NewAlert("Could not delete room.");
             }
         }
         public async Task FollowInvitation_Clicked(int invitationId, int roomId)
@@ -805,7 +805,7 @@ namespace Oqtane.ChatHubs.Services
         private async void OnRemovedChathubWaitingRoomItemExecute(object sender, ChatHubWaitingRoomItem e)
         {
             var room = await this.GetRoom(e.RoomId, this.ModuleId);
-            this.BlazorAlertsService.NewBlazorAlert($"You have been granted access to the room named {room.Title}. Do you like to enter??", "Javascript Application", PositionType.Fixed, true, e.RoomId.ToString());
+            this.AlertsService.NewAlert($"You have been granted access to the room named {room.Title}. Do you like to enter??", "Javascript Application", PositionType.Fixed, true, e.RoomId.ToString());
         }
         private void OnAddChatHubCamExecute(ChatHubCam cam, int roomId)
         {
@@ -829,7 +829,7 @@ namespace Oqtane.ChatHubs.Services
         public async void OnAlertConfirmedExecute(object sender, dynamic obj)
         {
             bool confirmed = (bool)obj.confirmed;
-            BlazorAlertsModel model = (BlazorAlertsModel)obj.model;
+            AlertsModel model = (AlertsModel)obj.model;
 
             if (confirmed)
             {
@@ -958,7 +958,7 @@ namespace Oqtane.ChatHubs.Services
                 if (task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Faulted)
                 {
                     this.TryHandleException(task);
-                    this.BlazorAlertsService.NewBlazorAlert("Wait for it maybe a minute. Your data will be created.");
+                    this.AlertsService.NewAlert("Wait for it maybe a minute. Your data will be created.");
                 }
             });
         }
@@ -1044,7 +1044,7 @@ namespace Oqtane.ChatHubs.Services
 
             this.VideoPlayerService.VideoServiceExtension.OnGetNextSequence -= async (VideoPlayerModel item) => await OnGetNextSequenceExecute(item);
 
-            this.BlazorAlertsService.OnAlertConfirmed -= OnAlertConfirmedExecute;
+            this.AlertsService.OnAlertConfirmed -= OnAlertConfirmedExecute;
 
             this.OnUpdateConnectedUserEvent -= OnUpdateConnectedUserExecute;
             this.OnAddChatHubRoomEvent -= OnAddChatHubRoomExecute;

@@ -1,16 +1,16 @@
-﻿@namespace BlazorAlerts
+﻿@namespace Hwavmvid.Alerts
 
-@inherits BlazorAlertsBase
+@inherits AlertsBase
 
 @using System.Collections.Generic
 @using System.Linq
 @using Microsoft.AspNetCore.Components.Web
 
-@if (BlazorAlertsService.BlazorAlerts.Any())
+@if (AlertsService.Alerts.Any())
 {
-    <div class="blazoralerts-container">
+    <div class="alerts-container">
 
-        <BlazorAlertsTemplate Items="BlazorAlertsService.BlazorAlerts">
+        <AlertsTemplate Items="AlertsService.Alerts">
 
             <RenderHeadline Context="headline">
                 <span>@headline</span>
@@ -42,7 +42,7 @@
                 </button>
             </RenderDenyButton>
 
-        </BlazorAlertsTemplate>
+        </AlertsTemplate>
 
     </div>
 }

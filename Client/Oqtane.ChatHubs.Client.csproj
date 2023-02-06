@@ -31,8 +31,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hwavmvid.Accordion\Hwavmvid.Accordion.csproj" />
-    <ProjectReference Include="..\BlazorAlerts\BlazorAlerts.csproj" />
-    <ProjectReference Include="..\BlazorBrowserResize\BlazorBrowserResize.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Alerts\Hwavmvid.Alerts.csproj" />
+    <ProjectReference Include="..\Hwavmvid.BrowserResize\Hwavmvid.BrowserResize.csproj" />
     <ProjectReference Include="..\Hwavmvid.ColorPicker\Hwavmvid.ColorPicker.csproj" />
     <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
     <ProjectReference Include="..\BlazorDropdown\BlazorDropdown.csproj" />
