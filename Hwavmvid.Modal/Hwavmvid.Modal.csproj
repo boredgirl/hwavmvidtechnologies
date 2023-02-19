@@ -4,10 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>BlazorModal</AssemblyName>
+    <AssemblyName>Hwavmvid.Modal</AssemblyName>
     <OutputType>Library</OutputType>
     <Version>1.0.0</Version>
-    <Product>BlazorModal</Product>
+    <Product>Hwavmvid.Modal</Product>
     <authors>hwavmvid vega</authors>
     <Company>hwavmvid technologies</Company>
     <copyright>hwavmvid corp.</copyright>

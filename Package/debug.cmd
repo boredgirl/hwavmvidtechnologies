@@ -10,8 +10,8 @@ XCOPY "..\Hwavmvid.Accordion\bin\Debug\net6.0\Hwavmvid.Accordion.dll" "..\..\oqt
 XCOPY "..\Hwavmvid.Accordion\bin\Debug\net6.0\Hwavmvid.Accordion.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorSelect\bin\Debug\net6.0\BlazorSelect.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorSelect\bin\Debug\net6.0\BlazorSelect.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorModal\bin\Debug\net6.0\BlazorModal.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
-XCOPY "..\BlazorModal\bin\Debug\net6.0\BlazorModal.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Modal\bin\Debug\net6.0\Hwavmvid.Modal.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
+XCOPY "..\Hwavmvid.Modal\bin\Debug\net6.0\Hwavmvid.Modal.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorWindows\bin\Debug\net6.0\BlazorWindows.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorWindows\bin\Debug\net6.0\BlazorWindows.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y
 XCOPY "..\BlazorTabs\bin\Debug\net6.0\BlazorTabs.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net6.0\" /Y

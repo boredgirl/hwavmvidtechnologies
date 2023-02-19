@@ -4,17 +4,17 @@
 @using Hwavmvid.FileUpload
 @using BlazorSelect
 @using Hwavmvid.ColorPicker
-@using BlazorModal
+@using Hwavmvid.Modal
 @using Hwavmvid.Devices
 
-<BlazorModalComponent ElementId="@EditRoomModalElementId">
+<Modalcomponent ElementId="@EditRoomModalElementId">
 
-    <BlazorModalHeader>
+    <Modalheader>
         <div class="p-2 bg-primary">
             <strong class="text-light">EditRoom</strong>
         </div>
-    </BlazorModalHeader>
-    <BlazorModalBody>
+    </Modalheader>
+    <Modalbody>
 
         <div class="p-2 bg-white text-dark">
 
@@ -62,8 +62,8 @@
 
         </div>
 
-    </BlazorModalBody>
-    <BlazorModalFooter>
+    </Modalbody>
+    <Modalfooter>
 
         <div class="p-2 text-end">
 
@@ -80,9 +80,9 @@
 
         </div>
 
-    </BlazorModalFooter>
+    </Modalfooter>
 
-</BlazorModalComponent>
+</Modalcomponent>
 
 @code {
 

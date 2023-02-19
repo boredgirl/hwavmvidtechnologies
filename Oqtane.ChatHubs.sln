@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.FileUpload", "Hwav
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTabs", "BlazorTabs\BlazorTabs.csproj", "{A4837789-BDFF-47BB-B8DF-BD7C98B53464}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorModal", "BlazorModal\BlazorModal.csproj", "{D050FC12-D08B-4533-BEA3-97611DD465E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hwavmvid.Modal", "Hwavmvid.Modal\Hwavmvid.Modal.csproj", "{D050FC12-D08B-4533-BEA3-97611DD465E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSelect", "BlazorSelect\BlazorSelect.csproj", "{965CF4D8-EB3C-4831-884E-080C93926BE7}"
 EndProject

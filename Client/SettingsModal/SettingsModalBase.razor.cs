@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Oqtane.ChatHubs.Services;
 using Oqtane.Modules;
-using BlazorModal;
+using Hwavmvid.Modal;
 
 namespace Oqtane.ChatHubs
 {
@@ -9,19 +9,19 @@ namespace Oqtane.ChatHubs
     {
 
         [Inject] public ChatHubService ChatHubService { get; set; }
-        [Inject] public BlazorModalService BlazorModalService { get; set; }
+        [Inject] public Modalservice ModalService { get; set; }
 
         public const string SettingsModalElementId = "SettingsModalElementId";
 
         public async void OpenDialogAsync()
         {
-            await this.BlazorModalService.ShowModal(SettingsModalElementId);
+            await this.ModalService.ShowModal(SettingsModalElementId);
             StateHasChanged();
         }
 
         public async void CloseDialogAsync()
         {
-            await this.BlazorModalService.HideModal(SettingsModalElementId);
+            await this.ModalService.HideModal(SettingsModalElementId);
             StateHasChanged();
         }
 

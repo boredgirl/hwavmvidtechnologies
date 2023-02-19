@@ -4,18 +4,18 @@
 
 @using Microsoft.AspNetCore.Components.Web
 @using BlazorDraggableList
-@using BlazorModal
+@using Hwavmvid.Modal
 
 
-<BlazorModalComponent ElementId="@SettingsModalElementId">
+<Modalcomponent ElementId="@SettingsModalElementId">
 
-    <BlazorModalHeader>
+    <Modalheader>
         <div class="p-2 bg-primary text-light">
             <strong>Account Data</strong>
         </div>
-    </BlazorModalHeader>
+    </Modalheader>
 
-    <BlazorModalBody>
+    <Modalbody>
         <div class="p-sm-3 bg-white text-dark">
 
             <p class="lead">Here a little overview of all current related userdata activities for guests and registered users.</p>
@@ -39,12 +39,12 @@
 
             }
         </div>
-    </BlazorModalBody>
+    </Modalbody>
 
-    <BlazorModalFooter>
+    <Modalfooter>
         <div class="p-2 my-3 float-end">
             <button type="button" class="btn btn-sm btn-primary" @onclick="() => CloseDialogAsync()">Close</button>
         </div>
-    </BlazorModalFooter>
+    </Modalfooter>
 
-</BlazorModalComponent>
+</Modalcomponent>

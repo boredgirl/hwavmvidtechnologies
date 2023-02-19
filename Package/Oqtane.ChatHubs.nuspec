@@ -64,8 +64,8 @@
 		<file src="..\Hwavmvid.Accordion\bin\Release\net6.0\Hwavmvid.Accordion.pdb" target="lib\net6.0" />
 		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.dll" target="lib\net6.0" />
 		<file src="..\BlazorSelect\bin\Release\net6.0\BlazorSelect.pdb" target="lib\net6.0" />
-		<file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.dll" target="lib\net6.0" />
-		<file src="..\BlazorModal\bin\Release\net6.0\BlazorModal.pdb" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Modal\bin\Release\net6.0\Hwavmvid.Modal.dll" target="lib\net6.0" />
+		<file src="..\Hwavmvid.Modal\bin\Release\net6.0\Hwavmvid.Modal.pdb" target="lib\net6.0" />
 		<file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.dll" target="lib\net6.0" />
 		<file src="..\BlazorWindows\bin\Release\net6.0\BlazorWindows.pdb" target="lib\net6.0" />
 		<file src="..\BlazorTabs\bin\Release\net6.0\BlazorTabs.dll" target="lib\net6.0" />
@@ -133,7 +133,7 @@
 		<file src="..\BlazorDraggableList\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorDropdown\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.FileUpload\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
-		<file src="..\BlazorModal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
+		<file src="..\Hwavmvid.Modal\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Pager\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\BlazorSelect\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />
 		<file src="..\Hwavmvid.Video\wwwroot\*" target="wwwroot/Modules/Oqtane.ChatHubs" />

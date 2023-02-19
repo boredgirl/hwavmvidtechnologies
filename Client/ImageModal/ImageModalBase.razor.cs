@@ -1,4 +1,4 @@
-﻿using BlazorModal;
+﻿using Hwavmvid.Modal;
 using Microsoft.AspNetCore.Components;
 using Oqtane.ChatHubs.Models;
 using Oqtane.Modules;
@@ -10,7 +10,7 @@ namespace Oqtane.ChatHubs
     {
 
         [Inject] protected NavigationManager NavigationManager { get; set; }
-        [Inject] protected BlazorModalService BlazorModalService { get; set; }
+        [Inject] protected Modalservice ModalService { get; set; }
 
         public const string ImageModalElementId = "ImageModalElementId";
 
@@ -21,13 +21,13 @@ namespace Oqtane.ChatHubs
         public async Task OpenDialogAsync(ChatHubMessage item)
         {
             this.Message = item;
-            await this.BlazorModalService.ShowModal(ImageModalElementId);
+            await this.ModalService.ShowModal(ImageModalElementId);
             StateHasChanged();
         }
 
         public async Task CloseDialogClickedAsync()
         {
-            await this.BlazorModalService.HideModal(ImageModalElementId);
+            await this.ModalService.HideModal(ImageModalElementId);
         }
 
     }

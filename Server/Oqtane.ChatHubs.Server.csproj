@@ -48,7 +48,7 @@
     <ProjectReference Include="..\BlazorDraggableList\BlazorDraggableList.csproj" />
     <ProjectReference Include="..\BlazorDynamicLayout\BlazorDynamicLayout.csproj" />
     <ProjectReference Include="..\Hwavmvid.FileUpload\Hwavmvid.FileUpload.csproj" />
-    <ProjectReference Include="..\BlazorModal\BlazorModal.csproj" />
+    <ProjectReference Include="..\Hwavmvid.Modal\Hwavmvid.Modal.csproj" />
     <ProjectReference Include="..\Hwavmvid.Notifications\Hwavmvid.Notifications.csproj" />
     <ProjectReference Include="..\Hwavmvid.Pager\Hwavmvid.Pager.csproj" />
     <ProjectReference Include="..\BlazorTabs\BlazorTabs.csproj" />

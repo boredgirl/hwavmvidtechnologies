@@ -17,7 +17,7 @@ using Hwavmvid.FileUpload;
 using Hwavmvid.BrowserResize;
 using Hwavmvid.Video;
 using Oqtane.ChatHubs.Models;
-using BlazorModal;
+using Hwavmvid.Modal;
 using Oqtane.Models;
 using BlazorDropdown;
 using Hwavmvid.Notifications;
@@ -42,7 +42,7 @@ namespace Oqtane.ChatHubs
         [Inject] protected BlazorDraggableListService BlazorDraggableListService { get; set; }
         [Inject] protected FileUploadService FileUploadService { get; set; }
         [Inject] protected VideoService VideoService { get; set; }
-        [Inject] protected BlazorModalService BlazorModalService { get; set; }
+        [Inject] protected Modalservice ModalService { get; set; }
         [Inject] protected BlazorDynamicLayoutService BlazorDynamicLayoutService { get; set; }
         [Inject] protected JsapinotificationService JsapinotificationService { get; set; }
 
@@ -120,7 +120,7 @@ namespace Oqtane.ChatHubs
                 await this.CookieService.InitCookieService();
                 await this.ScrollService.InitScrollService();
                 await this.BrowserResizeService.InitBrowserResizeService();
-                await this.BlazorModalService.InitBlazorModal();
+                await this.ModalService.Initmodal();
                 await this.JsapinotificationService.InitJsapinotifications();
 
                 string hostname = new Uri(NavigationManager.BaseUri).Host;

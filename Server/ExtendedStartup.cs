@@ -4,7 +4,7 @@ using Hwavmvid.BrowserResize;
 using Hwavmvid.ColorPicker;
 using BlazorDraggableList;
 using Hwavmvid.FileUpload;
-using BlazorModal;
+using Hwavmvid.Modal;
 using Hwavmvid.Video;
 using Hwavmvid.Notifications;
 using Hwavmvid.Pager;
@@ -70,7 +70,7 @@ namespace Oqtane
             services.AddScoped<VideoService, VideoService>();
             services.AddScoped<VideoPlayerService, VideoPlayerService>();
             services.AddScoped<BrowserResizeService, BrowserResizeService>();
-            services.AddScoped<BlazorModalService, BlazorModalService>();
+            services.AddScoped<Modalservice, Modalservice>();
             services.AddScoped<NotificationsService, NotificationsService>();
             services.AddScoped<BlazorDynamicLayoutService, BlazorDynamicLayoutService>();
             services.AddScoped<BlazorSliderService, BlazorSliderService>();

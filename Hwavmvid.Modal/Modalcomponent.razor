@@ -1,5 +1,5 @@
-﻿@namespace BlazorModal
-@inherits BlazorModalBase
+﻿@namespace Hwavmvid.Modal
+@inherits ModalBase
 @using Microsoft.AspNetCore.Components;
 
 <style type="text/css">
@@ -15,7 +15,7 @@
         display: block;
     }
 
-    .blazor-modal-centered-content {
+    .modal-centered-content {
         position: absolute;
         z-index: 1401;
         background-color: white;
@@ -29,7 +29,7 @@
 
     @@media (max-width: 575px) {
 
-        .blazor-modal-centered-content {
+        .modal-centered-content {
             width: 320px !important;
             height: 420px !important;
         }
@@ -37,7 +37,7 @@
 
     @@media (min-width: 576px) {
 
-        .blazor-modal-centered-content {
+        .modal-centered-content {
             width: 500px !important;
             height: 420px !important;
         }
@@ -46,16 +46,16 @@
 </style>
 
 <div id="@ElementId" style="display: none;">
-    <div class="blazor-modal-centered-content">
+    <div class="modal-centered-content">
         <div>
             <div>
-                @BlazorModalHeader
+                @Modalheader
             </div>
             <div>
-                @BlazorModalBody
+                @Modalbody
             </div>
             <div>
-                @BlazorModalFooter
+                @Modalfooter
             </div>
         </div>
     </div>

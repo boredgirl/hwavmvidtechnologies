@@ -1,6 +1,6 @@
 ﻿using Hwavmvid.Alerts;
 using Hwavmvid.ColorPicker;
-using BlazorModal;
+using Hwavmvid.Modal;
 using BlazorSelect;
 using Hwavmvid.Notifications;
 using Microsoft.AspNetCore.Components;
@@ -27,7 +27,7 @@ namespace Oqtane.ChatHubs
         [Inject] public ChatHubService ChatHubService { get; set; }
         [Inject] public AlertsService AlertsService { get; set; }
         [Inject] public ColorPickerService ColorPickerService { get; set; }
-        [Inject] public BlazorModalService BlazorModalService { get; set; }
+        [Inject] public Modalservice ModalService { get; set; }
         [Inject] public NotificationsService Notificationservice { get; set; }
 
         public const string EditRoomModalElementId = "EditRoomModalElementId";
@@ -138,7 +138,7 @@ namespace Oqtane.ChatHubs
         public async Task OpenCreateRoomModal()
         {
             this.InitCreateRoom();
-            await this.BlazorModalService.ShowModal(EditRoomModalElementId);
+            await this.ModalService.ShowModal(EditRoomModalElementId);
             StateHasChanged();
         }
 
@@ -193,7 +193,7 @@ namespace Oqtane.ChatHubs
         public async Task OpenEditRoomModal(int roomId)
         {
             await this.InitEditRoom(roomId);
-            await this.BlazorModalService.ShowModal(EditRoomModalElementId);
+            await this.ModalService.ShowModal(EditRoomModalElementId);
             StateHasChanged();
 
             await Task.Delay(1000).ContinueWith(async (task) =>
@@ -205,7 +205,7 @@ namespace Oqtane.ChatHubs
 
         public async Task CloseModal()
         {
-            await this.BlazorModalService.HideModal(EditRoomModalElementId);
+            await this.ModalService.HideModal(EditRoomModalElementId);
             this.AudioDefaultDevice = null;
             this.MicrophoneDefaultDevice = null;
             this.WebcamDefaultDevice = null;

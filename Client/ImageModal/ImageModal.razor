@@ -2,18 +2,18 @@
 
 @inherits ImageModalBase
 
-@using BlazorModal
+@using Hwavmvid.Modal
 @using Oqtane.ChatHubs.Constants
 
-<BlazorModalComponent ElementId="@ImageModalElementId">
+<Modalcomponent ElementId="@ImageModalElementId">
 
-    <BlazorModalHeader>
+    <Modalheader>
         <div class="p-2 bg-primary text-light">
             <strong>Image Uploads</strong>
         </div>
-    </BlazorModalHeader>
+    </Modalheader>
 
-    <BlazorModalBody>
+    <Modalbody>
         @if (Message != null && Message.Photos != null)
         {
 
@@ -30,12 +30,12 @@
             </div>
 
         }
-    </BlazorModalBody>
+    </Modalbody>
 
-    <BlazorModalFooter>
+    <Modalfooter>
         <div class="my-3 p-2 float-end">
             <button type="button" class="btn btn-link" @onclick="() => CloseDialogClickedAsync()">Dialog schließen</button>
         </div>
-    </BlazorModalFooter>
+    </Modalfooter>
 
-</BlazorModalComponent>
+</Modalcomponent>
